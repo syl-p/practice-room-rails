@@ -20,20 +20,18 @@ module Sluggable
 
   private
   def generate_slug
-    base = self.class.slug_source_field ? self.send(self.class.slug_source_field) : self.to_s
-    self.slug = base.parameterize || SecureRandom.uuid
+    base = self.class.slug_source_field ? self.send(self.class.slug_source_field) : nil
+    return if base.blank?
 
+    candidate = base.to_s.parameterize.presence || SecureRandom.uuid
+    slug_candidate = candidate
+    index = 1
 
-    results = self.class.where(slug: slug).where.not(id: id)
-    if results.exists?
-      increment = 1
-      results.each do |result|
-        if result.slug == slug
-          increment += 1
-        end
-      end
-
-      self.slug = "#{slug}-#{increment}"
+    while self.class.where(slug: slug_candidate).where.not(id: id).exists?
+      slug_candidate = "#{candidate}-#{index}"
+      index += 1
     end
+
+    self.slug = slug_candidate
   end
 end

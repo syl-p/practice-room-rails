@@ -1,6 +1,7 @@
 class Activity < ApplicationRecord
   include Sluggable
   slug_from :title
+
   include Taggable
 
   belongs_to :user
