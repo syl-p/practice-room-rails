@@ -4,5 +4,10 @@ class User < ApplicationRecord
   has_many :activities, dependent: :destroy
   has_many :practiced_activities, dependent: :destroy
 
+  validates :email_address, presence: true, uniqueness: { case_sensitive: false }
+  validates :email_address, format: { with: URI::MailTo::EMAIL_REGEXP, message: "must be a valid email address" }
   normalizes :email_address, with: ->(e) { e.strip.downcase }
+
+  validates :password, presence: true, length: { minimum: 6 }
+  validates :password, confirmation: true
 end
