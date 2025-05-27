@@ -1,0 +1,2 @@
+module PracticedActivitiesHelper
+end

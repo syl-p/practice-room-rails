@@ -1,0 +1,7 @@
+<nav>
+  <% if authenticated? %>
+    <%= Current.user.email_address %> (<%= render partial: "shared/time_today" %>)
+  <% else %>
+    <%= link_to "se connecter", new_session_path %>
+  <% end %>
+</nav>

@@ -1,0 +1,4 @@
+<h1><%= @activity.title %></h1>
+<%= render partial: "practiced_activities/add", locals: {activity_id: @activity.id} %>
+<hr>
+<%= @activity.comments.to_json %>

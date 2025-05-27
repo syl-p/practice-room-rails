@@ -1,0 +1,17 @@
+<h1>Dashboard</h1>
+<ul class="flex flex-wrap space-x-3 items-center justify-center">
+    <% (@start_at..@end_at).each do |wd| %>
+        <li>
+        <%= link_to dashboard_path(date: wd) do %>
+            <span><%= wd.day %></span>
+            <span><%= I18n.l(wd, format: "%B") %></span>
+        <% end %>
+        </li>
+    <% end %>
+</ul>
+
+<% @practises.each do |practiced_activity| %>
+    <%= turbo_frame_tag dom_id(practiced_activity) do%>
+        <%= practiced_activity.to_json %> <%= button_to practiced_activity_path(id: practiced_activity.id), method: :delete do %> x <% end %>
+    <% end%>
+<% end%>

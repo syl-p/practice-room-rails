@@ -7,3 +7,5 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
+tag_pool = FactoryBot.create_list(:tag, 10)
+FactoryBot.create_list(:user, 10, :with_activities, tag_pool: tag_pool)
