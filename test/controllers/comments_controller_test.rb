@@ -6,7 +6,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "unauthenticated cannot post comments" do
-    activity = FactoryBot.create(:activity)
+    activity = FactoryBot.create(:activity, :public)
     post activity_comments_url(activity_id: activity.id), params: { comment: { content: "This is a test comment." } }
     assert_response :redirect
   end
@@ -15,7 +15,7 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     user = FactoryBot.create(:user, password: "password")
     sign_in(user)
     
-    activity = FactoryBot.create(:activity)
+    activity = FactoryBot.create(:activity, :public)
     post activity_comments_url(activity_id: activity.id), params: { comment: { content: "This is a test comment." } }
     assert_response :success
   end

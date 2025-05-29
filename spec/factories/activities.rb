@@ -13,5 +13,13 @@ FactoryBot.define do
       activity.tags << evaluator.tag_pool.sample(5) if evaluator.tag_pool.any?
       activity.save
     end
+
+    trait :draft do
+      status { :draft }
+    end
+
+    trait :public do
+      status { :published }
+    end
   end
 end
