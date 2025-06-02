@@ -17,10 +17,12 @@ class CommentTest < ActiveSupport::TestCase
 
   test "reply should be valid" do
     parent_comment = FactoryBot.create(:comment)
-    reply = FactoryBot.create(:comment, parent_id: parent_comment.id)
+    reply = FactoryBot.build(:comment, parent_id: parent_comment.id)
+    reply.save
 
     assert reply.valid?
     assert_includes parent_comment.replies, reply
     assert_equal reply.parent_id, parent_comment.id
+    assert_equal reply.commentable, parent_comment.commentable
   end
 end

@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   include Authentication
   include Authorized
-
+  before_authorize :resume_session
   rescue_from NotAuthorizedError do |exception|
     redirect_to activities_url, alert: exception.message
   end
