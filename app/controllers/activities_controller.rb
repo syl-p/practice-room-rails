@@ -7,6 +7,7 @@ class ActivitiesController < ApplicationController
   end
 
   def show
+    authorize!(@activity)
   end
 
   def new
