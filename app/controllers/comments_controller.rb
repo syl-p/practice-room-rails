@@ -1,6 +1,6 @@
 class CommentsController < ApplicationController
-  allow_unauthenticated_access only: [:show]
-  before_action :set_comment, only: [:show, :edit, :update, :destroy]
+  allow_unauthenticated_access only: [ :show ]
+  before_action :set_comment, only: [ :show, :edit, :update, :destroy ]
 
   def show
   end

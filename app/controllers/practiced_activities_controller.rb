@@ -1,9 +1,9 @@
 class PracticedActivitiesController < ApplicationController
-  before_action :set_activity, only: [:create]
+  before_action :set_activity, only: [ :create ]
 
   def create
     @practiced_activity = PracticedActivity.new(activity: @activity, user: Current.user, duration: params[:duration].to_i)
-    
+
     if @practiced_activity.save
       # turbo stream response to update the dashboard
       respond_to do |format|

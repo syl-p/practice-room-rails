@@ -1,11 +1,6 @@
 require "test_helper"
 
 class ActivitiesControllerTest < ActionDispatch::IntegrationTest
-  def sign_in(user)
-    post session_url, params: { email_address: user.email_address, password: "password" }
-    assert_response :redirect
-  end
-
   test "should get index" do
     get activities_url
     assert_response :success

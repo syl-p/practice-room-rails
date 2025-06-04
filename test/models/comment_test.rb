@@ -28,10 +28,10 @@ class CommentTest < ActiveSupport::TestCase
     parent_comment.save!
 
 
-    reply = Comment.new(content: 'This is a reply', commentable:, parent_id: parent_comment.id)
-    
+    reply = Comment.new(content: "This is a reply", commentable:, parent_id: parent_comment.id)
+
     parent_comment.replies << reply
-    
+
     assert_includes parent_comment.replies, reply
     assert_equal reply.parent_id, parent_comment.id
     assert_equal reply.commentable, commentable

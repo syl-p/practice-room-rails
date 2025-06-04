@@ -1,5 +1,5 @@
 class Activities::CommentsController < ApplicationController
-  allow_unauthenticated_access only: [:index]
+  allow_unauthenticated_access only: [ :index ]
   include Commentable
 
   def index
