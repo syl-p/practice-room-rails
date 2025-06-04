@@ -1,6 +1,9 @@
 class PracticedActivitiesController < ApplicationController
+  before_action :set_activity, only: [:create]
+
   def create
-    @practiced_activity = PracticedActivity.new(activity_id: params[:activity_id], user: Current.user, duration: params[:duration].to_i)
+    @practiced_activity = PracticedActivity.new(activity: @activity, user: Current.user, duration: params[:duration].to_i)
+    
     if @practiced_activity.save
       # turbo stream response to update the dashboard
       respond_to do |format|
@@ -15,5 +18,10 @@ class PracticedActivitiesController < ApplicationController
   def destroy
     @practiced_activity = Current.user.practiced_activities.find(params[:id])
     @practiced_activity.destroy
+  end
+
+  private
+  def set_activity
+    @activity = Activity.find(params[:activity_id])
   end
 end
