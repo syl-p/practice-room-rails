@@ -16,6 +16,9 @@ class ActivitiesController < ApplicationController
 
   def create
     @activity = Activity.new(activity_params)
+    @activity.user = Current.user
+
+    
     if @activity.save
       redirect_to @activity, notice: "Activity was successfully created."
     else
@@ -27,6 +30,8 @@ class ActivitiesController < ApplicationController
   end
 
   def update
+    authorize!(@activity)
+
     if @activity.update(activity_params)
       redirect_to @activity, notice: "Activity was successfully updated."
     else
@@ -35,6 +40,8 @@ class ActivitiesController < ApplicationController
   end
 
   def destroy
+    authorize!(@activity)
+
     @activity.destroy
     redirect_to activities_url, notice: "Activity was successfully destroyed."
   end
