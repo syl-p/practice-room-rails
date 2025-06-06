@@ -10,7 +10,7 @@ module Commentable
     if @comment.save
       redirect_to @commentable, notice: "Comment was successfully created."
     else
-      flash.now[:alert] = "Failed to create comment."
+      redirect_to @commentable, flash.now[:alert] = "Failed to create comment."
     end
   end
 

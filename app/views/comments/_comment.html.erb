@@ -1,0 +1,3 @@
+<%= turbo_frame_tag dom_id(comment) do %>
+  <%= comment.user.username %>, le <%= comment.created_at %>: <%= comment.content %> <%= button_to "x", comment, method: :delete %>
+<% end %>

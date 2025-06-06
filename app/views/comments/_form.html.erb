@@ -1,0 +1,14 @@
+<%= form_with model: [local_assigns[:commentable], comment], class: "#{local_assigns[:class]}", data: {
+  turbo: true,
+  comment_target: "form"
+} do |f| %>
+  <%= f.text_area :content, class: "mb-3" %>
+
+  <%= f.submit "Commenter", data: {
+    action: 'click->comment#submit',
+  } %>
+
+  <% if comment.persisted? %>
+    <%= link_to "Annuler", comment %>
+  <% end %>
+<% end %>

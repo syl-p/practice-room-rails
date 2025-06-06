@@ -1,7 +1,17 @@
-<nav>
-  <% if authenticated? %>
-    <%= Current.user.email_address %> (<%= render partial: "shared/time_today" %>)
-  <% else %>
-    <%= link_to "se connecter", new_session_path %>
-  <% end %>
+<nav class="flex space-x-3 justify-between">
+  <div>
+    <%= link_to "logo", root_path %>
+  </div>
+  <div>
+    <% if authenticated? %>
+      <%= render partial: "shared/time_today" %>
+    <% end %>
+  </div>
+  <div>
+    <% if authenticated? %>
+      <%= Current.user.email_address %>
+    <% else %>
+      <%= link_to "se connecter", new_session_path %>
+    <% end %>
+  </div>
 </nav>

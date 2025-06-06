@@ -1,0 +1,10 @@
+<% @activities.each do |activity| %>
+  <div class="border p-3 rounded-lg my-3">
+    <h2 class="text-xl"><%= link_to activity.title, activity %></h2>
+    <p>tags: <%= activity.tags.pluck(:name).join(', ') %></p>
+    <p>Created at: <%= activity.created_at.strftime("%B %d, %Y") %></p>
+    <% activity.commenters.each do |user| %>
+      <%= render(AvatarComponent.new(user: user)) %>
+    <% end %>
+  </div>
+<% end %>

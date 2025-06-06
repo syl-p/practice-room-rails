@@ -1,7 +1,1 @@
-<% @activities.each do |activity| %>
-    <div class="activity">
-        <h2><%= link_to activity.title, activity %></h2>
-        <p>Created at: <%= activity.created_at.strftime("%B %d, %Y") %></p>
-        <p>tags: <%= activity.tags.pluck(:name).join(', ') %></p>
-    </div>
-<% end %>
+<%= render partial: "activities/card", collection: @activities, as: :activity %>

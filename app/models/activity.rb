@@ -6,6 +6,7 @@ class Activity < ApplicationRecord
 
   belongs_to :user
   has_many :comments, as: :commentable
+  has_many :commenters, -> { distinct }, through: :comments, source: :user
 
   validates :title, presence: true
   validates :content, presence: true
