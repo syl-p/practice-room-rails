@@ -1,0 +1,29 @@
+<%= render DropdownComponent.new(variant: :outline) do |component| %>
+  <% component.with_trigger_btn do %>
+    <%= render AvatarComponent.new(user: Current.user) %>
+    <span class="block">
+      <%= Current.user.username %>
+    </span>
+    <span class="sr-only">Ouvrir le menu utilisateur</span>
+  <% end %>
+
+  <% component.with_dropdown_menu do %>
+    <div class="py-1" role="none">
+      <p class="truncate px-3.5 py-3">
+        <span class="block text-xs text-gray-500" role="none">Connecté en tant que...</span>
+        <span class="mt-0.5 font-semibold" role="none">
+          <%= Current.user.username %>
+        </span>
+      </p>
+    </div>
+    <ul class="py-1" role="none">
+      <li>
+        <%= link_to "Tableau de bord", dashboard_path, class: "block px-4 py-2 text-sm text-gray-700" %>
+      </li>
+
+      <li>
+        <%= button_to "Se déconnecter", session_path, method: :delete, class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer" %>
+      </li>
+    </ul>
+  <% end %>
+<% end %>

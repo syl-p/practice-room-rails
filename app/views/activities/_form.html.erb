@@ -1,0 +1,24 @@
+<%= form_with model: @activity, local: true, builder: TailwindFormBuilder, data: {turbo: false} do |form| %>
+  <% if @activity.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this exercise from being saved:</h2>
+
+      <ul>
+        <% @activity.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= form.text_field :title %>
+  <%= form.text_area :content %>
+
+  <div class="mt-2 flex justify-between items-center">
+    <% if @activity.persisted? %>
+      <%= form.submit "Modifier l'exercice" %>
+    <% else %>
+      <%= form.submit "Créer l'exercice" %>
+    <% end %>
+  </div>
+<% end %>

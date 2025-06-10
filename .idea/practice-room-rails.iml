@@ -104,7 +104,6 @@
     <orderEntry type="library" scope="PROVIDED" name="prism (v1.4.0, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="propshaft (v1.1.0, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="pry (v0.15.2, asdf: 3.2.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="pry-remote (v0.1.8, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="psych (v5.2.6, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="public_suffix (v6.0.2, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="puma (v6.6.0, asdf: 3.2.0) [gem]" level="application" />
@@ -117,6 +116,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rails (v8.0.2, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-dom-testing (v2.3.0, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-html-sanitizer (v1.6.2, asdf: 3.2.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rails-i18n (v8.0.1, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="railties (v8.0.2, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rainbow (v3.1.1, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rake (v13.3.0, asdf: 3.2.0) [gem]" level="application" />
@@ -133,7 +133,6 @@
     <orderEntry type="library" scope="PROVIDED" name="rubyzip (v2.4.1, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="securerandom (v0.4.1, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="selenium-webdriver (v4.33.0, asdf: 3.2.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="slop (v3.6.0, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="solid_cable (v3.0.8, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="solid_cache (v1.0.7, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="solid_queue (v1.1.5, asdf: 3.2.0) [gem]" level="application" />
@@ -141,8 +140,8 @@
     <orderEntry type="library" scope="PROVIDED" name="sshkit (v1.24.0, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="stimulus-rails (v1.3.4, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="stringio (v3.1.7, asdf: 3.2.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="tailwindcss-rails (v4.2.3, asdf: 3.2.0) [gem]" level="application" />
-    <orderEntry type="library" scope="PROVIDED" name="tailwindcss-ruby (v4.1.8, asdf: 3.2.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tailwindcss-rails (v3.3.2, asdf: 3.2.0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="tailwindcss-ruby (v3.4.17, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thor (v1.3.2, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="thruster (v0.1.13, asdf: 3.2.0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="timeout (v0.4.3, asdf: 3.2.0) [gem]" level="application" />

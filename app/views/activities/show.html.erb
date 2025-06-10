@@ -1,10 +1,32 @@
 <section>
   <header class="bg-blue-100 py-20">
-    <h1 class="text-2xl"><%= @activity.title %></h1>
-    <%= render partial: "practiced_activities/add", locals: {activity_id: @activity.id} %>
+    <div class="container">
+      <div class="flex space-x-6">
+        <div class="flex-1">
+          <small class="block font-light text-sm text-muted-foreground">
+            Posté par <%= link_to @activity.user.username, @activity.user %>, le <time datetime="<%= @activity.created_at %>"><%= @activity.created_at %></time>
+          </small>
+          <h1 class="text-2xl"><%= @activity.title %></h1>
+        </div>
+        <%= render partial: "practiced_activities/add", locals: {activity_id: @activity.id} %>
+      </div>
+    </div>
   </header>
   <hr>
+  <section class="container my-10 grid grid-cols-6 gap-4">
+    <article class="lg:col-span-4">
+      <%= @activity.content %>
+    </article>
+    <aside  class="lg:col-span-2">
+    </aside>
+  </section>
+  <footer class="container">
+    <%= turbo_frame_tag record_id_gen(@activity, Comment.new) do %>
+      <%= render partial: "comments/form", locals: {comment: Comment.new, commentable: @activity} if authenticated? %>
+    <% end %>
 
-  <%= render partial: "comments/form", locals: {comment: Comment.new, commentable: @activity} %>
-  <%= render partial: "comments/comment", collection: @activity.comments, as: :comment %>
+    <%= turbo_frame_tag "#{dom_id(@activity)}_comments" do %>
+      <%= render partial: "comments/comment", collection: @activity.comments, as: :comment %>
+    <% end %>
+  </footer>
 </section>

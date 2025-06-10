@@ -2,6 +2,7 @@ module Authorized
   extend ActiveSupport::Concern
   included do
     class_attribute :before_authorize_method, instance_writer: false, default: nil
+    helper_method :can? if respond_to?(:helper_method)
   end
 
   class_methods do
@@ -17,12 +18,28 @@ module Authorized
 
     policy = get_policy(record)
     query ||= "#{action_name}?"
+
     unless policy.public_send(query)
       raise NotAuthorizedError, "not allowed to #{query} this #{record.class}"
     end
+
     true
   end
 
+
+  def can?(record, action)
+    if self.before_authorize_method
+      self.send(self.before_authorize_method)
+    end
+
+    policy = get_policy(record)
+    policy.public_send(action)
+  rescue NameError
+    raise NotAuthorizedError, "not allowed to #{query} this #{record.class}"
+  end
+
+
+  private
   def get_policy(record)
     "#{record.class}Policy".constantize.new(Current.session&.user, record)
   rescue NameError

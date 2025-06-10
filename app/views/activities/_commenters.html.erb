@@ -1,0 +1,7 @@
+<div class="flex -space-x-4 rtl:space-x-reverse">
+  <% commenters.each do |user| %>
+    <%= link_to user do %>
+      <%= render(AvatarComponent.new(user: user)) %>
+    <% end %>
+  <% end %>
+</div>

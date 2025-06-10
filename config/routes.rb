@@ -15,9 +15,14 @@ Rails.application.routes.draw do
   root "activities#index"
   get "dashboard" => "dashboard#index", as: :dashboard
 
-  resources :comments, only: %i[update destroy]
+  resources :users, only: %i[show]
+
+  resources :comments, only: %i[show edit update destroy] do
+    resources :comments, only: %i[create], module: :comments
+  end
+
   resources :activities do
-    resources :comments, module: :activities, only: [ :index, :create, :destroy ]
+    resources :comments, module: :activities, only: [ :index, :create ]
   end
 
   resources :practiced_activities, only: [ :create, :destroy ]

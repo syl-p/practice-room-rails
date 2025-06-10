@@ -1,3 +1,64 @@
 <%= turbo_frame_tag dom_id(comment) do %>
-  <%= comment.user.username %>, le <%= comment.created_at %>: <%= comment.content %> <%= button_to "x", comment, method: :delete %>
+  <article
+    class="pt-6 text-base bg-white rounded-lg dark:bg-gray-900"
+    data-author="<%= comment.user.username %>"
+    <% if comment.parent_id.nil? %>
+    data-controller="comment"
+    <% end %>
+    >
+    <footer class="flex justify-between items-center mb-2">
+      <div class="flex items-center space-x-3">
+        <div class="inline-flex items-center text-sm text-gray-900 dark:text-white font-semibold">
+          <%= link_to comment.user, data: {turbo: false}, class: "mr-3" do %>
+            <%= render(AvatarComponent.new(user: comment.user)) %>
+          <% end %>
+          <%= link_to comment.user.username, comment.user, data: {turbo: false} %>
+        </div>
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          <time pubdate datetime="<%= comment.created_at %>" title="<%= comment.created_at %>">
+            il y a <%= time_ago_in_words comment.created_at %>
+          </time>
+        </p>
+      </div>
+
+      <% if authenticated? %>
+        <%= render DropdownComponent.new(variant: :ghost) do |component| %>
+          <% component.with_trigger_btn do %>
+            ...
+          <% end %>
+
+          <% component.with_dropdown_menu do %>
+            <ul class="py-1" role="none">
+              <% if can? comment, :update? %>
+                <li><%= link_to "Editer", edit_comment_path(comment), class: "block px-4 py-2 text-sm text-gray-700" %></li>
+              <% end %>
+
+              <% if can? comment, :delete? %>
+                <li><%= button_to comment_path(comment), method: :delete, class: "block px-4 py-2 text-sm text-gray-700", data: {turbo: false} do %>
+                  Supprimer
+                <% end %></li>
+              <% end %>
+            </ul>
+          <% end %>
+        <% end %>
+      <% end %>
+    </footer>
+
+    <p><%= comment.content %></p>
+
+    <div class="flex items-center mt-4 space-x-4">
+      <p><a href="" data-action="click->comment#display">Répondre</a></p>
+    </div>
+
+    <div class="ml-6">
+      <% if comment.parent_id.nil? %>
+        <%= turbo_frame_tag record_id_gen(comment, Comment.new) do %>
+          <%= render partial: "comments/form", locals: {commentable: comment, comment: Comment.new, class: 'hidden'} %>
+        <% end %>
+      <% end %>
+      <%= turbo_frame_tag "#{dom_id(comment)}_comments" do %>
+        <%=  render partial: "comments/comment", collection: comment.replies, as: :comment  %>
+      <% end %>
+    </div>
+  </article>
 <% end %>

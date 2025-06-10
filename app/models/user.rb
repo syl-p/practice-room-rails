@@ -12,6 +12,7 @@ class User < ApplicationRecord
   validates :password, presence: true, length: { minimum: 6 }
   validates :password, confirmation: true
 
+  has_one_attached :avatar
   def practice_time_today
     practiced_activities.today.sum(:duration)
   end

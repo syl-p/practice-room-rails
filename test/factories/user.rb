@@ -1,7 +1,8 @@
 FactoryBot.define do
   factory :user do
-    username {Faker::Internet.username}
-    email_address { Faker::Internet.email }
+    sequence(:username) { |n| "#{Faker::Internet.username}_#{n}" }
+    sequence(:email_address) { |n| "user#{n}@example.com" }
+
     password { "password" }
 
     trait :with_activities do

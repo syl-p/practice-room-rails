@@ -1,10 +1,15 @@
-<% @activities.each do |activity| %>
-  <div class="border p-3 rounded-lg my-3">
+<article class="border p-3 rounded-lg my-3">
+  <header class="mb-3">
     <h2 class="text-xl"><%= link_to activity.title, activity %></h2>
-    <p>tags: <%= activity.tags.pluck(:name).join(', ') %></p>
-    <p>Created at: <%= activity.created_at.strftime("%B %d, %Y") %></p>
-    <% activity.commenters.each do |user| %>
-      <%= render(AvatarComponent.new(user: user)) %>
-    <% end %>
-  </div>
-<% end %>
+    <p class="text-sm font-light">Created at: <%= activity.created_at.strftime("%B %d, %Y") %></p>
+  </header>
+
+  <footer class="flex justify-between items-center">
+    <div>
+      <% activity.tags.each do |tag| %>
+        <%= render(TagComponent.new(tag.name, variant: :primary)) %>
+      <% end %>
+    </div>
+    <%= render partial: "activities/commenters", locals: {commenters: activity.commenters} %>
+  </footer>
+</article>

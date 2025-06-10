@@ -1,1 +1,7 @@
-<div><%= initials %></div>
+<%= content_tag :figure,
+                class: "rounded-full relative overflow-hidden flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-600 #{size_classes}" do %>
+  <% if avatar_path %>
+  <%= image_tag avatar_path, alt: "Avatar", class: "w-full h-full object-cover" %>
+  <% end %>
+  <span class="<%= 'hidden' if avatar_path %> text-black"><%= initials %></span>
+<% end %>

@@ -1,16 +1,37 @@
 module Commentable
   extend ActiveSupport::Concern
+  include ActionView::RecordIdentifier
+  include ApplicationHelper
 
   def create
-    @comment = Comment.new(comment_params)
+    @comment = @commentable.comments.new(comment_params)
     @comment.user = Current.user
     @comment.commentable = @commentable
     @comment.parent_id = @parent&.id
+    replace_target = @parent ? @parent : @commentable
 
-    if @comment.save
-      redirect_to @commentable, notice: "Comment was successfully created."
-    else
-      redirect_to @commentable, flash.now[:alert] = "Failed to create comment."
+    respond_to do |format|
+      if @comment.save
+        format.turbo_stream {
+          render turbo_stream: turbo_stream
+                                 .prepend("#{dom_id(@parent || @commentable)}_comments",
+                                          partial: "comments/comment",
+                                          locals: {comment: @comment, commentable: replace_target })
+        }
+        format.html {
+          redirect_to @commentable
+        }
+      else
+        format.turbo_stream {
+          render turbo_stream: turbo_stream.replace(record_id_gen(@parent || @commentable, @comment),
+                                                    partial: "comments/form",
+                                                    locals: {comment: @comment, commentable: replace_target }
+          )
+        }
+        format.html {
+          redirect_to replace_target
+        }
+      end
     end
   end
 
