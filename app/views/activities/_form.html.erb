@@ -1,24 +1,58 @@
-<%= form_with model: @activity, local: true, builder: TailwindFormBuilder, data: {turbo: false} do |form| %>
-  <% if @activity.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this exercise from being saved:</h2>
+<%= form_with model: @activity, local: true, builder: TailwindFormBuilder, data: {turbo: false} do |f| %>
+  <div class="lg:grid lg:grid-cols-6 gap-4">
+    <fieldset class="border p-6 rounded-lg lg:col-span-4 mb-6 ">
+      <legend>Contenu principal</legend>
+      <% if @activity.errors.any? %>
+        <div id="error_explanation">
+          <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this exercise from being saved:</h2>
 
-      <ul>
-        <% @activity.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+          <ul>
+            <% @activity.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
 
-  <%= form.text_field :title %>
-  <%= form.text_area :content %>
+      <%= f.text_field :title %>
+      <%= f.text_area :content, rows: 20 %>
+    </fieldset>
+    <aside class="lg:col-span-2">
+      <fieldset class="mb-6 border p-6 rounded-lg">
+        <legend>
+          Visibilité
+        </legend>
 
-  <div class="mt-2 flex justify-between items-center">
+        <div  class="bg-white rounded-md -space-y-px">
+          <% Activity.statuses.keys.each do |status| %>
+            <label class="rounded-tl-md rounded-tr-md relative border p-4 flex cursor-pointer focus:outline-none" for="<%= "activity_status_#{status.parameterize.underscore}" %>">
+              <%= f.radio_button :status, status %>
+              <span class="ml-3 flex flex-col">
+            <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
+            <span id="privacy-setting-0-label" class="block text-sm font-medium"> <%= status %>
+            </span>
+                <!-- Checked: "text-indigo-700", Not Checked: "text-gray-500" -->
+            <span id="privacy-setting-0-description" class="block text-sm"></span>
+          </span>
+            </label>
+          <% end %>
+        </div>
+      </fieldset>
+      <fieldset class="mb-6 border p-6 rounded-lg lg:col-span-2">
+        <legend>Media associés</legend>
+        <%= f.select :medium_ids,
+                     Medium.all.collect { |x| [x.name ? x.name : x.file.filename, x.id]},
+                     {:include_blank => true, selected_value: nil}, :multiple => true %>
+      </fieldset>
+    </aside>
+
+  </div>
+
+  <div class="mt-2 flex justify-end">
     <% if @activity.persisted? %>
-      <%= form.submit "Modifier l'exercice" %>
+      <%= f.submit "Modifier l'exercice" %>
     <% else %>
-      <%= form.submit "Créer l'exercice" %>
+      <%= f.submit "Créer l'exercice" %>
     <% end %>
   </div>
 <% end %>

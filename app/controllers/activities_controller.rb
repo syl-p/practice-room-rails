@@ -18,7 +18,6 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
     @activity.user = Current.user
 
-    
     if @activity.save
       redirect_to @activity, notice: "Activity was successfully created."
     else
@@ -27,6 +26,7 @@ class ActivitiesController < ApplicationController
   end
 
   def edit
+    authorize! @activity
   end
 
   def update
@@ -53,6 +53,6 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params.require(:activity).permit(:title, :description, :content)
+    params.require(:activity).permit(:title, :description, :content, medium_ids: [])
   end
 end

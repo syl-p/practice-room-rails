@@ -1,7 +1,9 @@
 <article class="border p-3 rounded-lg my-3">
   <header class="mb-3">
-    <h2 class="text-xl"><%= link_to activity.title, activity %></h2>
-    <p class="text-sm font-light">Created at: <%= activity.created_at.strftime("%B %d, %Y") %></p>
+    <h2 class="text-2xl font-bold"><%= link_to activity.title, activity %></h2>
+    <p class="font-light text-sm text-muted-foreground">
+      Posté par <%= link_to activity.user.username, activity.user %>, le <time datetime="<%= activity.created_at %>"><%= activity.created_at %></time>
+    </p>
   </header>
 
   <footer class="flex justify-between items-center">

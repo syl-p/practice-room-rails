@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    <meta name="view-transition" content="same-origin" />
+    <meta name="turbo-refresh-method" content="morph">
+    <meta name="turbo-refresh-scroll" content="preserve">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -25,7 +29,9 @@
 
   <body>
     <%= render partial: "shared/nav" %>
-    <%= yield %>
+    <main class="min-h-screen z-0" style="view-transition-name: main-content;">
+      <%= yield %>
+    </main>
     <%= render partial: "shared/footer" %>
   </body>
 </html>

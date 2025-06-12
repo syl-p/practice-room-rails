@@ -51,12 +51,13 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
   gem "factory_bot_rails"
   gem "faker"
-  gem "pry", "~> 0.15.2"
 end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  gem "pry", "~> 0.15.2"
+  gem "hotwire-spark"
 end
 
 group :test do

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_05_26_135438) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_12_081540) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -50,6 +50,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_26_135438) do
     t.index ["user_id"], name: "index_activities_on_user_id"
   end
 
+  create_table "activities_media", id: false, force: :cascade do |t|
+    t.integer "medium_id", null: false
+    t.integer "activity_id", null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
     t.string "commentable_type"
@@ -61,6 +66,13 @@ ActiveRecord::Schema[8.0].define(version: 2025_05_26_135438) do
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "media", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "name"
+    t.text "description"
   end
 
   create_table "practiced_activities", force: :cascade do |t|

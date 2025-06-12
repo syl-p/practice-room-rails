@@ -16,7 +16,7 @@ module Commentable
           render turbo_stream: turbo_stream
                                  .prepend("#{dom_id(@parent || @commentable)}_comments",
                                           partial: "comments/comment",
-                                          locals: {comment: @comment, commentable: replace_target })
+                                          locals: { comment: @comment, commentable: replace_target })
         }
         format.html {
           redirect_to @commentable
@@ -25,7 +25,7 @@ module Commentable
         format.turbo_stream {
           render turbo_stream: turbo_stream.replace(record_id_gen(@parent || @commentable, @comment),
                                                     partial: "comments/form",
-                                                    locals: {comment: @comment, commentable: replace_target }
+                                                    locals: { comment: @comment, commentable: replace_target }
           )
         }
         format.html {

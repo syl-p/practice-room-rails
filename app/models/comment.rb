@@ -4,6 +4,6 @@ class Comment < ApplicationRecord
 
   # Associations
   belongs_to :user
-  belongs_to :parent, class_name: 'Comment', optional: true
+  belongs_to :parent, class_name: "Comment", optional: true
   belongs_to :commentable, polymorphic: true
 end

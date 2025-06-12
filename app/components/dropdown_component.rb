@@ -11,17 +11,17 @@ class DropdownComponent < ViewComponent::Base
   def variant_class_name
     button_classes = TailwindHelper::BTN_BASE_CLASSES
     variant_classes = case @variant.to_sym
-                      when :default
+    when :default
                         TailwindHelper::PRIMARY_CLASSES
-                      when :secondary
+    when :secondary
                         TailwindHelper::SECONDARY_CLASSES
-                      when :error, :danger, :alert, :destructive
+    when :error, :danger, :alert, :destructive
                         TailwindHelper::DESTRUCTIVE_CLASSES
-                      when :outline
+    when :outline
                         TailwindHelper::OUTLINE_CLASSES
-                      when :ghost
+    when :ghost
                         TailwindHelper::GHOST_CLASSES
-                      end
+    end
 
     "#{button_classes} #{variant_classes}"
   end

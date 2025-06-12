@@ -1,0 +1,7 @@
+<section class="py-20">
+  <ul>
+    <% @media.each do |medium| %>
+      <li><%= url_for medium.file %></li>
+    <% end %>
+  </ul>
+</section>

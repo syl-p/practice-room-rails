@@ -25,5 +25,7 @@ Rails.application.routes.draw do
     resources :comments, module: :activities, only: [ :index, :create ]
   end
 
+  resources :media
+
   resources :practiced_activities, only: [ :create, :destroy ]
 end

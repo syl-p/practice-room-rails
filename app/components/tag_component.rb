@@ -19,18 +19,18 @@ class TagComponent < ViewComponent::Base
     @as = @href ? :a : :button
 
     @tag_classes = case @variant.to_sym
-                   when :default
+    when :default
                      TailwindHelper::PRIMARY_CLASSES
-                   when :secondary
+    when :secondary
                      TailwindHelper::SECONDARY_CLASSES
-                   when :error, :danger, :alert, :destructive
+    when :error, :danger, :alert, :destructive
                      TailwindHelper::DESTRUCTIVE_CLASSES
-                   when :outline
+    when :outline
                      TailwindHelper::OUTLINE_CLASSES
-                   when :ghost
+    when :ghost
                      TailwindHelper::GHOST_CLASSES
-                   else
+    else
                      TailwindHelper::PRIMARY_CLASSES
-                   end
+    end
   end
 end
