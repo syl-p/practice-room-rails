@@ -2,5 +2,5 @@
   <header class="py-20">
     <h1 class="text-4xl uppercase">Bonjour, qu'allons nous travailler ?</h1>
   </header>
-  <%= render partial: "activities/card", collection: @activities, as: :activity %>
+  <%= render partial: "activities/card", collection: @activities, as: :activity, locals: {classes: 'mb-3'} %>
 </section>

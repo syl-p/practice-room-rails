@@ -1,17 +1,17 @@
-<article class="border p-3 rounded-lg my-3">
-  <header class="mb-3">
+<article class="border rounded-lg bg-blue-100 <%= classes if local_assigns.has_key? :classes %>" style="view-transition-name:activity-<%= activity.id %>">
+  <header class="border border-b p-3">
+    <div class="mb-3">
+      <% activity.tags.limit(3).each do |tag| %>
+        <%= render(TagComponent.new(tag.name, variant: :outline)) %>
+      <% end %>
+    </div>
     <h2 class="text-2xl font-bold"><%= link_to activity.title, activity %></h2>
-    <p class="font-light text-sm text-muted-foreground">
+    <p class="font-light text-sm text-muted-foreground mb-3">
       Posté par <%= link_to activity.user.username, activity.user %>, le <time datetime="<%= activity.created_at %>"><%= activity.created_at %></time>
     </p>
   </header>
-
-  <footer class="flex justify-between items-center">
-    <div>
-      <% activity.tags.each do |tag| %>
-        <%= render(TagComponent.new(tag.name, variant: :primary)) %>
-      <% end %>
-    </div>
+  <aside class="flex justify-between items-center p-3 mt-3">
     <%= render partial: "activities/commenters", locals: {commenters: activity.commenters} %>
-  </footer>
+  </aside>
+  <%= content if local_assigns.has_key? :content %>
 </article>

@@ -7,6 +7,7 @@
   ]
 %>
 <header data-turbo-permanent
+
   class="fixed top-0 z-50 w-full"
 >
   <div class="container flex h-14 items-center justify-between">
@@ -53,7 +54,7 @@
     </div>
     <div class="flex items-center space-x-2 justify-end">
       <nav class="flex items-center space-x-3 items-center">
-        <%#= render partial: "partials/search_dialog" %>
+        <%= render partial: "shared/search_dialog" %>
         <% if authenticated? %>
           <%= link_to new_activity_path, class: ['hidden md:block', TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::OUTLINE_CLASSES].join(' ') do %>
             +

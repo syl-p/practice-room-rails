@@ -9,11 +9,28 @@ class User < ApplicationRecord
   validates :email_address, format: { with: URI::MailTo::EMAIL_REGEXP, message: "must be a valid email address" }
   normalizes :email_address, with: ->(e) { e.strip.downcase }
 
-  validates :password, presence: true, length: { minimum: 6 }
-  validates :password, confirmation: true
+  validates :password, confirmation: true, length: { minimum: 6 }, allow_blank: true
 
   has_one_attached :avatar
   def practice_time_today
     practiced_activities.today.sum(:duration)
+  end
+
+  def update_with_password(params)
+    if User.authenticate_by(email_address: params[:email_address], password: params[:current_password])
+      params.delete(:current_password)
+      debugger
+      update(params)
+    else
+      errors.add(:current_password, "est invalide")
+      false
+    end
+  end
+
+  def update_without_password(params)
+    params.delete(:current_password)
+    params.delete(:password)
+    params.delete(:password_confirmation)
+    update(params)
   end
 end

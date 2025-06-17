@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get "dashboard" => "dashboard#index", as: :dashboard
 
   resources :users, only: %i[show]
+  get "registration", to: "registration#edit", as: "edit_registration"
+  patch "registration", to: "registration#update"
 
   resources :comments, only: %i[show edit update destroy] do
     resources :comments, only: %i[create], module: :comments
@@ -26,6 +28,7 @@ Rails.application.routes.draw do
   end
 
   resources :media
+  get "search" => "search#index", as: :search, defaults: { format: :turbo_stream }
 
   resources :practiced_activities, only: [ :create, :destroy ]
 end

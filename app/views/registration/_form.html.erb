@@ -1,0 +1,47 @@
+<%= form_with model: @user, url: registration_path, builder: TailwindFormBuilder, data: {turbo: false} do |f| %>
+  <% if @user.errors.any? %>
+    <%= render_alert title: "#{pluralize(@user.errors.count, "erreur")} empêchent la mise à jour", variant: :error do %>
+      Veuillez corriger les erreurs présentes dans le formulaire.
+    <% end %>
+  <% end %>
+
+  <fieldset class="border p-6 rounded-lg lg:col-span-4 mb-6">
+    <legend>Informations générales</legend>
+    <!-- AVATAR UPLOADER -->
+    <div class="flex space-x-3 items-center mb-3" data-controller="avatar-uploader">
+      <div>
+        <figure class="rounded-full relative overflow-hidden flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-600 w-12 h-12">
+          <% url_image = @user.avatar.attached? ? url_for(@user.avatar) : '' %>
+          <%= image_tag url_image, class: "w-full h-full object-cover", data: {avatar_uploader_target: "avatar"} %>
+
+          <legend class="flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 bg-gray-100 dark:bg-gray-600
+                    <%= 'hidden' if @user.avatar.attached? %>"
+                  data-avatar-uploader-target="initials">
+            <span class="block">SP</span>
+          </legend>
+        </figure>
+
+        <%= button_tag  "reset", class: "#{'hidden' if !@user.avatar.attached?}",
+                        data: {action: "click->avatar-uploader#reset", 'avatar_uploader_target': 'resetBtn'} %>
+      </div>
+
+      <%= f.file_field :avatar, data: {avatar_uploader_target: "input", action: "change->avatar-uploader#change"} %>
+      <%= f.hidden_field :avatar_removed, data: {avatar_uploader_target: "removedField"}%>
+    </div>
+    <!-- END AVATAR UPLOADER -->
+
+    <%= f.text_field :username %>
+
+    <%= f.email_field :email_address %>
+
+    <%= f.text_area :bio %>
+  </fieldset>
+
+  <fieldset class="border p-6 rounded-lg lg:col-span-4 mb-6">
+    <legend>Modification du mot de passe (laissez vide si vous ne souhaitez pas le changer</legend>
+    <%= f.password_field :password %>
+    <%= f.password_field :password_confirmation %>
+    <%= f.password_field :current_password %>
+  </fieldset>
+  <%= f.submit "Modifier" %>
+<% end %>

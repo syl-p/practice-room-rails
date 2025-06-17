@@ -1,0 +1,22 @@
+<%= turbo_frame_tag "search_results" do %>
+  <span class="block font-semibold uppercase text-sm text-muted-foreground mb-3">Utilisateurs:</span>
+  <ul id="search_results" class="flex space-x-3 mb-3">
+    <% @results[:users].each do |user| %>
+      <li>
+        <%= link_to user, data: {turbo: false} do %>
+          <%= render AvatarComponent.new(user:) %>
+          <span class="sr-only"><%= user.username %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+  <span class="block font-semibold uppercase text-sm text-muted-foreground mb-3">Activités:</span>
+  <ul role="list" class="divide-y divide-primary-foreground">
+    <% @results[:activities].each do |activity| %>
+      <li class="hover:bg-gray-50">
+        <%= link_to activity.title, activity, data: {turbo: false}, class: "block p-4" %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

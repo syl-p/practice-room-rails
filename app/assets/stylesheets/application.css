@@ -9,45 +9,34 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-@keyframes fade-in {
-    from {
+
+::view-transition-old([view-transition-name^="activity-"]),
+::view-transition-new([view-transition-name^="activity-"]) {
+    animation-duration: 1000ms;
+    animation-timing-function: ease-in-out;
+    transform-origin: center center;
+}
+
+::view-transition-old([view-transition-name^="activity-"]) {
+    animation-name: slide-out-up;
+    z-index: 1;
+}
+
+::view-transition-new([view-transition-name^="activity-"]) {
+    animation-name: expand-in;
+    z-index: 2;
+}
+
+@keyframes slide-out-up {
+    to {
+        transform: translateY(-20%);
         opacity: 0;
     }
 }
 
-@keyframes fade-out {
-    to {
+@keyframes expand-in {
+    from {
+        transform: scale(0.95) translateY(20%);
         opacity: 0;
     }
-}
-
-@keyframes slide-from-right {
-    from {
-        transform: translateX(60px);
-    }
-}
-
-@keyframes slide-up {
-    from {
-        transform: translateY(130px);
-    }
-}
-
-@keyframes slide-to-left {
-    to {
-        transform: translateX(-30px);
-    }
-}
-
-/* Global but more fancy */
-::view-transition-old(main-content) {
-    z-index: 5;
-    animation: 90ms cubic-bezier(0.4, 0, 1, 1) both fade-out,
-    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-to-left;
-}
-
-::view-transition-new(main-content) {
-    z-index: 5;
-    animation: 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both fade-in,
-    300ms cubic-bezier(0.4, 0, 0.2, 1) both slide-from-right;
 }
