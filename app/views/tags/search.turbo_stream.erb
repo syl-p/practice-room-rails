@@ -1,0 +1,3 @@
+<%= turbo_stream.update "suggestions" do %>
+  <%= render partial: "tags/data_list", locals: {tags: @tags} if @tags.present? %>
+<% end %>

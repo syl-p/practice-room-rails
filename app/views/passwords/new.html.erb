@@ -1,8 +1,12 @@
-<h1>Forgot your password?</h1>
+<header>
+  <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Forgot your password?</h2>
+</header>
 
-<%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+<div class="mt-8">
+  <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
 
-<%= form_with url: passwords_path do |form| %>
-  <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
-  <%= form.submit "Email reset instructions" %>
-<% end %>
+  <%= form_with url: passwords_path, builder: TailwindFormBuilder do |form| %>
+    <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "Enter your email address", value: params[:email_address] %><br>
+    <%= form.submit "Email reset instructions" %>
+  <% end %>
+</div>

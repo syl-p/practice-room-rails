@@ -31,7 +31,6 @@ class ActivitiesController < ApplicationController
 
   def update
     authorize!(@activity)
-
     if @activity.update(activity_params)
       redirect_to @activity, notice: "Activity was successfully updated."
     else
@@ -53,6 +52,8 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    params.require(:activity).permit(:title, :description, :content, medium_ids: [])
+    raw_params = params.require(:activity).permit(:title, :content, :status, :tag_ids, medium_ids: [])
+    raw_params[:tag_ids] = raw_params[:tag_ids].to_s.split(',').reject(&:blank?)
+    raw_params
   end
 end

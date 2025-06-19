@@ -1,5 +1,4 @@
 class SearchService < ApplicationService
-
   def initialize(term)
     @term = term
   end
@@ -12,7 +11,7 @@ class SearchService < ApplicationService
 
     {
       users: users,
-      activities: activities,
+      activities: activities
     }
   end
 end

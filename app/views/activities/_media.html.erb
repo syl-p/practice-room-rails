@@ -1,0 +1,10 @@
+<% if media.present? %>
+  <h3 class="text-xl mb-3">
+    Media associés
+  </h3>
+  <ul class="divide-y divide-gray-200">
+    <% media.each do |medium| %>
+      <li class="p-4 hover:bg-gray-50"><%= render partial: "media/item", locals: {medium:} %></li>
+    <% end %>
+  </ul>
+<% end %>

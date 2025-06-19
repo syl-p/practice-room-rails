@@ -4,6 +4,7 @@ class CreateMedia < ActiveRecord::Migration[8.0]
       t.timestamps
       t.string :name
       t.text :description
+      t.belongs_to :user
     end
 
     create_join_table :media, :activities

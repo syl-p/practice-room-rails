@@ -73,6 +73,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_12_081540) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.text "description"
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_media_on_user_id"
   end
 
   create_table "practiced_activities", force: :cascade do |t|

@@ -15,7 +15,7 @@ class TagComponent < ViewComponent::Base
     @options = options
     @block = block
 
-    @default_classes = "inline-flex items-center rounded-full px-2 py-1 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
+    @default_classes = TailwindHelper::TAG_CLASSES
     @as = @href ? :a : :button
 
     @tag_classes = case @variant.to_sym

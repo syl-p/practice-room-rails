@@ -5,7 +5,7 @@ class RegistrationController < ApplicationController
   end
 
   def update
-    if params[:user][:avatar_removed] == '1'
+    if params[:user][:avatar_removed] == "1"
       @user.avatar.purge
     end
 

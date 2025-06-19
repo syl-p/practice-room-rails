@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
 
-// Connects to data-controller="avatar-uploader"
 export default class extends Controller {
   static targets = [ "input", "avatar", "removedField", "initials", "resetBtn" ]
 
@@ -8,7 +7,6 @@ export default class extends Controller {
   }
 
   change() {
-    console.log("hello change")
     this.#updateAvatar()
   }
 
@@ -21,7 +19,6 @@ export default class extends Controller {
   }
 
   #updateAvatar() {
-    console.log("update avatar", this.inputTarget.files);
     if(this.inputTarget.files.length > 0) {
       const reader = new FileReader()
       reader.readAsDataURL(this.inputTarget.files[0])

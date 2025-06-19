@@ -1,0 +1,22 @@
+<%
+  preselected_tags = preselected_tags.map do |tag|
+    { id: tag.id, name: tag.name }
+  end
+%>
+<div data-controller="tags-selector"
+     data-tags-selector-tag-classes-value="<%= [TailwindHelper::TAG_CLASSES, TailwindHelper::OUTLINE_CLASSES].join(' ') %>"
+     data-tags-selector-search-url-value="<%= tags_path %>"
+     data-tags-selector-preselected-tags-value="<%= preselected_tags.to_json %>">
+  <label class="<%= TailwindHelper::LABEL_CLASSES %>">Tags</label>
+  <input type="hidden" name="activity[tag_ids]" data-tags-selector-target="dataToSend"/>
+  <div class="flex space-x-3">
+    <ul class="flex space-x-3" data-tags-selector-target="listToShow"></ul>
+    <div>
+      <input data-action="input->tags-selector#search"
+             data-tags-selector-target="input"
+             type="text" name="search" list="tags"
+              />
+      <%= turbo_frame_tag "suggestions" %>
+    </div>
+  </div>
+</div>
