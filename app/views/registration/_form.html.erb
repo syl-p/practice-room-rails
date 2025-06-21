@@ -1,23 +1,27 @@
 <%= form_with model: @user, url: registration_path, builder: TailwindFormBuilder, data: {turbo: false} do |f| %>
   <% if @user.errors.any? %>
-    <%= render_alert title: "#{pluralize(@user.errors.count, "erreur")} empêchent la mise à jour", variant: :error do %>
-      Veuillez corriger les erreurs présentes dans le formulaire.
-    <% end %>
+
   <% end %>
 
   <fieldset class="border p-6 rounded-lg lg:col-span-4 mb-6">
     <legend>Informations générales</legend>
-    <%= render partial: 'registration/avatar_uploader', locals: {f:} %>
+    <%= render partial: 'registration/avatar_uploader', locals: {f:} if @user.persisted? %>
     <%= f.text_field :username %>
     <%= f.email_field :email_address %>
     <%= f.text_area :bio %>
   </fieldset>
 
   <fieldset class="border p-6 rounded-lg lg:col-span-4 mb-6">
-    <legend>Modification du mot de passe (laissez vide si vous ne souhaitez pas le changer</legend>
+    <legend>
+      <% if @user.persisted? %>
+        Modification du mot de passe (laissez vide si vous ne souhaitez pas le changer
+      <% else %>
+        Mot de passe
+      <% end %>
+    </legend>
     <%= f.password_field :password %>
     <%= f.password_field :password_confirmation %>
-    <%= f.password_field :current_password %>
+    <%= f.password_field :current_password if @user.persisted? %>
   </fieldset>
   <%= f.submit "Modifier" %>
 <% end %>

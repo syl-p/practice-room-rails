@@ -16,8 +16,7 @@ Rails.application.routes.draw do
   get "dashboard" => "dashboard#index", as: :dashboard
 
   resources :users, only: %i[show]
-  get "registration", to: "registration#edit", as: "edit_registration"
-  patch "registration", to: "registration#update"
+  resource :registration, controller: "registration"
 
   resources :comments, only: %i[show edit update destroy] do
     resources :comments, only: %i[create], module: :comments

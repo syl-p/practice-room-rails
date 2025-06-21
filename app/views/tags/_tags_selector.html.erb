@@ -8,11 +8,14 @@
      data-tags-selector-search-url-value="<%= tags_path %>"
      data-tags-selector-preselected-tags-value="<%= preselected_tags.to_json %>">
   <label class="<%= TailwindHelper::LABEL_CLASSES %>">Tags</label>
-  <input type="hidden" name="activity[tag_ids]" data-tags-selector-target="dataToSend"/>
-  <div class="flex space-x-3">
+  <input type="hidden" name="activity[tag_ids]"
+         data-tags-selector-target="dataToSend"/>
+  <div class="flex space-x-3 items-center bg-white border p-1  rounded-lg text-sm">
     <ul class="flex space-x-3" data-tags-selector-target="listToShow"></ul>
     <div>
-      <input data-action="input->tags-selector#search"
+      <input class="border-none"
+             placeholder="Chercher un tag ..."
+            data-action="input->tags-selector#search"
              data-tags-selector-target="input"
              type="text" name="search" list="tags"
               />

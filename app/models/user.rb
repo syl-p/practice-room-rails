@@ -19,7 +19,6 @@ class User < ApplicationRecord
   def update_with_password(params)
     if User.authenticate_by(email_address: params[:email_address], password: params[:current_password])
       params.delete(:current_password)
-      debugger
       update(params)
     else
       errors.add(:current_password, "est invalide")
