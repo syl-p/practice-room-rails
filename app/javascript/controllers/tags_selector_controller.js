@@ -16,7 +16,6 @@ export default class extends Controller {
       this.selectedTags.set(t.id, t.name)
     })
 
-    console.log(this.selectedTags)
     this.#updateListToShow()
   }
 

@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :activities, dependent: :destroy
   has_many :practiced_activities, dependent: :destroy
+  has_many :practices
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :email_address, presence: true, uniqueness: { case_sensitive: false }

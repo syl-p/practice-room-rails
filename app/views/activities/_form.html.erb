@@ -16,7 +16,7 @@
 
       <%= f.text_field :title %>
       <%= f.text_area :content, rows: 20 %>
-      <%= render partial: "tags/tags_selector", locals: {preselected_tags: @activity.tags} %>
+      <%= render partial: "tags/tags_selector", locals: {preselected_tags: @activity.tags, field_name: 'activity[tag_ids]'} %>
     </fieldset>
     <aside class="lg:col-span-2">
       <fieldset class="mb-6 border p-6 rounded-lg">

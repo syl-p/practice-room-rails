@@ -18,6 +18,9 @@ Rails.application.routes.draw do
   resources :users, only: %i[show]
   resource :registration, controller: "registration"
 
+  resources :practices
+  post "practices/switch", to: "practices#switch", as: :switch_practice
+
   resources :comments, only: %i[show edit update destroy] do
     resources :comments, only: %i[create], module: :comments
   end
@@ -25,6 +28,8 @@ Rails.application.routes.draw do
   resources :activities do
     resources :comments, module: :activities, only: [ :index, :create ]
   end
+
+  post 'activities/filter', to: 'activities#filter', as: "filter_activities", defaults: { format: :turbo_stream }
 
   resources :media
   get "tags", to: "tags#search", as: "tags"

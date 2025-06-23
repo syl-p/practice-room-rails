@@ -1,21 +1,10 @@
-<%
-  links = [
-    {
-      label: "Home",
-      route: root_path
-    },
-  ]
-%>
-<header data-turbo-permanent
-
-  class="fixed top-0 z-50 w-full"
+<header data-turbo-permanent class="fixed top-0 z-50 w-full"
 >
   <div class="container flex h-14 items-center justify-between">
     <div class="mr-4 flex">
       <a class="mr-6 flex items-center space-x-2" href="/">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="h-6 w-6">
           <rect width="256" height="256" fill="none" />
-
           <line
             x1="208"
             y1="128"
@@ -41,13 +30,16 @@
             />
 
         </svg>
-        <span class="hidden font-bold sm:inline-block">Practice room</span>
+        <span class="font-bold sr-only">Practice room</span>
       </a>
-      <nav class="hidden lg:flex items-center space-x-6 text-sm font-medium">
-        <% links.each do |link| %>
-          <%= link_to link[:label], link[:route], class: "transition-colors hover:text-foreground/80 text-foreground/60 text-foreground/60" %>
+
+      <% if authenticated? %>
+        <%= form_with url: switch_practice_path, builder: TailwindFormBuilder do %>
+          <%= select_tag :practice_id,
+                         options_from_collection_for_select(Current.user.practices, :id, :name, session[:current_practice_id]),
+                         onchange: 'this.form.submit()' %>
         <% end %>
-      </nav>
+      <% end %>
     </div>
     <div class="flex-1">
       <%= render partial: "shared/time_today" if authenticated? %>

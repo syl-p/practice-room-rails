@@ -1,9 +1,24 @@
 class ActivitiesController < ApplicationController
   allow_unauthenticated_access only: [ :index, :show ]
   before_action :set_activity, only: [ :show, :edit, :update, :destroy ]
+  include PracticesHelper
 
   def index
-    @activities = Activity.preload(:tags, :user).limit(10).order(created_at: :desc)
+    if authenticated?
+      if current_practice.present?
+        tag_ids = current_practice.tags.pluck(:id)
+        @activities = ActivitiesService.call(tag_ids:)
+      else
+        redirect_to new_practice_path, flash: {error: "Veuillez créer une pratique"}
+      end
+    else
+      @activities = Activity.published.order(created_at: :desc).limit(10)
+    end
+  end
+
+  def filter
+    tag_ids = params[:tag_ids].blank? ? current_practice.tags.pluck(:id) : params[:tag_ids]
+    @activities = ActivitiesService.call(tag_ids:)
   end
 
   def show
@@ -53,7 +68,7 @@ class ActivitiesController < ApplicationController
 
   def activity_params
     raw_params = params.require(:activity).permit(:title, :content, :status, :tag_ids, medium_ids: [])
-    raw_params[:tag_ids] = raw_params[:tag_ids].to_s.split(',').reject(&:blank?)
+    raw_params[:tag_ids] = raw_params[:tag_ids].to_s.split(",").reject(&:blank?)
     raw_params
   end
 end

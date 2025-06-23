@@ -1,0 +1,22 @@
+<%= form_with model: practice, builder: TailwindFormBuilder do |f| %>
+  <% if practice.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-500 px-3 py-2 font-medium rounded-md mt-3">
+      <h2><%= pluralize(practice.errors.count, "error") %> prohibited this practice from being saved:</h2>
+
+      <ul class="list-disc ml-6">
+        <% practice.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.text_field :name  %>
+  <%= f.text_area :description  %>
+
+  <%= render partial: "tags/tags_selector", locals: {preselected_tags: practice.tags, field_name: 'practice[tag_ids]'} %>
+
+  <div class="inline">
+    <%= f.submit %>
+  </div>
+<% end %>

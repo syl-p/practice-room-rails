@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_12_081540) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_21_125007) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -87,6 +87,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_12_081540) do
     t.index ["user_id"], name: "index_practiced_activities_on_user_id"
   end
 
+  create_table "practices", force: :cascade do |t|
+    t.string "name"
+    t.text "description"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_practices_on_user_id"
+  end
+
   create_table "sessions", force: :cascade do |t|
     t.integer "user_id", null: false
     t.string "ip_address"
@@ -126,6 +135,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_12_081540) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "practiced_activities", "activities"
   add_foreign_key "practiced_activities", "users"
+  add_foreign_key "practices", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "taggings", "tags"
 end
