@@ -18,7 +18,7 @@ class ActivitiesController < ApplicationController
 
   def filter
     tag_ids = params[:tag_ids].blank? ? current_practice.tags.pluck(:id) : params[:tag_ids]
-    @activities = ActivitiesService.call(tag_ids:)
+    @activities = ActivitiesService.call(tag_ids:, in_favorite:  params[:in_favorite])
   end
 
   def show

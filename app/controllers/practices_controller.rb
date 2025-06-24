@@ -13,10 +13,6 @@ class PracticesController < ApplicationController
     redirect_back fallback_location: root_path
   end
 
-  # GET /practices/1 or /practices/1.json
-  def show
-  end
-
   # GET /practices/new
   def new
     @practice = Practice.new
@@ -33,7 +29,7 @@ class PracticesController < ApplicationController
 
     respond_to do |format|
       if @practice.save
-        format.html { redirect_to @practice, notice: "Practice was successfully created." }
+        format.html { redirect_to root_path, notice: "Practice was successfully created." }
         format.json { render :show, status: :created, location: @practice }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -47,10 +43,8 @@ class PracticesController < ApplicationController
     respond_to do |format|
       if @practice.update(practice_params)
         format.html { redirect_to @practice, notice: "Practice was successfully updated." }
-        format.json { render :show, status: :ok, location: @practice }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @practice.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -68,7 +62,7 @@ class PracticesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_practice
-      @practice = Practice.find(session[:practice_id])
+      @practice = Practice.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.

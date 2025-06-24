@@ -25,9 +25,10 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create], module: :comments
   end
 
-  resources :activities do
-    resources :comments, module: :activities, only: [ :index, :create ]
-  end
+  resources :activities
+
+  post "favorites/:activity_id",  to: "favorites#create", as: 'new_favorite'
+  delete "favorites/:activity_id",  to: "favorites#destroy", as: 'remove_favorite'
 
   post 'activities/filter', to: 'activities#filter', as: "filter_activities", defaults: { format: :turbo_stream }
 

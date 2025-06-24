@@ -4,6 +4,7 @@ class User < ApplicationRecord
   has_many :activities, dependent: :destroy
   has_many :practiced_activities, dependent: :destroy
   has_many :practices
+  has_and_belongs_to_many :favorites, class_name: "Activity", join_table: "favorites"
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :email_address, presence: true, uniqueness: { case_sensitive: false }

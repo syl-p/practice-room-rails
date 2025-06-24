@@ -2,8 +2,9 @@
   <%= form_with url: filter_activities_path, method: :post do |f| %>
     <div class="py-8 mb-6 flex items-center space-x-6 border-t border-b overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
       <label>
-        <%= f.check_box :favorites, {
-          class: "hidden peer"
+        <%= f.check_box :in_favorite, {
+          class: "hidden peer",
+          onchange: "this.form.requestSubmit();"
         }, true, false %>
         <span class="p-2 cursor-pointer peer-checked:font-bold peer-checked:border-b-4 peer-checked:border-primary">Favoris</span>
       </label>

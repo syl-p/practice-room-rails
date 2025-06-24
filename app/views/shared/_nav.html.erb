@@ -34,7 +34,7 @@
       </a>
 
       <% if authenticated? %>
-        <%= form_with url: switch_practice_path, builder: TailwindFormBuilder do %>
+        <%= form_with url: switch_practice_path do %>
           <%= select_tag :practice_id,
                          options_from_collection_for_select(Current.user.practices, :id, :name, session[:current_practice_id]),
                          onchange: 'this.form.submit()' %>

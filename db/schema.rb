@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_21_125007) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_24_083134) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -66,6 +66,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_125007) do
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "favorites", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "activity_id", null: false
+    t.index ["activity_id"], name: "index_favorites_on_activity_id"
+    t.index ["user_id", "activity_id"], name: "index_favorites_on_user_id_and_activity_id", unique: true
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "media", force: :cascade do |t|
