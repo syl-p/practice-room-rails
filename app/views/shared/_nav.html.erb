@@ -51,6 +51,7 @@
           <%= link_to new_activity_path, class: ['hidden md:block', TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::OUTLINE_CLASSES].join(' ') do %>
             +
           <% end %>
+          <%= render partial: "shared/notifications" %>
           <%= render partial: "shared/user_dropdown" %>
         <% else %>
           <%= link_to "Se connecter", new_session_path, class: "btn btn-link" %>

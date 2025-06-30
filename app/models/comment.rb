@@ -6,4 +6,14 @@ class Comment < ApplicationRecord
   belongs_to :user
   belongs_to :parent, class_name: "Comment", optional: true
   belongs_to :commentable, polymorphic: true
+
+  after_create :notify_user
+
+  private
+  def notify_user
+    Notification.create(
+      user: commentable.user,
+      notifiable: self
+    )
+  end
 end

@@ -1,0 +1,16 @@
+<%= link_to notification.notifiable.commentable,
+            class: "flex w-full items-center space-x-3 px-4 py-2", data: {turbo: false} do %>
+  <div>
+    <%= render AvatarComponent.new(user: notification.notifiable.user) %>
+  </div>
+  <div class="flex-1">
+    <p class="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased mb-1">
+      <span class="font-medium text-blue-gray-900">
+        <%= notification.notifiable.user.username %>
+      </span>&nbsp;à posté un commentaire sur votre activité
+    </p>
+    <p class="flex items-center gap-1 font-sans text-xs font-light text-gray-600 antialiased">
+      <%= notification.created_at %>
+    </p>
+  </div>
+<% end %>

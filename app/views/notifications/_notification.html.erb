@@ -1,0 +1,4 @@
+<%= turbo_frame_tag dom_id(notification) do %>
+  <%= render partial: "notifications/types/#{notification.notifiable_type.underscore}",
+             locals: {notification:} %>
+<% end %>
