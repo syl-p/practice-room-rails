@@ -5,9 +5,9 @@
         <%= render(TagComponent.new(tag.name, variant: :outline)) %>
       <% end %>
     </div>
-    <h2 class="text-2xl font-bold"><%= link_to activity.title, activity, data: {turbo: false} %></h2>
+    <h2 class="text-2xl font-bold"><%= link_to activity.title, activity, data: { turbo_frame: "_top" } %></h2>
     <p class="font-light text-sm text-muted-foreground mb-3">
-      Posté par <%= link_to activity.user.username, activity.user, data: {turbo: false} %>, le <time datetime="<%= activity.created_at %>"><%= activity.created_at %></time>
+      Posté par <%= link_to activity.user.username, activity.user, data: { turbo_frame: "_top" } %>, le <time datetime="<%= activity.created_at %>"><%= activity.created_at %></time>
     </p>
   </header>
   <aside class="flex justify-between items-center p-3 mt-3 container mx-auto">

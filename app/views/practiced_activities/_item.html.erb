@@ -1,0 +1,31 @@
+<div
+  class="flex space-x-6 min-w-0 relative items-center rounded-lg border bg-card text-card-foreground shadow-sm p-4"
+>
+  <div class="hidden flex-shrink-0 md:block">
+    <%= display_time practiced_activity.duration %>
+  </div>
+  <div class="flex-1 min-w-0">
+    <div class="flex space-x-6 items-center mb-3">
+      <div class="flex-1">
+        <p class="text-xs text-muted-foreground">à <%= practiced_activity.created_at %></p>
+        <p>
+          <%= link_to practiced_activity.activity.title, practiced_activity.activity,
+                      class: "block font-semibold truncate" %>
+        </p>
+        <p class="text-xs">
+          Posté par <%= practiced_activity.activity.user.username %>
+        </p>
+      </div>
+      <div>
+        <%= button_to practiced_activity_path(id: practiced_activity.id),
+                      method: :delete, class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::OUTLINE_CLASSES].join(' ') do %> x <% end %>
+      </div>
+    </div>
+    <p class="font-light text-sm text-muted-foreground mb-3">
+      <%= practiced_activity.activity.content[0..100] %>
+    </p>
+    <div class="">
+
+    </div>
+  </div>
+</div>

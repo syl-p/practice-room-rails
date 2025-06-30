@@ -4,12 +4,17 @@ class SearchService < ApplicationService
   end
 
   def call
-    {} if @term.blank?
+    results = {
+      users: [],
+      activities: [],
+    }
 
-    users = User.where("username LIKE ?", "#{@term}%").limit(5)
-    activities = Activity.where("title LIKE ?", "#{@term}%").limit(10)
+    return results unless @term.present?
 
-    {
+    users = User.where("username LIKE ?", "%#{@term}%").limit(5)
+    activities = Activity.where("title LIKE ?", "%#{@term}%").limit(10)
+
+    results = {
       users: users,
       activities: activities
     }

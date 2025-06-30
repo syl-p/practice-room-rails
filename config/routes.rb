@@ -25,7 +25,9 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create], module: :comments
   end
 
-  resources :activities
+  resources :activities do
+    resources :comments, module: :activities
+  end
 
   post "favorites/:activity_id",  to: "favorites#create", as: 'new_favorite'
   delete "favorites/:activity_id",  to: "favorites#destroy", as: 'remove_favorite'
