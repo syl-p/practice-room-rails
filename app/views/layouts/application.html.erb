@@ -30,6 +30,7 @@
   <body>
     <%= render partial: "shared/nav" %>
     <main class="min-h-screen z-0" style="view-transition-name: main-content;">
+      <%= render partial: "shared/flash" %>
       <%= yield %>
     </main>
     <%= render partial: "shared/footer" %>

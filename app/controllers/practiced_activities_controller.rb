@@ -7,6 +7,7 @@ class PracticedActivitiesController < ApplicationController
     if @practiced_activity.save
       # turbo stream response to update the dashboard
       respond_to do |format|
+        flash[:success] = "Votre temps de pratique à été mise à jour."
         format.turbo_stream
       end
     else

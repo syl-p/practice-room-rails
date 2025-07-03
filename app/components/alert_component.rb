@@ -2,7 +2,7 @@
 
 class AlertComponent < ViewComponent::Base
   renders_one :title
-  renders_one :content
+  renders_one :body
 
   def initialize(variant: :default)
     @variant = variant

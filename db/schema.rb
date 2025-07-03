@@ -89,6 +89,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_30_100656) do
     t.integer "user_id", null: false
     t.string "notifiable_type", null: false
     t.integer "notifiable_id", null: false
+    t.integer "notification_type", default: 0, null: false
     t.datetime "read_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

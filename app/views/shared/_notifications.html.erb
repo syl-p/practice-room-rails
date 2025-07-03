@@ -13,7 +13,7 @@
     <% component.with_dropdown_menu do %>
       <%= turbo_stream_from "notifications:#{Current.user.id}" %>
       <%= turbo_frame_tag "notifications" do %>
-        <%= render partial: "notifications/list", locals: {notifications: Current.user.notifications} %>
+        <%= render partial: "notifications/list", locals: {notifications: Current.user.notifications.unread} %>
       <% end %>
     <% end %>
   <% end %>
