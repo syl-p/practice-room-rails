@@ -10,10 +10,10 @@
         <p class="text-xs text-muted-foreground">à <%= practiced_activity.created_at %></p>
         <p>
           <%= link_to practiced_activity.activity.title, practiced_activity.activity,
-                      class: "block font-semibold truncate" %>
+                      class: "block font-semibold truncate", data: {turbo: false} %>
         </p>
         <p class="text-xs">
-          Posté par <%= practiced_activity.activity.user.username %>
+          Posté par <%= link_to practiced_activity.activity.user.username, practiced_activity.activity.user, data: {turbo: false} %>
         </p>
       </div>
       <div>
