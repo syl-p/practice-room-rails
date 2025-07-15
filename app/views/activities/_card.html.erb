@@ -14,8 +14,10 @@
       <aside class="flex justify-between items-center p-3 mt-3 container mx-auto">
         <%= render partial: "activities/commenters", locals: {commenters: activity.commenters} %>
         <div class="flex space-x-3">
-          <%= render partial: "favorites/btn", locals: {activity_id: activity.id} %>
-          <%= render partial: "practiced_activities/add", locals: {activity_id: activity.id} %>
+          <% if authenticated? %>
+            <%= render partial: "favorites/btn", locals: {activity_id: activity.id} %>
+            <%= render partial: "practiced_activities/add", locals: {activity_id: activity.id} %>
+          <% end %>
         </div>
       </aside>
     </div>
