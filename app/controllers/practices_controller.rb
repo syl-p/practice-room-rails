@@ -66,7 +66,7 @@ class PracticesController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def practice_paramsP
+    def practice_params
       params.require(:practice).permit(:name, :description)
       raw_params = params.require(:practice).permit(:name, :description, :tag_ids)
       raw_params[:tag_ids] = raw_params[:tag_ids].to_s.split(",").reject(&:blank?)
