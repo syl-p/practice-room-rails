@@ -40,7 +40,7 @@
         </div>
       </fieldset>
       <fieldset class="mb-6 border p-6 rounded-lg lg:col-span-2">
-        <legend>Media associés</legend>
+        <legend>Media associés (<%= link_to "nouveau", new_medium_path, data: { turbo: true, turbo_frame: :remote_modal } %>)</legend>
         <%= f.select :medium_ids,
                      Medium.all.collect { |x| [x.name ? x.name : x.file.filename, x.id]},
                      {:include_blank => true, selected_value: nil}, :multiple => true %>

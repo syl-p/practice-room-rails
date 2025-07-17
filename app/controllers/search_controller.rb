@@ -4,4 +4,8 @@ class SearchController < ApplicationController
   def index
     @results = SearchService.call(params[:term])
   end
+
+  def new
+
+  end
 end

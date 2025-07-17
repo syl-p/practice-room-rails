@@ -38,6 +38,7 @@ Rails.application.routes.draw do
   get "tags", to: "tags#search", as: "tags"
 
   get "search" => "search#index", as: :search, defaults: { format: :turbo_stream }
+  get "search/new" => "search#new", as: :new_search
 
   resources :practiced_activities, only: [ :create, :destroy ]
 end

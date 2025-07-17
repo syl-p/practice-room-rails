@@ -33,6 +33,7 @@
       <%= render partial: "shared/flash" %>
       <%= yield %>
     </main>
+    <%= turbo_frame_tag :remote_modal %>
     <%= render partial: "shared/footer" %>
   </body>
 </html>

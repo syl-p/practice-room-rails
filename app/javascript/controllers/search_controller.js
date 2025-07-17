@@ -2,15 +2,10 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="search"
 export default class extends Controller {
-  static targets = ["dialog", "input"]
+  static targets = ["input"]
 
   connect() {
     this.debounce = setTimeout(() => {})
-  }
-
-  toggle(e) {
-    e.preventDefault();
-    this.dialogTarget.showModal()
   }
 
   change(e) {
@@ -22,12 +17,5 @@ export default class extends Controller {
     this.debounce = setTimeout(() => {
       this.inputTarget.closest('form')?.requestSubmit()
     }, 500)
-  }
-
-  closeOnSelfClick(e) {
-    if (e.target === this.dialogTarget) {
-      this.inputTarget.value = ''
-      this.dialogTarget.close()
-    }
   }
 }

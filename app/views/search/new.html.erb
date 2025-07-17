@@ -1,0 +1,13 @@
+<%= turbo_frame_tag :remote_modal do %>
+  <dialog data-controller="remote-modal search" class="backdrop:bg-background/80 backdrop:backdrop-blur-sm w-full md:max-w-[600px] lg:min-w-[900px] max-w-2xl gap-4 border bg-background shadow-lg duration-200 rounded-md">
+    <div class="p-6">
+      <%= form_with url: search_path, method: "get", builder: TailwindFormBuilder do |f| %>
+        <%= f.text_field :term, data: {
+          turbo: true,
+          search_target: "input",
+          action: "input->search#change"} %>
+      <% end %>
+      <%= turbo_frame_tag "search_results" %>
+    </div>
+  </dialog>
+<% end %>
