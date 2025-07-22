@@ -6,7 +6,9 @@ class Notification < ApplicationRecord
   scope :unread , -> {where(read_at: nil).order(read_at: :desc)}
 
   # websocket
-  broadcasts_to ->(record) { "notifications:#{record.user_id}" }, inserts_by: :prepend
+  after_create_commit do
+    broadcast_prepend_to "notifications:#{user_id}", target: "notifications"
+  end
 
   def mark_as_read!
     update(read_at: Time.current)
