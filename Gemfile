@@ -67,7 +67,7 @@ group :test do
 end
 
 gem "view_component", "~> 3.23"
-gem "tailwindcss-rails", "~> 3.3.1"
+gem "tailwindcss-rails", "~> 4.3.0"
 gem "rails-i18n", "~> 8.0"
 
 gem "mission_control-jobs", "~> 1.1"
