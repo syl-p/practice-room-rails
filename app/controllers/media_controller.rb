@@ -1,4 +1,6 @@
 class MediaController < ApplicationController
+  allow_unauthenticated_access except: :create
+
   def index
     @media = Medium.where(user: Current.user)
   end
@@ -8,16 +10,13 @@ class MediaController < ApplicationController
   end
 
   def create
-    @medium = Medium.new(medium_params)
-    if @medium.save
-      redirect_to media_path, flash: { success: "Medium Saved!" }
-    else
-      render "new", flash: { error: "Error!" }
-    end
-  end
+    @medium = Medium.new(user: Current.user)
+    @medium.file.attach(params[:file])
 
-  private
-  def medium_params
-    params.expect(medium: [ :file ])
+    if @medium.save
+      render json: @medium, status: 201
+    else
+      render json: { errors: @medium.errors.full_messages }, status: :unprocessable_entity
+    end
   end
 end

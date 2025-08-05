@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_secure_password
   has_many :sessions, dependent: :destroy
   has_many :activities, dependent: :destroy
+  has_many :media
   has_many :practiced_activities, dependent: :destroy
   has_many :practices
   has_many :notifications

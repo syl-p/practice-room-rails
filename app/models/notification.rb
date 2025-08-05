@@ -1,9 +1,9 @@
 class Notification < ApplicationRecord
   belongs_to :user
   belongs_to :notifiable, polymorphic: true
-  enum :notification_type, [:comment, :mention], default: :comment
+  enum :notification_type, [ :comment, :mention ], default: :comment
 
-  scope :unread , -> {where(read_at: nil).order(read_at: :desc)}
+  scope :unread, -> { where(read_at: nil).order(read_at: :desc) }
 
   # websocket
   after_create_commit do

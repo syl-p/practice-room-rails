@@ -6,7 +6,7 @@ class SearchService < ApplicationService
   def call
     results = {
       users: [],
-      activities: [],
+      activities: []
     }
 
     return results unless @term.present?

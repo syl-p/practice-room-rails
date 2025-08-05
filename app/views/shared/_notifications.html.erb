@@ -7,7 +7,7 @@
       </svg>
 
       <span data-notifications-target="indicator"
-            class="indicator hidden bottom-3 left-3 absolute w-3.5 h-3.5 bg-red-400 animate-pulse border-2 border-white dark:border-gray-800 rounded-full"></span>
+            class="indicator <%= "hidden" unless Current.user.notifications.unread.present? %> bottom-3 left-3 absolute w-3.5 h-3.5 bg-red-400 animate-pulse border-2 border-white dark:border-gray-800 rounded-full"></span>
     <% end %>
 
     <% component.with_dropdown_menu do %>

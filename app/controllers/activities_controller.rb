@@ -9,7 +9,7 @@ class ActivitiesController < ApplicationController
         tag_ids = current_practice.tags.pluck(:id)
         @activities = ActivitiesService.call(tag_ids:)
       else
-        redirect_to new_practice_path, flash: {error: "Veuillez créer une pratique"}
+        redirect_to new_practice_path, flash: { error: "Veuillez créer une pratique" }
       end
     else
       @activities = Activity.published.order(created_at: :desc).limit(10)

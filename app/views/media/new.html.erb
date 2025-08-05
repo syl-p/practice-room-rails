@@ -1,24 +1,10 @@
 <%= turbo_frame_tag :remote_modal do %>
-  <dialog data-controller="remote-modal" class="backdrop:bg-background/80 backdrop:backdrop-blur-sm w-full md:max-w-[600px] lg:min-w-[900px] max-w-2xl border bg-background shadow-lg duration-200 rounded-md">
-    <%= form_with model: @medium, method: :post, multipart: true,
-                  class: "p-8",
-                  builder: TailwindFormBuilder do |f| %>
-      <% if @medium.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@medium.errors.count, "error") %> prohibited this medium from being saved:</h2>
-
-          <ul>
-            <% @medium.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-
-      <div class="mb-6">
+  <dialog data-controller="remote-modal"
+          class="backdrop:bg-background/80 backdrop:backdrop-blur-sm w-full md:max-w-[600px] lg:min-w-[900px] max-w-2xl border bg-background shadow-lg duration-200 rounded-md">
         <div class="flex flex-col items-center justify-center gap-2 rounded-radius border border-dashed p-8 text-on-surface dark:border-outline-dark dark:text-on-surface-dark"
              data-controller="dropzone"
              data-dropzone-dragging-classes-value="bg-primary"
+             data-dropzone-upload-url-value="<%= media_url %>"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -38,16 +24,20 @@
               for="fileInputDragDrop"
               class="font-medium text-primary group-focus-within:underline dark:text-primary-dark"
             >
-              <%= f.file_field :file, class: "sr-only", data: {dropzone_target: "input"} %>
+              <%= file_field_tag :file, multiple: true, class: "sr-only", data: {dropzone_target: "input"} %>
               Chercher
             </label>
             ou glisser-déposer vos fichiers
           </div>
           <small id="validFileFormats">PNG, JPG, WebP, PDF - Max 3MB</small>
 
+          <ul data-dropzone-target="list">
+          </ul>
+
+          <button class="<%= [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(" ") %>"
+                  data-action="click->dropzone#submit">
+            Envoyez vos fichiers
+          </button>
         </div>
-      </div>
-      <%= f.submit "envoyer" %>
-    <% end %>
   </dialog>
 <% end %>

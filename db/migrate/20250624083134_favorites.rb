@@ -5,6 +5,6 @@ class Favorites < ActiveRecord::Migration[8.0]
       t.references :activity, null: false
     end
 
-    add_index :favorites, [:user_id, :activity_id], unique: true
+    add_index :favorites, [ :user_id, :activity_id ], unique: true
   end
 end

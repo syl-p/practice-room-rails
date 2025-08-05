@@ -1,5 +1,5 @@
 class PracticedActivitiesService < ApplicationService
-  def initialize(user: , start_at: , end_at:)
+  def initialize(user:, start_at:, end_at:)
     @user = user
     @start_at = start_at
     @end_at = end_at
@@ -17,7 +17,7 @@ class PracticedActivitiesService < ApplicationService
     count = @user.practiced_activities.at(@start_at, @end_at).count
     {
       state: count,
-      goal: 3,
+      goal: 3
     }
   end
 end

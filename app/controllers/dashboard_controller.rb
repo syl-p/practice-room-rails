@@ -17,7 +17,7 @@ class DashboardController < ApplicationController
 
     @stats = {
       more_than_10_mn_today: practices_activities_service.more_than_10_mn_today?,
-      have_3_exercises_today: practices_activities_service.have_3_exercises_today?,
+      have_3_exercises_today: practices_activities_service.have_3_exercises_today?
     }
   end
 

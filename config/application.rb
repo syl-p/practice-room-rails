@@ -25,7 +25,7 @@ module PracticeRoom
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
 
-    MissionControl::Jobs.http_basic_auth_user = ENV['JOB_PANEL_USER']
-    MissionControl::Jobs.http_basic_auth_password = ENV['JOB_PANEL_PASSWORD']
+    MissionControl::Jobs.http_basic_auth_user = ENV["JOB_PANEL_USER"]
+    MissionControl::Jobs.http_basic_auth_password = ENV["JOB_PANEL_PASSWORD"]
   end
 end

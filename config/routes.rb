@@ -30,10 +30,10 @@ Rails.application.routes.draw do
     resources :comments, module: :activities
   end
 
-  post "favorites/:activity_id",  to: "favorites#create", as: 'new_favorite'
-  delete "favorites/:activity_id",  to: "favorites#destroy", as: 'remove_favorite'
+  post "favorites/:activity_id",  to: "favorites#create", as: "new_favorite"
+  delete "favorites/:activity_id",  to: "favorites#destroy", as: "remove_favorite"
 
-  post 'activities/filter', to: 'activities#filter', as: "filter_activities", defaults: { format: :turbo_stream }
+  post "activities/filter", to: "activities#filter", as: "filter_activities", defaults: { format: :turbo_stream }
 
   resources :media
   get "tags", to: "tags#search", as: "tags"

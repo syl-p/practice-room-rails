@@ -14,7 +14,7 @@ class ActivitiesService < ApplicationService
     if @tag_ids.present?
       activities = activities
                         .joins(:tags)
-                        .where(tags: {id: @tag_ids})
+                        .where(tags: { id: @tag_ids })
                         .distinct
     end
 

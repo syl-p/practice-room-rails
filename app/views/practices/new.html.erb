@@ -1,9 +1,9 @@
 <% content_for :title, "New practice" %>
 
-<div class="md:w-2/3 w-full">
+<section class="container py-20">
   <h1 class="font-bold text-4xl">New practice</h1>
 
   <%= render "form", practice: @practice %>
 
   <%= link_to "Back to practices", practices_path, class: "ml-2 rounded-md px-3.5 py-2.5 bg-gray-100 hover:bg-gray-50 inline-block font-medium" %>
-</div>
+</section>
