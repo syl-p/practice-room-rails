@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="dropzone"
 export default class extends Controller {
-  static targets = ['input', 'list', 'item']
+  static targets = ['input', 'list']
   static values = {
     uploadUrl: String,
     draggingClasses: String
@@ -78,7 +78,7 @@ export default class extends Controller {
     li.dataset.id = item.index
 
     li.innerHTML = `
-        <div data-dropzone-target="item" class="border p-3 mb-3">
+        <div class="border p-3 mb-3">
           <div class="flex space-x-3">
             <p>${item.name}</p>
             <button
@@ -91,8 +91,7 @@ export default class extends Controller {
           <p class="status"></p>
         </div>
     `
-
-
+    
     this.listTarget.appendChild(li)
   }
 
@@ -134,13 +133,16 @@ export default class extends Controller {
 
     // ON FINISH
     xhr.onload = () => {
-      if (xhr.status === 201) {
-        progress.classList.add('hidden')
-        const response = JSON.parse(xhr.responseText)
-        status.textContent = "✅ Upload réussi"
-      } else {
+      const contentType = xhr.getResponseHeader("Content-Type")
+      if(xhr.status !== 200) {
         status.textContent = "❌ Échec création Medium"
       }
+
+      progress.classList.add('hidden')
+      status.textContent = "✅ Upload réussi"
+
+      // TURBO Work here !
+      Turbo.renderStreamMessage(xhr.responseText)
     }
 
     xhr.onerror = () => {

@@ -1,7 +1,20 @@
-<section class="py-20">
-  <ul>
-    <% @media.each do |medium| %>
-      <li><%= url_for medium.file %></li>
-    <% end %>
-  </ul>
-</section>
+<%
+  selected_ids = Array(params[:selected_ids]).map(&:to_i)
+%>
+
+<%= turbo_frame_tag :remote_modal do %>
+  <dialog data-controller="remote-modal media-selection"
+          class="p-8 backdrop:bg-background/80 backdrop:backdrop-blur-sm w-full md:max-w-[600px] lg:min-w-[900px] max-w-2xl border bg-background shadow-lg duration-200 rounded-md">
+    <%= render "media/modal_links" %>
+    <ul class="grid grid-cols-3 gap-3 mb-6">
+      <% @media.each do |medium| %>
+        <li>
+          <%= render medium, {selected: selected_ids.include?(medium.id)}%>
+        </li>
+      <% end %>
+    </ul>
+    <button
+      class="<%= [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(' ') %>"
+      data-action="click->media-selection#submit click->remote-modal#close">Sélectionner</button>
+  </dialog>
+<% end %>

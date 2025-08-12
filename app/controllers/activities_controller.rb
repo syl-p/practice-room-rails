@@ -34,7 +34,7 @@ class ActivitiesController < ApplicationController
     @activity.user = Current.user
 
     if @activity.save
-      redirect_to @activity, notice: "Activity was successfully created."
+      redirect_to @activity, flash: {success: "Bravo ! Votre activité à été créée."}
     else
       render :new
     end
@@ -47,7 +47,7 @@ class ActivitiesController < ApplicationController
   def update
     authorize!(@activity)
     if @activity.update(activity_params)
-      redirect_to @activity, notice: "Activity was successfully updated."
+      redirect_to @activity, flash: {success: 'Votre activité à été mise à jour.'}
     else
       render :edit
     end

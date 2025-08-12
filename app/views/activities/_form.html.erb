@@ -2,18 +2,6 @@
   <div class="lg:grid lg:grid-cols-6 gap-4">
     <fieldset class="border p-6 rounded-lg lg:col-span-4 mb-6 ">
       <legend>Contenu principal</legend>
-      <% if @activity.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(@activity.errors.count, "error") %> prohibited this exercise from being saved:</h2>
-
-          <ul>
-            <% @activity.errors.full_messages.each do |message| %>
-              <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
-
       <%= f.text_field :title %>
       <%= f.text_area :content, rows: 20 %>
       <%= render partial: "tags/tags_selector", locals: {preselected_tags: @activity.tags, field_name: 'activity[tag_ids]'} %>
@@ -39,12 +27,25 @@
           <% end %>
         </div>
       </fieldset>
+
       <fieldset class="mb-6 border p-6 rounded-lg lg:col-span-2">
-        <legend>Media associés (<%= link_to "nouveau", new_medium_path, data: { turbo: true, turbo_frame: :remote_modal } %>)</legend>
-        <%= f.select :medium_ids,
-                     Current.user.media.collect { |x| [x.name ? x.name : x.file.filename, x.id]},
-                     {:include_blank => true, selected_value: nil}, :multiple => true %>
+        <legend>Media associés</legend>
+        <div class="flex space-x-3"
+             data-controller="media-preview"
+             data-media-preview-medium-selected-value="<%= @activity.media.pluck(:id).to_json %>">
+            <ul class="flex space-x-3" data-media-preview-target="selectedList">
+            </ul>
+            <%= link_to media_path(selected_ids: @activity.media.pluck(:id)),
+                        data: { turbo: true,
+                                turbo_frame: :remote_modal,
+                                media_preview_target: "mediaListLink"
+                        },
+                        class: "w-18 h-18 p-6 flex flex-col justify-center bg-secondary rounded-lg" do %>
+              +
+            <% end %>
+        </div>
       </fieldset>
+
     </aside>
 
   </div>

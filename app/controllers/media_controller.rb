@@ -1,12 +1,8 @@
 class MediaController < ApplicationController
-  allow_unauthenticated_access except: :create
+  before_action :set_medium, only: [:destroy]
 
   def index
     @media = Medium.where(user: Current.user)
-  end
-
-  def new
-    @medium = Medium.new
   end
 
   def create
@@ -18,5 +14,20 @@ class MediaController < ApplicationController
     else
       render json: { errors: @medium.errors.full_messages }, status: :unprocessable_entity
     end
+  end
+
+  def destroy
+    @medium.destroy!
+
+    respond_to do |format|
+      format.html { redirect_to media_path, status: :see_other, notice: "Media supprimé !" }
+      format.json { head :no_content }
+    end
+  end
+
+  private
+
+  def set_medium
+    @medium = Medium.find(params[:id])
   end
 end
