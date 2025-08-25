@@ -3,6 +3,7 @@ class Activity < ApplicationRecord
   slug_from :title
   include Taggable
   enum :status, [ :draft, :published ], default: :published
+  scope :published, -> { where(status: :published) }
 
   belongs_to :user
   has_many :comments, as: :commentable

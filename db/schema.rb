@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_30_100656) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_25_114047) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -74,6 +74,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_30_100656) do
     t.index ["activity_id"], name: "index_favorites_on_activity_id"
     t.index ["user_id", "activity_id"], name: "index_favorites_on_user_id_and_activity_id", unique: true
     t.index ["user_id"], name: "index_favorites_on_user_id"
+  end
+
+  create_table "follows", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "following_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["follower_id", "following_id"], name: "index_follows_on_follower_id_and_following_id", unique: true
+    t.index ["follower_id"], name: "index_follows_on_follower_id"
+    t.index ["following_id"], name: "index_follows_on_following_id"
   end
 
   create_table "media", force: :cascade do |t|
@@ -153,6 +163,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_30_100656) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "follows", "users", column: "follower_id"
+  add_foreign_key "follows", "users", column: "following_id"
   add_foreign_key "practiced_activities", "activities"
   add_foreign_key "practiced_activities", "users"
   add_foreign_key "practices", "users"

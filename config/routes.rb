@@ -17,6 +17,9 @@ Rails.application.routes.draw do
   get "dashboard" => "dashboard#index", as: :dashboard
 
   resources :users, only: %i[show]
+  post "follows/:id", to: "follows#create", as: "follow"
+  delete "follows/:id", to: "follows#destroy", as: "unfollow"
+
   resource :registration, controller: "registration"
 
   resources :practices
