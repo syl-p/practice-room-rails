@@ -57,7 +57,7 @@ class ActivitiesController < ApplicationController
     authorize!(@activity)
 
     @activity.destroy
-    redirect_to activities_url, notice: "Activity was successfully destroyed."
+    redirect_to activities_url, flash: {success: "Activity was successfully destroyed."}
   end
 
   private
