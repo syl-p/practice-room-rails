@@ -24,4 +24,9 @@
     </footer>
   </section>
 <% end %>
-<%= render partial: "activities/card", locals: {activity: @activity, content:, classes: 'py-20'} %>
+
+<%= render partial: "activities/card", locals: {
+  activity: @activity,
+  content:,
+  classes: 'py-20'
+} %>

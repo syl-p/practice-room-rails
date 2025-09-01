@@ -47,15 +47,20 @@
     <p><%== comment.content %></p>
 
     <div class="flex items-center mt-4 space-x-4">
-      <p><a href="" data-action="click->comment#display">Répondre</a></p>
+      <p>
+        <% if authenticated? %>
+          <a href="" data-action="click->comment#display">Répondre</a>
+        <% end %>
+      </p>
     </div>
 
     <div class="ml-6">
-      <% if comment.parent_id.nil? %>
+      <% if comment.parent_id.nil? && authenticated? %>
         <%= turbo_frame_tag record_id_gen(comment, Comment.new) do %>
           <%= render partial: "comments/form", locals: {commentable: comment, comment: Comment.new, class: 'hidden'} %>
         <% end %>
       <% end %>
+
       <%= turbo_frame_tag "#{dom_id(comment)}_comments" do %>
         <%=  render partial: "comments/comment", collection: comment.replies, as: :comment  %>
       <% end %>

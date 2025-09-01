@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create], module: :comments
   end
 
+  resources :notifications, only: %i[index]
+
   resources :activities do
     resources :comments, module: :activities
   end

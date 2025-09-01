@@ -1,5 +1,5 @@
 class MediaController < ApplicationController
-  before_action :set_medium, only: [:destroy]
+  before_action :set_medium, only: [ :destroy ]
 
   def index
     @media = Medium.where(user: Current.user)
@@ -10,7 +10,7 @@ class MediaController < ApplicationController
     @medium.file.attach(params[:file])
 
     if @medium.save
-      render json: @medium, status: 201
+      render json: @medium
     else
       render json: { errors: @medium.errors.full_messages }, status: :unprocessable_entity
     end

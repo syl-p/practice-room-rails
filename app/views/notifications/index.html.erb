@@ -1,0 +1,3 @@
+<%= turbo_frame_tag "notifications", id: "notifications" do %>
+  <%= render partial: "notifications/list", locals: {notifications: @notifications }%>
+<% end %>

@@ -58,13 +58,16 @@ export default class extends Controller {
     this.selectedTags.forEach((name, id) => {
       const li = document.createElement("li")
       li.innerHTML = `
-        <button type="button"
-            class="${this.tagClassesValue}"
-            data-id="${id}"
-            data-action="click->tags-selector#deleteTag" 
-            data-tags-selector-id-param="${id}">
+        <div class="${this.tagClassesValue}" >
             ${name}
-        </button>
+            <button 
+                class="ml-2 text-black font-bold"
+                data-id="${id}"
+                data-action="click->tags-selector#deleteTag" 
+                data-tags-selector-id-param="${id}">
+                &times
+            </button>
+        </div>
       `
       this.listToShowTarget.appendChild(li)
     })

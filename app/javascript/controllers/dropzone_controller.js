@@ -134,12 +134,13 @@ export default class extends Controller {
     // ON FINISH
     xhr.onload = () => {
       const contentType = xhr.getResponseHeader("Content-Type")
+      progress.classList.add('hidden')
+
       if(xhr.status !== 200) {
         status.textContent = "❌ Échec création Medium"
+      } else {
+        status.textContent = "✅ Upload réussi"
       }
-
-      progress.classList.add('hidden')
-      status.textContent = "✅ Upload réussi"
 
       // TURBO Work here !
       Turbo.renderStreamMessage(xhr.responseText)

@@ -1,18 +1,14 @@
 class ActivitiesController < ApplicationController
-  allow_unauthenticated_access only: [ :index, :show ]
+  allow_unauthenticated_access only: [ :show ]
   before_action :set_activity, only: [ :show, :edit, :update, :destroy ]
   include PracticesHelper
 
   def index
-    if authenticated?
-      if current_practice.present?
-        tag_ids = current_practice.tags.pluck(:id)
-        @activities = ActivitiesService.call(tag_ids:)
-      else
-        redirect_to new_practice_path, flash: { error: "Veuillez créer une pratique" }
-      end
+    if current_practice.present?
+      tag_ids = current_practice.tags.pluck(:id)
+      @activities = ActivitiesService.call(tag_ids:)
     else
-      @activities = Activity.published.order(created_at: :desc).limit(10)
+      redirect_to new_practice_path, flash: { error: "Veuillez créer une pratique" }
     end
   end
 
@@ -34,7 +30,7 @@ class ActivitiesController < ApplicationController
     @activity.user = Current.user
 
     if @activity.save
-      redirect_to @activity, flash: {success: "Bravo ! Votre activité à été créée."}
+      redirect_to @activity, flash: { success: "Bravo ! Votre activité à été créée." }
     else
       render :new
     end
@@ -47,7 +43,7 @@ class ActivitiesController < ApplicationController
   def update
     authorize!(@activity)
     if @activity.update(activity_params)
-      redirect_to @activity, flash: {success: 'Votre activité à été mise à jour.'}
+      redirect_to @activity, flash: { success: "Votre activité à été mise à jour." }
     else
       render :edit
     end
@@ -57,13 +53,13 @@ class ActivitiesController < ApplicationController
     authorize!(@activity)
 
     @activity.destroy
-    redirect_to activities_url, flash: {success: "Activity was successfully destroyed."}
+    redirect_to activities_url, flash: { success: "Activity was successfully destroyed." }
   end
 
   private
 
   def set_activity
-    @activity = Activity.preload(:tags, :user, :comments).find(params[:id])
+    @activity = Activity.find(params[:id])
   end
 
   def activity_params

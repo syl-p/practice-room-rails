@@ -5,6 +5,7 @@
     </h1>
   </header>
   <%= render partial: "activities/filters" %>
+
   <%= turbo_frame_tag "activities" do %>
     <%= render partial: "activities/card", collection: @activities, as: :activity, locals: {classes: 'mb-3'} %>
   <% end %>

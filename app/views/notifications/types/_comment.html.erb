@@ -1,5 +1,6 @@
 <%= link_to notification.notifiable.commentable,
-            class: "flex w-full items-center space-x-3 px-4 py-2", data: {turbo: false} do %>
+            class: "flex w-full items-center space-x-3 px-4 py-2 #{'bg-secondary' unless notification.read_at.present?}",
+            data: {turbo: false} do %>
   <div>
     <%= render AvatarComponent.new(user: notification.notifiable.user) %>
   </div>
