@@ -23,7 +23,9 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
   def practice_time_today
-    practiced_activities.today.sum(:duration)
+    Rails.cache.fetch("practice_time_today:#{username}:#{Date.today.to_s}") do
+      practiced_activities.today.sum(:duration)
+    end
   end
 
   def update_with_password(params)
