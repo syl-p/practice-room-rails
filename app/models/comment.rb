@@ -1,6 +1,7 @@
 class Comment < ApplicationRecord
   include Rails.application.routes.url_helpers
   attr_accessor :mentioned_users
+
   validates :content, presence: true
   has_many :replies, class_name: "Comment", foreign_key: "parent_id", dependent: :destroy
 
@@ -23,18 +24,7 @@ class Comment < ApplicationRecord
     end
   end
 
-  def notify_author
-    Notification.create(user: commentable.user, notifiable: self, notification_type: :comment)
-  end
-
-  def notify_mentioned_users
-    @mentioned_users.each do |user|
-      Notification.create(user: user, notifiable: self, notification_type: :mention)
-    end
-  end
-
   def notify_author_and_mentions
-    notify_author if commentable.user != user
-    notify_mentioned_users
+    Comments::NotificationsJob.perform_later(self.id, @mentioned_users.pluck(:id))
   end
 end

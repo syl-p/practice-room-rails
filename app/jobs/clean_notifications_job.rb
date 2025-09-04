@@ -3,7 +3,7 @@ class CleanNotificationsJob < ApplicationJob
 
   def perform(*args)
     Notification
-      .where("created_at <= ?", 3.minutes.ago)
+      .where('read_at IS NOT NULL')
       .destroy_all
   end
 end
