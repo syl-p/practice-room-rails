@@ -1,21 +1,6 @@
 class ActivitiesController < ApplicationController
   allow_unauthenticated_access only: [ :show ]
   before_action :set_activity, only: [ :show, :edit, :update, :destroy ]
-  include PracticesHelper
-
-  def index
-    if current_practice.present?
-      tag_ids = current_practice.tags.pluck(:id)
-      @activities = ActivitiesService.call(tag_ids:)
-    else
-      redirect_to new_practice_path, flash: { error: "Veuillez créer une pratique" }
-    end
-  end
-
-  def filter
-    tag_ids = params[:tag_ids].blank? ? current_practice.tags.pluck(:id) : params[:tag_ids]
-    @activities = ActivitiesService.call(tag_ids:, in_favorite:  params[:in_favorite])
-  end
 
   def show
     authorize!(@activity)

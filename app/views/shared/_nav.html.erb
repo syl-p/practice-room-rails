@@ -2,7 +2,7 @@
 >
   <div class="container flex h-14 items-center justify-between">
     <div class="mr-4 flex">
-      <a class="mr-6 flex items-center space-x-2" href="/">
+      <%= link_to authenticated? ? practices_path : root_path, class: "mr-6 flex items-center space-x-2" do %>
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" class="h-6 w-6">
           <rect width="256" height="256" fill="none" />
           <line
@@ -31,14 +31,15 @@
 
         </svg>
         <span class="font-bold sr-only">Practice room</span>
-      </a>
+      <% end %>
 
-      <% if authenticated? %>
-        <%= form_with url: switch_practice_path do %>
+      <% if authenticated? && params[:practice_id] %>
           <%= select_tag :practice_id,
-                         options_from_collection_for_select(Current.user.practices, :id, :name, session[:current_practice_id]),
-                         onchange: 'this.form.submit()' %>
-        <% end %>
+                         options_for_select(
+                           Current.user.practices.map {|p| [p.name, practice_path(p.id)]},
+                           practice_path(params[:practice_id])
+                         ),
+                         onchange: 'if(event.target?.value) window.location.href = event.target.value' %>
       <% end %>
     </div>
     <div class="flex-1">

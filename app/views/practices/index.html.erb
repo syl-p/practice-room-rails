@@ -1,0 +1,12 @@
+<% content_for :title, "Vos pratiques" %>
+
+<section class="container pt-20">
+  <h1 class="text-3xl mb-6">Vos pratiques: </h1>
+  <ul class="">
+    <% @practices.each do |practice| %>
+      <li class="mb-3">
+        <%= render partial: "practices/card", locals: {practice:} %>
+      </li>
+    <% end %>
+  </ul>
+</section>

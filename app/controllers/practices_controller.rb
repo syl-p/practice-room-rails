@@ -1,16 +1,8 @@
 class PracticesController < ApplicationController
   before_action :set_practice, only: %i[ show edit update destroy ]
 
-  def switch
-    practice = Current.user.practices.find(params[:practice_id])
-
-    if practice
-      session[:current_practice_id] = practice.id
-    else
-      flash[:alert] = "Practice not found."
-    end
-
-    redirect_back fallback_location: root_path
+  def index
+    @practices = Current.user.practices
   end
 
   # GET /practices/new

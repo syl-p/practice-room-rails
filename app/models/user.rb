@@ -23,7 +23,7 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
   def practice_time_today
-    Rails.cache.fetch("practice_time_today:#{username}:#{Date.today.to_s}") do
+    Rails.cache.fetch("practice_time_today:#{username}:#{Date.today}") do
       practiced_activities.today.sum(:duration)
     end
   end

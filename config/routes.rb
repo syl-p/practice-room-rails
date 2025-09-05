@@ -13,7 +13,7 @@ Rails.application.routes.draw do
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
 
   # Defines the root path route ("/")
-  root "activities#index"
+  root "pages#home"
   get "dashboard" => "dashboard#index", as: :dashboard
 
   resources :users, only: %i[show]
@@ -22,8 +22,17 @@ Rails.application.routes.draw do
 
   resource :registration, controller: "registration"
 
-  resources :practices
-  post "practices/switch", to: "practices#switch", as: :switch_practice
+  resources :practices, except: [:show] do
+    # for fixing url /new vs /:practice_id
+    collection do
+      get  "/new", to: "practices#new", as: :new
+    end
+
+    scope module: :practices do
+      get "", to: "activities#index", as: :root
+      post "filter", to: "activities#filter", as: "filter_activities", defaults: { format: :turbo_stream }
+    end
+  end
 
   resources :comments, only: %i[show edit update destroy] do
     resources :comments, only: %i[create], module: :comments
@@ -37,8 +46,6 @@ Rails.application.routes.draw do
 
   post "favorites/:activity_id",  to: "favorites#create", as: "new_favorite"
   delete "favorites/:activity_id",  to: "favorites#destroy", as: "remove_favorite"
-
-  post "activities/filter", to: "activities#filter", as: "filter_activities", defaults: { format: :turbo_stream }
 
   resources :media
   get "tags", to: "tags#search", as: "tags"

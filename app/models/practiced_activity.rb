@@ -11,6 +11,6 @@ class PracticedActivity < ApplicationRecord
 
   private
   def clean_cache
-    Rails.cache.delete("practice_time_today:#{user.username}:#{Date.today.to_s}")
+    Rails.cache.delete("practice_time_today:#{user.username}:#{Date.today}")
   end
 end

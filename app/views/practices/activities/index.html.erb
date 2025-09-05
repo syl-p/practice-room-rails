@@ -4,7 +4,7 @@
       Bonjour, qu'allons nous travailler ?
     </h1>
   </header>
-  <%= render partial: "activities/filters" %>
+  <%= render partial: "practices/activities/filters" %>
 
   <%= turbo_frame_tag "activities" do %>
     <%= render partial: "activities/card", collection: @activities, as: :activity, locals: {classes: 'mb-3'} %>
