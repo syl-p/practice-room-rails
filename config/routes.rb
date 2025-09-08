@@ -20,7 +20,12 @@ Rails.application.routes.draw do
   post "follows/:id", to: "follows#create", as: "follow"
   delete "follows/:id", to: "follows#destroy", as: "unfollow"
 
-  resource :registration, controller: "registration"
+  resource :registration, controller: "registration", only: %i[new create]
+
+  namespace :settings do
+    resource :profile, only: %i[edit update]
+    resource :password, only: %i[edit update]
+  end
 
   resources :practices, except: [:show] do
     # for fixing url /new vs /:practice_id

@@ -1,0 +1,17 @@
+<section class="container pt-20 md:grid md:grid-cols-6 md:gap-6">
+  <aside class="md:col-span-1">
+    <%= render partial: "settings/nav" %>
+  </aside>
+  <article class="md:col-span-5">
+    <%= form_with model: Current.user, url: settings_profile_path, builder: TailwindFormBuilder, data: {turbo: false} do |f| %>
+      <fieldset class="border p-6 rounded-lg lg:col-span-4 mb-6">
+        <legend>Informations générales</legend>
+        <%= render partial: 'registration/avatar_uploader', locals: {f:} if @user.persisted? %>
+        <%= f.text_field :username %>
+        <%= f.email_field :email_address %>
+        <%= f.text_area :bio %>
+      </fieldset>
+      <%= f.submit "Modifier" %>
+    <% end %>
+  </article>
+</section>

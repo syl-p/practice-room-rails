@@ -1,0 +1,13 @@
+<% links = [
+  {href: edit_settings_profile_path, name: "Vos informations"},
+  {href: edit_settings_password_path, name: "Mot de passe"},
+] %>
+
+<nav>
+  <h2 class="text-2xl uppercase font-light text-secondary-foreground mb-6">Votre compte</h2>
+  <ul>
+    <% links.each do |link| %>
+      <li><%= link_to link[:name], link[:href] %></li>
+    <% end %>
+  </ul>
+</nav>
