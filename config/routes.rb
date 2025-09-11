@@ -28,10 +28,10 @@ Rails.application.routes.draw do
     resource :password, only: %i[edit update]
   end
 
-  resources :practices, except: [:show] do
+  resources :practices, except: [ :show ] do
     # for fixing url /new vs /:practice_id
     collection do
-      get  "/new", to: "practices#new", as: :new
+      get "/new", to: "practices#new", as: :new
     end
 
     scope module: :practices do

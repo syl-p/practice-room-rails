@@ -52,7 +52,7 @@ class PracticedActivitiesControllerTest < ActionDispatch::IntegrationTest
     assert_no_difference("PracticedActivity.count") do
       post practiced_activities_url, params: {
         activity_id: activity.id,
-        duration: 5000,
+        duration: 5000
       }, as: :turbo_stream
     end
 

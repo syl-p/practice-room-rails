@@ -13,7 +13,7 @@ class Settings::PasswordsController < ApplicationController
   private
 
   def user_params
-    params.expect(user: [:password_challenge, :password, :password_confirmation])
+    params.expect(user: [ :password_challenge, :password, :password_confirmation ])
           .with_defaults(password_challenge: "")
   end
 end
