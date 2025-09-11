@@ -36,14 +36,14 @@
       <% if authenticated? && params[:practice_id] %>
           <%= select_tag :practice_id,
                          options_for_select(
-                           Current.user.practices.map {|p| [p.name, practice_path(p.id)]},
+                           Current.user.cached_practices.map {|p| [p.name, practice_path(p.id)]},
                            practice_path(params[:practice_id])
                          ),
                          onchange: 'if(event.target?.value) window.location.href = event.target.value' %>
       <% end %>
     </div>
     <div class="flex-1">
-      <%= render partial: "shared/time_today" if authenticated? %>
+      <%= render partial: "shared/time_today" if authenticated? && params[:practice_id] %>
     </div>
     <div class="flex items-center space-x-2 justify-end">
       <nav class="flex items-center space-x-3 items-center">

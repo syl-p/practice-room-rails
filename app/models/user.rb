@@ -22,6 +22,13 @@ class User < ApplicationRecord
   validates :password, confirmation: true, length: { minimum: 6 }, allow_blank: true
 
   has_one_attached :avatar
+
+  def cached_practices
+    Rails.cache.fetch("practices:#{username}") do
+      practices
+    end
+  end
+
   def practice_time_today
     Rails.cache.fetch("practice_time_today:#{username}:#{Date.today}") do
       practiced_activities.today.sum(:duration)

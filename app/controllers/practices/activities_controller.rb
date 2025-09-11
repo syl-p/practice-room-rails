@@ -1,6 +1,5 @@
 class Practices::ActivitiesController < ApplicationController
   before_action :set_practice
-
   def index
     if @current_practice
       tag_ids = @current_practice.tags.pluck(:id)

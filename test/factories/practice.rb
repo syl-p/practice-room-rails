@@ -1,0 +1,7 @@
+FactoryBot.define do
+  factory :practice do
+    name { Faker::Lorem.word }
+    description { Faker::Lorem.sentence }
+    association :user
+  end
+end

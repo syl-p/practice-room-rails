@@ -1,6 +1,7 @@
 class PracticedActivity < ApplicationRecord
   belongs_to :user
   belongs_to :activity
+  belongs_to :practice
 
   validates :duration, presence: true, numericality: { only_integer: true, greater_than: 0 }
 

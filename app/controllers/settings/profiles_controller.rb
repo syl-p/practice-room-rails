@@ -4,7 +4,7 @@ class Settings::ProfilesController < ApplicationController
 
   def update
     if params[:user][:avatar_removed] == "1"
-      @user.avatar.purge
+      Current.user.avatar.purge
     end
 
     if Current.user.update(user_params)
