@@ -1,7 +1,7 @@
 <% content_for :title, "Vos pratiques" %>
 
 <section class="container pt-20">
-  <header class="pt-20 mb-10">
+  <header class="mb-10">
     <h1 class="text-4xl font-bold uppercase">
       Bonjour, qu'allons nous travailler ?
     </h1>
@@ -19,7 +19,7 @@
     </li>
     <% @practices.each do |practice| %>
       <li class="mb-3 col-span-4">
-        <%= render partial: "practices/card", locals: {practice:} %>
+        <%= render practice %>
       </li>
     <% end %>
   </ul>

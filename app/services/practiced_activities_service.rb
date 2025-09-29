@@ -1,12 +1,15 @@
 class PracticedActivitiesService < ApplicationService
+  attr_reader :practiced_activities
+
   def initialize(user:, start_at:, end_at:)
     @user = user
     @start_at = start_at
     @end_at = end_at
+    @practiced_activities = @user.practiced_activities.at(@start_at, @end_at)
   end
 
   def more_than_10_mn_today?
-    practice_time = @user.practiced_activities.at(@start_at, @end_at).sum(:duration)
+    practice_time = @practiced_activities.sum(:duration)
     {
       state: practice_time,
       goal: 10.minutes
@@ -14,7 +17,7 @@ class PracticedActivitiesService < ApplicationService
   end
 
   def have_3_exercises_today?
-    count = @user.practiced_activities.at(@start_at, @end_at).count
+    count = @practiced_activities.count
     {
       state: count,
       goal: 3

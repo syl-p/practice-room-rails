@@ -1,7 +1,0 @@
-<article class="rounded-lg bg-secondary p-6 flex space-x-3 items-center">
-  <div class="flex-1">
-    <%= link_to practice.name, practice, class: "text-xl font-bold", data: { turbo_frame: "_top" } %>
-    <p><%= practice.description %></p>
-  </div>
-  <%= link_to "Pratiquer", practice, class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(' ') %>
-</article>

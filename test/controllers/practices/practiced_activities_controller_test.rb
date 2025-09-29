@@ -4,10 +4,9 @@ class PracticedActivitiesControllerTest < ActionDispatch::IntegrationTest
   test "unauthenticated cannot save a practiced_activity" do
     practice = FactoryBot.create(:practice)
     activity = FactoryBot.create(:activity)
-    post practiced_activities_url, params: {
+    post practice_practiced_activities_path(practice_id: practice.id), params: {
       activity_id: activity.id,
-      duration: 30,
-      practice_id: practice.id
+      duration: 30
     }
     assert_response :redirect
   end
@@ -18,10 +17,9 @@ class PracticedActivitiesControllerTest < ActionDispatch::IntegrationTest
     sign_in(practice.user)
 
     assert_difference "PracticedActivity.count", 1 do
-      post practiced_activities_url, params: {
+      post practice_practiced_activities_path(practice_id: practice.id), params: {
         activity_id: activity.id,
-        duration: 30,
-        practice_id: practice.id
+        duration: 30
       }, as: :turbo_stream
     end
 
@@ -34,34 +32,33 @@ class PracticedActivitiesControllerTest < ActionDispatch::IntegrationTest
     sign_in(practice.user)
 
     assert_no_difference("PracticedActivity.count") do
-      post practiced_activities_url, params: {
+      post practice_practiced_activities_path(practice_id: practice.id), params: {
         activity_id: activity.id,
-        duration: nil,
-        practice_id: practice.id
+        duration: nil
       }, as: :turbo_stream
     end
 
-    assert_equal "Duration not found.", flash[:alert]
+    assert_equal "Duration not valid.", flash[:alert]
   end
 
-  test "fails to create practiced_activity without practice" do
+  test "user cannot provide a invalid duration" do
     practice = FactoryBot.create(:practice)
     activity = FactoryBot.create(:activity)
     sign_in(practice.user)
 
     assert_no_difference("PracticedActivity.count") do
-      post practiced_activities_url, params: {
+      post practice_practiced_activities_path(practice_id: practice.id), params: {
         activity_id: activity.id,
-        duration: 5000
+        duration: "not valid !"
       }, as: :turbo_stream
     end
 
-    assert_equal "Practice not found.", flash[:alert]
+    assert_equal "Duration not valid.", flash[:alert]
   end
 
   test "unauthenticated cannot destroy a practiced_activity" do
     practiced_activity = FactoryBot.create(:practiced_activity)
-    delete practiced_activity_url(practiced_activity)
+    delete practice_practiced_activity_path(practiced_activity, practice_id: practiced_activity.practice.id)
     assert_response :redirect
   end
 
@@ -71,7 +68,7 @@ class PracticedActivitiesControllerTest < ActionDispatch::IntegrationTest
     sign_in(practice.user)
 
     assert_difference "PracticedActivity.count", -1 do
-      delete practiced_activity_url(practiced_activity), as: :turbo_stream
+      delete practice_practiced_activity_path(practiced_activity, practice_id: practice.id), as: :turbo_stream
     end
     assert_response :success
   end
@@ -83,7 +80,7 @@ class PracticedActivitiesControllerTest < ActionDispatch::IntegrationTest
     practiced_activity.save
     sign_in(user1)
     assert_no_difference "PracticedActivity.count" do
-      delete practiced_activity_url(practiced_activity), as: :turbo_stream
+      delete practice_practiced_activity_path(practiced_activity, practice_id: practiced_activity.id), as: :turbo_stream
     end
     assert_response :not_found
   end

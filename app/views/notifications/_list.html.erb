@@ -1,3 +1,7 @@
 <% notifications.each do |notification| %>
   <%= render notification %>
 <% end %>
+
+<% if notifications.blank? %>
+  <p class="px-4 py-2">Aucune notification.</p>
+<% end %>

@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :activities, dependent: :destroy
   has_many :media
   has_many :practiced_activities, dependent: :destroy
-  has_many :practices
+  has_many :practices, dependent: :destroy
   has_many :notifications
   has_and_belongs_to_many :favorites, class_name: "Activity", join_table: "favorites"
 
@@ -24,8 +24,10 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   def cached_practices
-    Rails.cache.fetch("practices:#{username}") do
-      practices
+    Rails.cache.fetch("practices:#{username}:#{Date.today}") do
+      practices.left_joins(:practiced_activities)
+               .select("practices.*, COALESCE(SUM(practiced_activities.duration),0) as duration")
+               .group("practices.id")
     end
   end
 

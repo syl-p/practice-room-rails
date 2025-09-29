@@ -9,7 +9,7 @@
         <span class="p-2 cursor-pointer peer-checked:font-bold peer-checked:border-b-4 peer-checked:border-primary">Favoris</span>
       </label>
       <ul class="flex-nowrap flex space-x-6">
-        <% @current_practice.tags.each do |tag| %>
+        <% @practice.tags.each do |tag| %>
           <label>
             <%= f.check_box :tag_ids, {
               multiple: true,

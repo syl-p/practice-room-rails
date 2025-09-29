@@ -2,7 +2,7 @@ class PracticesController < ApplicationController
   before_action :set_practice, only: %i[ show edit update destroy ]
 
   def index
-    @practices = Current.user.practices
+    @practices = Current.user.cached_practices
   end
 
   # GET /practices/new

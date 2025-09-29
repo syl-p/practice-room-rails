@@ -1,0 +1,11 @@
+<%= turbo_stream.replace "user_practices" do %>
+  <%= render partial: "shared/user_practices" %>
+<% end %>
+
+<%= turbo_stream.append :practiced_activities_list do %>
+  <%= render partial: "practices/practiced_activities/item", locals: {practiced_activity: @practiced_activity} %>
+<% end %>
+
+<%= turbo_stream.update "flash" do %>
+  <%= render partial: "shared/flash" %>
+<% end %>

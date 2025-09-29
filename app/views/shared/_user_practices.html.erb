@@ -1,0 +1,6 @@
+<%= select_tag :practice_id,
+               options_for_select(
+                 Current.user.cached_practices.map {|p| ["#{p.name} (#{display_time(p.duration)})", practice_path(p.id)]},
+                 practice_path(params[:practice_id])
+               ),
+               onchange: 'if(event.target?.value) window.location.href = event.target.value' %>

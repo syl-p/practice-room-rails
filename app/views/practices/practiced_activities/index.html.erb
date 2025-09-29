@@ -1,0 +1,29 @@
+<%= turbo_frame_tag :practiced_activities do %>
+  <%= turbo_frame_tag :date_selector do %>
+    <nav>
+      <ul class="flex flex-wrap space-x-3 items-center justify-center mb-8">
+        <% (@start_at..@end_at).each do |wd| %>
+          <li>
+            <%= link_to practice_practiced_activities_path(practice_id: @practice.id, date: wd),
+                        class: "block text-center p-2 rounded-full border relative #{'bg-primary-foreground' if wd == @current_date}" do %>
+              <span class="block"><%= wd.day %></span>
+              <span class="block text-sm"><%= I18n.l(wd, format: "%b") %></span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  <% end %>
+
+  <%= turbo_frame_tag :practiced_activities_list do %>
+    <ul class="space-y-6">
+      <% @practiced_activities.each do |practiced_activity| %>
+        <li>
+          <%= turbo_frame_tag dom_id(practiced_activity) do %>
+            <%= render partial: "practices/practiced_activities/item", locals: {practiced_activity:} %>
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

@@ -1,13 +1,15 @@
-<section class="container pt-20">
-  <h1 class="text-xl font-bold mb-3">Edition des informations</h1>
+<header>
+  <h2 class="mt-6 text-3xl font-extrabold text-gray-900">Créé ton compte pour nous rejoindre</h2>
+  <p>Si tu en as déjà un, <%= link_to "connecte toi", new_session_path %>.</p>
+</header>
+
+<div class="mt-8">
+  <%= tag.div(flash[:alert], style: "color:red") if flash[:alert] %>
+  <%= tag.div(flash[:notice], style: "color:green") if flash[:notice] %>
+
   <%= form_with model: @user, url: registration_path, builder: TailwindFormBuilder, data: {turbo: false} do |f| %>
-    <fieldset class="border p-6 rounded-lg lg:col-span-4 mb-6">
-      <legend>Informations générales</legend>
-      <%= render partial: 'registration/avatar_uploader', locals: {f:} if @user.persisted? %>
-      <%= f.text_field :username %>
-      <%= f.email_field :email_address %>
-      <%= f.text_area :bio %>
-    </fieldset>
+    <%= f.text_field :username, required: true, autofocus: true %>
+    <%= f.email_field :email_address, required: true %>
     <%= f.submit "S'inscrire" %>
   <% end %>
-</section>
+</div>

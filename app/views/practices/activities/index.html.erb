@@ -1,7 +1,19 @@
-<section class="container pt-20 mb-10">
+<section class="container pt-20">
+  <header class="mb-10 flex space-x-3">
+    <div>
+      <h1 class="text-4xl font-bold uppercase">
+        <%= @practice.name %>
+      </h1>
+      <p class="text-secondary-foreground font-light">
+        <%= @practice.description %>
+      </p>
+    </div>
+    <%= render partial: "practices/dropdown", locals: {practice: @practice} %>
+  </header>
+
   <%= render partial: "practices/activities/filters" %>
 
   <%= turbo_frame_tag "activities" do %>
-    <%= render partial: "activities/card", collection: @activities, as: :activity, locals: {classes: 'mb-3'} %>
+    <%= render partial: "practices/activities/card", collection: @activities, as: :activity, locals: {classes: 'mb-3'} %>
   <% end %>
 </section>

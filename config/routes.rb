@@ -37,6 +37,8 @@ Rails.application.routes.draw do
     scope module: :practices do
       get "", to: "activities#index", as: :root
       post "filter", to: "activities#filter", as: "filter_activities", defaults: { format: :turbo_stream }
+
+      resources :practiced_activities, only: [ :index, :create, :destroy ]
     end
   end
 
@@ -58,6 +60,4 @@ Rails.application.routes.draw do
 
   get "search" => "search#index", as: :search, defaults: { format: :turbo_stream }
   get "search/new" => "search#new", as: :new_search
-
-  resources :practiced_activities, only: [ :create, :destroy ]
 end

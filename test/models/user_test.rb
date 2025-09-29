@@ -6,6 +6,11 @@ class UserTest < ActiveSupport::TestCase
     assert user.valid?
   end
 
+  test "username should be composed of characters and numbers" do
+    user = FactoryBot.build(:user)
+    # TODO
+  end
+
   test "should be invalid without an email address" do
     user = FactoryBot.build(:user, email_address: nil)
     assert_not user.valid?

@@ -1,7 +1,8 @@
-<%= form_with url: practiced_activities_path(activity_id:),
+<%= form_with url: practice_practiced_activities_path(practice_id:, activity_id:),
               html: { id: "timer-#{activity_id}"},
               data: {turbo: true, controller: "btn-timer"} do |f| %>
   <%= f.hidden_field :duration, data: {btn_timer_target: "input"} %>
+  <%= f.hidden_field :practice_id, value: "1", data: {btn_timer_target: "input"} %>
 
   <%= f.button class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(" "),
                data: {btn_timer_target: "button", action: "click->btn-timer#toggle"} do %>

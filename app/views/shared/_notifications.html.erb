@@ -14,7 +14,7 @@
 <!--      <div id="notifications">
         <%#= render partial: "notifications/list", locals: {notifications: Current.user.notifications.unread.limited} %>
       </div>-->
-      <%= turbo_frame_tag "notifications", id: "notifications", src: notifications_path do %>
+      <%= turbo_frame_tag "notifications", id: "notifications", src: notifications_path, loading: :lazy do %>
         ...
       <% end %>
     <% end %>

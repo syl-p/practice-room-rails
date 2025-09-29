@@ -1,0 +1,9 @@
+<%= turbo_stream.remove dom_id(@practiced_activity) %>
+
+<%= turbo_stream.replace "user_practices" do %>
+  <%= render partial: "shared/user_practices" %>
+<% end %>
+
+<%= turbo_stream.update "flash" do %>
+  <%= render partial: "shared/flash" %>
+<% end %>
