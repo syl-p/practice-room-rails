@@ -1,6 +1,9 @@
 # # Bienvenue dans **Practice Room** 🎶
+RUBY 8, HOTWIRE TURBO ET STIMULUS: 
 
-RUBY 8, HOTWIRE TURBO ET STIMULUS !
++ SOLID QUEUE
++ SOLID CACHE
++ SOLID CABLE
 
 ## Découvrez une nouvelle façon de pratiquer avec plaisir !
 
@@ -45,11 +48,21 @@ Bienvenue sur **"Practice Room"**, la plateforme communautaire et open source qu
 - Gagnez des badges et suivez des défis quotidiens pour une expérience encore plus stimulante.
 
 ## 🛠️ Détails Techniques
+### Pour lancer le projet en local:
 
-- Backend développé avec AdonisJs.
-- Frontend utilisant AlpineJS et HTMX.
-- Base de données PostgreSQL.
+```shell
+bundle
+```
 
+```shell
+bin/rails db:create
+bin/rails db:migrate
+bin/rails db:seed
+```
+
+```shell
+bin/dev
+```
 ## 🗺️ Roadmap & Corrections
 
 Suivez notre progression directement sur [l'onglet "projects"](https://github.com/users/syl-p/projects/13/views/1).

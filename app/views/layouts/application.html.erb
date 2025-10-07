@@ -38,7 +38,9 @@
         </div>
 
         <% if authenticated? && params[:practice_id] %>
-          <aside class="z-[110] lg:z-0 h-screen hidden fixed right-0 bottom-0 w-96 shrink-0 xl:static xl:block"
+          <aside
+            id="practice-sidebar"
+            class="z-[110] lg:z-0 h-screen hidden fixed right-0 bottom-0 w-96 shrink-0 xl:static xl:block"
                  data-application-target="sidebar"
                  data-transition-enter="transform transition ease-in-out duration-500"
                  data-transition-enter-start="translate-x-full"
@@ -46,14 +48,12 @@
                  data-transition-leave="transform transition ease-in-out duration-500"
                  data-transition-leave-start="translate-x-0"
                  data-transition-leave-end="translate-x-full">
-            <div class="fixed w-96 h-full right-0 bottom-0 bg-light shadow px-4 overflow-hidden">
-              <div class="flex flex-col h-full gap-6 items-center justify-center">
-                <%= turbo_frame_tag :practiced_activities,
-                                    src: practice_practiced_activities_path(practice_id: params[:practice_id]),
-                                    loading: :lazy do %>
-                  ...
-                <% end %>
-              </div>
+            <div class="fixed w-96 h-full right-0 bottom-0 bg-light shadow px-4 overflow-hidden bg-white pt-20">
+              <%= turbo_frame_tag :practiced_activities,
+                                  src: practice_practiced_activities_path(practice_id: params[:practice_id]),
+                                  loading: :lazy do %>
+                ...
+              <% end %>
             </div>
           </aside>
         <% end %>

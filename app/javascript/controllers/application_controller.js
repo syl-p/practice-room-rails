@@ -1,4 +1,4 @@
-import { leave, enter } from "../transistion";
+import { leave, enter } from "transition";
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {

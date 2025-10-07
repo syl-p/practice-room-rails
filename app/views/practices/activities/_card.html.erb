@@ -7,7 +7,7 @@
         <% end %>
       </div>
       <h2 class="text-2xl font-bold">
-        <%= link_to activity.title, activity %>
+        <%= link_to activity.title, activity, data: { turbo_frame: "_top" } %>
       </h2>
       <p class="font-light text-sm text-muted-foreground mb-3">
         Posté par <%= link_to activity.user.username, activity.user, data: { turbo_frame: "_top" } %>, le <time datetime="<%= activity.created_at %>"><%= activity.created_at %></time>

@@ -1,5 +1,7 @@
 class Practices::ActivitiesController < ApplicationController
   before_action :set_practice
+  before_action :set_stats, only: [ :index ]
+
   def index
     if @practice
       tag_ids = @practice.tags.pluck(:id)
@@ -20,5 +22,20 @@ class Practices::ActivitiesController < ApplicationController
   private
   def set_practice
     @practice = Practice.find(params[:practice_id])
+  end
+
+  def set_stats
+    current_date = Date.today
+    practices_activities_service = PracticedActivitiesService.new(
+      user: Current.user,
+      practice_id: @practice.id,
+      start_at: current_date.beginning_of_day,
+      end_at: current_date.end_of_day
+    )
+
+    @stats = {
+      more_than_10_mn_today: practices_activities_service.more_than_10_mn_today?,
+      have_3_exercises_today: practices_activities_service.have_3_exercises_today?
+    }
   end
 end

@@ -1,4 +1,4 @@
-<section class="container pt-20">
+<section class="pt-20">
   <header class="mb-10 flex space-x-3">
     <div>
       <h1 class="text-4xl font-bold uppercase">
@@ -10,6 +10,22 @@
     </div>
     <%= render partial: "practices/dropdown", locals: {practice: @practice} %>
   </header>
+
+  <div class="md:flex md:space-x-3 mb-6">
+    <%= render partial: "practices/daily_stat", locals: {
+      state: @stats[:more_than_10_mn_today][:state],
+      goal: @stats[:more_than_10_mn_today][:goal],
+      label_title: '10 minutes',
+      label_subtitle: 'Au moins 10 minutes de pratique'
+    } %>
+
+    <%= render partial: "practices/daily_stat", locals: {
+      state: @stats[:have_3_exercises_today][:state],
+      goal: @stats[:have_3_exercises_today][:goal],
+      label_title: '3 activitiés différentes',
+      label_subtitle: 'Pratiquez au moins 3 activitités'
+    } %>
+  </div>
 
   <%= render partial: "practices/activities/filters" %>
 

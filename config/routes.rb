@@ -15,7 +15,6 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "pages#home"
-  get "dashboard" => "dashboard#index", as: :dashboard
 
   resources :users, only: %i[show]
   post "follows/:id", to: "follows#create", as: "follow"
@@ -28,7 +27,7 @@ Rails.application.routes.draw do
     resource :password, only: %i[edit update]
   end
 
-  resources :practices, except: [ :show ] do
+  resources :practices, except: [ :show, :index ] do
     # for fixing url /new vs /:practice_id
     collection do
       get "/new", to: "practices#new", as: :new
