@@ -1,23 +1,22 @@
 <section class="pt-20 container">
+  <header class="p-6 bg-secondary rounded-md mb-10">
+    <h1 class="text-4xl lg:text-5xl">Practice room</h1>
+    <p class="text-muted-foreground">La plateforme pour pratiquer vos passions avec vos potes !</p>
+  </header>
   <% if authenticated? %>
-    <ul class="grid grid-cols-12 gap-6">
-      <li class="mb-3 col-span-4">
-        <%= link_to new_practices_path, class: "flex flex-col justify-center items-center rounded-md border border-dashed bg-primary-foreground hover:bg-secondary p-6" do %>
+    <h2 class="text-primary mb-6 text-3xl">Reprenons là où nous en étions</h2>
+    <div class="flex space-x-6 items-stretch flex-nowrap overflow-hidden overflow-x-auto is-overflow-x-scroll w-full">
+        <%= link_to new_practices_path, class: "min-w-[300px] flex flex-col justify-center items-center rounded-md border border-dashed bg-primary-foreground hover:bg-secondary p-6" do %>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
           <span className="text-body font-body text-neutral-400 text-center mt-3">
-          Crééer une nouvelle pratique
-        </span>
+              Crééer une nouvelle pratique
+            </span>
         <% end %>
-      </li>
       <% @practices.each do |practice| %>
-        <li class="mb-3 col-span-4">
           <%= render practice %>
-        </li>
       <% end %>
-    </ul>
-  <% else %>
-    <h1 class="text-3xl">Pratiquez votre passion avec vos amis !</h1>
+    </div>
   <% end %>
 </section>

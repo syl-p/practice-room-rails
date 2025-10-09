@@ -15,15 +15,7 @@ class PracticesController < ApplicationController
     @practice = Practice.new(practice_params)
     Current.user.practices << @practice
 
-    respond_to do |format|
-      if @practice.save
-        format.html { redirect_to root_path, notice: "Practice was successfully created." }
-        format.json { render :show, status: :created, location: @practice }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @practice.errors, status: :unprocessable_entity }
-      end
-    end
+    redirect_to root_path, notice: "Practice was successfully created."
   end
 
   # PATCH/PUT /practices/1 or /practices/1.json

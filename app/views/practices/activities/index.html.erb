@@ -1,5 +1,5 @@
-<section class="pt-20">
-  <header class="mb-10 flex space-x-3">
+<section>
+  <header class="mb-6 flex space-x-3">
     <div>
       <h1 class="text-4xl font-bold uppercase">
         <%= @practice.name %>
@@ -11,7 +11,7 @@
     <%= render partial: "practices/dropdown", locals: {practice: @practice} %>
   </header>
 
-  <div class="md:flex md:space-x-3 mb-6">
+  <div class="flex space-x-3 mb-6">
     <%= render partial: "practices/daily_stat", locals: {
       state: @stats[:more_than_10_mn_today][:state],
       goal: @stats[:more_than_10_mn_today][:goal],

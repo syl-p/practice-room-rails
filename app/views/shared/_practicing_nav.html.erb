@@ -1,0 +1,23 @@
+<header data-turbo-permanent class="sticky top-0 left-0 z-50 w-full py-4 px-8">
+  <div class="h-12 flex space-x-3 items-center justify-between">
+    <div class="flex justify-center items-center space-x-3">
+      <% if authenticated? && params[:practice_id] %>
+        <%= turbo_frame_tag "user_practices" do %>
+          <%= render partial: "shared/user_practices"%>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="flex items-center space-x-2 justify-end">
+      <nav class="flex items-center space-x-3 items-center">
+        <%= render partial: "shared/search_dialog" %>
+        <button
+          class="<%= [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::OUTLINE_CLASSES, 'lg:hidden'].join(' ')%> "
+          data-action="click->application#toggle"
+          data-application-id-param="practice-sidebar">
+          open
+        </button>
+      </nav>
+    </div>
+  </div>
+</header>

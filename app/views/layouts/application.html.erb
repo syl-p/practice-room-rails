@@ -1,67 +1,19 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= content_for(:title) || "Practice Room" %></title>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="view-transition" content="same-origin" />
-    <meta name="turbo-refresh-method" content="morph">
-    <meta name="turbo-refresh-scroll" content="preserve">
-
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-
-    <%= yield :head %>
-
-    <%# Enable PWA manifest for installable apps (make sure to enable in config/routes.rb too!) %>
-    <%#= tag.link rel: "manifest", href: pwa_manifest_path(format: :json) %>
-
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-
-    <%# Includes all stylesheet files in app/assets/stylesheets %>
-    <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>
-    <%= stylesheet_link_tag :app, "data-turbo-track": "reload" %>
-    <%= javascript_importmap_tags %>
+    <%= render partial: "shared/head" %>
   </head>
 
   <body data-controller="application">
     <%= render partial: "shared/nav" %>
     <%= render partial: "shared/flash" %>
 
-    <main class="h-full relative p-8">
-      <section class="flex w-full items-stretch gap-x-0 relative">
-        <div class="flex-1 relative">
-          <%= yield %>
-        </div>
-
-        <% if authenticated? && params[:practice_id] %>
-          <aside
-            id="practice-sidebar"
-            class="z-[110] lg:z-0 h-screen hidden fixed right-0 bottom-0 w-96 shrink-0 xl:static xl:block"
-                 data-application-target="sidebar"
-                 data-transition-enter="transform transition ease-in-out duration-500"
-                 data-transition-enter-start="translate-x-full"
-                 data-transition-enter-end="translate-x-0"
-                 data-transition-leave="transform transition ease-in-out duration-500"
-                 data-transition-leave-start="translate-x-0"
-                 data-transition-leave-end="translate-x-full">
-            <div class="fixed w-96 h-full right-0 bottom-0 bg-light shadow px-4 overflow-hidden bg-white pt-20">
-              <%= turbo_frame_tag :practiced_activities,
-                                  src: practice_practiced_activities_path(practice_id: params[:practice_id]),
-                                  loading: :lazy do %>
-                ...
-              <% end %>
-            </div>
-          </aside>
-        <% end %>
-      </section>
+    <main class="p-8 min-h-screen">
+        <%= yield %>
     </main>
+
     <%= turbo_frame_tag :remote_modal %>
     <%= render partial: "shared/footer" %>
-    
     <div
       data-application-target="overlay"
       data-transition-enter="ease-in-out duration-500"

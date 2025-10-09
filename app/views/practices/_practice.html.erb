@@ -1,4 +1,4 @@
-<article id="<%= dom_id practice %>" class="rounded-lg bg-secondary p-6">
+<article id="<%= dom_id practice %>" class="min-w-[300px] rounded-lg bg-secondary p-4">
   <div class="flex-1 flex space-x-3 items-center mb-6">
     <%= link_to practice.name, practice, class: "text-xl font-bold block flex-1", data: { turbo_frame: "_top" } %>
     <%= render partial: "practices/dropdown", locals: {practice: } %>
