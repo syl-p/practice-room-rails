@@ -18,5 +18,12 @@
           <%= render practice %>
       <% end %>
     </div>
+  <% else %>
+    <h2 class="text-primary mb-6 text-3xl">Les dernières activités</h2>
+    <div class="flex space-x-6 items-stretch flex-nowrap overflow-hidden overflow-x-auto is-overflow-x-scroll w-full">
+      <% @activities.each do |activity| %>
+        <%= render activity %>
+      <% end %>
+    </div>
   <% end %>
 </section>

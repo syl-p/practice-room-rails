@@ -1,5 +1,5 @@
 class PracticesController < ApplicationController
-  before_action :set_practice, only: %i[ show edit update destroy ]
+  before_action :set_practice, only: %i[ edit update destroy ]
 
   # GET /practices/new
   def new

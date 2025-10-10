@@ -17,6 +17,7 @@ export default class extends Controller {
     })
 
     this.#updateListToShow()
+    this.#updateDataToSend()
   }
 
   search() {

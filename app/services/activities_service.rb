@@ -2,6 +2,7 @@ class ActivitiesService < ApplicationService
   def initialize(options)
     @tag_ids = options[:tag_ids]
     @in_favorites = options[:in_favorite]
+    @limit = options[:limit] || 10
   end
 
   def call
@@ -20,6 +21,6 @@ class ActivitiesService < ApplicationService
 
     activities
       .order(created_at: :desc)
-      .limit(10)
+      .limit(@limit)
   end
 end
