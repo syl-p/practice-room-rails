@@ -1,5 +1,5 @@
 <%
-  field_name = local_assigns[:field_name] || 'tag_ids'
+  field_name = local_assigns[:field_name] || 'tag_labels'
   preselected_tags = local_assigns[:preselected_tags] || []
   preselected_tags = preselected_tags.map do |tag|
     { id: tag.id, name: tag.name }
@@ -9,19 +9,19 @@
 <div data-controller="tags-selector"
      data-tags-selector-tag-classes-value="<%= [TailwindHelper::TAG_CLASSES, TailwindHelper::OUTLINE_CLASSES].join(' ') %>"
      data-tags-selector-search-url-value="<%= tags_path %>"
-     data-tags-selector-preselected-tags-value="<%= preselected_tags.to_json %>">
+     data-tags-selector-preselected-tags-value="<%= preselected_tags.pluck(:name).to_json %>">
   <label class="<%= TailwindHelper::LABEL_CLASSES %>">Tags</label>
   <input type="hidden" name="<%= field_name %>"
          data-tags-selector-target="dataToSend"/>
-  <div class="p-4">
+  
+  <div class="py-4">
     <input class="border p-2 rounded w-full"
            autocomplete="off"
            placeholder="Chercher un tag ..."
-           data-action="input->tags-selector#search"
            data-tags-selector-target="input"
+           data-action="input->tags-selector#search keydown.enter->tags-selector#selectTag:stop"
            type="text" name="search" list="tags" />
-
-    <%= turbo_frame_tag "suggestions" %>
+    <datalist id="tags"></datalist>
 
     <ul class="mt-2 flex flex-wrap gap-2"
         data-tags-selector-target="listToShow"></ul>

@@ -1,9 +1,0 @@
-<ul id="tags">
-  <% tags.each do |tag| %>
-    <li data-action="click->tags-selector#selectTag"
-        data-tags-selector-id-param="<%= tag.id %>"
-        data-tags-selector-name-param="<%= tag.name %>">
-      <%= tag.name %>
-    </li>
-  <% end %>
-</ul>

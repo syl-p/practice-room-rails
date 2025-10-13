@@ -13,30 +13,34 @@ class PracticesController < ApplicationController
   # POST /practices or /practices.json
   def create
     @practice = Practice.new(practice_params)
-    Current.user.practices << @practice
 
-    redirect_to root_path, notice: "Practice was successfully created."
+    tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
+    if tags.present?
+      @practice.tags = find_tags(tags)
+    end
+
+    Current.user.practices << @practice
+    redirect_to @practice, flash: {success: "Practice was successfully created." }
   end
 
   # PATCH/PUT /practices/1 or /practices/1.json
   def update
-    respond_to do |format|
-      if @practice.update(practice_params)
-        format.html { redirect_to @practice, notice: "Practice was successfully updated." }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-      end
+    tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
+    if tags.present?
+      @practice.tags = find_tags(tags)
+    end
+
+    if @practice.update(practice_params)
+      redirect_to @practice, flash: {success: "Practice was successfully updated." }
+    else
+      render :edit, status: :unprocessable_entity
     end
   end
 
   # DELETE /practices/1 or /practices/1.json
   def destroy
     @practice.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to practices_path, status: :see_other, notice: "Practice was successfully destroyed." }
-      format.json { head :no_content }
-    end
+    redirect_to root_path, status: :see_other, flash: {success: "Practice was successfully destroyed." }
   end
 
   private
@@ -48,8 +52,9 @@ class PracticesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def practice_params
       params.require(:practice).permit(:name, :description)
-      raw_params = params.require(:practice).permit(:name, :description, :tag_ids)
-      raw_params[:tag_ids] = raw_params[:tag_ids].to_s.split(",").reject(&:blank?)
-      raw_params
     end
+
+  def find_tags(labels)
+    Tag.where(name: labels)
+  end
 end

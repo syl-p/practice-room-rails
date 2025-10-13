@@ -3,9 +3,7 @@ class PagesController < ApplicationController
   def home
     if authenticated?
       @practices = Current.user.cached_practices
-      if @practices.size == 0
-        redirect_to new_practices_path
-      end
+      redirect_to new_practices_path unless @practices.present?
     else
       @activities = ActivitiesService.call(tag_ids: [], limit: 5)
     end

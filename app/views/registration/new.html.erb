@@ -10,6 +10,8 @@
   <%= form_with model: @user, url: registration_path, builder: TailwindFormBuilder, data: {turbo: false} do |f| %>
     <%= f.text_field :username, required: true, autofocus: true %>
     <%= f.email_field :email_address, required: true %>
+    <%= f.password_field :password, required: true %>
+    <%= f.password_field :password_confirmation, required: true %>
     <%= f.submit "S'inscrire" %>
   <% end %>
 </div>

@@ -6,7 +6,7 @@ class PracticedActivitiesService < ApplicationService
     @start_at = start_at
     @end_at = end_at
     @practiced_activities = @user.practiced_activities.at(@start_at, @end_at)
-                                                      .where(practice_id: )
+                                                      .where(practice_id:)
   end
 
   def more_than_10_mn_today?

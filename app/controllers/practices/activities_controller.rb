@@ -1,5 +1,5 @@
 class Practices::ActivitiesController < ApplicationController
-  layout 'practicing'
+  layout "practicing"
   before_action :set_practice
   before_action :set_stats, only: [ :index ]
 

@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="tag-selector"
 export default class extends Controller {
-  static targets = ['input', 'suggestions', 'dataToSend', 'listToShow']
+  static targets = ['input', 'dataToSend', 'listToShow']
   static values = {
     searchUrl: String,
     preselectedTags: [],
@@ -11,13 +11,9 @@ export default class extends Controller {
 
   connect() {
     this.debounce = null
-    this.selectedTags = new Map()
-    this.preselectedTagsValue.forEach(t => {
-      this.selectedTags.set(t.id, t.name)
-    })
+    this.selectedTags = [...this.preselectedTagsValue]
 
-    this.#updateListToShow()
-    this.#updateDataToSend()
+    this.#render()
   }
 
   search() {
@@ -29,6 +25,8 @@ export default class extends Controller {
 
   fetchTags() {
     const pattern = this.inputTarget.value.trim()
+    if (!pattern) return
+
     fetch(
         `${this.searchUrlValue}?pattern=${encodeURIComponent(pattern)}`,
         {headers: { Accept: "text/vnd.turbo-stream.html" }})
@@ -36,41 +34,44 @@ export default class extends Controller {
         .then(html => Turbo.renderStreamMessage(html))
   }
 
-  selectTag({params: {id, name}}) {
-    this.selectedTags.set(id, name)
-    this.listToShowTarget.innerHTML = ''
-    this.#updateDataToSend()
-    this.#updateListToShow()
+  selectTag(event) {
+    event.preventDefault()
+    const tag = this.inputTarget.value.trim()
+    if (!tag) return;
+    if(this.selectedTags.includes(tag)) return
+
+    this.selectedTags.push(tag)
+    this.inputTarget.value = ""
+    this.#render()
   }
 
-  deleteTag({params: {id}}) {
-    this.listToShowTarget.querySelector(`[data-id="${id}"]`).remove()
-    this.selectedTags.delete(id)
-    this.#updateDataToSend()
-    this.#updateListToShow()
+  deleteTag(event) {
+    event.preventDefault()
+    const label = event.target.dataset.label
+    this.selectedTags = this.selectedTags.filter(tag => tag !== label)
+    this.#render()
   }
 
-  #updateDataToSend() {
-    this.dataToSendTarget.value = Array.from(this.selectedTags.keys()).join(',')
-  }
-
-  #updateListToShow() {
-    this.listToShowTarget.innerHTML = ''
-    this.selectedTags.forEach((name, id) => {
+  #render() {
+    // RENDER LIST
+    this.listToShowTarget.innerHTML = '' // clear list
+    this.selectedTags.forEach((tagLabel, index) => {
       const li = document.createElement("li")
       li.innerHTML = `
         <div class="${this.tagClassesValue}" >
-            ${name}
+            ${tagLabel}
             <button 
                 class="ml-2 text-black font-bold"
-                data-id="${id}"
-                data-action="click->tags-selector#deleteTag" 
-                data-tags-selector-id-param="${id}">
+                data-label="${tagLabel}"
+                data-action="click->tags-selector#deleteTag:stop">
                 &times
             </button>
         </div>
       `
       this.listToShowTarget.appendChild(li)
     })
+
+    // UPDATE HIDDEN INPUT
+    this.dataToSendTarget.value = this.selectedTags.join(',')
   }
 }

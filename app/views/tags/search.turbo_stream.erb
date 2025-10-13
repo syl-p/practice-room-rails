@@ -1,3 +1,9 @@
-<%= turbo_stream.update "suggestions" do %>
-  <%= render partial: "tags/data_list", locals: {tags: @tags} if @tags.present? %>
+<% if @tags.present? %>
+    <%= turbo_stream.update "tags" do %>
+      <% @tags.each do |tag| %>
+        <option data-action="click->tags-selector#selectTag" value="<%= tag.name %>">
+          <%= tag.name %>
+        </option>
+      <% end %>
+    <% end %>
 <% end %>

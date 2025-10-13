@@ -6,7 +6,7 @@
   <% component.with_dropdown_menu do %>
     <ul class="py-1" role="none">
       <li><%= link_to "Editer", edit_practice_path(id: practice.id), class: "block px-4 py-2 text-sm text-gray-700"  %></li>
-      <li><%= link_to "Supprimer", practice_path(id: practice.id), method: :delete, class: "block px-4 py-2 text-sm text-gray-700"  %></li>
+      <li><%= button_to "Supprimer", practice_path(id: practice.id), method: :delete, class: "block px-4 py-2 text-sm text-gray-700"  %></li>
     </ul>
   <% end %>
 <% end %>

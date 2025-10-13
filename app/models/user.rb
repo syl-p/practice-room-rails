@@ -24,8 +24,8 @@ class User < ApplicationRecord
   has_one_attached :avatar
 
   def cached_practices
-    cache_key = [self, 'practices', Date.current]
-    Rails.cache.fetch(cache_key) do
+    cache_key = [ self, "practices", Date.current ]
+    Rails.cache.fetch(cache_key, expires_in: 1.day) do
       practices.left_joins(:practiced_activities)
                .select("practices.*, COALESCE(SUM(practiced_activities.duration),0) as duration")
                .group("practices.id")
@@ -33,8 +33,8 @@ class User < ApplicationRecord
   end
 
   def practice_time_today
-    cache_key = [self, 'practice_time_today', Date.current]
-    Rails.cache.fetch(cache_key) do
+    cache_key = [ self, "practice_time_today", Date.current ]
+    Rails.cache.fetch(cache_key, expires_in: 1.day) do
       practiced_activities.today.sum(:duration)
     end
   end

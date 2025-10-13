@@ -2,6 +2,7 @@ class Practices::PracticedActivitiesController < ApplicationController
   before_action :set_practice
   before_action :set_activity, only: [ :create ]
   before_action :set_duration, only: [ :create ]
+  before_action :set_practiced_activity, only: [ :destroy ]
 
   def index
     session[:current_practice_id] = @practice.id
@@ -28,13 +29,15 @@ class Practices::PracticedActivitiesController < ApplicationController
   end
 
   def destroy
-    @practiced_activity = Current.user.practiced_activities.find(params[:id])
     @practiced_activity.destroy
-
     flash[:success] = "Votre temps de pratique à été mise à jour."
   end
 
   private
+  def set_practiced_activity
+    @practiced_activity = Current.user.practiced_activities.find(params[:id])
+  end
+
   def set_duration
     begin
       @duration = Integer(params[:duration])

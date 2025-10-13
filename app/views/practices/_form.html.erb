@@ -14,7 +14,7 @@
   <%= f.text_field :name  %>
   <%= f.text_area :description  %>
 
-  <%= render partial: "tags/tags_selector", locals: {preselected_tags: practice.tags, field_name: 'practice[tag_ids]'} %>
+  <%= render partial: "tags/tags_selector", locals: {preselected_tags: practice.tags} %>
 
   <div class="inline">
     <%= f.submit %>
