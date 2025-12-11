@@ -1,4 +1,4 @@
-<article class="rounded-lg bg-blue-100" style="view-transition-name:activity-<%= @activity.id %>">
+<article class="bg-blue-100 pt-20" style="view-transition-name:activity-<%= @activity.id %>">
   <header class="border border-b p-3 container mx-auto">
     <div class="mb-3">
       <% @activity.tags.each do |tag| %>
@@ -10,19 +10,21 @@
       Posté par <%= link_to @activity.user.username, @activity.user, data: { turbo_frame: "_top" } %>, le <time datetime="<%= @activity.created_at %>"><%= @activity.created_at %></time>
     </p>
   </header>
-  <aside class="flex justify-between items-center p-3 mt-3 container mx-auto">
+  <aside class="flex justify-between items-center p-3 mt-3 mb-20 container mx-auto">
     <%= render partial: "activities/commenters",
                locals: {commenters: @activity.commenters} %>
     <div class="flex space-x-3">
       <% if authenticated? %>
-        <%= render partial: "favorites/btn", locals: {activity_id: @activity.id} %>
+        <%#= render partial: "favorites/btn", locals: {activity_id: @activity.id} %>
+        <%= render partial: "activities/attach_form",
+                   locals: {activity: @activity} %>
         <%= render partial: "practices/practiced_activities/add",
                    locals: {practice_id: session[:current_practice_id], activity_id: @activity.id} %>
       <% end %>
     </div>
   </aside>
   <section class="rounded-t-3xl bg-white py-8">
-    <div class=" container my-10 lg:grid lg:grid-cols-6 gap-4">
+    <div class="container my-10 lg:grid lg:grid-cols-6 gap-4">
       <article class="mb-6 lg:mb-0 lg:col-span-4">
         <%= @activity.content %>
       </article>
@@ -30,7 +32,6 @@
         <%= render partial: "activities/media", locals: {media: @activity.media} %>
       </aside>
     </div>
-
     <footer class="container">
       <h2 class="text-xl mb-3">
         Discussions

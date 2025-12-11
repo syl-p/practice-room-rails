@@ -27,16 +27,15 @@ Rails.application.routes.draw do
     resource :password, only: %i[edit update]
   end
 
-  resources :practices, except: [ :show, :index ] do
+  resources :practices, except: [ :index ] do
     # for fixing url /new vs /:practice_id
     collection do
       get "/new", to: "practices#new", as: :new
     end
 
     scope module: :practices do
-      get "", to: "activities#index", as: :root
-      post "filter", to: "activities#filter", as: "filter_activities", defaults: { format: :turbo_stream }
-
+      get "activity/:id", to: "activities#show", as: :activity
+      post "activity/filter", to: "activities#filter", as: "filter_activities", defaults: { format: :turbo_stream }
       resources :practiced_activities, only: [ :index, :create, :destroy ]
     end
   end
@@ -48,6 +47,7 @@ Rails.application.routes.draw do
   resources :notifications, only: %i[index]
 
   resources :activities do
+    post "attach_to", to: "practices/activities#attach_to", as: "attach"
     resources :comments, module: :activities
   end
 

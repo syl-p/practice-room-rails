@@ -1,6 +1,6 @@
 <% if authenticated? %>
-  <%= form_with url: practice_filter_activities_path, method: :post do |f| %>
-    <div class="py-8 mb-6 flex items-center space-x-6 border-t border-b overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
+  <%= form_with url: practice_filter_activities_path(practice_id: practice.id), method: :post do |f| %>
+    <div class="flex items-center space-x-6">
       <label>
         <%= f.check_box :in_favorite, {
           class: "hidden peer",

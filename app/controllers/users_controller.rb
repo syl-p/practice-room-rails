@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   allow_unauthenticated_access only: :show
-  before_action :set_user, only: %i[ show ]
+  before_action :set_user, only: %i[ show activities ]
 
   def show
   end

@@ -1,23 +1,18 @@
-<div
-  id="<%= dom_id(practiced_activity) %>"
-  class="flex space-x-6 min-w-0 relative items-center rounded-lg border bg-card text-card-foreground shadow-sm p-4"
->
-  <div class="hidden flex-shrink-0 md:block">
-    <%= display_time(practiced_activity.duration) %>
-  </div>
-  <div class="flex-1 min-w-0">
-    <div class="flex space-x-6 items-center mb-3">
-      <div class="flex-1">
-        <p class="text-xs text-muted-foreground">à <%= practiced_activity.created_at %></p>
-        <p>
-          <%= link_to practiced_activity.activity.title, practiced_activity.activity,
-                      class: "block font-semibold truncate", data: {turbo: false} %>
-        </p>
-      </div>
-      <div>
-        <%= button_to practice_practiced_activity_path(practice_id: @practice.id, id: practiced_activity.id),
-                      method: :delete, class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::OUTLINE_CLASSES].join(' ') do %> x <% end %>
-      </div>
+<%= turbo_frame_tag dom_id(practiced_activity) do %>
+  <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-4 mb-3">
+    <div class="flex-1 flex items-center">
+        <div class="flex-1">
+          <p class="text-xs text-muted-foreground">
+            <%= display_time(practiced_activity.duration) %> à <%= practiced_activity.created_at %></p>
+          <p>
+            <%= link_to practiced_activity.activity.title, practice_activity_path(practice_id: @practice.id, id: practiced_activity.activity.id),
+                        class: "block font-semibold truncate", data: {turbo: false} %>
+          </p>
+        </div>
+        <div>
+          <%= button_to practice_practiced_activity_path(practice_id: @practice.id, id: practiced_activity.id),
+                        method: :delete, class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::OUTLINE_CLASSES].join(' ') do %> x <% end %>
+        </div>
     </div>
   </div>
-</div>
+<% end %>

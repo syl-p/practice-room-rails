@@ -1,27 +1,21 @@
-<article class="rounded-lg bg-blue-100" style="view-transition-name:activity-<%= activity.id %>">
-  <div class="<%= classes if local_assigns.has_key? :classes %>">
-    <header class="border border-b p-3 container mx-auto">
-      <div class="mb-3">
-        <% activity.tags.each do |tag| %>
-          <%= render(TagComponent.new(tag.name, variant: :outline)) %>
-        <% end %>
-      </div>
-      <h2 class="text-2xl font-bold">
-        <%= link_to activity.title, activity, data: { turbo_frame: "_top" } %>
-      </h2>
-      <p class="font-light text-sm text-muted-foreground mb-3">
-        Posté par <%= link_to activity.user.username, activity.user, data: { turbo_frame: "_top" } %>, le <time datetime="<%= activity.created_at %>"><%= activity.created_at %></time>
-      </p>
-    </header>
-    <aside class="flex justify-between items-center p-3 mt-3 container mx-auto">
-      <%= render partial: "activities/commenters", locals: {commenters: activity.commenters} %>
-      <div class="flex space-x-3">
-        <% if authenticated? %>
-          <%= render partial: "favorites/btn", locals: {activity_id: activity.id} %>
-          <%= render partial: "practices/practiced_activities/add", locals: {practice_id: @practice, activity_id: activity.id} %>
-        <% end %>
-      </div>
-    </aside>
+<article class="rounded bg-background shadow rounded p-6 mb-6 flex space-x-3 items-center"
+         style="view-transition-name:activity-<%= activity.id %>">
+  <div class="flex-1">
+    <h3 class="font-bold">
+      <%= link_to activity.title, practice_activity_path(practice, activity), data: { turbo_frame: "_top" } %>
+    </h3>
+    <p class="text-sm text-muted-foreground">
+      Proposé par <%= link_to activity.user.username, activity.user, data: { turbo_frame: "_top" } %>
+    </p>
   </div>
-  <%= content if local_assigns.has_key? :content %>
+  <div>
+    <% activity.tags.each do |tag| %>
+      <%= render(TagComponent.new(tag.name, variant: :outline)) %>
+    <% end %>
+  </div>
+  <div class="flex justify-between items-center">
+    <% if authenticated? %>
+      <%= render partial: "practices/practiced_activities/add", locals: {practice_id: @practice, activity_id: activity.id} %>
+    <% end %>
+  </div>
 </article>

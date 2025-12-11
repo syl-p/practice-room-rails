@@ -1,0 +1,3 @@
+class PracticePolicy < ApplicationPolicy
+  
+end

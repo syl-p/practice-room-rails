@@ -1,5 +1,11 @@
 class PracticesController < ApplicationController
-  before_action :set_practice, only: %i[ edit update destroy ]
+  before_action :set_practice, only: %i[ show edit update destroy ]
+  before_action :set_stats, only: [ :show ]
+
+  def show
+    redirect_to new_practice_path, flash: { error: "Veuillez créer une pratique" } unless @practice.present?
+    session[:current_practice_id] = @practice.id
+  end
 
   # GET /practices/new
   def new
@@ -20,7 +26,7 @@ class PracticesController < ApplicationController
     end
 
     Current.user.practices << @practice
-    redirect_to @practice, flash: {success: "Practice was successfully created." }
+    redirect_to @practice, flash: { success: "Practice was successfully created." }
   end
 
   # PATCH/PUT /practices/1 or /practices/1.json
@@ -31,7 +37,7 @@ class PracticesController < ApplicationController
     end
 
     if @practice.update(practice_params)
-      redirect_to @practice, flash: {success: "Practice was successfully updated." }
+      redirect_to @practice, flash: { success: "Practice was successfully updated." }
     else
       render :edit, status: :unprocessable_entity
     end
@@ -40,7 +46,7 @@ class PracticesController < ApplicationController
   # DELETE /practices/1 or /practices/1.json
   def destroy
     @practice.destroy!
-    redirect_to root_path, status: :see_other, flash: {success: "Practice was successfully destroyed." }
+    redirect_to root_path, status: :see_other, flash: { success: "Practice was successfully destroyed." }
   end
 
   private
@@ -54,7 +60,22 @@ class PracticesController < ApplicationController
       params.require(:practice).permit(:name, :description)
     end
 
-  def find_tags(labels)
-    Tag.where(name: labels)
-  end
+    def find_tags(labels)
+      Tag.where(name: labels)
+    end
+
+    def set_stats
+      current_date = Date.today
+      practices_activities_service = PracticedActivitiesService.new(
+        user: Current.user,
+        practice_id: @practice.id,
+        start_at: current_date.beginning_of_day,
+        end_at: current_date.end_of_day
+      )
+
+      @stats = {
+        more_than_10_mn_today: practices_activities_service.more_than_10_mn_today?,
+        have_3_exercises_today: practices_activities_service.have_3_exercises_today?
+      }
+    end
 end

@@ -123,6 +123,7 @@
     <orderEntry type="library" scope="PROVIDED" name="rails-dom-testing (v2.3.0, ruby-3.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-html-sanitizer (v1.6.2, ruby-3.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rails-i18n (v8.0.1, ruby-3.2.0-p0) [gem]" level="application" />
+    <orderEntry type="library" scope="PROVIDED" name="rails_icons (v1.5.1, ruby-3.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="railties (v8.0.2, ruby-3.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rainbow (v3.1.1, ruby-3.2.0-p0) [gem]" level="application" />
     <orderEntry type="library" scope="PROVIDED" name="rake (v13.3.0, ruby-3.2.0-p0) [gem]" level="application" />
