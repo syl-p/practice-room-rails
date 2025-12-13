@@ -9,8 +9,14 @@
                end
   %>
     <%= button_to form_url,
-                  class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(' '),
+                  class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::GHOST_CLASSES].join(' '),
                   method: mode do %>
-      <%= mode == :post ? 'Ajouter aux favoris' : 'Supprimer des favoris' %>
+      <% if mode == :post %>
+        <%= icon('heart') %>
+        <span class="sr-only">Ajouter aux favoris</span>
+      <% else %>
+        <%= icon('heart', variant: "solid") %>
+        <span class="sr-only">Retirer des favoris</span>
+      <% end %>
   <% end %>
 <% end %>

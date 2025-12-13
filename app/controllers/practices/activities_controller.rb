@@ -1,21 +1,29 @@
 class Practices::ActivitiesController < ApplicationController
   before_action :set_practice
-  before_action :set_activity, only: [ :show, :attach_to ]
+  before_action :set_activity, only: [ :show, :attach, :detach ]
 
   def show
     authorize!(@activity)
   end
 
-  def attach_to
-    authorize(@activity)
-    @practice.activities << @activity
-    @practice.save
-    flash[:success] = "Activity Attached!"
-  end
-
   def filter
     tag_ids = params[:tag_ids].blank? ? @practice.tags.pluck(:id) : params[:tag_ids]
     @activities = ActivitiesService.call(tag_ids:, in_favorite:  params[:in_favorite])
+  end
+
+  def attach
+    authorize!(@practice)
+    @practice.activities << @activity
+    @practice.save
+    
+    flash[:success] = "Activity Attached!"
+  end
+
+  def detach
+    authorize!(@practice)
+    @practice.activities.delete(@activity)
+
+    flash[:success] = "Activity Detached!"
   end
 
   private

@@ -1,6 +1,7 @@
 class Practice < ApplicationRecord
-  belongs_to :user, touch: true
   include Taggable
+
+  belongs_to :user, touch: true
   has_many :practiced_activities
   has_many :practice_activities
   has_many :activities, through: :practice_activities

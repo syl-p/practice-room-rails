@@ -19,7 +19,7 @@
            autocomplete="off"
            placeholder="Chercher un tag ..."
            data-tags-selector-target="input"
-           data-action="input->tags-selector#search keydown.enter->tags-selector#selectTag:stop"
+           data-action="input->tags-selector#search change->tags-selector#selectTag"
            type="text" name="search" list="tags" />
     <datalist id="tags"></datalist>
 

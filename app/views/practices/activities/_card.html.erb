@@ -1,21 +1,44 @@
-<article class="rounded bg-background shadow rounded p-6 mb-6 flex space-x-3 items-center"
-         style="view-transition-name:activity-<%= activity.id %>">
-  <div class="flex-1">
-    <h3 class="font-bold">
-      <%= link_to activity.title, practice_activity_path(practice, activity), data: { turbo_frame: "_top" } %>
-    </h3>
-    <p class="text-sm text-muted-foreground">
-      Proposé par <%= link_to activity.user.username, activity.user, data: { turbo_frame: "_top" } %>
-    </p>
-  </div>
-  <div>
-    <% activity.tags.each do |tag| %>
-      <%= render(TagComponent.new(tag.name, variant: :outline)) %>
-    <% end %>
-  </div>
-  <div class="flex justify-between items-center">
-    <% if authenticated? %>
-      <%= render partial: "practices/practiced_activities/add", locals: {practice_id: @practice, activity_id: activity.id} %>
-    <% end %>
-  </div>
-</article>
+<%= turbo_frame_tag record_id_gen(practice, activity) do %>
+  <article class="rounded bg-background shadow rounded p-6 mb-6 flex space-x-3 items-center"
+           style="view-transition-name:activity-<%= activity.id %>">
+    <div class="flex justify-between items-center">
+      <% if authenticated? %>
+        <%= render partial: "practices/practiced_activities/add", locals: {practice_id: @practice, activity_id: activity.id} %>
+      <% end %>
+    </div>
+    <div class="flex-1">
+      <h3 class="font-bold">
+        <%= link_to activity.title, practice_activity_path(practice, activity), data: { turbo_frame: "_top" } %>
+      </h3>
+      <p class="text-sm text-muted-foreground">
+        Proposé par <%= link_to activity.user.username, activity.user, data: { turbo_frame: "_top" } %>
+      </p>
+      <% activity.tags.each do |tag| %>
+        <%= render(TagComponent.new(tag.name, variant: :outline)) %>
+      <% end %>
+    </div>
+    <div class="flex justify-between items-center">
+      <%= render DropdownComponent.new(variant: :outline) do |component| %>
+        <% component.with_trigger_btn do %>
+          ...
+        <% end %>
+
+        <% component.with_dropdown_menu do %>
+          <ul class="py-1" role="none">
+            <li>
+              <%= link_to "Voir",
+                          practice_activity_path(practice, activity),
+                          class: "block px-4 py-2 text-sm text-gray-700" %>
+            </li>
+            <li>
+              <%= button_to "Détacher",
+                            practice_attach_activity_path(practice, activity),
+                            class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer",
+                            method: :delete %>
+            </li>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
+  </article>
+<% end %>

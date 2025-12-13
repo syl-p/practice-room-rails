@@ -1,7 +1,21 @@
 <% current_practice_id = session[:current_practice_id] %>
-  <%= form_with url: activity_attach_path(activity_id: activity.id),
-                method: :post,
-                builder: TailwindFormBuilder do |f| %>
-    <%= f.select :practice_id, Current.user.cached_practices.map {|p| [p.name, p.id]}, selected: current_practice_id %>
-    <%= f.submit "Attacher" %>
+<%= render DropdownComponent.new(variant: :outline) do |component| %>
+  <% component.with_trigger_btn do %>
+
+    Ajouter à une pratique
   <% end %>
+  <% component.with_dropdown_menu do %>
+    <ul class="py-1" role="none">
+      <% Current.user.cached_practices.each do |practice| %>
+        <li>
+          <%= button_to practice.name, practice_attach_activity_path(practice_id: practice.id, id: activity.id),
+                        method: :post, class: "block px-4 py-2 text-sm text-gray-700" %></li>
+      <% end %>
+      <li>
+        <%= link_to "Créér une nouvelle pratique", new_practices_path,
+                    data: {turbo: false},
+                    class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer" %>
+      </li>
+    </ul>
+  <% end %>
+<% end %>

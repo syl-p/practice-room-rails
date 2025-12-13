@@ -4,7 +4,7 @@
     <%= render partial: "shared/head" %>
   </head>
 
-  <body class="bg-background" data-controller="application">
+  <body class="bg-background">
     <%= render partial: "shared/nav" %>
     <%= render partial: "shared/flash" %>
 
@@ -14,14 +14,5 @@
 
     <%= turbo_frame_tag :remote_modal %>
     <%= render partial: "shared/footer" %>
-    <div
-      data-application-target="overlay"
-      data-transition-enter="ease-in-out duration-500"
-      data-transition-enter-start="opacity-0"
-      data-transition-enter-end="opacity-100"
-      data-transition-leave="ease-in-out duration-500"
-      data-transition-leave-start="opacity-100"
-      data-transition-leave-end="opacity-0"
-      class="hidden inset-0 bg-gray-500 bg-opacity-75 transition-opacity fixed left-0 top-0 w-full h-screen z-[50]"></div>
   </body>
 </html>

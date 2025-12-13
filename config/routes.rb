@@ -36,6 +36,8 @@ Rails.application.routes.draw do
     scope module: :practices do
       get "activity/:id", to: "activities#show", as: :activity
       post "activity/filter", to: "activities#filter", as: "filter_activities", defaults: { format: :turbo_stream }
+      post "activity/:id/attach", to: "activities#attach", as: "attach_activity", defaults: { format: :turbo_stream }
+      delete "activity/:id/attach", to: "activities#detach", as: "detach_activity", defaults: { format: :turbo_stream }
       resources :practiced_activities, only: [ :index, :create, :destroy ]
     end
   end
@@ -47,7 +49,6 @@ Rails.application.routes.draw do
   resources :notifications, only: %i[index]
 
   resources :activities do
-    post "attach_to", to: "practices/activities#attach_to", as: "attach"
     resources :comments, module: :activities
   end
 
