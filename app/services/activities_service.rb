@@ -1,13 +1,13 @@
 class ActivitiesService < ApplicationService
   def initialize(options)
     @tag_ids = options[:tag_ids]
-    @in_favorites = options[:in_favorite]
+    @in_bookmarks = options[:in_bookmark]
     @limit = options[:limit] || 10
   end
 
   def call
-    if @in_favorites.present?
-      activities = Current.user.favorites
+    if @in_bookmarks.present?
+      activities = Current.user.bookmarks
     else
       activities = Activity.published
     end

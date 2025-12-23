@@ -1,11 +1,11 @@
-<% mode = Current.user.favorites.find {|a| a.id === activity_id} ? :delete : :post %>
-<%= turbo_frame_tag "favorite_btn_for_#{activity_id}" do %>
+<% mode = Current.user.bookmarks.find {|a| a.id === activity_id} ? :delete : :post %>
+<%= turbo_frame_tag "bookmark_btn_for_#{activity_id}" do %>
   <%
     form_url = case mode
     when :post
-      new_favorite_path(activity_id: activity_id)
+      new_bookmark_path(activity_id: activity_id)
       when :delete
-        remove_favorite_path(activity_id: activity_id)
+        remove_bookmark_path(activity_id: activity_id)
                end
   %>
     <%= button_to form_url,

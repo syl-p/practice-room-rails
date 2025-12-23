@@ -52,8 +52,8 @@ Rails.application.routes.draw do
     resources :comments, module: :activities
   end
 
-  post "favorites/:activity_id",  to: "favorites#create", as: "new_favorite"
-  delete "favorites/:activity_id",  to: "favorites#destroy", as: "remove_favorite"
+  post "bookmarks/:activity_id",  to: "bookmarks#create", as: "new_bookmark"
+  delete "bookmarks/:activity_id",  to: "bookmarks#destroy", as: "remove_bookmark"
 
   resources :media
   get "tags", to: "tags#search", as: "tags"

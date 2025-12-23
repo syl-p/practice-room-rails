@@ -1,12 +1,12 @@
-class FavoritesController < ApplicationController
+class BookmarksController < ApplicationController
   before_action :set_activity, only: [ :create, :destroy ]
 
   def create
-    Current.user.favorites << @activity
+    Current.user.bookmarks << @activity
   end
 
   def destroy
-    Current.user.favorites.delete(@activity)
+    Current.user.bookmarks.delete(@activity)
   end
 
   private

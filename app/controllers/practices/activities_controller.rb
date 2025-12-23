@@ -8,7 +8,7 @@ class Practices::ActivitiesController < ApplicationController
 
   def filter
     tag_ids = params[:tag_ids].blank? ? @practice.tags.pluck(:id) : params[:tag_ids]
-    @activities = ActivitiesService.call(tag_ids:, in_favorite:  params[:in_favorite])
+    @activities = ActivitiesService.call(tag_ids:, in_bookmark:  params[:in_bookmark])
   end
 
   def attach

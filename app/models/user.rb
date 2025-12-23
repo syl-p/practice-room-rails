@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :practice_entries, dependent: :destroy
   has_many :practices, dependent: :destroy
   has_many :notifications
-  has_and_belongs_to_many :favorites, class_name: "Activity", join_table: "favorites"
+  has_and_belongs_to_many :bookmarks, class_name: "Activity", join_table: "bookmarks"
 
   has_many :follows_as_following, class_name: "Follow", foreign_key: "follower_id"
   has_many :following, through: :follows_as_following

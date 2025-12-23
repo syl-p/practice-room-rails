@@ -12,7 +12,7 @@
             </p>
           </div>
           <div class="flex space-x-3 items-center">
-            <%= render partial: "favorites/btn", locals: {activity_id: @activity.id} if authenticated? %>
+            <%= render partial: "bookmarks/btn", locals: {activity_id: @activity.id} if authenticated? %>
             <%= render partial: "activities/attach_form",
                        locals: {activity: @activity} if authenticated? %>
           </div>

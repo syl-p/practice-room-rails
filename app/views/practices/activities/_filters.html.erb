@@ -2,7 +2,7 @@
   <%= form_with url: practice_filter_activities_path(practice_id: practice.id), method: :post do |f| %>
     <div class="flex items-center space-x-6">
       <label>
-        <%= f.check_box :in_favorite, {
+        <%= f.check_box :in_bookmark, {
           class: "hidden peer",
           onchange: "this.form.requestSubmit();"
         }, true, false %>

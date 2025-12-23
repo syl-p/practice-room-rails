@@ -57,6 +57,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_141608) do
     t.integer "activity_id", null: false
   end
 
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "activity_id", null: false
+    t.index ["activity_id"], name: "index_bookmarks_on_activity_id"
+    t.index ["user_id", "activity_id"], name: "index_bookmarks_on_user_id_and_activity_id", unique: true
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
     t.string "commentable_type"
@@ -67,14 +75,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_141608) do
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
-  create_table "favorites", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "activity_id", null: false
-    t.index ["activity_id"], name: "index_favorites_on_activity_id"
-    t.index ["user_id", "activity_id"], name: "index_favorites_on_user_id_and_activity_id", unique: true
-    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "follows", force: :cascade do |t|
