@@ -1,7 +1,7 @@
 require "test_helper"
 
 class TagTest < ActiveSupport::TestCase
-  test "get practiced_activities duration by tags" do
+  test "get practice_entries duration by tags" do
     practice = FactoryBot.create(:practice)
     tag = FactoryBot.create(:tag)
     activity = FactoryBot.create(:activity)
@@ -9,8 +9,8 @@ class TagTest < ActiveSupport::TestCase
     activity.tags << tag
     practice.activities << activity
 
-    PracticedActivity.create(practice:, activity:, user:, duration: 5)
-    PracticedActivity.create(practice:, activity:, user:, duration: 10)
+    PracticeEntry.create(practice:, activity:, user:, duration: 5)
+    PracticeEntry.create(practice:, activity:, user:, duration: 10)
     tags_by_duration = Tag.with_duration
 
     assert_not_empty tags_by_duration

@@ -7,14 +7,14 @@ class Tag < ApplicationRecord
     .joins("INNER JOIN activities ON activities.id = taggings.taggable_id")
   }
 
-  scope :with_practiced_activities, ->{
+  scope :with_practice_entries, ->{
     for_activities
-      .joins("INNER JOIN practiced_activities ON practiced_activities.id = activities.id")
+      .joins("INNER JOIN practice_entries ON practice_entries.id = activities.id")
   }
 
   scope :with_duration, ->{
-    with_practiced_activities
-      .select("tags.*, COALESCE(SUM(practiced_activities.duration), 0) as duration")
+    with_practice_entries
+      .select("tags.*, COALESCE(SUM(practice_entries.duration), 0) as duration")
       .group("tags.id")
   }
 

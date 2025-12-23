@@ -3,7 +3,7 @@
            style="view-transition-name:activity-<%= activity.id %>">
     <div class="flex justify-between items-center">
       <% if authenticated? %>
-        <%= render partial: "practices/practiced_activities/add", locals: {practice_id: @practice, activity_id: activity.id} %>
+        <%= render partial: "practices/practice_entries/add", locals: {practice_id: @practice, activity_id: activity.id} %>
       <% end %>
     </div>
     <div class="flex-1">

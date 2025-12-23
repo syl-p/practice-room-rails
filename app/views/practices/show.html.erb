@@ -42,8 +42,8 @@
     <aside>
       <div class="rounded-xl border bg-card text-card-foreground shadow p-6">
         <h2 class="text-2xl mb-3 font-semibold tracking-tight">Journal de votre pratique</h2>
-        <%= turbo_frame_tag :practiced_activities,
-                            src: practice_practiced_activities_path(practice_id: @practice.id),
+        <%= turbo_frame_tag :practice_entries,
+                            src: practice_practice_entries_path(practice_id: @practice.id),
                             loading: :lazy do %>
           Chargement...
         <% end %>

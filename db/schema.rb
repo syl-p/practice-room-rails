@@ -19,6 +19,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_141608) do
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+    t.index ["record_type", "record_id"], name: "index_active_storage_attachments_on_record"
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
@@ -37,6 +38,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_141608) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+    t.index ["blob_id"], name: "index_active_storage_variant_records_on_blob_id"
   end
 
   create_table "activities", force: :cascade do |t|
@@ -116,16 +118,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_141608) do
     t.index ["practice_id"], name: "index_practice_activities_on_practice_id"
   end
 
-  create_table "practiced_activities", force: :cascade do |t|
+  create_table "practice_entries", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "activity_id", null: false
     t.integer "duration", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "practice_id"
-    t.index ["activity_id"], name: "index_practiced_activities_on_activity_id"
-    t.index ["practice_id"], name: "index_practiced_activities_on_practice_id"
-    t.index ["user_id"], name: "index_practiced_activities_on_user_id"
+    t.integer "practice_id", null: false
+    t.index ["activity_id"], name: "index_practice_entries_on_activity_id"
+    t.index ["practice_id"], name: "index_practice_entries_on_practice_id"
+    t.index ["user_id"], name: "index_practice_entries_on_user_id"
   end
 
   create_table "practices", force: :cascade do |t|
@@ -176,8 +178,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_141608) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "follows", "users", column: "following_id"
-  add_foreign_key "practiced_activities", "activities"
-  add_foreign_key "practiced_activities", "users"
+  add_foreign_key "practice_entries", "activities"
+  add_foreign_key "practice_entries", "users"
   add_foreign_key "practices", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "taggings", "tags"

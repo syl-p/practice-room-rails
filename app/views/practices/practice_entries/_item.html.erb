@@ -1,16 +1,16 @@
-<%= turbo_frame_tag dom_id(practiced_activity) do %>
+<%= turbo_frame_tag dom_id(practice_entry) do %>
   <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-4 mb-3">
     <div class="flex-1 flex items-center">
         <div class="flex-1">
           <p class="text-xs text-muted-foreground">
-            <%= display_time(practiced_activity.duration) %> à <%= practiced_activity.created_at %></p>
+            <%= display_time(practice_entry.duration) %> à <%= practice_entry.created_at %></p>
           <p>
-            <%= link_to practiced_activity.activity.title, practice_activity_path(practice_id: @practice.id, id: practiced_activity.activity.id),
+            <%= link_to practice_entry.activity.title, practice_activity_path(practice_id: @practice.id, id: practice_entry.activity.id),
                         class: "block font-semibold truncate", data: {turbo: false} %>
           </p>
         </div>
         <div>
-          <%= button_to practice_practiced_activity_path(practice_id: @practice.id, id: practiced_activity.id),
+          <%= button_to practice_practice_entry_path(practice_id: @practice.id, id: practice_entry.id),
                         method: :delete, class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::OUTLINE_CLASSES].join(' ') do %> x <% end %>
         </div>
     </div>

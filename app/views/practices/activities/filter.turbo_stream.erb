@@ -1,4 +1,4 @@
-<%= turbo_stream.update "activities" do %>
+<%= turbo_stream.update "practice_activities" do %>
   <%= render partial: "practices/activities/card",
              collection: @activities,
              as: :activity, locals: {classes: 'mb-3', practice: @practice} %>

@@ -1,4 +1,4 @@
-class PracticedActivity < ApplicationRecord
+class PracticeEntry < ApplicationRecord
   belongs_to :user, touch: true
   belongs_to :activity
   belongs_to :practice

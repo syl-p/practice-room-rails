@@ -1,4 +1,4 @@
-<%= form_with url: practice_practiced_activities_path(practice_id:, activity_id:),
+<%= form_with url: practice_practice_entries_path(practice_id:, activity_id:),
               html: { id: "timer-#{activity_id}"},
               data: {turbo: true, controller: "btn-timer"} do |f| %>
   <%= f.hidden_field :duration, data: {btn_timer_target: "input"} %>

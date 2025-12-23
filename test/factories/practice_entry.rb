@@ -1,5 +1,5 @@
 FactoryBot.define do
-  factory :practiced_activity do
+  factory :practice_entry do
     user { association(:user) }
     activity { association(:activity) }
     association :practice

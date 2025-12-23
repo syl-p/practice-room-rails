@@ -1,8 +1,8 @@
-class Practices::PracticedActivitiesController < ApplicationController
+class Practices::PracticeEntriesController < ApplicationController
   before_action :set_practice
   before_action :set_activity, only: [ :create ]
   before_action :set_duration, only: [ :create ]
-  before_action :set_practiced_activity, only: [ :destroy ]
+  before_action :set_practice_entry, only: [ :destroy ]
 
   def index
     session[:current_practice_id] = @practice.id
@@ -10,32 +10,32 @@ class Practices::PracticedActivitiesController < ApplicationController
     @current_date = parse_date(params[:date]) || Date.today
     @start_at = @current_date.beginning_of_week
     @end_at = @current_date.end_of_week
-    @practiced_activities = Current.user
-                                   .practiced_activities.at(@start_at, @end_at)
+    @practice_entries = Current.user
+                                   .practice_entries.at(@start_at, @end_at)
                                    .where(practice_id: @practice.id)
   end
 
   def create
-    @practiced_activity = PracticedActivity.new(
+    @practice_entry = PracticeEntry.new(
       activity: @activity,
       user: Current.user,
       duration: @duration,
       practice: @practice,
     )
 
-    if @practiced_activity.save
+    if @practice_entry.save
       flash[:success] = "Votre temps de pratique à été mise à jour."
     end
   end
 
   def destroy
-    @practiced_activity.destroy
+    @practice_entry.destroy
     flash[:success] = "Votre temps de pratique à été mise à jour."
   end
 
   private
-  def set_practiced_activity
-    @practiced_activity = Current.user.practiced_activities.find(params[:id])
+  def set_practice_entry
+    @practice_entry = Current.user.practice_entries.find(params[:id])
   end
 
   def set_duration

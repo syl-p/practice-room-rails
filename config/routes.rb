@@ -38,7 +38,7 @@ Rails.application.routes.draw do
       post "activity/filter", to: "activities#filter", as: "filter_activities", defaults: { format: :turbo_stream }
       post "activity/:id/attach", to: "activities#attach", as: "attach_activity", defaults: { format: :turbo_stream }
       delete "activity/:id/attach", to: "activities#detach", as: "detach_activity", defaults: { format: :turbo_stream }
-      resources :practiced_activities, only: [ :index, :create, :destroy ]
+      resources :practice_entries, only: [ :index, :create, :destroy ]
     end
   end
 

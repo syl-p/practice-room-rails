@@ -3,7 +3,7 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :activities, dependent: :destroy
   has_many :media
-  has_many :practiced_activities, dependent: :destroy
+  has_many :practice_entries, dependent: :destroy
   has_many :practices, dependent: :destroy
   has_many :notifications
   has_and_belongs_to_many :favorites, class_name: "Activity", join_table: "favorites"
@@ -26,8 +26,8 @@ class User < ApplicationRecord
   def cached_practices
     cache_key = [ self, "practices", Date.current ]
     Rails.cache.fetch(cache_key, expires_in: 1.day) do
-      practices.left_joins(:practiced_activities)
-               .select("practices.*, COALESCE(SUM(practiced_activities.duration),0) as duration")
+      practices.left_joins(:practice_entries)
+               .select("practices.*, COALESCE(SUM(practice_entries.duration),0) as duration")
                .group("practices.id")
     end
   end
@@ -35,7 +35,7 @@ class User < ApplicationRecord
   def practice_time_today
     cache_key = [ self, "practice_time_today", Date.current ]
     Rails.cache.fetch(cache_key, expires_in: 1.day) do
-      practiced_activities.today.sum(:duration)
+      practice_entries.today.sum(:duration)
     end
   end
 
