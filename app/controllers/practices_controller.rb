@@ -7,16 +7,13 @@ class PracticesController < ApplicationController
     session[:current_practice_id] = @practice.id
   end
 
-  # GET /practices/new
   def new
     @practice = Practice.new
   end
 
-  # GET /practices/1/edit
   def edit
   end
 
-  # POST /practices or /practices.json
   def create
     @practice = Practice.new(practice_params)
 
@@ -29,7 +26,6 @@ class PracticesController < ApplicationController
     redirect_to @practice, flash: { success: "Practice was successfully created." }
   end
 
-  # PATCH/PUT /practices/1 or /practices/1.json
   def update
     tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
     if tags.present?
@@ -43,19 +39,16 @@ class PracticesController < ApplicationController
     end
   end
 
-  # DELETE /practices/1 or /practices/1.json
   def destroy
     @practice.destroy!
     redirect_to root_path, status: :see_other, flash: { success: "Practice was successfully destroyed." }
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_practice
       @practice = Practice.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def practice_params
       params.require(:practice).permit(:name, :description)
     end

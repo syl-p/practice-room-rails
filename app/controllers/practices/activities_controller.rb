@@ -8,14 +8,14 @@ class Practices::ActivitiesController < ApplicationController
 
   def filter
     tag_ids = params[:tag_ids].blank? ? @practice.tags.pluck(:id) : params[:tag_ids]
-    @activities = ActivitiesService.call(tag_ids:, in_bookmark:  params[:in_bookmark])
+    @activities = Practices::ActivitiesService.new(@practice.id, tag_ids).call
   end
 
   def attach
     authorize!(@practice)
     @practice.activities << @activity
     @practice.save
-    
+
     flash[:success] = "Activity Attached!"
   end
 
