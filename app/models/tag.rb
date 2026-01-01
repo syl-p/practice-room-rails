@@ -1,25 +1,20 @@
 class Tag < ApplicationRecord
   has_many :taggings, dependent: :destroy
   validates :name, presence: true, uniqueness: true
-  scope :for_activities, ->{
-    joins(:taggings)
-    .where(taggings: { taggable_type: "Activity" })
-    .joins("INNER JOIN activities ON activities.id = taggings.taggable_id")
-  }
-
-  scope :with_practice_entries, ->{
-    for_activities
-      .joins("INNER JOIN practice_entries ON practice_entries.id = activities.id")
-  }
-
-  scope :with_duration, ->{
-    with_practice_entries
-      .select("tags.*, COALESCE(SUM(practice_entries.duration), 0) as duration")
+  scope :for_practice_with_duration, ->(practice_id) {
+    joins("INNER JOIN taggings tp
+          ON tp.tag_id = tags.id
+          AND tp.taggable_type = 'Practice'
+          AND tp.taggable_id = #{practice_id}")
+      .joins("INNER JOIN taggings ta
+              ON ta.tag_id = tags.id
+              AND ta.taggable_type = 'Activity'")
+      .joins("INNER JOIN activities
+              ON activities.id = ta.taggable_id")
+      .joins("INNER JOIN practice_entries
+              ON practice_entries.activity_id = activities.id")
+      .where(practice_entries: { practice_id: practice_id })
+      .select("tags.*, SUM(practice_entries.duration) AS duration")
       .group("tags.id")
-  }
-
-  scope :for_practice, ->(practice_id) {
-      joins("INNER JOIN practice_activities ON practice_activities.id = activities.id")
-      .where(practice_activities: { practice_id: practice_id } )
   }
 end

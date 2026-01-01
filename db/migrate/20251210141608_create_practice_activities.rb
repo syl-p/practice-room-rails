@@ -6,5 +6,7 @@ class CreatePracticeActivities < ActiveRecord::Migration[8.0]
       t.integer :position
       t.timestamps
     end
+
+    add_index :practice_activities, [:practice_id, :activity_id], unique: true
   end
 end

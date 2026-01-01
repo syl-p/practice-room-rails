@@ -2,6 +2,6 @@
   <%= render partial: "shared/flash" %>
 <% end %>
 
-<%= turbo_stream.append "practice_activities" do %>
+<%= turbo_stream.append :activities do %>
   <%= render partial: "practices/activities/card", locals: {practice: @practice, activity: @activity} %>
 <% end %>
