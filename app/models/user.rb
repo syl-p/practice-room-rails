@@ -25,13 +25,6 @@ class User < ApplicationRecord
     end
   end
 
-  def practice_time_today
-    cache_key = [ self, "practice_time_today", Date.current ]
-    Rails.cache.fetch(cache_key, expires_in: 1.day) do
-      practice_entries.today.sum(:duration)
-    end
-  end
-
   def update_with_password(params)
     if User.authenticate_by(email_address: params[:email_address], password: params[:current_password])
       params.delete(:current_password)

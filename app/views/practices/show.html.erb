@@ -9,6 +9,7 @@
       </div>
       <%= @practice.description %>
       <hr class="my-3">
+      <h2 class="text-xl mb-3">Répartition de la pratique:</h2>
       <%= render partial: "practices/duration_by_tags", locals: {tags_with_duration: @stats[:tags_with_duration]} %>
     </div>
 

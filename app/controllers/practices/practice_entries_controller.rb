@@ -10,9 +10,8 @@ class Practices::PracticeEntriesController < ApplicationController
     @current_date = parse_date(params[:date]) || Date.today
     @start_at = @current_date.beginning_of_week
     @end_at = @current_date.end_of_week
-    @practice_entries = Current.user
-                                   .practice_entries.at(@start_at, @end_at)
-                                   .where(practice_id: @practice.id)
+    @practice_entries = @practice
+                                   .practice_entries.at(@current_date.beginning_of_day, @current_date.end_of_day)
   end
 
   def create
