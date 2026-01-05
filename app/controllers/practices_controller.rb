@@ -1,16 +1,19 @@
 class PracticesController < ApplicationController
-  before_action :set_practice, only: %i[ edit update destroy ]
+  before_action :set_practice, only: %i[ show edit update destroy ]
+  before_action :set_stats, only: [ :show ]
 
-  # GET /practices/new
+  def show
+    redirect_to new_practice_path, flash: { error: "Veuillez créer une pratique" } unless @practice.present?
+    session[:current_practice_id] = @practice.id
+  end
+
   def new
     @practice = Practice.new
   end
 
-  # GET /practices/1/edit
   def edit
   end
 
-  # POST /practices or /practices.json
   def create
     @practice = Practice.new(practice_params)
 
@@ -20,10 +23,9 @@ class PracticesController < ApplicationController
     end
 
     Current.user.practices << @practice
-    redirect_to @practice, flash: {success: "Practice was successfully created." }
+    redirect_to @practice, flash: { success: "Practice was successfully created." }
   end
 
-  # PATCH/PUT /practices/1 or /practices/1.json
   def update
     tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
     if tags.present?
@@ -31,30 +33,45 @@ class PracticesController < ApplicationController
     end
 
     if @practice.update(practice_params)
-      redirect_to @practice, flash: {success: "Practice was successfully updated." }
+      redirect_to @practice, flash: { success: "Practice was successfully updated." }
     else
       render :edit, status: :unprocessable_entity
     end
   end
 
-  # DELETE /practices/1 or /practices/1.json
   def destroy
     @practice.destroy!
-    redirect_to root_path, status: :see_other, flash: {success: "Practice was successfully destroyed." }
+    redirect_to root_path, status: :see_other, flash: { success: "Practice was successfully destroyed." }
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
     def set_practice
       @practice = Practice.find(params[:id])
     end
 
-    # Only allow a list of trusted parameters through.
     def practice_params
       params.require(:practice).permit(:name, :description)
     end
 
-  def find_tags(labels)
-    Tag.where(name: labels)
-  end
+    def find_tags(labels)
+      Tag.where(name: labels)
+    end
+
+    def set_stats
+      current_date = Date.today
+      practices_activities_service = PracticeEntriesService.new(
+        user: Current.user,
+        practice_id: @practice.id,
+        start_at: current_date.beginning_of_day,
+        end_at: current_date.end_of_day
+      )
+
+      tags_with_duration = Tag.for_practice_with_duration(@practice.id).order("duration DESC")
+
+      @stats = {
+        more_than_10_mn_today: practices_activities_service.more_than_10_mn_today?,
+        have_3_exercises_today: practices_activities_service.have_3_exercises_today?,
+        tags_with_duration:
+      }
+    end
 end

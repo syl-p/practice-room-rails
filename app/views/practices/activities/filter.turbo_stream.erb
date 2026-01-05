@@ -1,3 +1,13 @@
-<%= turbo_stream.update "activities" do %>
-  <%= render partial: "practices/activities/card", collection: @activities, as: :activity, locals: {classes: 'mb-3'} %>
+<%= turbo_stream.update :activities do %>
+  <% if @activities.any? %>
+    <%= render partial: "practices/activities/card",
+               collection: @activities,
+               as: :activity, locals: {classes: 'mb-3', practice: @practice} %>
+    <% else %>
+      <%= render partial: "practices/activities/empty_state" %>
+    <% end %>
+<% end %>
+
+<%= turbo_stream.update :activities_count do %>
+  <%= @activities.count %>
 <% end %>

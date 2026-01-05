@@ -1,48 +1,60 @@
-<article class="rounded-lg bg-blue-100" style="view-transition-name:activity-<%= @activity.id %>">
-  <header class="border border-b p-3 container mx-auto">
-    <div class="mb-3">
-      <% @activity.tags.each do |tag| %>
-        <%= render(TagComponent.new(tag.name, variant: :outline)) %>
-      <% end %>
-    </div>
-    <h2 class="text-2xl font-bold"><%= link_to @activity.title, @activity, data: { turbo_frame: "_top" } %></h2>
-    <p class="font-light text-sm text-muted-foreground mb-3">
-      Posté par <%= link_to @activity.user.username, @activity.user, data: { turbo_frame: "_top" } %>, le <time datetime="<%= @activity.created_at %>"><%= @activity.created_at %></time>
-    </p>
-  </header>
-  <aside class="flex justify-between items-center p-3 mt-3 container mx-auto">
-    <%= render partial: "activities/commenters",
-               locals: {commenters: @activity.commenters} %>
-    <div class="flex space-x-3">
-      <% if authenticated? %>
-        <%= render partial: "favorites/btn", locals: {activity_id: @activity.id} %>
-        <%= render partial: "practices/practiced_activities/add",
-                   locals: {practice_id: session[:current_practice_id], activity_id: @activity.id} %>
-      <% end %>
-    </div>
-  </aside>
-  <section class="rounded-t-3xl bg-white py-8">
-    <div class=" container my-10 lg:grid lg:grid-cols-6 gap-4">
-      <article class="mb-6 lg:mb-0 lg:col-span-4">
+<%= turbo_frame_tag :remote_modal do %>
+  <dialog data-controller="remote-modal search" class="backdrop:bg-background/80 backdrop:backdrop-blur-sm w-full md:max-w-[600px] lg:min-w-[900px] max-w-2xl gap-4 border bg-background shadow-lg duration-200 rounded-md">
+    <article class="container mx-auto py-8">
+      <header>
+        <div class="flex space-x-3">
+          <div class="flex-1">
+            <h2 class="text-2xl font-bold">
+              <%= link_to @activity.title, @activity, data: { turbo_frame: "_top" } %>
+            </h2>
+            <p class="font-light text-sm text-muted-foreground mb-3">
+              Posté par <%= link_to @activity.user.username, @activity.user, data: { turbo_frame: "_top" } %>, le <time datetime="<%= @activity.created_at %>"><%= @activity.created_at %></time>
+            </p>
+          </div>
+          <div class="flex space-x-3 items-center">
+            <%= render partial: "bookmarks/btn", locals: {activity_id: @activity.id} if authenticated? %>
+            <%= render partial: "activities/attach_form",
+                       locals: {activity: @activity} if authenticated? %>
+          </div>
+        </div>
+      </header>
+      <section>
         <%= @activity.content %>
-      </article>
-      <aside  class="lg:col-span-2">
-        <%= render partial: "activities/media", locals: {media: @activity.media} %>
-      </aside>
-    </div>
+        <div class="mt-3">
+          <% if @activity.media.count > 0 %>
+            <div class="mb-3">
+              <h3 class="mb-3">Media (<%= @activity.media.count %>):</h3>
+              <ul class="flex space-x-3">
+                <% @activity.media.each do |medium| %>
+                  <li><%= medium.name || medium.file.filename.to_s %></li>
+                <% end %>
+              </ul>
+            </div>
+          <% end %>
+          <div class="mb-3">
+            <h3 class="mb-3">Tags:</h3>
+            <% @activity.tags.each do |tag| %>
+              <%= render(TagComponent.new(tag.name, variant: :outline)) %>
+            <% end %>
+          </div>
+        </div>
+      </section>
+      <div class="w-full flex justify-center">
+        <div class="shrink-0 bg-border h-[1px] w-full my-4"></div>
+      </div>
+      <footer>
+        <h2 class="text-xl mb-3 flex space-x-3 items-center">
+          <%= icon "chat-bubble-left-right", class: "size-6" %>
+          <span class="block">Discussions</span>
+        </h2>
+        <%= turbo_frame_tag record_id_gen(@activity, Comment.new) do %>
+          <%= render partial: "comments/form", locals: {comment: Comment.new, commentable: @activity} if authenticated? %>
+        <% end %>
 
-    <footer class="container">
-      <h2 class="text-xl mb-3">
-        Discussions
-      </h2>
-
-      <%= turbo_frame_tag record_id_gen(@activity, Comment.new) do %>
-        <%= render partial: "comments/form", locals: {comment: Comment.new, commentable: @activity} if authenticated? %>
-      <% end %>
-
-      <%= turbo_frame_tag "#{dom_id(@activity)}_comments" do %>
-        <%= render partial: "comments/comment", collection: @activity.comments, as: :comment %>
-      <% end %>
-    </footer>
-  </section>
-</article>
+        <%= turbo_frame_tag "#{dom_id(@activity)}_comments" do %>
+          <%= render partial: "comments/comment", collection: @activity.comments, as: :comment %>
+        <% end %>
+      </footer>
+    </article>
+  </dialog>
+<% end %>

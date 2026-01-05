@@ -14,6 +14,11 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
     @activity.user = Current.user
 
+    tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
+    if tags.present?
+      @activity.tags = find_tags(tags)
+    end
+
     if @activity.save
       redirect_to @activity, flash: { success: "Bravo ! Votre activité à été créée." }
     else
@@ -27,6 +32,12 @@ class ActivitiesController < ApplicationController
 
   def update
     authorize!(@activity)
+
+    tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
+    if tags.present?
+      @activity.tags = find_tags(tags)
+    end
+
     if @activity.update(activity_params)
       redirect_to @activity, flash: { success: "Votre activité à été mise à jour." }
     else
@@ -48,8 +59,10 @@ class ActivitiesController < ApplicationController
   end
 
   def activity_params
-    raw_params = params.require(:activity).permit(:title, :content, :status, :tag_ids, medium_ids: [])
-    raw_params[:tag_ids] = raw_params[:tag_ids].to_s.split(",").reject(&:blank?)
-    raw_params
+    params.require(:activity).permit(:title, :content, :status, medium_ids: [])
+  end
+
+  def find_tags(labels)
+    Tag.where(name: labels)
   end
 end

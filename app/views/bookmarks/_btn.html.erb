@@ -1,0 +1,22 @@
+<% mode = Current.user.bookmarks.find {|a| a.id === activity_id} ? :delete : :post %>
+<%= turbo_frame_tag "bookmark_btn_for_#{activity_id}" do %>
+  <%
+    form_url = case mode
+    when :post
+      new_bookmark_path(activity_id: activity_id)
+      when :delete
+        remove_bookmark_path(activity_id: activity_id)
+               end
+  %>
+    <%= button_to form_url,
+                  class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::GHOST_CLASSES].join(' '),
+                  method: mode do %>
+      <% if mode == :post %>
+        <%= icon('heart') %>
+        <span class="sr-only">Ajouter aux favoris</span>
+      <% else %>
+        <%= icon('heart', variant: "solid") %>
+        <span class="sr-only">Retirer des favoris</span>
+      <% end %>
+  <% end %>
+<% end %>

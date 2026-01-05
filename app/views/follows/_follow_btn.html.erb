@@ -1,9 +1,0 @@
-<%= turbo_frame_tag "follow_btn" do %>
-  <% if Current.user.following.include? user %>
-    <%= button_to "Se désabonner", follow_path({id: user.id}), method: :delete,
-                  class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(' ') %>
-  <% else %>
-    <%= button_to "S'abonner", unfollow_path({id: user.id}), method: :post,
-                  class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(' ') %>
-  <% end %>
-<% end %>

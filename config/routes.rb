@@ -17,9 +17,6 @@ Rails.application.routes.draw do
   root "pages#home"
 
   resources :users, only: %i[show]
-  post "follows/:id", to: "follows#create", as: "follow"
-  delete "follows/:id", to: "follows#destroy", as: "unfollow"
-
   resource :registration, controller: "registration", only: %i[new create]
 
   namespace :settings do
@@ -27,17 +24,17 @@ Rails.application.routes.draw do
     resource :password, only: %i[edit update]
   end
 
-  resources :practices, except: [ :show, :index ] do
-    # for fixing url /new vs /:practice_id
+  resources :practices, except: [ :index ] do
     collection do
       get "/new", to: "practices#new", as: :new
     end
 
     scope module: :practices do
-      get "", to: "activities#index", as: :root
-      post "filter", to: "activities#filter", as: "filter_activities", defaults: { format: :turbo_stream }
-
-      resources :practiced_activities, only: [ :index, :create, :destroy ]
+      get "activity/:id", to: "activities#show", as: :activity
+      post "activity/filter", to: "activities#filter", as: "filter_activities", defaults: { format: :turbo_stream }
+      post "activity/:id/attach", to: "activities#attach", as: "attach_activity", defaults: { format: :turbo_stream }
+      delete "activity/:id/attach", to: "activities#detach", as: "detach_activity", defaults: { format: :turbo_stream }
+      resources :practice_entries, only: [ :index, :create, :destroy ]
     end
   end
 
@@ -51,8 +48,8 @@ Rails.application.routes.draw do
     resources :comments, module: :activities
   end
 
-  post "favorites/:activity_id",  to: "favorites#create", as: "new_favorite"
-  delete "favorites/:activity_id",  to: "favorites#destroy", as: "remove_favorite"
+  post "bookmarks/:activity_id",  to: "bookmarks#create", as: "new_bookmark"
+  delete "bookmarks/:activity_id",  to: "bookmarks#destroy", as: "remove_bookmark"
 
   resources :media
   get "tags", to: "tags#search", as: "tags"

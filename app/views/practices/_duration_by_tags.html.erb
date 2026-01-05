@@ -1,0 +1,12 @@
+<%
+  total_duration = tags_with_duration.sum(&:duration)
+%>
+<ul>
+  <% tags_with_duration.each do |tag| %>
+    <li>
+      <%= tag.name %>
+      <progress class="progress" value="<%= (tag.duration.to_f/total_duration) * 100 %>" max="100"></progress>
+      <%= tag.duration %> min
+    </li>
+  <% end %>
+</ul>

@@ -1,18 +1,13 @@
 <header class="bg-secondary py-20 mb-6">
-  <div class="container flex space-x-3 items-center">
-    <div class="flex-1 flex items-center justify-between space-x-3">
-      <%= render(AvatarComponent.new(user: @user)) %>
-      <div class="flex-1">
-        <h1 class="text-3xl">
-          <%= @user.username %>
-        </h1>
-        <p class="font-light text-sm text-muted-foreground">
-          A rejoins la plateforme <%= @user.created_at %>
-        </p>
-      </div>
-    </div>
-    <div>
-      <%= render partial: 'follows/follow_btn', locals: {user: @user} if authenticated? %>
+  <div class="container flex-1 flex items-center justify-between space-x-3">
+    <%= render(AvatarComponent.new(user: @user)) %>
+    <div class="flex-1">
+      <h1 class="text-3xl">
+        <%= @user.username %>
+      </h1>
+      <p class="font-light text-sm text-muted-foreground">
+        A rejoins la plateforme <%= @user.created_at %>
+      </p>
     </div>
   </div>
 </header>
@@ -24,16 +19,6 @@
     <p class="mb-6">
       <%= @user.bio %>
     </p>
-    <h2 class="text-xl mb-3">
-      Suivi par -- abonnés
-    </h2>
-    <ul class="flex space-x-3">
-      <% @user.followers.each do |follower| %>
-        <%= link_to follower do %>
-          <%= render(AvatarComponent.new(user: follower)) %>
-        <% end %>
-      <% end %>
-    </ul>
   </aside>
   <article class="col-span-4 space-y-3">
     <% @user.activities.published do |activity| %>

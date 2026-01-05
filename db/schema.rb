@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_10_132038) do
+ActiveRecord::Schema[8.0].define(version: 2025_12_10_141608) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -19,6 +19,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_10_132038) do
     t.datetime "created_at", null: false
     t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
     t.index ["record_type", "record_id", "name", "blob_id"], name: "index_active_storage_attachments_uniqueness", unique: true
+    t.index ["record_type", "record_id"], name: "index_active_storage_attachments_on_record"
   end
 
   create_table "active_storage_blobs", force: :cascade do |t|
@@ -37,6 +38,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_10_132038) do
     t.bigint "blob_id", null: false
     t.string "variation_digest", null: false
     t.index ["blob_id", "variation_digest"], name: "index_active_storage_variant_records_uniqueness", unique: true
+    t.index ["blob_id"], name: "index_active_storage_variant_records_on_blob_id"
   end
 
   create_table "activities", force: :cascade do |t|
@@ -55,6 +57,14 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_10_132038) do
     t.integer "activity_id", null: false
   end
 
+  create_table "bookmarks", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.integer "activity_id", null: false
+    t.index ["activity_id"], name: "index_bookmarks_on_activity_id"
+    t.index ["user_id", "activity_id"], name: "index_bookmarks_on_user_id_and_activity_id", unique: true
+    t.index ["user_id"], name: "index_bookmarks_on_user_id"
+  end
+
   create_table "comments", force: :cascade do |t|
     t.integer "user_id"
     t.string "commentable_type"
@@ -65,14 +75,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_10_132038) do
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
-  end
-
-  create_table "favorites", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "activity_id", null: false
-    t.index ["activity_id"], name: "index_favorites_on_activity_id"
-    t.index ["user_id", "activity_id"], name: "index_favorites_on_user_id_and_activity_id", unique: true
-    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "follows", force: :cascade do |t|
@@ -106,16 +108,26 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_10_132038) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
-  create_table "practiced_activities", force: :cascade do |t|
+  create_table "practice_activities", force: :cascade do |t|
+    t.integer "practice_id"
+    t.integer "activity_id"
+    t.integer "position"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["activity_id"], name: "index_practice_activities_on_activity_id"
+    t.index ["practice_id"], name: "index_practice_activities_on_practice_id"
+  end
+
+  create_table "practice_entries", force: :cascade do |t|
     t.integer "user_id", null: false
     t.integer "activity_id", null: false
     t.integer "duration", default: 0, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "practice_id"
-    t.index ["activity_id"], name: "index_practiced_activities_on_activity_id"
-    t.index ["practice_id"], name: "index_practiced_activities_on_practice_id"
-    t.index ["user_id"], name: "index_practiced_activities_on_user_id"
+    t.integer "practice_id", null: false
+    t.index ["activity_id"], name: "index_practice_entries_on_activity_id"
+    t.index ["practice_id"], name: "index_practice_entries_on_practice_id"
+    t.index ["user_id"], name: "index_practice_entries_on_user_id"
   end
 
   create_table "practices", force: :cascade do |t|
@@ -166,8 +178,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_10_132038) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "follows", "users", column: "follower_id"
   add_foreign_key "follows", "users", column: "following_id"
-  add_foreign_key "practiced_activities", "activities"
-  add_foreign_key "practiced_activities", "users"
+  add_foreign_key "practice_entries", "activities"
+  add_foreign_key "practice_entries", "users"
   add_foreign_key "practices", "users"
   add_foreign_key "sessions", "users"
   add_foreign_key "taggings", "tags"

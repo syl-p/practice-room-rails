@@ -9,22 +9,9 @@
     <%
       nav_links = [
         {
-          label: "Home",
-          path: root_path,
-          logo: '
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-            </svg>
-          '
-        },
-        {
-          label: "Mes ressources",
-          path: media_path,
-          must_be_logged: true,
-          logo: '
-            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" wstroke-width="1.5">
-              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
-            </svg>'
+          label: "Nouvelle activité",
+          path: new_activity_path,
+          logo: icon("pencil", class: 'size-6')
         }
       ]
     %>

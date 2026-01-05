@@ -1,29 +1,20 @@
 <% if authenticated? %>
-  <%= form_with url: practice_filter_activities_path, method: :post do |f| %>
-    <div class="py-8 mb-6 flex items-center space-x-6 border-t border-b overflow-x-auto scrollbar-thin scrollbar-thumb-gray-300 scrollbar-track-transparent">
-      <label>
-        <%= f.check_box :in_favorite, {
-          class: "hidden peer",
-          onchange: "this.form.requestSubmit();"
-        }, true, false %>
-        <span class="p-2 cursor-pointer peer-checked:font-bold peer-checked:border-b-4 peer-checked:border-primary">Favoris</span>
-      </label>
-      <ul class="flex-nowrap flex space-x-6">
-        <% @practice.tags.each do |tag| %>
-          <label>
-            <%= f.check_box :tag_ids, {
-              multiple: true,
-              class: "hidden peer",
-              onchange: "this.form.requestSubmit();"
-            },
-                            tag.id,
-                            false %>
-            <span class="p-2 cursor-pointer peer-checked:font-bold peer-checked:border-b-4 peer-checked:border-primary">
-              <%= tag.name %>
-            </span>
-          </label>
-        <% end %>
-      </ul>
+  <%= form_with url: practice_filter_activities_path(practice_id: practice.id), method: :post do |f| %>
+    <div class="flex items-center space-x-6">
+      <% @practice.tags.each do |tag| %>
+        <label>
+          <%= f.check_box :tag_ids, {
+            multiple: true,
+            class: "hidden peer",
+            onchange: "this.form.requestSubmit();"
+          },
+                          tag.id,
+                          false %>
+          <span class="p-2 cursor-pointer peer-checked:font-bold peer-checked:border-b-4 peer-checked:border-primary">
+            <%= tag.name %>
+          </span>
+        </label>
+      <% end %>
     </div>
   <% end %>
 <% end %>

@@ -3,17 +3,10 @@ class User < ApplicationRecord
   has_many :sessions, dependent: :destroy
   has_many :activities, dependent: :destroy
   has_many :media
-  has_many :practiced_activities, dependent: :destroy
+  has_many :practice_entries, dependent: :destroy
   has_many :practices, dependent: :destroy
   has_many :notifications
-  has_and_belongs_to_many :favorites, class_name: "Activity", join_table: "favorites"
-
-  has_many :follows_as_following, class_name: "Follow", foreign_key: "follower_id"
-  has_many :following, through: :follows_as_following
-
-  has_many :follows_as_follower, class_name: "Follow", foreign_key: "following_id"
-  has_many :followers, through: :follows_as_follower
-
+  has_and_belongs_to_many :bookmarks, class_name: "Activity", join_table: "bookmarks"
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :email_address, presence: true, uniqueness: { case_sensitive: false }
   validates :email_address, format: { with: URI::MailTo::EMAIL_REGEXP, message: "must be a valid email address" }
@@ -26,16 +19,9 @@ class User < ApplicationRecord
   def cached_practices
     cache_key = [ self, "practices", Date.current ]
     Rails.cache.fetch(cache_key, expires_in: 1.day) do
-      practices.left_joins(:practiced_activities)
-               .select("practices.*, COALESCE(SUM(practiced_activities.duration),0) as duration")
+      practices.left_joins(:practice_entries)
+               .select("practices.*, COALESCE(SUM(practice_entries.duration),0) as duration")
                .group("practices.id")
-    end
-  end
-
-  def practice_time_today
-    cache_key = [ self, "practice_time_today", Date.current ]
-    Rails.cache.fetch(cache_key, expires_in: 1.day) do
-      practiced_activities.today.sum(:duration)
     end
   end
 

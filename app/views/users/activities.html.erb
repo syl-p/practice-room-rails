@@ -1,0 +1,9 @@
+<%= turbo_frame_tag :user_activities_preview do %>
+  <ul class="mb-6">
+    <% @activities.each do |activity| %>
+      <div class="bg-secondary border">
+        <h4><%= link_to activity.title, activity %></h4>
+      </div>
+    <% end %>
+  </ul>
+<% end %>
