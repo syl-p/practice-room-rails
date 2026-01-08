@@ -16,6 +16,7 @@ class Practices::ActivitiesController < ApplicationController
     @practice.save
 
     flash[:success] = "Activity Attached!"
+    redirect_to practice_path(@practice)
   end
 
   def detach

@@ -5,7 +5,7 @@ const RESUME_LABEL = "Continuer"
 
 // Connects to data-controller="btn-timer"
 export default class extends Controller {
-  static targets = ["button", "label", "display", "input", "submitButton"]
+  static targets = ["playBtn", "pauseBtn", "display", "input", "submitButton"]
 
   connect() {
     this.running = false
@@ -23,22 +23,12 @@ export default class extends Controller {
     })
   }
 
-  toggle(e) {
-    this.displayTarget.classList.remove("hidden")
-
+  start(e) {
     e.preventDefault()
-    if(this.running) {
-      this.pause()
-    } else {
-      this.start()
-    }
-  }
-
-  start() {
-    this.submitButtonTarget.classList.add("hidden")
+    this.pauseBtnTarget.classList.remove("hidden")
+    this.playBtnTarget.classList.add("hidden")
     this.running = true
     this.startTime = Date.now()
-    this.labelTarget.textContent = PAUSE_LABEL
     this.timerInterval = setInterval(() => {
       const now = Date.now()
       const total = this.elapsedTime + (now - this.startTime)
@@ -46,14 +36,16 @@ export default class extends Controller {
     }, 500)
   }
 
-  pause() {
+  pause(e) {
+    e.preventDefault()
     this.running = false
     clearInterval(this.timerInterval)
     const now = Date.now()
     this.elapsedTime += now - this.startTime
     this.#updateDisplay(this.elapsedTime)
     this.inputTarget.value = Math.floor(this.elapsedTime / 1000)
-    this.labelTarget.textContent = RESUME_LABEL
+    this.pauseBtnTarget.classList.add("hidden")
+    this.playBtnTarget.classList.remove("hidden")
     this.submitButtonTarget.classList.remove("hidden")
   }
 
@@ -71,10 +63,9 @@ export default class extends Controller {
     this.elapsedTime = 0
 
     // UI
-    this.displayTarget.classList.add("hidden")
+    this.pauseBtnTarget.classList.add("hidden")
     this.submitButtonTarget.classList.add("hidden")
-    this.displayTarget.textContent = ""
-    this.labelTarget.textContent = START_LABEL
+    this.displayTarget.textContent = "--:--"
     this.#updateDisplay(0)
   }
 

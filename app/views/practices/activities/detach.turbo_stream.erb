@@ -3,3 +3,9 @@
 <% end %>
 
 <%= turbo_stream.remove record_id_gen(@practice, @activity) %>
+
+<% if @practice.activities.empty? %>
+  <%= turbo_stream.update :activities do %>
+    <%= render partial: "practices/activities/empty_state" %>
+  <% end %>
+<% end %>

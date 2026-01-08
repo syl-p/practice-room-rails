@@ -2,7 +2,7 @@ FactoryBot.define do
   factory :user do
     sequence(:username) { |n| "#{Faker::Internet.username}_#{n}" }
     sequence(:email_address) { |n| "user#{n}@example.com" }
-
+    bio { Faker::Lorem.paragraph }
     password { "password" }
 
     trait :with_activities do

@@ -1,0 +1,16 @@
+<%= render DropdownComponent.new(variant: :outline) do |component| %>
+  <% component.with_trigger_btn do %>
+    ...
+  <% end %>
+
+  <% component.with_dropdown_menu do %>
+    <ul class="py-1" role="none">
+      <li>
+        <%= button_to "Détacher",
+                      practice_attach_activity_path(practice, activity),
+                      class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer",
+                      method: :delete %>
+      </li>
+    </ul>
+  <% end %>
+<% end %>

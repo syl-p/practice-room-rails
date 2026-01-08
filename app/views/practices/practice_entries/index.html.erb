@@ -12,12 +12,13 @@
       <% end %>
     </ul>
   </nav>
-
-  <% if @practice_entries.any? %>
-    <% @practice_entries.each do |practice_entry| %>
-      <%= render partial: "practices/practice_entries/item", locals: {practice_entry:} %>
+  <%= turbo_frame_tag :practice_entries_list do %>
+    <% if @practice_entries.any? %>
+      <% @practice_entries.each do |practice_entry| %>
+        <%= render partial: "practices/practice_entries/item", locals: {practice_entry:} %>
+      <% end %>
+    <% else %>
+      <p>Pratiquer une des activités pour mettre à jour votre journal.</p>
     <% end %>
-  <% else %>
-    <p>Pratiquer une des activités pour mettre à jour votre journal.</p>
   <% end %>
 <% end %>
