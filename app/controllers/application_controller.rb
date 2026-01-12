@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   before_authorize :resume_session
 
   rescue_from NotAuthorizedError do |exception|
-    redirect_to activities_url, alert: exception.message
+    redirect_to root_path, alert: exception.message
   end
 
   # Only allow modern browsers supporting webp images, web push, badges, import maps, CSS nesting, and CSS :has.

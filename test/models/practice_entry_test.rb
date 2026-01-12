@@ -22,4 +22,9 @@ class PracticeEntryTest < ActiveSupport::TestCase
     assert_includes PracticeEntry.today, today_activity
     assert_not_includes PracticeEntry.today, yesterday_activity
   end
+
+  test "with total duration scope add sum aggregate" do
+    FactoryBot.create_list(:practice_entry, 3)
+    assert_equal PracticeEntry.with_total_duration, 30
+  end
 end

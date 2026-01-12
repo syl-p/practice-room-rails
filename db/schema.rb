@@ -77,16 +77,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_141608) do
     t.index ["user_id"], name: "index_comments_on_user_id"
   end
 
-  create_table "follows", force: :cascade do |t|
-    t.integer "follower_id"
-    t.integer "following_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["follower_id", "following_id"], name: "index_follows_on_follower_id_and_following_id", unique: true
-    t.index ["follower_id"], name: "index_follows_on_follower_id"
-    t.index ["following_id"], name: "index_follows_on_following_id"
-  end
-
   create_table "media", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -115,6 +105,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_141608) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["activity_id"], name: "index_practice_activities_on_activity_id"
+    t.index ["practice_id", "activity_id"], name: "index_practice_activities_on_practice_id_and_activity_id", unique: true
     t.index ["practice_id"], name: "index_practice_activities_on_practice_id"
   end
 
@@ -176,8 +167,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_141608) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "follows", "users", column: "follower_id"
-  add_foreign_key "follows", "users", column: "following_id"
   add_foreign_key "practice_entries", "activities"
   add_foreign_key "practice_entries", "users"
   add_foreign_key "practices", "users"

@@ -15,11 +15,3 @@ activities = FactoryBot.create_list(:activity, 10, tag_pool: tag_pool, user_pool
 activities.each do |activity|
   FactoryBot.create_list(:comment, 5, commentable: activity)
 end
-
-# add follows
-users.each do |user|
-  followings = users.without(user).sample(5) # chacun suit 5 autres
-  followings.each do |other|
-    FactoryBot.create(:follow, follower: user, following: other)
-  end
-end

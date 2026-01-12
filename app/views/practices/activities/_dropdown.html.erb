@@ -5,6 +5,11 @@
 
   <% component.with_dropdown_menu do %>
     <ul class="py-1" role="none">
+      <% if can? activity, :edit? %>
+        <li>
+            <%= link_to "Editer", edit_activity_path(activity) %>
+        </li>
+      <% end %>
       <li>
         <%= button_to "Détacher",
                       practice_attach_activity_path(practice, activity),

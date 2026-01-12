@@ -3,7 +3,7 @@
     <%= icon "chevron-left" %>
     <span class="block">Retour à ma pratique</span>
   <% end %>
-  <header class="rounded bg-background shadow rounded p-6 mt-6 flex space-x-3 items-center" style="view-transition-name:activity-<%= @activity.id %>">
+  <header class="rounded bg-background shadow p-4 mt-6 flex space-x-3 items-center" style="view-transition-name:activity-<%= @activity.id %>">
     <%= render partial: "practices/practice_entries/add",
                locals: {practice_id: session[:current_practice_id], activity_id: @activity.id} %>
     <div class="flex-1">

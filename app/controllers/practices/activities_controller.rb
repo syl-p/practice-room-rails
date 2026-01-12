@@ -11,12 +11,14 @@ class Practices::ActivitiesController < ApplicationController
   end
 
   def attach
-    authorize!(@practice)
-    @practice.activities << @activity
-    @practice.save
-
-    flash[:success] = "Activity Attached!"
-    redirect_to practice_path(@practice)
+     authorize!(@practice)
+     @practice.activities << @activity
+     @practice.save
+     flash[:success] = "Activity Attached!"
+  rescue
+    flash[:error] = "Activity already attached"
+  ensure
+     redirect_to practice_path(@practice)
   end
 
   def detach

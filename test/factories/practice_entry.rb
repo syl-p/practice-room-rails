@@ -3,6 +3,6 @@ FactoryBot.define do
     user { association(:user) }
     activity { association(:activity) }
     association :practice
-    duration { 30 }
+    duration { 10 }
   end
 end

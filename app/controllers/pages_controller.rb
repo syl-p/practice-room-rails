@@ -5,7 +5,7 @@ class PagesController < ApplicationController
       @practices = Current.user.cached_practices
       redirect_to new_practices_path unless @practices.present?
     else
-      @activities = ActivitiesService.call(tag_ids: [], limit: 5)
+      redirect_to new_session_path
     end
   end
 end
