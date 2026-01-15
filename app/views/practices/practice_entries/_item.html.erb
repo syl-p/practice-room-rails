@@ -1,18 +1,17 @@
 <%= turbo_frame_tag dom_id(practice_entry) do %>
-  <div class="rounded-lg border bg-card text-card-foreground shadow-sm p-4 mb-3">
-    <div class="flex-1 flex items-center">
-      <div class="flex-1">
-        <p class="text-xs text-muted-foreground">
-          <%= display_time(practice_entry.duration) %> à <%= practice_entry.created_at %></p>
+  <div class="tile">
+    <div class="tile-content">
         <p>
           <%= link_to practice_entry.activity.title, practice_activity_path(practice_id: @practice.id, id: practice_entry.activity.id),
-                      class: "block font-semibold truncate", data: {turbo: false} %>
+                      class: "block font-semibold truncate", data: {turbo: false} %><br>
+          <small><%= display_time(practice_entry.duration) %> à <%= practice_entry.created_at %></small>
         </p>
-      </div>
-      <div>
-        <%= button_to practice_practice_entry_path(practice_id: @practice.id, id: practice_entry.id),
-                      method: :delete, class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::OUTLINE_CLASSES].join(' ') do %> x <% end %>
-      </div>
+    </div>
+    <div class="tile-action">
+      <%= button_to practice_practice_entry_path(practice_id: @practice.id, id: practice_entry.id),
+                    method: :delete, class: "btn" do %>
+        <%= icon "x-mark" %>
+      <% end %>
     </div>
   </div>
 <% end %>

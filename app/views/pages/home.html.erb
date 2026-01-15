@@ -1,7 +1,9 @@
-<section class="pt-20 container">
-  <header class="p-6 bg-secondary rounded-md mb-10">
-    <h1 class="text-4xl lg:text-5xl">Practice room</h1>
-    <p class="text-muted-foreground">La plateforme pour pratiquer vos passions avec vos potes !</p>
+<section>
+  <header class="hero bg-primary">
+    <div class="hero-body container grid-xl">
+      <h1>Practice room</h1>
+      <p class="text-muted">La plateforme pour pratiquer vos passions avec vos potes !</p>
+    </div>
   </header>
   <% if authenticated? %>
     <h2 class="text-primary mb-6 text-3xl">Reprenons là où nous en étions</h2>
@@ -11,8 +13,8 @@
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
           <span className="text-body font-body text-neutral-400 text-center mt-3">
-              Crééer une nouvelle pratique
-            </span>
+            Créer une nouvelle pratique
+          </span>
         <% end %>
       <% @practices.each do |practice| %>
           <%= render practice %>

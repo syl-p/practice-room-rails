@@ -1,12 +1,12 @@
 <%= render DropdownComponent.new(variant: :outline) do |component| %>
   <% component.with_trigger_btn do %>
-    ...
+    <% icon "ellipsis-horizontal" %>
   <% end %>
 
   <% component.with_dropdown_menu do %>
-    <ul class="py-1" role="none">
-      <li><%= link_to "Editer", edit_practice_path(id: practice.id), class: "block px-4 py-2 text-sm text-gray-700"  %></li>
-      <li><%= button_to "Supprimer", practice_path(id: practice.id), method: :delete, class: "block px-4 py-2 text-sm text-gray-700"  %></li>
+    <ul class="menu" role="none">
+      <li class="menu-item"><%= link_to "Editer", edit_practice_path(id: practice.id)  %></li>
+      <li class="menu-item"><%= button_to "Supprimer", practice_path(id: practice.id), method: :delete, class: "btn btn-link p-0"  %></li>
     </ul>
   <% end %>
 <% end %>

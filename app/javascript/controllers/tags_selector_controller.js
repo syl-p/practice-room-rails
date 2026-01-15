@@ -6,7 +6,8 @@ export default class extends Controller {
   static values = {
     searchUrl: String,
     preselectedTags: [],
-    tagClasses: String
+    tagClasses: String,
+    closeBtnClasses: String
   }
 
   connect() {
@@ -34,13 +35,11 @@ export default class extends Controller {
         .then(html => Turbo.renderStreamMessage(html))
   }
 
-  selectTag(event) {
-    event.preventDefault()
-    const tag = this.inputTarget.value.trim()
-    if (!tag) return;
-    if(this.selectedTags.includes(tag)) return
+  selectTag({params: {value}}) {
+    if (!value) return;
+    if(this.selectedTags.includes(value)) return
 
-    this.selectedTags.push(tag)
+    this.selectedTags.push(value)
     this.inputTarget.value = ""
     this.#render()
   }
@@ -57,15 +56,17 @@ export default class extends Controller {
     this.listToShowTarget.innerHTML = '' // clear list
     this.selectedTags.forEach((tagLabel, index) => {
       const li = document.createElement("li")
+      li.classList.add(this.tagClassesValue)
+
       li.innerHTML = `
         <div class="${this.tagClassesValue}" >
             ${tagLabel}
-            <button 
-                class="ml-2 text-black font-bold"
+            <a 
+                aria-label="Close" role="button"
+                class="${this.closeBtnClassesValue}"
                 data-label="${tagLabel}"
                 data-action="click->tags-selector#deleteTag:stop">
-                &times
-            </button>
+            </a>
         </div>
       `
       this.listToShowTarget.appendChild(li)

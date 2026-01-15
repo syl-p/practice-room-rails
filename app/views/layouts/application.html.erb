@@ -4,13 +4,11 @@
     <%= render partial: "shared/head" %>
   </head>
 
-  <body class="bg-background">
+  <body>
     <%= render partial: "shared/nav" %>
     <%= render partial: "shared/flash" %>
 
-    <main class="min-h-screen">
-        <%= yield %>
-    </main>
+    <%= yield %>
 
     <%= turbo_frame_tag :remote_modal %>
     <%= render partial: "shared/footer" %>

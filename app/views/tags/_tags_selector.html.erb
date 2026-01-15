@@ -6,24 +6,29 @@
   end
 %>
 
-<div data-controller="tags-selector"
-     data-tags-selector-tag-classes-value="<%= [TailwindHelper::TAG_CLASSES, TailwindHelper::OUTLINE_CLASSES].join(' ') %>"
-     data-tags-selector-search-url-value="<%= tags_path %>"
-     data-tags-selector-preselected-tags-value="<%= preselected_tags.pluck(:name).to_json %>">
-  <label class="<%= TailwindHelper::LABEL_CLASSES %>">Tags</label>
-  <input type="hidden" name="<%= field_name %>"
-         data-tags-selector-target="dataToSend"/>
-  
-  <div class="py-4">
-    <input class="border p-2 rounded w-full"
-           autocomplete="off"
-           placeholder="Chercher un tag ..."
-           data-tags-selector-target="input"
-           data-action="input->tags-selector#search change->tags-selector#selectTag"
-           type="text" name="search" list="tags" />
-    <datalist id="tags"></datalist>
+<div class="form-group">
+  <label class="form-label">Tags</label>
+  <div class="form-autocomplete"
+       data-controller="tags-selector"
+       data-tags-selector-tag-classes-value="chip"
+       data-tags-selector-close-btn-classes-value="btn btn-clear"
+       data-tags-selector-search-url-value="<%= tags_path %>"
+       data-tags-selector-preselected-tags-value="<%= preselected_tags.pluck(:name).to_json %>">
 
-    <ul class="mt-2 flex flex-wrap gap-2"
-        data-tags-selector-target="listToShow"></ul>
+    <input type="hidden" data-tags-selector-target="dataToSend" />
+
+    <!-- autocomplete input container -->
+    <div class="form-autocomplete-input form-input">
+      <div data-tags-selector-target="listToShow">
+      </div>
+
+      <!-- autocomplete real input box -->
+      <input type="text" name="search" placeholder="typing here" class="form-input"
+             data-tags-selector-target="input"
+             data-action="input->tags-selector#search change->tags-selector#selectTag"/>
+    </div>
+
+    <!-- autocomplete suggestion list -->
+    <%= turbo_frame_tag :tags %>
   </div>
 </div>

@@ -1,19 +1,17 @@
 <%= link_to activity_path(
             notification.notifiable.commentable,
             anchor: dom_id(notification.notifiable)),
-            class: "flex w-full items-center space-x-3 px-4 py-2 #{'bg-secondary' unless notification.read_at.present?}",
+            class: "tile #{'bg-secondary' unless notification.read_at.present?}",
             data: {turbo: false} do %>
-  <div>
+  <div class="tile-icon">
     <%= render AvatarComponent.new(user: notification.notifiable.user) %>
   </div>
-  <div class="flex-1">
-    <p class="block font-sans text-sm font-normal leading-normal text-gray-700 antialiased mb-1">
-      <span class="font-medium text-blue-gray-900">
-        <%= notification.notifiable.user.username %>
-      </span>&nbsp;vous a mentionné dans un commentaire.
-    </p>
-    <p class="flex items-center gap-1 font-sans text-xs font-light text-gray-600 antialiased">
-      <%= notification.created_at %>
+  <div class="tile-content">
+    <p>
+      <%= notification.notifiable.user.username %> vous a mentionné dans un commentaire.
+      <small class="d-block">
+        <%= notification.created_at %>
+      </small>
     </p>
   </div>
 <% end %>

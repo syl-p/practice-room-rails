@@ -1,30 +1,30 @@
 <%= form_with url: practice_practice_entries_path(practice_id:, activity_id:),
               html: { id: "timer-#{activity_id}"},
-              data: {turbo: true, controller: "btn-timer"} do |f| %>
+              data: {turbo: true, controller: "btn-timer", "btn-timer-hidden-classes-value": "d-hide"} do |f| %>
   <%= f.hidden_field :duration, data: {btn_timer_target: "input"} %>
   <%= f.hidden_field :practice_id, value: "1", data: {btn_timer_target: "input"} %>
 
-  <div class="flex space-x-0 items-center">
-    <span class="<%= [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::SECONDARY_CLASSES].join(" ") %>">
+  <div class="btn-group">
+    <span class="btn">
       <%= icon "clock" %>
       <span  data-btn-timer-target="display">
         --:--
       </span>
     </span>
 
-    <%= f.button class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(" "),
+    <%= f.button class: "btn btn-primary",
                  data: {btn_timer_target: "playBtn", action: "click->btn-timer#start"} do %>
       <%= icon "play" %>
-      <span class="sr-only">Pratiquer</span>
+      <span class="d-hide">Pratiquer</span>
     <% end %>
 
-    <%= f.button class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::SECONDARY_CLASSES, "hidden"].join(" "),
+    <%= f.button class: "btn d-hide",
                  data: {btn_timer_target: "pauseBtn", action: "click->btn-timer#pause"} do %>
       <%= icon "pause" %>
-      <span class="sr-only">Stop</span>
+      <span class="d-hide">Stop</span>
     <% end %>
 
-    <%= f.submit "Enregistrer", class: ["hidden", TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(" "),
+    <%= f.submit "Enregistrer", class: "btn btn-primary d-hide",
                  data: {btn_timer_target: "submitButton"} %>
 
   </div>

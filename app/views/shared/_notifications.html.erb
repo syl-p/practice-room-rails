@@ -3,14 +3,11 @@
     <% component.with_trigger_btn do %>
       <%= icon "bell", class: "size-6" %>
       <span data-notifications-target="indicator"
-            class="indicator <%= "hidden" unless Current.user.notifications.unread.present? %> bottom-3 left-3 absolute w-3.5 h-3.5 bg-red-400 animate-pulse border-2 border-white dark:border-gray-800 rounded-full"></span>
+            class="badge <%= "d-hide" unless Current.user.notifications.unread.present? %> bottom-3 left-3 absolute w-3.5 h-3.5 bg-red-400 animate-pulse border-2 border-white dark:border-gray-800 rounded-full"></span>
     <% end %>
 
     <% component.with_dropdown_menu do %>
       <%= turbo_stream_from "notifications:#{Current.user.id}" %>
-<!--      <div id="notifications">
-        <%#= render partial: "notifications/list", locals: {notifications: Current.user.notifications.unread.limited} %>
-      </div>-->
       <%= turbo_frame_tag "notifications", id: "notifications", src: notifications_path, loading: :lazy do %>
         ...
       <% end %>

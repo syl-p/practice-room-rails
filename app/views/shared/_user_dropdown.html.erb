@@ -11,26 +11,26 @@
     <span class="hidden md:block">
       <%= Current.user.username %>
     </span>
-    <span class="sr-only">Ouvrir le menu utilisateur</span>
   <% end %>
 
   <% component.with_dropdown_menu do %>
-    <div class="py-1" role="none">
-      <p class="truncate px-3.5 py-3">
-        <span class="block text-xs text-gray-500" role="none">Connecté en tant que...</span>
-        <span class="mt-0.5 font-semibold" role="none">
-          <%= Current.user.username %>
-        </span>
-      </p>
-    </div>
-    <ul class="py-1" role="none">
+    <ul class="menu" role="none">
+      <li class="menu-item">
+        <p>
+          <span class="d-block" role="none">Connecté en tant que...</span>
+          <span role="none">
+            <%= Current.user.username %>
+          </span>
+        </p>
+      </li>
+      <li class="divider" data-content="Vos préférences"></li>
       <% dropdown_menu_links.each do |link| %>
-        <li>
+        <li class="menu-item">
           <%= link_to link[:name], link[:href], class: "block px-4 py-2 text-sm text-gray-700" %>
         </li>
       <% end %>
-      <li>
-        <%= button_to "Se déconnecter", session_path, method: :delete, class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer" %>
+      <li class="menu-item">
+        <%= button_to "Se déconnecter", session_path, method: :delete, class: "btn btn-link" %>
       </li>
     </ul>
   <% end %>

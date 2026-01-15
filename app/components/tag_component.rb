@@ -15,8 +15,8 @@ class TagComponent < ViewComponent::Base
     @options = options
     @block = block
 
-    @default_classes = TailwindHelper::TAG_CLASSES
-    @as = @href ? :a : :button
+    @default_classes = "chip"
+    @as = @href ? :a : :span
 
     @tag_classes = case @variant.to_sym
     when :default

@@ -1,0 +1,22 @@
+<%= render DropdownComponent.new(variant: :ghost) do |component| %>
+  <% component.with_trigger_btn do %>
+    <%= icon "ellipsis-horizontal" %>
+  <% end %>
+
+  <% component.with_dropdown_menu do %>
+    <ul class="menu" role="none">
+      <% if can? comment, :update? %>
+        <li class="menu-item">
+          <%= link_to "Editer", edit_comment_path(comment) %>
+        </li>
+      <% end %>
+      <% if can? comment, :delete? %>
+        <li class="menu-item">
+          <%= button_to comment_path(comment), method: :delete, class: "btn btn-link p-0", data: {turbo: false} do %>
+            Supprimer
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% end %>

@@ -1,0 +1,22 @@
+<div class="card">
+  <div class="card-header">
+    <h2 class="text-xl mb-3 flex-1">Objectifs de la journée</h2>
+  </div>
+  <div class="card-body">
+    <div class="d-flex">
+      <%= render partial: "practices/daily_stat", locals: {
+        state: @stats[:more_than_10_mn_today][:state],
+        goal: @stats[:more_than_10_mn_today][:goal],
+        label_title: '10 minutes',
+        label_subtitle: 'Au moins 10 minutes de pratique'
+      } %>
+
+      <%= render partial: "practices/daily_stat", locals: {
+        state: @stats[:have_3_exercises_today][:state],
+        goal: @stats[:have_3_exercises_today][:goal],
+        label_title: '3 activitiés différentes',
+        label_subtitle: 'Pratiquez au moins 3 activitités'
+      } %>
+    </div>
+  </div>
+</div>

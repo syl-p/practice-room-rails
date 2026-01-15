@@ -1,18 +1,27 @@
+<% tag_container = local_assigns.fetch(:tag_container, :article) %>
 <%= turbo_frame_tag record_id_gen(practice, activity) do %>
-  <article class="rounded bg-background shadow p-4 mb-6 flex space-x-3 items-center" style="view-transition-name:activity-<%= activity.id %>">
-    <%= render partial: "practices/practice_entries/add",
-               locals: {practice_id: @practice, activity_id: activity.id} %>
-    <div class="flex-1">
-      <h3 class="font-bold">
-        <%= link_to activity.title, practice_activity_path(practice, activity), data: { turbo_frame: "_top" } %>
-      </h3>
-      <p class="text-sm text-muted-foreground mb-3">
-        Proposé par <%= link_to activity.user.username, activity.user, data: { turbo_frame: "_top" } %>
-      </p>
-      <% activity.tags.each do |tag| %>
-        <%= render(TagComponent.new(tag.name, variant: :outline)) %>
-      <% end %>
+  <%= content_tag tag_container, class: "card", style: "view-transition-name:activity-#{activity.id}" do %>
+    <div class="card-body tile">
+      <div class="tile-icon">
+        <%= render partial: "practices/practice_entries/add",
+                   locals: {practice_id: @practice, activity_id: activity.id} %>
+      </div>
+      <div class="tile-content">
+        <h3 class="tile-title mb-1">
+          <%= link_to activity.title, practice_activity_path(practice, activity),
+                      data: { turbo_frame: "_top" } %>
+        </h3>
+        <p class="tile-subtitle">
+          Proposé par <%= link_to activity.user.username, activity.user,
+                                  data: { turbo_frame: "_top" } %>
+        </p>
+        <% activity.tags.each do |tag| %>
+          <%= render(TagComponent.new(tag.name, variant: :outline)) %>
+        <% end %>
+      </div>
+      <div class="tile-action">
+        <%= render partial: "practices/activities/dropdown", locals: {practice:, activity:} %>
+      </div>
     </div>
-    <%= render partial: "practices/activities/dropdown", locals: {practice:, activity:} %>
-  </article>
+  <% end %>
 <% end %>

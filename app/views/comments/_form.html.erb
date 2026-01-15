@@ -3,7 +3,7 @@
   turbo: true,
   comment_target: "form"
 }, builder: TailwindFormBuilder do |f| %>
-  <%= f.text_area :content, class: "mb-3" %>
+  <%= f.text_area :content %>
 
   <%= f.submit "Commenter", data: {
     action: 'click->comment#submit',

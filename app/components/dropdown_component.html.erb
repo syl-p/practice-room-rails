@@ -1,14 +1,14 @@
-<div class="relative dropdown" data-controller="dropdown">
+<div class="popover popover-bottom">
   <button
     type="button"
-    class="<%= variant_class_name %>"
+    class="btn"
     data-dropdown-target="triggerBtn"
     data-action="click->dropdown#toggle"
   >
     <%= trigger_btn %>
   </button>
   <div
-    class="hidden absolute right-0 z-10 mt-4 w-max max-w-sm bg-white rounded-md ring-1 ring-black ring-opacity-5 shadow-lg origin-top-right focus:outline-none"
+    class="popover-container"
     data-dropdown-target="dropdownMenu"
   >
     <%= dropdown_menu %>

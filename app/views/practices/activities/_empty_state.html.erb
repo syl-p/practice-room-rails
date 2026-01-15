@@ -1,9 +1,9 @@
-<div class="w-full text-center bg-secondary p-8">
-  <h3>Aucune activités prêtes.</h3>
-  <div>
-    <%= link_to "Créer une activité", new_activity_path, class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(' '), data: {turbo: false} %>
+<div class="empty">
+  <h3 class="empty-title">Aucune activités prêtes.</h3>
+  <div class="empty-action">
+    <%= link_to "Créer une activité", new_activity_path, class: "btn btn-primary", data: {turbo: false} %>
     <%= link_to "Chercher une activité", new_search_path,
-                  class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::OUTLINE_CLASSES, 'mt-4'].join(' '),
+                  class: "btn",
                   data: {turbo: true, turbo_frame: :remote_modal} %>
   </div>
 </div>

@@ -1,10 +1,11 @@
 import { Controller } from "@hotwired/stimulus"
-const START_LABEL = "Pratiquer"
-const PAUSE_LABEL = "Pause"
-const RESUME_LABEL = "Continuer"
 
 // Connects to data-controller="btn-timer"
 export default class extends Controller {
+  static values = {
+    hiddenClasses: String
+  }
+  bb
   static targets = ["playBtn", "pauseBtn", "display", "input", "submitButton"]
 
   connect() {
@@ -25,8 +26,8 @@ export default class extends Controller {
 
   start(e) {
     e.preventDefault()
-    this.pauseBtnTarget.classList.remove("hidden")
-    this.playBtnTarget.classList.add("hidden")
+    this.pauseBtnTarget.classList.remove(this.hiddenClassesValue)
+    this.playBtnTarget.classList.add(this.hiddenClassesValue)
     this.running = true
     this.startTime = Date.now()
     this.timerInterval = setInterval(() => {
@@ -44,9 +45,9 @@ export default class extends Controller {
     this.elapsedTime += now - this.startTime
     this.#updateDisplay(this.elapsedTime)
     this.inputTarget.value = Math.floor(this.elapsedTime / 1000)
-    this.pauseBtnTarget.classList.add("hidden")
-    this.playBtnTarget.classList.remove("hidden")
-    this.submitButtonTarget.classList.remove("hidden")
+    this.pauseBtnTarget.classList.add(this.hiddenClassesValue)
+    this.playBtnTarget.classList.remove(this.hiddenClassesValue)
+    this.submitButtonTarget.classList.remove(this.hiddenClassesValue)
   }
 
   onSubmitEnd(event) {
@@ -63,8 +64,8 @@ export default class extends Controller {
     this.elapsedTime = 0
 
     // UI
-    this.pauseBtnTarget.classList.add("hidden")
-    this.submitButtonTarget.classList.add("hidden")
+    this.pauseBtnTarget.classList.add(this.hiddenClassesValue)
+    this.submitButtonTarget.classList.add(this.hiddenClassesValue)
     this.displayTarget.textContent = "--:--"
     this.#updateDisplay(0)
   }

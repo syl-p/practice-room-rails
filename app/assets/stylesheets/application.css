@@ -40,3 +40,73 @@
         opacity: 0;
     }
 }
+
+.practice {
+    .practice-hero {
+        margin-bottom: 30px;
+    }
+}
+
+.day-selector {
+    display: flex;
+    gap: .25rem;
+    align-content: center;
+    align-items: center;
+    list-style: none;
+    .day-selector-item {
+        display: block;
+        border-radius: 30%;
+        padding: 10px 5px;
+    }
+}
+
+.btn:has(svg), .btn:has(figure) {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    justify-items: center;
+    align-content: center;
+    gap: .4rem;
+}
+
+.btn {
+    svg {
+        height: 30px;
+        width: 30px;
+    }
+}
+
+.flash-container {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+}
+
+.heading {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    .heading-content {
+        flex: 1 1 0;
+    }
+}
+
+/* UTILITIES COMPLEMENT */
+.d-flex { display: flex; }
+.flex-col { flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-1 {
+    flex: 1 1 0;
+}
+
+.items-center { align-items: center; }
+.items-start { align-items: flex-start; }
+.items-end { align-items: flex-end; }
+
+.justify-between { justify-content: space-between; }
+.justify-center { justify-content: center; }
+.justify-end { justify-content: flex-end; }
+
+.gap-1 { gap: .25rem; }
+.gap-2 { gap: .5rem; }
+.gap-3 { gap: 1rem; }
