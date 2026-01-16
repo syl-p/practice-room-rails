@@ -1,17 +1,14 @@
 <% tag_container = local_assigns.fetch(:tag_container, :article) %>
 <%= turbo_frame_tag record_id_gen(practice, activity) do %>
-  <%= content_tag tag_container, class: "card", style: "view-transition-name:activity-#{activity.id}" do %>
-    <div class="card-body tile">
-      <div class="tile-icon">
-        <%= render partial: "practices/practice_entries/add",
-                   locals: {practice_id: @practice, activity_id: activity.id} %>
-      </div>
-      <div class="tile-content">
-        <h3 class="tile-title mb-1">
+  <%= content_tag tag_container, class: "activity-card mb-2",
+                  style: "view-transition-name:activity-#{activity.id}" do %>
+    <div class="activity-header">
+      <div class="activity-body">
+        <h3 class="mb-1 h5">
           <%= link_to activity.title, practice_activity_path(practice, activity),
                       data: { turbo_frame: "_top" } %>
         </h3>
-        <p class="tile-subtitle">
+        <p class="text-muted text-small">
           Proposé par <%= link_to activity.user.username, activity.user,
                                   data: { turbo_frame: "_top" } %>
         </p>
@@ -19,9 +16,13 @@
           <%= render(TagComponent.new(tag.name, variant: :outline)) %>
         <% end %>
       </div>
-      <div class="tile-action">
+      <div class="activity-right">
         <%= render partial: "practices/activities/dropdown", locals: {practice:, activity:} %>
       </div>
+    </div>
+    <div class="activity-footer">
+      <%= render partial: "practices/practice_entries/add",
+                 locals: {practice_id: @practice, activity_id: activity.id} %>
     </div>
   <% end %>
 <% end %>

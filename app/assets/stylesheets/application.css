@@ -41,8 +41,8 @@
     }
 }
 
-.practice {
-    .practice-hero {
+.page {
+    .page-hero {
         margin-bottom: 30px;
     }
 }
@@ -93,8 +93,10 @@
 
 /* UTILITIES COMPLEMENT */
 .d-flex { display: flex; }
+.d-inline-flex { display: inline-flex; }
 .flex-col { flex-direction: column; }
 .flex-wrap { flex-wrap: wrap; }
+.flex-row { flex-direction: row; }
 .flex-1 {
     flex: 1 1 0;
 }
@@ -103,10 +105,71 @@
 .items-start { align-items: flex-start; }
 .items-end { align-items: flex-end; }
 
-.justify-between { justify-content: space-between; }
 .justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
 .justify-end { justify-content: flex-end; }
 
 .gap-1 { gap: .25rem; }
 .gap-2 { gap: .5rem; }
 .gap-3 { gap: 1rem; }
+
+.min-h-screen { min-height: 100vh; }
+.h-screen { height: 100vh; }
+
+.min-h-full { min-height: 100%; }
+.h-full { height: 100%; }
+
+.w-full { width: 100%; }
+.max-w-screen { max-width: 100vw; }
+
+@media (max-width: 768px) {
+    .d-sm-hide { display: none!important; }
+    .d-sm-flex-col { flex-direction: column!important; }
+}
+
+/* Activity card */
+.activity-card {
+    border: 1px solid #e5e5e5;
+    border-radius: .4rem;
+    background: #fff;
+    padding: .75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: .5rem;
+}
+
+/* Header */
+.activity-header {
+    display: flex;
+    align-items: flex-start;
+    gap: .5rem;
+}
+
+.activity-body {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Footer */
+.activity-footer {
+    display: flex;
+    justify-content: flex-start;
+}
+
+/* Desktop */
+@media (min-width: 768px) {
+    .activity-card {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .activity-footer {
+        order: -1;
+        align-content: end;
+    }
+
+    .activity-header {
+        flex: 1;
+        align-items: center;
+    }
+}

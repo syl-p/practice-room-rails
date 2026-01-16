@@ -1,12 +1,14 @@
-<article id="<%= dom_id practice %>" class="min-w-[300px] rounded-lg bg-secondary p-4">
-  <div class="flex-1 flex space-x-3 items-center mb-6">
-    <%= link_to practice.name, practice, class: "text-xl font-bold block flex-1", data: { turbo_frame: "_top" } %>
+<article id="<%= dom_id practice %>" class="card">
+  <div class="card-header d-flex gap-3">
+    <div class="flex-1">
+      <%= link_to practice.name, practice, class: 'flex-1', data: { turbo_frame: "_top" } %>
+    </div>
     <%= render partial: "practices/dropdown", locals: {practice: } %>
   </div>
-  <div class="flex space-x-3 items-center">
-    <p class="flex-1">
-      <%= practice.description %><br>
-      Aujourd'hui: <%= display_time(practice.duration) %></p>
-    <%= link_to "Pratiquer", practice, class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(' ') %>
+  <div class="card-body">
+    <div class="card-content">
+      <p class="text-muted">Aujourd'hui: <%= display_time(practice.duration) %></p>
+      <%= link_to "Pratiquer", practice, class: "btn btn-primary" %>
+    </div>
   </div>
 </article>

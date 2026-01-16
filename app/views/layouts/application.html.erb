@@ -8,7 +8,9 @@
     <%= render partial: "shared/nav" %>
     <%= render partial: "shared/flash" %>
 
-    <%= yield %>
+    <main class="min-h-screen">
+      <%= yield %>
+    </main>
 
     <%= turbo_frame_tag :remote_modal %>
     <%= render partial: "shared/footer" %>

@@ -8,7 +8,7 @@
 <%= render DropdownComponent.new(variant: :outline) do |component| %>
   <% component.with_trigger_btn do %>
     <%= render AvatarComponent.new(user: Current.user) %>
-    <span class="hidden md:block">
+    <span>
       <%= Current.user.username %>
     </span>
   <% end %>

@@ -3,7 +3,7 @@
     <%= link_to "PRM", root_path, class: "navbar-brand", data: {turbo: false} %>
   </div>
 
-  <div class="navbar-section navbar-center">
+  <div class="navbar-section navbar-center d-sm-hide">
     <% if authenticated? && params[:id] %>
       <%= turbo_frame_tag "user_practices" do %>
         <%= render partial: "shared/user_practices" %>

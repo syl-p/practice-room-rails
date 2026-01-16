@@ -1,9 +1,9 @@
-<main class="practice">
-  <header class="hero hero-sm practice-hero bg-gray">
+<main class="page">
+  <header class="hero hero-sm page-hero bg-gray">
     <div class="hero-body container grid-xl">
       <div class="d-flex">
         <div class="flex-1">
-          <h1 class="mb-0">
+          <h1 class="mb-0 h1">
             Aujourd'hui, votre pratique <br>
             <span class="text-primary"><%= @practice.name %></span>
           </h1>
@@ -14,7 +14,7 @@
         </div>
       </div>
 
-      <div class="d-flex gap-3">
+      <div class="d-flex gap-3 d-sm-flex-col">
         <%= render partial: "practices/duration_by_tags", locals: {tags_with_duration: @stats[:tags_with_duration]} %>
         <%= render partial: "practices/daily_stats" %>
       </div>
@@ -33,7 +33,7 @@
             </h2>
             <p class="text-muted">Retrouvez les activités liées à votre pratique ici.</p>
           </div>
-          <div class="heading-actions">
+          <div class="heading-actions d-sm-hide">
             <%= render partial: "practices/activities/filters", locals: {practice: @practice} %>
           </div>
         </header>
@@ -41,7 +41,7 @@
           <% if @practice.activities.any? %>
             <%= render partial: "practices/activities/card",
                        collection: @practice.activities, as: :activity,
-                       locals: {practice: @practice, classes: 'mb-3'} %>
+                       locals: {practice: @practice} %>
           <% else %>
             <%= render partial: "practices/activities/empty_state" %>
           <% end %>
