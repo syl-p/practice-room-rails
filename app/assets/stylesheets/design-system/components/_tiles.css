@@ -1,0 +1,61 @@
+.tile {
+    align-content: space-between;
+    align-items: flex-start;
+    display: flex;
+}
+
+.tile__icon,
+.tile__action {
+    flex: 0 0 auto;
+}
+
+.tile__icon {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+
+.tile__icon > svg,
+.tile__icon > img,
+.tile__icon > .avatar {
+    height: var(--control-icon-size);
+    width: var(--control-icon-size);
+    flex-shrink: 0;
+}
+
+.tile__content {
+    flex: 1 1 auto;
+}
+
+.tile__content:not(:first-child) {
+    padding-left: var(--unit-4);
+}
+
+.tile__content:not(:last-child) {
+    padding-right: var(--unit-4);
+}
+
+.tile__title,
+.tile__subtitle {
+    line-height: var(--line-height);
+}
+
+/* Modifier: Centered */
+.tile--centered {
+    align-items: center;
+}
+
+.tile--centered .tile__content {
+    overflow: hidden;
+}
+
+.tile--centered .tile__title,
+.tile--centered .tile__subtitle {
+    margin-bottom: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

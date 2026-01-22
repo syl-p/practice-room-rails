@@ -1,0 +1,26 @@
+.breadcrumb {
+    list-style: none;
+    margin: var(--unit-1) 0;
+    padding: var(--unit-1) 0;
+}
+
+.breadcrumb__item {
+    color: var(--gray-color-dark);
+    display: inline-block;
+    margin: 0;
+    padding: var(--unit-1) 0;
+}
+
+.breadcrumb__item:not(:last-child) {
+    margin-right: var(--unit-1);
+}
+
+.breadcrumb__item:not(:last-child) a {
+    color: var(--gray-color-dark);
+}
+
+.breadcrumb__item:not(:first-child)::before {
+    color: var(--gray-color-dark);
+    content: "/";
+    padding-right: var(--unit-2);
+}

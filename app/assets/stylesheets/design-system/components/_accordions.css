@@ -1,0 +1,109 @@
+/* Accordion Component */
+/* Based on BEM methodology */
+
+.accordion {
+    display: block;
+    position: relative;
+}
+
+.accordion__input {
+    display: none;
+}
+
+.accordion__header {
+    display: block;
+    padding: var(--unit-2) var(--unit-4);
+    cursor: pointer;
+    border: var(--border-width) solid var(--color-border);
+    background-color: var(--color-body-bg);
+    color: var(--color-text);
+    font-weight: 500;
+    transition: background-color 0.15s ease;
+}
+
+.accordion__header:hover {
+    background-color: var(--bg-color-dark);
+}
+
+.accordion__header:focus {
+    outline: 2px solid var(--primary-color);
+    outline-offset: -2px;
+}
+
+.accordion__icon {
+    display: inline-block;
+    margin-right: var(--unit-2);
+    transition: transform 0.25s ease;
+}
+
+/* Active state */
+.accordion__input:checked ~ .accordion__header .accordion__icon,
+.accordion[open] .accordion__header .accordion__icon {
+    transform: rotate(90deg);
+}
+
+.accordion__body {
+    margin-bottom: var(--unit-4);
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.25s ease;
+    border-left: var(--border-width) solid var(--color-border);
+    border-right: var(--border-width) solid var(--color-border);
+    border-bottom: var(--border-width) solid var(--color-border);
+}
+
+.accordion__input:checked ~ .accordion__body,
+.accordion[open] .accordion__body {
+    max-height: 50rem;
+}
+
+.accordion__content {
+    padding: var(--unit-4);
+    background-color: var(--color-body-bg);
+}
+
+/* Accordion group */
+.accordion-group .accordion:not(:first-child) .accordion__header {
+    border-top: none;
+}
+
+.accordion-group .accordion:first-child .accordion__header {
+    border-radius: var(--border-radius) var(--border-radius) 0 0;
+}
+
+.accordion-group .accordion:last-child .accordion__body {
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+.accordion-group .accordion:only-child .accordion__header {
+    border-radius: var(--border-radius);
+}
+
+.accordion-group .accordion:only-child .accordion__body {
+    border-radius: 0 0 var(--border-radius) var(--border-radius);
+}
+
+/* HTML5 details/summary support */
+details.accordion summary.accordion__header::-webkit-details-marker {
+    display: none;
+}
+
+/* Variants */
+.accordion--primary .accordion__header {
+    border-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.accordion--primary .accordion__header:hover {
+    background-color: var(--primary-color-light);
+}
+
+.accordion--success .accordion__header {
+    border-color: var(--color-success);
+    color: var(--color-success);
+}
+
+.accordion--error .accordion__header {
+    border-color: var(--color-error);
+    color: var(--color-error);
+}

@@ -1,5 +1,5 @@
 <% current_practice_id = session[:current_practice_id] %>
-<div class="flex space-x-0">
+<div class="btn__group">
   <%= button_to "Ajouter à ma pratique", practice_attach_activity_path(practice_id: current_practice_id, id: activity.id),
                 method: :post, class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(" "),
   data: {turbo_frame: "_top"} %>
@@ -8,16 +8,16 @@
       <% icon "chevron-down" %>
     <% end %>
     <% component.with_dropdown_menu do %>
-      <ul class="py-1" role="none">
+      <ul class="menu" role="none">
         <% Current.user.cached_practices.each do |practice| %>
-          <li>
+          <li class="menu__item">
             <%= button_to practice.name, practice_attach_activity_path(practice_id: practice.id, id: activity.id),
-                          method: :post, class: "block px-4 py-2 text-sm text-gray-700" %></li>
+                          method: :post, class: "btn btn--link" %></li>
         <% end %>
-        <li>
+        <li class="menu__item">
           <%= link_to "Créér une nouvelle pratique", new_practices_path,
                       data: {turbo: false},
-                      class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer" %>
+                      class: "btn btn--link" %>
         </li>
       </ul>
     <% end %>

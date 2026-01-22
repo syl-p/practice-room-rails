@@ -9,7 +9,6 @@
  * Consider organizing styles into separate files for maintainability.
  */
 
-
 ::view-transition-old([view-transition-name^="activity-"]),
 ::view-transition-new([view-transition-name^="activity-"]) {
     animation-duration: 1000ms;
@@ -49,7 +48,7 @@
 
 .day-selector {
     display: flex;
-    gap: .25rem;
+    gap: 0.25rem;
     align-content: center;
     align-items: center;
     list-style: none;
@@ -57,22 +56,6 @@
         display: block;
         border-radius: 30%;
         padding: 10px 5px;
-    }
-}
-
-.btn:has(svg), .btn:has(figure) {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    justify-items: center;
-    align-content: center;
-    gap: .4rem;
-}
-
-.btn {
-    svg {
-        height: 30px;
-        width: 30px;
     }
 }
 
@@ -91,67 +74,31 @@
     }
 }
 
-/* UTILITIES COMPLEMENT */
-.d-flex { display: flex; }
-.d-inline-flex { display: inline-flex; }
-.flex-col { flex-direction: column; }
-.flex-wrap { flex-wrap: wrap; }
-.flex-row { flex-direction: row; }
-.flex-1 {
-    flex: 1 1 0;
-}
-
-.items-center { align-items: center; }
-.items-start { align-items: flex-start; }
-.items-end { align-items: flex-end; }
-
-.justify-center { justify-content: center; }
-.justify-between { justify-content: space-between; }
-.justify-end { justify-content: flex-end; }
-
-.gap-1 { gap: .25rem; }
-.gap-2 { gap: .5rem; }
-.gap-3 { gap: 1rem; }
-
-.min-h-screen { min-height: 100vh; }
-.h-screen { height: 100vh; }
-
-.min-h-full { min-height: 100%; }
-.h-full { height: 100%; }
-
-.w-full { width: 100%; }
-.max-w-screen { max-width: 100vw; }
-
-@media (max-width: 768px) {
-    .d-sm-hide { display: none!important; }
-    .d-sm-flex-col { flex-direction: column!important; }
-}
-
 /* Activity card */
 .activity-card {
-    border: 1px solid #e5e5e5;
-    border-radius: .4rem;
-    background: #fff;
-    padding: .75rem 1rem;
+    border: var(--border-width) solid var(--color-border);
+    border-radius: var(--border-radius);
+    background: var(--bg-color);
+    padding: var(--unit-8);
     display: flex;
     flex-direction: column;
-    gap: .5rem;
+    gap: var(--unit-4);
 }
 
 /* Header */
-.activity-header {
+.activity-card__header {
     display: flex;
     align-items: flex-start;
-    gap: .5rem;
+    gap: var(--unit-4);
 }
 
-.activity-body {
+.activity-card__body {
     flex: 1;
     min-width: 0;
 }
 
 /* Footer */
-.activity-footer {
+.activity-card__footer {
     display: flex;
     justify-content: flex-start;
 }
@@ -163,12 +110,12 @@
         align-items: center;
     }
 
-    .activity-footer {
+    .activity-card__footer {
         order: -1;
         align-content: end;
     }
 
-    .activity-header {
+    .activity-card__header {
         flex: 1;
         align-items: center;
     }

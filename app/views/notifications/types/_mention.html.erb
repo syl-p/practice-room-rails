@@ -3,10 +3,10 @@
             anchor: dom_id(notification.notifiable)),
             class: "tile #{'bg-secondary' unless notification.read_at.present?}",
             data: {turbo: false} do %>
-  <div class="tile-icon">
+  <div class="tile__icon">
     <%= render AvatarComponent.new(user: notification.notifiable.user) %>
   </div>
-  <div class="tile-content">
+  <div class="tile__content">
     <p>
       <%= notification.notifiable.user.username %> vous a mentionné dans un commentaire.
       <small class="d-block">

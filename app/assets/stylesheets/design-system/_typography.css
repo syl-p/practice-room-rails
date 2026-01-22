@@ -1,0 +1,144 @@
+/* Typography Component */
+/* Based on Spectre.css v0.5.9 with BEM methodology */
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    color: inherit;
+    font-weight: 500;
+    line-height: 1.2;
+    margin-bottom: 0.5em;
+    margin-top: 0;
+}
+
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+    font-weight: 500;
+}
+
+h1,
+.h1 {
+    font-size: 2rem;
+}
+
+h2,
+.h2 {
+    font-size: 1.6rem;
+}
+
+h3,
+.h3 {
+    font-size: 1.4rem;
+}
+
+h4,
+.h4 {
+    font-size: 1.2rem;
+}
+
+h5,
+.h5 {
+    font-size: 1rem;
+}
+
+h6,
+.h6 {
+    font-size: 0.8rem;
+}
+
+/* Paragraphs */
+p {
+    margin: 0 0 var(--line-height);
+}
+
+/* Semantic text elements */
+a,
+ins,
+u {
+    text-decoration-skip: ink edges;
+}
+
+abbr[title] {
+    border-bottom: var(--border-width) dotted;
+    cursor: help;
+    text-decoration: none;
+}
+
+kbd {
+    background: var(--dark-color);
+    border-radius: var(--border-radius);
+    color: var(--light-color);
+    font-size: var(--font-size-sm);
+    line-height: 1.25;
+    padding: var(--unit-h) var(--unit-1);
+}
+
+mark {
+    background: var(--highlight-color);
+    border-bottom: var(--border-width) solid #ffd367;
+    border-radius: var(--border-radius);
+    color: var(--body-font-color);
+    padding: var(--unit-o) var(--unit-h) 0;
+}
+
+/* Blockquote */
+blockquote {
+    border-left: var(--border-width-lg) solid var(--border-color);
+    margin-left: 0;
+    padding: var(--layout-spacing) var(--unit-4);
+}
+
+blockquote p:last-child {
+    margin-bottom: 0;
+}
+
+/* Lists */
+ul,
+ol {
+    margin: var(--layout-spacing) 0 var(--layout-spacing) var(--layout-spacing);
+    padding: 0;
+}
+
+ul ul,
+ul ol,
+ol ul,
+ol ol {
+    margin: var(--layout-spacing) 0 var(--layout-spacing) var(--layout-spacing);
+}
+
+ul li,
+ol li {
+    margin-top: var(--unit-1);
+}
+
+ul {
+    list-style: disc inside;
+}
+
+ul ul {
+    list-style-type: circle;
+}
+
+ol {
+    list-style: decimal inside;
+}
+
+ol ol {
+    list-style-type: lower-alpha;
+}
+
+dl dt {
+    font-weight: bold;
+}
+
+dl dd {
+    margin: var(--unit-1) 0 var(--layout-spacing) 0;
+}

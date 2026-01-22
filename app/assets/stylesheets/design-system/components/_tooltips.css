@@ -1,0 +1,99 @@
+.tooltip {
+    position: relative;
+}
+
+.tooltip::after {
+    background: rgba(var(--dark-color-rgb), 0.95);
+    border-radius: var(--unit-h);
+    bottom: 100%;
+    color: var(--light-color);
+    content: attr(data-tooltip);
+    display: block;
+    font-size: var(--font-size-sm);
+    left: 50%;
+    max-width: var(--control-width-sm);
+    opacity: 0;
+    overflow: hidden;
+    padding: var(--unit-1) var(--unit-2);
+    pointer-events: none;
+    position: absolute;
+    text-overflow: ellipsis;
+    transform: translate(-50%, var(--unit-2));
+    transition: opacity 0.2s, transform 0.2s;
+    white-space: pre;
+    z-index: var(--zindex-3);
+}
+
+.tooltip:focus::after,
+.tooltip:hover::after {
+    opacity: 1;
+    transform: translate(-50%, calc(var(--unit-1) * -1));
+}
+
+.tooltip[disabled],
+.tooltip--disabled {
+    pointer-events: auto;
+}
+
+.tooltip--right::after {
+    bottom: 50%;
+    left: 100%;
+    transform: translate(calc(var(--unit-1) * -1), 50%);
+}
+
+.tooltip--right:focus::after,
+.tooltip--right:hover::after {
+    transform: translate(var(--unit-1), 50%);
+}
+
+.tooltip--bottom::after {
+    bottom: auto;
+    top: 100%;
+    transform: translate(-50%, calc(var(--unit-2) * -1));
+}
+
+.tooltip--bottom:focus::after,
+.tooltip--bottom:hover::after {
+    transform: translate(-50%, var(--unit-1));
+}
+
+.tooltip--left::after {
+    bottom: 50%;
+    left: auto;
+    right: 100%;
+    transform: translate(var(--unit-2), 50%);
+}
+
+.tooltip--left:focus::after,
+.tooltip--left:hover::after {
+    transform: translate(calc(var(--unit-1) * -1), 50%);
+}
+
+@keyframes loading {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes slide-down {
+    0% {
+        opacity: 0;
+        transform: translateY(calc(var(--unit-8) * -1));
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+a.text-primary:focus,
+a.text-primary:hover {
+    color: var(--primary-color-dark);
+}

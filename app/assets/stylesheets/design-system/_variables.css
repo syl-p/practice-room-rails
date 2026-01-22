@@ -1,0 +1,147 @@
+/* Design System Variables */
+/* Based on Spectre.css v0.5.9 with calculated CSS custom properties */
+
+:root {
+    /* Core Version */
+    --version: "0.5.9";
+
+    /* Core Features */
+    --rtl: false;
+
+    /* Core Colors */
+    --primary-color: #5755d9;
+    --primary-color-dark: #4b48d6; /* darken(#5755d9, 3%) */
+    --primary-color-light: #6c6ade; /* lighten(#5755d9, 3%) */
+    --secondary-color: #f1f1fc; /* lighten(#5755d9, 37.5%) */
+    --secondary-color-dark: #e5e5f9; /* darken(#f1f1fc, 3%) */
+    --secondary-color-light: #fafafe; /* lighten(#f1f1fc, 3%) */
+
+    /* Gray Colors */
+    --dark-color: #303742;
+    --light-color: #fff;
+    --gray-color: #bcc3ce; /* lighten(#303742, 55%) */
+    --gray-color-dark: #66758c; /* darken(#bcc3ce, 30%) */
+    --gray-color-light: #e7eaed; /* lighten(#bcc3ce, 20%) */
+
+    /* Border Colors */
+    --border-color: #dadee4; /* lighten(#303742, 65%) */
+    --border-color-dark: #bcc3ce; /* darken(#dadee4, 10%) */
+    --border-color-light: #eef0f3; /* lighten(#dadee4, 8%) */
+
+    /* Background Colors */
+    --bg-color: #f7f8f9; /* lighten(#303742, 75%) */
+    --bg-color-dark: #eef0f3; /* darken(#f7f8f9, 3%) */
+    --bg-color-light: #fff;
+
+    /* Control Colors */
+    --success-color: #32b643;
+    --warning-color: #ffb700;
+    --error-color: #e85600;
+
+    /* Other Colors */
+    --code-color: #d73e48;
+    --highlight-color: #ffe9b3;
+    --body-bg: #fff; /* $bg-color-light */
+    --body-font-color: #3b4351; /* lighten(#303742, 5%) */
+    --link-color: #5755d9; /* $primary-color */
+    --link-color-dark: #302ecd; /* darken(#5755d9, 10%) */
+    --link-color-light: #807fe2; /* lighten(#5755d9, 10%) */
+
+    /* Font Families */
+    --base-font-family:
+        -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto;
+    --mono-font-family:
+        "SF Mono", "Segoe UI Mono", "Roboto Mono", Menlo, Courier, monospace;
+    --fallback-font-family: "Helvetica Neue", sans-serif;
+    --cjk-zh-hans-font-family:
+        var(--base-font-family), "PingFang SC", "Hiragino Sans GB",
+        "Microsoft YaHei", var(--fallback-font-family);
+    --cjk-zh-hant-font-family:
+        var(--base-font-family), "PingFang TC", "Hiragino Sans CNS",
+        "Microsoft JhengHei", var(--fallback-font-family);
+    --cjk-jp-font-family:
+        var(--base-font-family), "Hiragino Sans", "Hiragino Kaku Gothic Pro",
+        "Yu Gothic", YuGothic, Meiryo, var(--fallback-font-family);
+    --cjk-ko-font-family:
+        var(--base-font-family), "Malgun Gothic", var(--fallback-font-family);
+    --body-font-family: var(--base-font-family), var(--fallback-font-family);
+
+    /* Unit Sizes */
+    --unit-o: 0.05rem;
+    --unit-h: 0.1rem;
+    --unit-1: 0.2rem;
+    --unit-2: 0.4rem;
+    --unit-3: 0.6rem;
+    --unit-4: 0.8rem;
+    --unit-5: 1rem;
+    --unit-6: 1.2rem;
+    --unit-7: 1.4rem;
+    --unit-8: 1.6rem;
+    --unit-9: 1.8rem;
+    --unit-10: 2rem;
+    --unit-12: 2.4rem;
+    --unit-16: 3.2rem;
+
+    /* Font Sizes */
+    --html-font-size: 20px;
+    --html-line-height: 1.5;
+    --font-size: 0.8rem;
+    --font-size-sm: 0.7rem;
+    --font-size-lg: 0.9rem;
+    --line-height: 1.2rem;
+
+    /* Layout Sizes */
+    --layout-spacing: var(--unit-2); /* 0.4rem */
+    --layout-spacing-sm: var(--unit-1); /* 0.2rem */
+    --layout-spacing-lg: var(--unit-4); /* 0.8rem */
+    --border-radius: var(--unit-h); /* 0.1rem */
+    --border-width: var(--unit-o); /* 0.05rem */
+    --border-width-lg: var(--unit-h); /* 0.1rem */
+
+    /* Control Sizes */
+    --control-size: var(--unit-9); /* 1.8rem */
+    --control-size-sm: var(--unit-7); /* 1.4rem */
+    --control-size-lg: var(--unit-10); /* 2rem */
+    --control-padding-x: var(--unit-2); /* 0.4rem */
+    --control-padding-x-sm: 0.3rem; /* var(--unit-2) * 0.75 */
+    --control-padding-x-lg: 0.6rem; /* var(--unit-2) * 1.5 */
+    --control-padding-y: 0.25rem; /* (1.8rem - 1.2rem) / 2 - 0.05rem */
+    --control-padding-y-sm: 0.05rem; /* (1.4rem - 1.2rem) / 2 - 0.05rem */
+    --control-padding-y-lg: 0.35rem; /* (2rem - 1.2rem) / 2 - 0.05rem */
+    --control-icon-size: 1.2rem;
+
+    /* Control Widths */
+    --control-width-xs: 180px;
+    --control-width-sm: 320px;
+    --control-width-md: 640px;
+    --control-width-lg: 960px;
+    --control-width-xl: 1280px;
+
+    /* Responsive Breakpoints */
+    --size-xs: 480px;
+    --size-sm: 600px;
+    --size-md: 840px;
+    --size-lg: 960px;
+    --size-xl: 1280px;
+    --size-2x: 1440px;
+
+    --responsive-breakpoint: var(--size-xs);
+
+    /* Z-index Scale */
+    --zindex-0: 1;
+    --zindex-1: 100;
+    --zindex-2: 200;
+    --zindex-3: 300;
+    --zindex-4: 400;
+
+    /* Colors with transparency for shadows and overlays */
+    --dark-color-rgb: 48, 55, 66;
+    --primary-color-rgb: 87, 85, 217;
+    --success-color-rgb: 50, 182, 67;
+    --error-color-rgb: 232, 86, 0;
+    --warning-color-rgb: 255, 183, 0;
+    --body-font-color-rgb: 59, 67, 81;
+    --gray-color-light-rgb: 231, 234, 237;
+    --light-color-rgb: 255, 255, 255;
+    --bg-color-rgb: 247, 248, 249;
+}

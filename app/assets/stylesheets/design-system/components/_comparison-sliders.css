@@ -1,0 +1,121 @@
+/* Comparison Sliders Component */
+/* Based on Spectre.css v0.5.9 with pure BEM methodology */
+
+.comparison-slider {
+    height: 50vh;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    -webkit-overflow-scrolling: touch;
+}
+
+.comparison-slider__before,
+.comparison-slider__after {
+    height: 100%;
+    left: 0;
+    margin: 0;
+    overflow: hidden;
+    position: absolute;
+    top: 0;
+}
+
+.comparison-slider__before img,
+.comparison-slider__after img {
+    height: 100%;
+    object-fit: cover;
+    object-position: left center;
+    position: absolute;
+    width: 100%;
+}
+
+.comparison-slider__before {
+    width: 100%;
+    z-index: 1;
+}
+
+.comparison-slider__before .comparison-slider__label {
+    right: var(--unit-4);
+}
+
+.comparison-slider__after {
+    max-width: 100%;
+    min-width: 0;
+    z-index: 2;
+}
+
+.comparison-slider__after::before {
+    background: transparent;
+    content: "";
+    cursor: default;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    right: var(--unit-4);
+    top: 0;
+    z-index: var(--zindex-0);
+}
+
+.comparison-slider__after::after {
+    background: currentColor;
+    border-radius: 50%;
+    box-shadow: 0 -5px, 0 5px;
+    color: var(--light-color);
+    content: "";
+    height: 3px;
+    pointer-events: none;
+    position: absolute;
+    right: var(--unit-2);
+    top: 50%;
+    transform: translate(50%, -50%);
+    width: 3px;
+}
+
+.comparison-slider__after .comparison-slider__label {
+    left: var(--unit-4);
+}
+
+.comparison-slider__resizer {
+    animation: first-run 1.5s 1 ease-in-out;
+    cursor: ew-resize;
+    height: var(--unit-4);
+    left: 0;
+    max-width: 100%;
+    min-width: var(--unit-4);
+    opacity: 0;
+    outline: none;
+    position: relative;
+    resize: horizontal;
+    top: 50%;
+    transform: translateY(-50%) scaleY(30);
+    width: 0;
+}
+
+.comparison-slider__label {
+    background: rgba(var(--dark-color-rgb), 0.5);
+    bottom: var(--unit-4);
+    color: var(--light-color);
+    padding: var(--unit-1) var(--unit-2);
+    position: absolute;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@keyframes first-run {
+    0% {
+        width: 0;
+    }
+    25% {
+        width: var(--unit-12);
+    }
+    50% {
+        width: var(--unit-4);
+    }
+    75% {
+        width: var(--unit-6);
+    }
+    100% {
+        width: 0;
+    }
+}

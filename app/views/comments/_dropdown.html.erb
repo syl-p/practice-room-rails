@@ -6,13 +6,13 @@
   <% component.with_dropdown_menu do %>
     <ul class="menu" role="none">
       <% if can? comment, :update? %>
-        <li class="menu-item">
+        <li class="menu__item">
           <%= link_to "Editer", edit_comment_path(comment) %>
         </li>
       <% end %>
       <% if can? comment, :delete? %>
-        <li class="menu-item">
-          <%= button_to comment_path(comment), method: :delete, class: "btn btn-link p-0", data: {turbo: false} do %>
+        <li class="menu__item">
+          <%= button_to comment_path(comment), method: :delete, class: "btn btn--link p-0", data: {turbo: false} do %>
             Supprimer
           <% end %>
         </li>

@@ -1,13 +1,13 @@
 <%= turbo_frame_tag dom_id(practice_entry) do %>
   <div class="tile">
-    <div class="tile-content">
+    <div class="tile__content">
         <p>
           <%= link_to practice_entry.activity.title, practice_activity_path(practice_id: @practice.id, id: practice_entry.activity.id),
                       class: "block font-semibold truncate", data: {turbo: false} %><br>
           <small><%= display_time(practice_entry.duration) %> à <%= practice_entry.created_at %></small>
         </p>
     </div>
-    <div class="tile-action">
+    <div class="tile__action">
       <%= button_to practice_practice_entry_path(practice_id: @practice.id, id: practice_entry.id),
                     method: :delete, class: "btn" do %>
         <%= icon "x-mark" %>

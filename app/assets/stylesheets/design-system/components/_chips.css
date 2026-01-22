@@ -1,0 +1,27 @@
+.chip {
+    align-items: center;
+    background: var(--bg-color-dark);
+    border-radius: 5rem;
+    color: var(--color-text-light);
+    display: inline-flex;
+    font-size: var(--font-size-sm);
+    height: 1.2rem;
+    line-height: var(--line-height);
+    margin: var(--unit-1);
+    max-width: 100%;
+    padding: 0 var(--unit-4);
+    text-decoration: none;
+    vertical-align: middle;
+}
+
+.chip__content,
+.chip-content {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.chip .avatar {
+    margin-left: -0.4rem;
+    margin-right: 0.2rem;
+}

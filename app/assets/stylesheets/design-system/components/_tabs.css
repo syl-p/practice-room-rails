@@ -1,0 +1,63 @@
+.tab {
+    -ms-flex-align: center;
+    align-items: center;
+    border-bottom: var(--border-width) solid var(--border-color);
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    list-style: none;
+    margin: var(--unit-1) 0 0.15rem 0;
+}
+
+.tab__item {
+    margin-top: 0;
+}
+
+.tab__item a {
+    border-bottom: var(--unit-h) solid transparent;
+    color: inherit;
+    display: block;
+    margin: 0 var(--unit-2) 0 0;
+    padding: var(--unit-2) var(--unit-1) 0.3rem var(--unit-1);
+    text-decoration: none;
+}
+
+.tab__item a:focus,
+.tab__item a:hover {
+    color: var(--primary-color);
+}
+
+.tab__item--active a {
+    border-bottom-color: var(--primary-color);
+    color: var(--primary-color);
+}
+
+.tab__item--action {
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    text-align: right;
+}
+
+.tab__item .btn--clear {
+    margin-top: calc(var(--unit-1) * -1);
+}
+
+.tab--block .tab__item {
+    -ms-flex: 1 0 0;
+    flex: 1 0 0;
+    text-align: center;
+}
+
+.tab--block .tab__item a {
+    margin: 0;
+}
+
+.tab--block .tab__item .badge[data-badge]::after {
+    position: absolute;
+    right: var(--unit-h);
+    top: var(--unit-h);
+    transform: translate(0, 0);
+}
+
+.tab:not(.tab--block) .badge {

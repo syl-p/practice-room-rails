@@ -1,0 +1,53 @@
+/* Autocomplete Component */
+/* Based on Spectre.css v0.5.9 with pure BEM methodology */
+
+.form-autocomplete {
+    position: relative;
+}
+
+.form-autocomplete__input {
+    -ms-align-content: flex-start;
+    align-content: flex-start;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    height: auto;
+    min-height: var(--unit-8);
+    padding: var(--unit-h);
+}
+
+.form-autocomplete__input--focused {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 var(--unit-h) rgba(var(--primary-color-rgb), 0.2);
+}
+
+.form-autocomplete__input .form__input {
+    border-color: transparent;
+    box-shadow: none;
+    display: inline-block;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    height: var(--unit-6);
+    line-height: var(--unit-4);
+    margin: var(--unit-h);
+    width: auto;
+}
+
+.form-autocomplete .menu {
+    left: 0;
+    position: absolute;
+    top: 100%;
+    width: 100%;
+}
+
+.form-autocomplete--oneline .form-autocomplete__input {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+.form-autocomplete--oneline .chip {
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+}

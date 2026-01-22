@@ -2,7 +2,7 @@
     <% if @tags.any? %>
       <ul class="menu">
         <% @tags.each do |tag| %>
-          <li class="menu-item"
+          <li class="menu__item"
               data-action="click->tags-selector#selectTag"
               data-tags-selector-value-param="<%= tag.name %>">
             <div class="chip">

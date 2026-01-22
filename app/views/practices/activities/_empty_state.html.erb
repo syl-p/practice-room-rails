@@ -1,9 +1,9 @@
 <div class="empty">
-  <h3 class="empty-title">Aucune activités prêtes.</h3>
-  <div class="empty-action">
-    <%= link_to "Créer une activité", new_activity_path, class: "btn btn-primary", data: {turbo: false} %>
+  <h3 class="empty__title">Aucune activités prêtes.</h3>
+  <div class="empty__action">
+    <%= link_to "Créer une activité", new_activity_path, class: "btn btn--primary", data: {turbo: false} %>
     <%= link_to "Chercher une activité", new_search_path,
-                  class: "btn",
+                  class: "btn btn--primary",
                   data: {turbo: true, turbo_frame: :remote_modal} %>
   </div>
 </div>

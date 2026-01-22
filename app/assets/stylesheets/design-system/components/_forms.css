@@ -1,0 +1,206 @@
+/* Forms Component */
+/* Based on Spectre.css v0.5.9 with pure BEM methodology */
+
+.form__group {
+    margin-bottom: var(--layout-spacing);
+}
+
+fieldset {
+    margin-bottom: var(--layout-spacing-lg);
+}
+
+legend {
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    margin-bottom: var(--layout-spacing);
+}
+
+/* Form inputs */
+.form__input {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: var(--bg-color-light);
+    background-image: none;
+    border: var(--border-width) solid var(--border-color-dark);
+    border-radius: var(--border-radius);
+    color: var(--body-font-color);
+    display: block;
+    font-size: var(--font-size);
+    height: var(--control-size);
+    line-height: var(--line-height);
+    max-width: 100%;
+    outline: none;
+    padding: var(--control-padding-y) var(--control-padding-x);
+    position: relative;
+    transition:
+        background 0.2s,
+        border 0.2s,
+        box-shadow 0.2s,
+        color 0.2s;
+    width: 100%;
+}
+
+.form__input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 var(--unit-h) rgba(var(--primary-color-rgb), 0.2);
+}
+
+.form__input::-ms-input-placeholder {
+    color: var(--gray-color);
+}
+
+.form__input::placeholder {
+    color: var(--gray-color);
+}
+
+/* Form select */
+.form__select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: var(--bg-color-light);
+    border: var(--border-width) solid var(--border-color-dark);
+    border-radius: var(--border-radius);
+    color: inherit;
+    font-size: var(--font-size);
+    height: var(--control-size);
+    line-height: var(--line-height);
+    outline: none;
+    padding: var(--control-padding-y) var(--control-padding-x);
+    width: 100%;
+}
+
+.form__select:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 var(--unit-h) rgba(var(--primary-color-rgb), 0.2);
+}
+
+.form__select::-ms-expand {
+    display: none;
+}
+
+/* Input sizes */
+.form__input--sm {
+    font-size: var(--font-size-sm);
+    height: var(--control-size-sm);
+    padding: var(--control-padding-y-sm) var(--control-padding-x-sm);
+}
+
+.form__input--lg {
+    font-size: var(--font-size-lg);
+    height: var(--control-size-lg);
+    padding: var(--control-padding-y-lg) var(--control-padding-x-lg);
+}
+
+.form__select--sm {
+    font-size: var(--font-size-sm);
+    height: var(--control-size-sm);
+    padding: var(--control-padding-y-sm) var(--control-padding-x-sm);
+}
+
+.form__select--lg {
+    font-size: var(--font-size-lg);
+    height: var(--control-size-lg);
+    padding: var(--control-padding-y-lg) var(--control-padding-x-lg);
+}
+
+/* Form input inline */
+.form__input--inline {
+    display: inline-block;
+    vertical-align: middle;
+    width: auto;
+}
+
+/* Form textarea */
+textarea.form__input,
+textarea.form__input--lg,
+textarea.form__input--sm {
+    height: auto;
+}
+
+/* Form labels */
+.form__label {
+    display: block;
+    font-size: var(--font-size);
+    font-weight: 500;
+    line-height: var(--line-height);
+    padding: var(--control-padding-y) 0;
+}
+
+.form__label--sm {
+    font-size: var(--font-size-sm);
+    padding: var(--control-padding-y-sm) 0;
+}
+
+.form__label--lg {
+    font-size: var(--font-size-lg);
+    padding: var(--control-padding-y-lg) 0;
+}
+
+/* Form hints */
+.form__hint {
+    color: var(--gray-color);
+    font-size: var(--font-size-sm);
+    margin-top: var(--unit-1);
+}
+
+/* Form validation states */
+.form__input--success,
+.form__select--success {
+    background: var(--bg-color-light);
+    border-color: var(--success-color);
+}
+
+.form__input--success:focus,
+.form__select--success:focus {
+    box-shadow: 0 0 0 var(--unit-h) rgba(var(--success-color-rgb), 0.2);
+}
+
+.form__hint--success {
+    color: var(--success-color);
+}
+
+.form__input--error,
+.form__select--error {
+    background: var(--bg-color-light);
+    border-color: var(--error-color);
+}
+
+.form__input--error:focus,
+.form__select--error:focus {
+    box-shadow: 0 0 0 var(--unit-h) rgba(var(--error-color-rgb), 0.2);
+}
+
+.form__hint--error {
+    color: var(--error-color);
+}
+
+/* Disabled states */
+.form__input:disabled,
+.form__input--disabled,
+.form__select:disabled,
+.form__select--disabled {
+    background-color: var(--bg-color);
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.form__input[readonly] {
+    background-color: var(--bg-color);
+}
+
+/* Form horizontal layout */
+.form--horizontal {
+    padding: var(--layout-spacing) 0;
+}
+
+.form--horizontal .form__group {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Form inline layout */
+.form--inline {
+    display: inline-block;
+}

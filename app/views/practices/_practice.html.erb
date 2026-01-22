@@ -1,14 +1,14 @@
 <article id="<%= dom_id practice %>" class="card">
-  <div class="card-header d-flex gap-3">
-    <div class="flex-1">
-      <%= link_to practice.name, practice, class: 'flex-1', data: { turbo_frame: "_top" } %>
+  <div class="card__header u-d-flex u-gap-3">
+    <div class="u-flex-1">
+      <%= link_to practice.name, practice, class: 'u-flex-1', data: { turbo_frame: "_top" } %>
     </div>
     <%= render partial: "practices/dropdown", locals: {practice: } %>
   </div>
-  <div class="card-body">
-    <div class="card-content">
+  <div class="card__body">
+    <div class="card__body-content">
       <p class="text-muted">Aujourd'hui: <%= display_time(practice.duration) %></p>
-      <%= link_to "Pratiquer", practice, class: "btn btn-primary" %>
+      <%= link_to "Pratiquer", practice, class: "btn btn--primary" %>
     </div>
   </div>
 </article>

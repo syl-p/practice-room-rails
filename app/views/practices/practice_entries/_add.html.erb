@@ -1,10 +1,10 @@
 <%= form_with url: practice_practice_entries_path(practice_id:, activity_id:),
               html: { id: "timer-#{activity_id}"},
-              data: {turbo: true, controller: "btn-timer", "btn-timer-hidden-classes-value": "d-hide"} do |f| %>
+              data: {turbo: true, controller: "btn-timer", "btn-timer-hidden-classes-value": "u-d-hide"} do |f| %>
   <%= f.hidden_field :duration, data: {btn_timer_target: "input"} %>
   <%= f.hidden_field :practice_id, value: "1", data: {btn_timer_target: "input"} %>
 
-  <div class="btn-group">
+  <div class="btn__group">
     <span class="btn">
       <%= icon "clock" %>
       <span  data-btn-timer-target="display">
@@ -12,19 +12,19 @@
       </span>
     </span>
 
-    <%= f.button class: "btn btn-primary",
+    <%= f.button class: "btn btn--primary",
                  data: {btn_timer_target: "playBtn", action: "click->btn-timer#start"} do %>
       <%= icon "play" %>
-      <span class="d-hide">Pratiquer</span>
+      <span class="u-d-hide">Pratiquer</span>
     <% end %>
 
-    <%= f.button class: "btn d-hide",
+    <%= f.button class: "btn u-d-hide",
                  data: {btn_timer_target: "pauseBtn", action: "click->btn-timer#pause"} do %>
       <%= icon "pause" %>
-      <span class="d-hide">Stop</span>
+      <span class="u-d-hide">Stop</span>
     <% end %>
 
-    <%= f.submit "Enregistrer", class: "btn btn-primary d-hide",
+    <%= f.submit "Enregistrer", class: "btn btn--primary u-d-hide",
                  data: {btn_timer_target: "submitButton"} %>
 
   </div>

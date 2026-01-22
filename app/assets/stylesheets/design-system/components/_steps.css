@@ -1,0 +1,64 @@
+.step {
+    display: flex;
+    flex-wrap: nowrap;
+    list-style: none;
+    margin: var(--unit-2) 0;
+    width: 100%;
+}
+
+.step__item {
+    flex: 1 1 0;
+    margin-top: 0;
+    min-height: var(--unit-10);
+    position: relative;
+    text-align: center;
+}
+
+.step__item:not(:first-child)::before {
+    background: var(--primary-color);
+    content: "";
+    height: 2px;
+    left: -50%;
+    position: absolute;
+    top: calc(var(--unit-5) - 1px);
+    width: 100%;
+}
+
+.step__item a {
+    color: var(--primary-color);
+    display: inline-block;
+    padding: var(--unit-10) var(--unit-2) 0;
+    text-decoration: none;
+}
+
+.step__item a::before {
+    background: var(--primary-color);
+    border: var(--unit-o) solid var(--bg-color);
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: var(--unit-3);
+    left: 50%;
+    position: absolute;
+    top: var(--unit-4);
+    transform: translateX(-50%);
+    width: var(--unit-3);
+    z-index: 2;
+}
+
+.step__item--active a::before {
+    background: var(--bg-color);
+    border: var(--unit-o) solid var(--primary-color);
+}
+
+.step__item--active ~ .step__item::before {
+    background: var(--color-border);
+}
+
+.step__item--active ~ .step__item a {
+    color: var(--color-text-lighter);
+}
+
+.step__item--active ~ .step__item a::before {
+    background: var(--color-border);
+}

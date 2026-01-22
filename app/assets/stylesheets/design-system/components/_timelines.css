@@ -1,0 +1,68 @@
+/* Timelines Component */
+/* Based on Spectre.css v0.5.9 with pure BEM methodology */
+
+.timeline {
+}
+
+.timeline__item {
+    display: -ms-flexbox;
+    display: flex;
+    margin-bottom: var(--unit-6);
+    position: relative;
+}
+
+.timeline__item::before {
+    background: var(--border-color);
+    content: "";
+    height: 100%;
+    left: 11px;
+    position: absolute;
+    top: var(--unit-6);
+    width: 2px;
+}
+
+.timeline__left {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+}
+
+.timeline__content {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 2px 0 2px var(--layout-spacing-lg);
+}
+
+.timeline__icon {
+    -ms-flex-align: center;
+    align-items: center;
+    border-radius: 50%;
+    color: var(--light-color);
+    display: -ms-flexbox;
+    display: flex;
+    height: var(--unit-6);
+    -ms-flex-pack: center;
+    justify-content: center;
+    text-align: center;
+    width: var(--unit-6);
+}
+
+.timeline__icon::before {
+    border: var(--border-width-lg) solid var(--primary-color);
+    border-radius: 50%;
+    content: "";
+    display: block;
+    height: var(--unit-2);
+    left: var(--unit-2);
+    position: absolute;
+    top: var(--unit-2);
+    width: var(--unit-2);
+}
+
+.timeline__icon--lg {
+    background: var(--primary-color);
+    line-height: var(--line-height);
+}
+
+.timeline__icon--lg::before {
+    content: none;
+}

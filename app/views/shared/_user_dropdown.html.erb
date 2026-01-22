@@ -15,7 +15,7 @@
 
   <% component.with_dropdown_menu do %>
     <ul class="menu" role="none">
-      <li class="menu-item">
+      <li class="menu__item">
         <p>
           <span class="d-block" role="none">Connecté en tant que...</span>
           <span role="none">
@@ -25,12 +25,12 @@
       </li>
       <li class="divider" data-content="Vos préférences"></li>
       <% dropdown_menu_links.each do |link| %>
-        <li class="menu-item">
-          <%= link_to link[:name], link[:href], class: "block px-4 py-2 text-sm text-gray-700" %>
+        <li class="menu__item">
+          <%= link_to link[:name], link[:href] %>
         </li>
       <% end %>
-      <li class="menu-item">
-        <%= button_to "Se déconnecter", session_path, method: :delete, class: "btn btn-link" %>
+      <li class="menu__item">
+        <%= button_to "Se déconnecter", session_path, method: :delete, class: "btn btn--link p-0" %>
       </li>
     </ul>
   <% end %>

@@ -1,0 +1,60 @@
+/* Nav Component */
+/* Based on BEM methodology */
+
+.nav {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav__item {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+}
+
+.nav__item a {
+    color: var(--body-font-color);
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: var(--unit-2) var(--unit-4);
+    text-decoration: none;
+    transition:
+        color 0.15s,
+        background-color 0.15s;
+}
+
+.nav__item a > svg,
+.nav__item a > img,
+.nav__item a > .avatar {
+    height: var(--unit-4);
+    width: var(--unit-4);
+    margin-right: var(--unit-2);
+    flex-shrink: 0;
+}
+
+.nav__item a:focus,
+.nav__item a:hover {
+    color: var(--primary-color);
+    background-color: var(--bg-color-dark);
+}
+
+.nav__item--active > a {
+    color: var(--primary-color);
+    font-weight: 500;
+}
+
+.nav__item--active > a:focus,
+.nav__item--active > a:hover {
+    color: var(--primary-color-dark);
+}
+
+/* Nested nav */
+.nav .nav {
+    padding-left: var(--unit-4);
+}

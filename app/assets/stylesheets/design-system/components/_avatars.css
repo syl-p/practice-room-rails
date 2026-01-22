@@ -1,0 +1,89 @@
+.avatar {
+    background: var(--primary-color);
+    border-radius: 50%;
+    color: rgba(var(--light-color-rgb), 0.85);
+    display: inline-block;
+    font-size: var(--font-size);
+    font-weight: 300;
+    height: var(--unit-8);
+    line-height: 1.25;
+    margin: 0;
+    position: relative;
+    vertical-align: middle;
+    width: var(--unit-8);
+}
+
+.avatar--xs {
+    font-size: 0.4rem;
+    height: var(--unit-4);
+    width: var(--unit-4);
+}
+
+.avatar--sm {
+    font-size: 0.6rem;
+    height: var(--unit-6);
+    width: var(--unit-6);
+}
+
+.avatar--lg {
+    font-size: 1.2rem;
+    height: var(--unit-12);
+    width: var(--unit-12);
+}
+
+.avatar--xl {
+    font-size: 1.6rem;
+    height: var(--unit-16);
+    width: var(--unit-16);
+}
+
+.avatar img {
+    border-radius: 50%;
+    height: 100%;
+    position: relative;
+    width: 100%;
+    z-index: 1;
+}
+
+.avatar__icon,
+.avatar__presence {
+    background: var(--light-color);
+    bottom: 14.64%;
+    height: 50%;
+    padding: var(--unit-h);
+    position: absolute;
+    right: 14.64%;
+    transform: translate(50%, 50%);
+    width: 50%;
+    z-index: 2;
+}
+
+.avatar__presence {
+    background: var(--gray-color);
+    border-radius: 50%;
+    box-shadow: 0 0 0 var(--unit-h) var(--light-color);
+    height: 0.5em;
+    width: 0.5em;
+}
+
+.avatar__presence--online {
+    background: var(--success-color);
+}
+
+.avatar__presence--busy {
+    background: var(--error-color);
+}
+
+.avatar__presence--away {
+    background: var(--warning-color);
+}
+
+.avatar[data-initial]::before {
+    color: currentColor;
+    content: attr(data-initial);
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+}

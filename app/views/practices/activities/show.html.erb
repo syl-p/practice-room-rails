@@ -1,5 +1,5 @@
 <article class="container grid-xl">
-  <%= link_to practice_path(@practice), class: "d-block mb-2" do %>
+  <%= link_to practice_path(@practice), class: "u-d-block u-mb-2" do %>
     <span class="block">Retour à ma pratique</span>
   <% end %>
 
@@ -12,7 +12,7 @@
     <article class="column col-8 col-lg-12">
       <%= @activity.content %>
     </article>
-    <aside class="column col-3 col-lg-12">
+    <aside class="column col-4 col-lg-12">
       <%= render partial: "practices/activities/media", locals: {media: @activity.media} %>
     </aside>
   </div>

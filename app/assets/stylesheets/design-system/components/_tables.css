@@ -1,0 +1,42 @@
+/* Tables Component */
+/* Based on Spectre.css v0.5.9 with pure BEM methodology */
+
+.table {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+}
+
+.table--striped .table__row:nth-of-type(odd) {
+    background: var(--bg-color);
+}
+
+.table--hover .table__row--active,
+.table--striped .table__row--active {
+    background: var(--bg-color-dark);
+}
+
+.table--hover .table__row:hover {
+    background: var(--bg-color-dark);
+}
+
+.table--scroll {
+    display: block;
+    overflow-x: auto;
+    padding: 0;
+    white-space: nowrap;
+}
+
+.table__cell,
+.table__header {
+    border-bottom: var(--border-width) solid var(--border-color);
+    padding: var(--layout-spacing) var(--control-padding-x);
+    text-align: left;
+    vertical-align: top;
+}
+
+.table__header {
+    border-bottom-width: var(--border-width-lg);
+    color: var(--body-font-color);
+    font-weight: 600;
+}

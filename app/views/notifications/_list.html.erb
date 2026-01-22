@@ -1,9 +1,9 @@
 <ul class="menu">
   <% if @notifications.any? %>
     <% notifications.each do |notification| %>
-      <li class="menu-item"><%= render notification %></li>
+      <li class="menu__item"><%= render notification %></li>
     <% end %>
   <% else %>
-    <li class="menu-item">Aucune notification.</li>
+    <li class="menu__item">Aucune notification.</li>
   <% end %>
 </ul>

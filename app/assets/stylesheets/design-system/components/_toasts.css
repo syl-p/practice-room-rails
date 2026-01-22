@@ -1,0 +1,96 @@
+/* Toasts Component */
+/* Based on Spectre.css v0.5.9 with pure BEM methodology */
+
+.toast {
+    background: rgba(var(--dark-color-rgb), 0.95);
+    border: var(--border-width) solid var(--dark-color);
+    border-color: var(--dark-color);
+    border-radius: var(--border-radius);
+    color: var(--light-color);
+    display: block;
+    padding: var(--layout-spacing);
+    width: 100%;
+}
+
+.toast--primary {
+    background: rgba(var(--primary-color-rgb), 0.95);
+    border-color: var(--primary-color);
+}
+
+.toast--success {
+    background: rgba(var(--success-color-rgb), 0.95);
+    border-color: var(--success-color);
+}
+
+.toast--warning {
+    background: rgba(var(--warning-color-rgb), 0.95);
+    border-color: var(--warning-color);
+}
+
+.toast--error {
+    background: rgba(var(--error-color-rgb), 0.95);
+    border-color: var(--error-color);
+}
+
+.toast__link {
+    color: var(--light-color);
+    text-decoration: underline;
+}
+
+.toast__link:focus,
+.toast__link:hover,
+.toast__link:active,
+.toast__link--active {
+    opacity: 0.75;
+}
+
+.toast__close {
+    margin: var(--unit-h);
+}
+
+.toast__message:last-child {
+    margin-bottom: 0;
+}
+
+/* Toast positioning containers */
+.toast-container {
+    position: fixed;
+    z-index: var(--zindex-4);
+    pointer-events: none;
+}
+
+.toast-container .toast {
+    pointer-events: auto;
+    margin-bottom: var(--unit-1);
+}
+
+.toast-container--top-right {
+    top: var(--layout-spacing);
+    right: var(--layout-spacing);
+    max-width: var(--control-width-sm);
+}
+
+.toast-container--top-left {
+    top: var(--layout-spacing);
+    left: var(--layout-spacing);
+    max-width: var(--control-width-sm);
+}
+
+.toast-container--bottom-right {
+    bottom: var(--layout-spacing);
+    right: var(--layout-spacing);
+    max-width: var(--control-width-sm);
+}
+
+.toast-container--bottom-left {
+    bottom: var(--layout-spacing);
+    left: var(--layout-spacing);
+    max-width: var(--control-width-sm);
+}
+
+.toast-container--center {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    max-width: var(--control-width-md);
+}

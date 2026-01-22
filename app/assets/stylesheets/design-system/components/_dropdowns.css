@@ -1,0 +1,139 @@
+/* Dropdown Component */
+/* Based on BEM methodology */
+
+.dropdown {
+    display: inline-block;
+    position: relative;
+}
+
+.dropdown__toggle {
+    cursor: pointer;
+}
+
+.dropdown__menu {
+    animation: slide-down 0.15s ease 1;
+    display: none;
+    left: 0;
+    max-height: 50vh;
+    overflow-y: auto;
+    position: absolute;
+    top: 100%;
+    z-index: var(--zindex-4);
+    background-color: var(--bg-color-light);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    box-shadow: 0 var(--unit-2) var(--unit-8) rgba(var(--body-font-color-rgb), 0.1);
+    min-width: var(--control-width-xs);
+}
+
+.dropdown__menu .menu {
+    margin: 0;
+    padding: var(--unit-2) 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+/* Dropdown positioning variants */
+.dropdown--right .dropdown__menu {
+    left: auto;
+    right: 0;
+}
+
+.dropdown--top .dropdown__menu {
+    top: auto;
+    bottom: 100%;
+    animation: slide-up 0.15s ease 1;
+}
+
+.dropdown--left .dropdown__menu {
+    left: auto;
+    right: 100%;
+    top: 0;
+}
+
+.dropdown--center .dropdown__menu {
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* Active state */
+.dropdown--active .dropdown__menu,
+.dropdown__toggle:focus + .dropdown__menu,
+.dropdown__menu:hover {
+    display: block;
+}
+
+/* Button group integration */
+.btn-group .dropdown .dropdown__toggle:nth-last-child(2) {
+    border-bottom-right-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+}
+
+/* Size variants */
+.dropdown--sm .dropdown__menu {
+    min-width: calc(var(--control-width-xs) * 0.67);
+    font-size: var(--font-size-sm);
+}
+
+.dropdown--lg .dropdown__menu {
+    min-width: calc(var(--control-width-xs) * 1.33);
+    font-size: var(--font-size-lg);
+}
+
+/* Animations */
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-var(--unit-2));
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 0;
+        transform: translateY(var(--unit-2));
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Dropdown divider */
+.dropdown__divider {
+    border-bottom: var(--border-width) solid var(--border-color);
+    height: 0;
+    margin: var(--unit-2) 0;
+}
+
+/* Dropdown header */
+.dropdown__header {
+    color: var(--gray-color-dark);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    padding: var(--unit-2) var(--unit-4);
+    text-transform: uppercase;
+}
+
+/* Responsive behavior */
+@media (max-width: 600px) {
+    .dropdown__menu {
+        position: fixed;
+        left: var(--unit-4) !important;
+        right: var(--unit-4) !important;
+        top: auto !important;
+        bottom: var(--unit-4);
+        max-width: none;
+        width: auto;
+        transform: none !important;
+    }
+
+    .dropdown--center .dropdown__menu {
+        transform: none !important;
+    }
+}

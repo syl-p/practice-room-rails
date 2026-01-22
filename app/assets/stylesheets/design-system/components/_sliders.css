@@ -1,0 +1,107 @@
+/* Sliders Component */
+/* Based on Spectre.css v0.5.9 with pure BEM methodology */
+
+.slider {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: transparent;
+    display: block;
+    height: var(--unit-6);
+    width: 100%;
+}
+
+.slider:focus {
+    box-shadow: 0 0 0 var(--unit-h) rgba(var(--primary-color-rgb), 0.2);
+    outline: none;
+}
+
+.slider.tooltip:not([data-tooltip])::after {
+    content: attr(value);
+}
+
+/* Slider Thumb */
+.slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: var(--primary-color);
+    border: 0;
+    border-radius: 50%;
+    height: var(--unit-3);
+    margin-top: calc((var(--unit-3) - var(--unit-h)) / -2);
+    transition: transform 0.2s;
+    width: var(--unit-3);
+}
+
+.slider::-moz-range-thumb {
+    background: var(--primary-color);
+    border: 0;
+    border-radius: 50%;
+    height: var(--unit-3);
+    transition: transform 0.2s;
+    width: var(--unit-3);
+}
+
+.slider::-ms-thumb {
+    background: var(--primary-color);
+    border: 0;
+    border-radius: 50%;
+    height: var(--unit-3);
+    transition: transform 0.2s;
+    width: var(--unit-3);
+}
+
+.slider:active::-webkit-slider-thumb {
+    transform: scale(1.25);
+}
+
+.slider:active::-moz-range-thumb {
+    transform: scale(1.25);
+}
+
+.slider:active::-ms-thumb {
+    transform: scale(1.25);
+}
+
+.slider:disabled::-webkit-slider-thumb,
+.slider--disabled::-webkit-slider-thumb {
+    background: var(--gray-color-light);
+    transform: scale(1);
+}
+
+.slider:disabled::-moz-range-thumb,
+.slider--disabled::-moz-range-thumb {
+    background: var(--gray-color-light);
+    transform: scale(1);
+}
+
+.slider:disabled::-ms-thumb,
+.slider--disabled::-ms-thumb {
+    background: var(--gray-color-light);
+    transform: scale(1);
+}
+
+/* Slider Track */
+.slider::-webkit-slider-runnable-track {
+    background: var(--bg-color-dark);
+    border-radius: var(--border-radius);
+    height: var(--unit-h);
+    width: 100%;
+}
+
+.slider::-moz-range-track {
+    background: var(--bg-color-dark);
+    border-radius: var(--border-radius);
+    height: var(--unit-h);
+    width: 100%;
+}
+
+.slider::-ms-track {
+    background: var(--bg-color-dark);
+    border-radius: var(--border-radius);
+    height: var(--unit-h);
+    width: 100%;
+}
+
+.slider::-ms-fill-lower {
+    background: var(--primary-color);
+}

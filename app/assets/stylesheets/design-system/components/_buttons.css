@@ -1,0 +1,288 @@
+/* Buttons Component */
+/* Based on Spectre.css v0.5.9 with pure BEM methodology */
+
+.btn {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: var(--bg-color-light);
+    border: var(--border-width) solid var(--primary-color);
+    border-radius: var(--border-radius);
+    color: var(--primary-color);
+    cursor: pointer;
+    display: inline-block;
+    font-size: var(--font-size);
+    height: var(--control-size);
+    line-height: var(--line-height);
+    outline: none;
+    padding: var(--control-padding-y) var(--control-padding-x);
+    text-align: center;
+    text-decoration: none;
+    transition:
+        background 0.2s,
+        border 0.2s,
+        box-shadow 0.2s,
+        color 0.2s;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+.btn:focus {
+    box-shadow: 0 0 0 var(--unit-h) rgba(var(--primary-color-rgb), 0.2);
+}
+
+.btn:focus,
+.btn:hover {
+    background: var(--secondary-color);
+    border-color: var(--primary-color-dark);
+    text-decoration: none;
+}
+
+.btn:active,
+.btn--active {
+    background: var(--primary-color-dark);
+    border-color: var(--primary-color-dark);
+    color: var(--light-color);
+    text-decoration: none;
+}
+
+.btn:active.loading::after,
+.btn--active.loading::after {
+    border-bottom-color: var(--light-color);
+    border-left-color: var(--light-color);
+}
+
+.btn[disabled],
+.btn:disabled,
+.btn--disabled {
+    cursor: default;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Button variants */
+.btn--primary {
+    background: var(--primary-color);
+    border-color: var(--primary-color-dark);
+    color: var(--light-color);
+}
+
+.btn--primary:focus,
+.btn--primary:hover {
+    background: var(--primary-color-dark);
+    border-color: var(--primary-color-dark);
+    color: var(--light-color);
+}
+
+.btn--primary:active,
+.btn--primary.btn--active {
+    background: var(--primary-color-dark);
+    border-color: var(--link-color-dark);
+    color: var(--light-color);
+}
+
+.btn--primary.loading::after {
+    border-bottom-color: var(--light-color);
+    border-left-color: var(--light-color);
+}
+
+.btn--success {
+    background: var(--success-color);
+    border-color: var(--success-color);
+    color: var(--light-color);
+}
+
+.btn--success:focus {
+    box-shadow: 0 0 0 var(--unit-h) rgba(var(--success-color-rgb), 0.2);
+}
+
+.btn--success:focus,
+.btn--success:hover {
+    background: var(--success-color);
+    border-color: var(--success-color);
+    color: var(--light-color);
+}
+
+.btn--success:active,
+.btn--success.btn--active {
+    background: var(--success-color);
+    border-color: var(--success-color);
+    color: var(--light-color);
+}
+
+.btn--success.loading::after {
+    border-bottom-color: var(--light-color);
+    border-left-color: var(--light-color);
+}
+
+.btn--error {
+    background: var(--error-color);
+    border-color: var(--error-color);
+    color: var(--light-color);
+}
+
+.btn--error:focus {
+    box-shadow: 0 0 0 var(--unit-h) rgba(var(--error-color-rgb), 0.2);
+}
+
+.btn--error:focus,
+.btn--error:hover {
+    background: var(--error-color);
+    border-color: var(--error-color);
+    color: var(--light-color);
+}
+
+.btn--error:active,
+.btn--error.btn--active {
+    background: var(--error-color);
+    border-color: var(--error-color);
+    color: var(--light-color);
+}
+
+.btn--error.loading::after {
+    border-bottom-color: var(--light-color);
+    border-left-color: var(--light-color);
+}
+
+.btn--link {
+    background: transparent;
+    border-color: transparent;
+    color: var(--primary-color);
+}
+
+.btn--link:focus,
+.btn--link:hover,
+.btn--link:active,
+.btn--link.btn--active {
+    color: var(--link-color-dark);
+}
+
+/* Button sizes */
+.btn--sm {
+    font-size: var(--font-size-sm);
+    height: var(--control-size-sm);
+    padding: var(--control-padding-y-sm) var(--control-padding-x-sm);
+}
+
+.btn--lg {
+    font-size: var(--font-size-lg);
+    height: var(--control-size-lg);
+    padding: var(--control-padding-y-lg) var(--control-padding-x-lg);
+}
+
+.btn--block {
+    display: block;
+    width: 100%;
+}
+
+.btn--action {
+    padding-left: 0;
+    padding-right: 0;
+    width: var(--control-size);
+}
+
+.btn--action.btn--sm {
+    width: var(--control-size-sm);
+}
+
+.btn--action.btn--lg {
+    width: var(--control-size-lg);
+}
+
+.btn--clear {
+    background: transparent;
+    border: 0;
+    color: currentColor;
+    height: var(--unit-5);
+    line-height: var(--font-size);
+    margin-left: var(--unit-1);
+    margin-right: -2px;
+    opacity: 1;
+    padding: var(--unit-h);
+    text-decoration: none;
+    width: var(--unit-5);
+}
+
+.btn--clear:focus,
+.btn--clear:hover {
+    background: rgba(var(--bg-color-rgb), 0.5);
+    opacity: 0.95;
+}
+
+.btn--clear::before {
+    content: "\2715";
+}
+
+/* Button group */
+.btn__group {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.btn__group .btn {
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+}
+
+.btn__group .btn:first-child:not(:last-child) {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.btn__group .btn:not(:first-child):not(:last-child) {
+    border-radius: 0;
+    margin-left: -1px;
+}
+
+.btn__group .btn:last-child:not(:first-child) {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+    margin-left: -1px;
+}
+
+.btn__group .btn:focus,
+.btn__group .btn:hover,
+.btn__group .btn:active,
+.btn__group .btn--active {
+    z-index: 1;
+}
+
+.btn__group--block {
+    display: -ms-flexbox;
+    display: flex;
+}
+
+.btn__group--block .btn {
+    -ms-flex: 1 0 0;
+    flex: 1 0 0;
+}
+
+/* Icon support (SVG / avatar) */
+.btn:has(svg),
+.btn:has(img),
+.btn:has(.avatar),
+.btn:has(figure) {
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    gap: var(--unit-2);
+}
+
+.btn > svg,
+.btn > img,
+.btn > .avatar,
+.btn__icon > svg,
+.btn__icon > img,
+.btn__icon > .avatar {
+    height: var(--control-icon-size);
+    width: var(--control-icon-size);
+    flex-shrink: 0;
+}

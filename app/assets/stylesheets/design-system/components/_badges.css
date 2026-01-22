@@ -1,0 +1,49 @@
+.badge {
+    position: relative;
+    white-space: nowrap;
+}
+
+.badge[data-badge]::after,
+.badge:not([data-badge])::after {
+    background: var(--primary-color);
+    background-clip: padding-box;
+    border-radius: 0.5rem;
+    box-shadow: 0 0 0 var(--unit-h) var(--light-color);
+    color: var(--light-color);
+    content: attr(data-badge);
+    display: inline-block;
+    transform: translate(calc(var(--unit-o) * -1), calc(var(--unit-5) * -0.5));
+}
+
+.badge[data-badge]::after {
+    font-size: var(--font-size-sm);
+    height: 0.9rem;
+    line-height: 1;
+    min-width: 0.9rem;
+    padding: var(--unit-h) var(--unit-1);
+    text-align: center;
+    white-space: nowrap;
+}
+
+.badge:not([data-badge])::after,
+.badge[data-badge=""]::after {
+    height: 0.3rem;
+    min-width: 0.3rem;
+    padding: 0;
+    width: 0.3rem;
+}
+
+.badge.btn::after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    transform: translate(50%, -50%);
+}
+
+.badge.avatar::after {
+    position: absolute;
+    right: 14.64%;
+    top: 14.64%;
+    transform: translate(50%, -50%);
+    z-index: 100;
+}

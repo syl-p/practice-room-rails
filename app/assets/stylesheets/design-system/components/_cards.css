@@ -1,0 +1,67 @@
+/* Cards Component */
+/* Based on Spectre.css v0.5.9 with pure BEM methodology */
+
+.card {
+    background: var(--bg-color-light);
+    border: var(--border-width) solid var(--border-color);
+    border-radius: var(--border-radius);
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+
+.card__header,
+.card__body,
+.card__footer {
+    padding: var(--unit-4);
+    padding-bottom: 0;
+}
+
+.card__header:last-child,
+.card__body:last-child,
+.card__footer:last-child {
+    padding-bottom: var(--unit-4);
+}
+
+.card__body {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+
+.card__image {
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    max-width: 100%;
+    padding-top: var(--unit-4);
+}
+
+.card__image:first-child {
+    padding-top: 0;
+}
+
+.card__image:first-child img {
+    border-top-left-radius: var(--border-radius);
+    border-top-right-radius: var(--border-radius);
+}
+
+.card__image:last-child img {
+    border-bottom-left-radius: var(--border-radius);
+    border-bottom-right-radius: var(--border-radius);
+}
+
+/* BEM variants */
+.card--shadow {
+    box-shadow: 0 var(--unit-o) var(--unit-4) rgba(var(--dark-color-rgb), 0.15);
+}
+
+.card--hover {
+    transition:
+        transform 0.2s,
+        box-shadow 0.2s;
+}
+
+.card--hover:hover {
+    box-shadow: 0 var(--unit-1) var(--unit-8) rgba(var(--dark-color-rgb), 0.15);
+    transform: translateY(-1px);
+}

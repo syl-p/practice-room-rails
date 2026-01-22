@@ -1,0 +1,60 @@
+/* Meters Component */
+/* Based on Spectre.css v0.5.9 with pure BEM methodology */
+
+.meter {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: var(--bg-color);
+    border: 0;
+    border-radius: var(--border-radius);
+    display: block;
+    height: var(--unit-4);
+    width: 100%;
+}
+
+.meter::-webkit-meter-inner-element {
+    display: block;
+}
+
+.meter::-webkit-meter-bar,
+.meter::-webkit-meter-optimum-value,
+.meter::-webkit-meter-suboptimum-value,
+.meter::-webkit-meter-even-less-good-value {
+    border-radius: var(--border-radius);
+}
+
+.meter::-webkit-meter-bar {
+    background: var(--bg-color);
+}
+
+.meter::-webkit-meter-optimum-value {
+    background: var(--success-color);
+}
+
+.meter::-webkit-meter-suboptimum-value {
+    background: var(--warning-color);
+}
+
+.meter::-webkit-meter-even-less-good-value {
+    background: var(--error-color);
+}
+
+.meter::-moz-meter-bar,
+.meter:-moz-meter-optimum,
+.meter:-moz-meter-sub-optimum,
+.meter:-moz-meter-sub-sub-optimum {
+    border-radius: var(--border-radius);
+}
+
+.meter:-moz-meter-optimum::-moz-meter-bar {
+    background: var(--success-color);
+}
+
+.meter:-moz-meter-sub-optimum::-moz-meter-bar {
+    background: var(--warning-color);
+}
+
+.meter:-moz-meter-sub-sub-optimum::-moz-meter-bar {
+    background: var(--error-color);
+}

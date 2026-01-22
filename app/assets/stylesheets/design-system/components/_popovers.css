@@ -1,0 +1,58 @@
+.popover {
+    display: inline-block;
+    position: relative;
+}
+
+.popover__container {
+    left: 50%;
+    opacity: 0;
+    padding: var(--unit-4);
+    position: absolute;
+    top: 0;
+    transform: translate(-50%, -50%) scale(0);
+    transition: transform 0.2s;
+    width: var(--control-width-sm);
+    z-index: var(--zindex-3);
+}
+
+.popover *:focus + .popover__container,
+.popover:hover .popover__container {
+    display: block;
+    opacity: 1;
+    transform: translate(-50%, -100%) scale(1);
+}
+
+.popover--right .popover__container {
+    left: 100%;
+    top: 50%;
+}
+
+.popover--right *:focus + .popover__container,
+.popover--right:hover .popover__container {
+    transform: translate(0, -50%) scale(1);
+}
+
+.popover--bottom .popover__container {
+    left: 50%;
+    top: 100%;
+}
+
+.popover--bottom *:focus + .popover__container,
+.popover--bottom:hover .popover__container {
+    transform: translate(-50%, 0) scale(1);
+}
+
+.popover--left .popover__container {
+    left: 0;
+    top: 50%;
+}
+
+.popover--left *:focus + .popover__container,
+.popover--left:hover .popover__container {
+    transform: translate(-100%, -50%) scale(1);
+}
+
+.popover .card {
+    border: 0;
+    box-shadow: 0 var(--unit-2) var(--unit-5) rgba(var(--dark-color-rgb), 0.3);
+}

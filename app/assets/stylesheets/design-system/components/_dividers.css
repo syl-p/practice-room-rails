@@ -1,0 +1,53 @@
+/* Dividers Component */
+/* Based on Spectre.css v0.5.9 utilities with BEM methodology */
+
+.divider,
+.divider-vert {
+    display: block;
+    position: relative;
+}
+
+.divider[data-content]::after,
+.divider-vert[data-content]::after {
+    background: var(--bg-color-light);
+    color: var(--gray-color);
+    content: attr(data-content);
+    display: inline-block;
+    font-size: var(--font-size-sm);
+    padding: 0 var(--unit-1);
+    transform: translateY(-0.65rem);
+}
+
+.divider {
+    border-top: var(--border-width) solid var(--border-color-light);
+    height: var(--border-width);
+    margin: var(--unit-1) 0;
+}
+
+.divider[data-content] {
+    margin: var(--unit-2) 0;
+}
+
+.divider-vert {
+    display: block;
+    padding: var(--unit-2);
+}
+
+.divider-vert::before {
+    border-left: var(--border-width) solid var(--border-color);
+    bottom: var(--unit-1);
+    content: "";
+    display: block;
+    left: 50%;
+    position: absolute;
+    top: var(--unit-1);
+    transform: translateX(-50%);
+}
+
+.divider-vert[data-content]::after {
+    left: 50%;
+    padding: var(--unit-h) 0;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+}

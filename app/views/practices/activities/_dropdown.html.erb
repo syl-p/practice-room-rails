@@ -6,14 +6,14 @@
   <% component.with_dropdown_menu do %>
     <ul class="menu" role="none">
       <% if can? activity, :edit? %>
-        <li class="menu-item">
+        <li class="menu__item">
             <%= link_to "Editer", edit_activity_path(activity) %>
         </li>
       <% end %>
-      <li class="menu-item">
+      <li class="menu__item">
         <%= button_to "Détacher",
                       practice_attach_activity_path(practice, activity),
-                      class: "btn btn-link p-0",
+                      class: "btn btn--link p-0",
                       method: :delete %>
       </li>
     </ul>

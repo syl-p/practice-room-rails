@@ -6,24 +6,24 @@
   end
 %>
 
-<div class="form-group">
-  <label class="form-label">Tags</label>
-  <div class="form-autocomplete"
+<div class="form__group">
+  <label class="form__label">Tags</label>
+  <div class="form__autocomplete"
        data-controller="tags-selector"
        data-tags-selector-tag-classes-value="chip"
-       data-tags-selector-close-btn-classes-value="btn btn-clear"
+       data-tags-selector-close-btn-classes-value="btn btn--clear"
        data-tags-selector-search-url-value="<%= tags_path %>"
        data-tags-selector-preselected-tags-value="<%= preselected_tags.pluck(:name).to_json %>">
 
     <input type="hidden" data-tags-selector-target="dataToSend" />
 
     <!-- autocomplete input container -->
-    <div class="form-autocomplete-input form-input">
+    <div class="form__autocomplete-input form__input">
       <div data-tags-selector-target="listToShow">
       </div>
 
       <!-- autocomplete real input box -->
-      <input type="text" name="search" placeholder="typing here" class="form-input"
+      <input type="text" name="search" placeholder="typing here" class="form__input"
              data-tags-selector-target="input"
              data-action="input->tags-selector#search change->tags-selector#selectTag"/>
     </div>

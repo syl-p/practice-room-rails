@@ -5,8 +5,8 @@
 
   <% component.with_dropdown_menu do %>
     <ul class="menu" role="none">
-      <li class="menu-item"><%= link_to "Editer", edit_practice_path(id: practice.id)  %></li>
-      <li class="menu-item"><%= button_to "Supprimer", practice_path(id: practice.id), method: :delete, class: "btn btn-link p-0"  %></li>
+      <li class="menu__item"><%= link_to "Editer", edit_practice_path(id: practice.id)  %></li>
+      <li class="menu__item"><%= button_to "Supprimer", practice_path(id: practice.id), method: :delete, class: "btn btn--link p-0"  %></li>
     </ul>
   <% end %>
 <% end %>

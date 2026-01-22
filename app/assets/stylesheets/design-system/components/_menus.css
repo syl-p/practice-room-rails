@@ -1,0 +1,71 @@
+/* Menus Component */
+/* Based on Spectre.css v0.5.9 with pure BEM methodology */
+
+.menu {
+    background: var(--bg-color-light);
+    border-radius: var(--border-radius);
+    box-shadow: 0 var(--unit-o) var(--unit-1) rgba(var(--dark-color-rgb), 0.3);
+    list-style: none;
+    margin: 0;
+    min-width: 180px;
+    padding: var(--layout-spacing);
+    transform: translateY(var(--unit-1));
+    z-index: var(--zindex-3);
+}
+
+.menu--nav {
+    background: transparent;
+    box-shadow: none;
+}
+
+.menu__item {
+    margin-top: 0;
+    padding: 0 var(--layout-spacing);
+    position: relative;
+    text-decoration: none;
+}
+
+.menu__item > a {
+    border-radius: var(--border-radius);
+    color: inherit;
+    display: block;
+    margin: 0 calc(-1 * var(--layout-spacing));
+    padding: var(--unit-1) var(--layout-spacing);
+    text-decoration: none;
+}
+
+.menu__item > a:focus,
+.menu__item > a:hover {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.menu__item > a:active,
+.menu__item > a.active,
+.menu__item--active > a {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.menu__item .form-checkbox,
+.menu__item .form-radio,
+.menu__item .form-switch {
+    margin: var(--unit-1) 0;
+}
+
+.menu__item + .menu__item {
+    margin-top: 0;
+}
+
+.menu__badge {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.menu__badge .label {
+    margin-right: var(--layout-spacing);
+}

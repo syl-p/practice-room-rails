@@ -1,9 +1,9 @@
 <header data-turbo-permanent class="navbar py-2 container grid-xl">
-  <div class="navbar-section">
-    <%= link_to "PRM", root_path, class: "navbar-brand", data: {turbo: false} %>
+  <div class="navbar__section">
+    <%= link_to "PRM", root_path, class: "navbar__brand", data: {turbo: false} %>
   </div>
 
-  <div class="navbar-section navbar-center d-sm-hide">
+  <div class="navbar__section navbar__center u-d-sm-hide">
     <% if authenticated? && params[:id] %>
       <%= turbo_frame_tag "user_practices" do %>
         <%= render partial: "shared/user_practices" %>
@@ -11,8 +11,8 @@
     <% end %>
   </div>
 
-  <div class="navbar-section">
-    <nav class="d-flex gap-1">
+  <div class="navbar__section">
+    <nav class="u-d-flex u-gap-1">
       <% if authenticated? %>
         <%= render partial: "shared/search_dialog" %>
         <%= render partial: "shared/notifications" %>

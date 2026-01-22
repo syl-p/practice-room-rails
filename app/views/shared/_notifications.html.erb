@@ -2,9 +2,9 @@
   <%= render DropdownComponent.new(variant: :outline) do |component| %>
     <% component.with_trigger_btn do %>
       <%= icon "bell", class: "size-6" %>
-      <span class="text-assistive">Notifications</span>
+      <span class="u-text-assistive">Notifications</span>
       <span data-notifications-target="indicator"
-            class="badge <%= "d-hide" unless Current.user.notifications.unread.present? %> bottom-3 left-3 absolute w-3.5 h-3.5 bg-red-400 animate-pulse border-2 border-white dark:border-gray-800 rounded-full"></span>
+            class="badge badge-alert <%= "d-hide" unless Current.user.notifications.unread.present? %> bottom-3 left-3 absolute w-3.5 h-3.5 bg-red-400 animate-pulse border-2 border-white dark:border-gray-800 rounded-full"></span>
     <% end %>
 
     <% component.with_dropdown_menu do %>

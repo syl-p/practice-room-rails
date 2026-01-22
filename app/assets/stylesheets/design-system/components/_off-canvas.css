@@ -1,0 +1,84 @@
+/* Off Canvas Component */
+/* Based on Spectre.css v0.5.9 with pure BEM methodology */
+
+.off-canvas {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: nowrap;
+    flex-flow: nowrap;
+    height: 100%;
+    position: relative;
+    width: 100%;
+}
+
+.off-canvas__toggle {
+    display: block;
+    left: var(--layout-spacing);
+    position: absolute;
+    top: var(--layout-spacing);
+    transition: none;
+    z-index: var(--zindex-0);
+}
+
+.off-canvas__sidebar {
+    background: var(--bg-color);
+    bottom: 0;
+    left: 0;
+    min-width: 10rem;
+    overflow-y: auto;
+    position: fixed;
+    top: 0;
+    transform: translateX(-100%);
+    transition: transform 0.25s;
+    z-index: var(--zindex-2);
+}
+
+.off-canvas__sidebar:target,
+.off-canvas__sidebar--active {
+    transform: translateX(0);
+}
+
+.off-canvas__content {
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    height: 100%;
+    padding: var(--layout-spacing) var(--layout-spacing) var(--layout-spacing) 4rem;
+}
+
+.off-canvas__overlay {
+    background: rgba(var(--dark-color-rgb), 0.1);
+    border-color: transparent;
+    border-radius: 0;
+    bottom: 0;
+    display: none;
+    height: 100%;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    width: 100%;
+}
+
+.off-canvas__sidebar:target ~ .off-canvas__overlay,
+.off-canvas__sidebar--active ~ .off-canvas__overlay {
+    display: block;
+    z-index: var(--zindex-1);
+}
+
+/* Responsive layout */
+@media (min-width: var(--size-lg)) {
+    .off-canvas--sidebar-show .off-canvas__toggle {
+        display: none;
+    }
+
+    .off-canvas--sidebar-show .off-canvas__sidebar {
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto;
+        position: relative;
+        transform: none;
+    }
+
+    .off-canvas--sidebar-show .off-canvas__overlay {
+        display: none !important;
+    }
+}

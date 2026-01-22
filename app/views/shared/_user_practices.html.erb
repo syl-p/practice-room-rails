@@ -8,5 +8,5 @@
                  practices.map {|p| ["#{p.name} (#{display_time(p.duration)})", practice_path(p.id)]},
                  practice_path(selected_practice)
                ),
-               class: "form-select",
+               class: "form__select",
                onchange: 'if(event.target?.value) window.location.href = event.target.value' %>

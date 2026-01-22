@@ -1,0 +1,87 @@
+/* Modals Component */
+/* Based on Spectre.css v0.5.9 with pure BEM methodology */
+
+.modal {
+    align-items: center;
+    bottom: 0;
+    display: none;
+    justify-content: center;
+    left: 0;
+    opacity: 0;
+    overflow: hidden;
+    padding: var(--layout-spacing);
+    position: fixed;
+    right: 0;
+    top: 0;
+}
+
+.modal:target,
+.modal--active {
+    display: flex;
+    opacity: 1;
+    z-index: var(--zindex-4);
+}
+
+.modal:target .modal__overlay,
+.modal--active .modal__overlay {
+    background: rgba(var(--dark-color-rgb), 0.75);
+    bottom: 0;
+    cursor: default;
+    display: block;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.modal:target .modal__container,
+.modal--active .modal__container {
+    animation: slide-down 0.2s ease 1;
+    z-index: 1;
+}
+
+.modal--sm .modal__container {
+    max-width: var(--control-width-sm);
+    padding: 0 var(--unit-1);
+}
+
+.modal--lg .modal__overlay {
+    background: var(--bg-color-light);
+}
+
+.modal--lg .modal__container {
+    max-width: var(--control-width-lg);
+    padding: 0 var(--unit-2);
+}
+
+.modal__container {
+    background: var(--bg-color-light);
+    border-radius: var(--border-radius);
+    box-shadow: 0 var(--unit-1) var(--unit-5) rgba(var(--dark-color-rgb), 0.3);
+    display: flex;
+    flex-direction: column;
+    max-height: 75vh;
+    max-width: var(--control-width-md);
+    padding: 0 var(--unit-4);
+    width: 100%;
+}
+
+.modal__container--fullheight {
+    max-height: 100vh;
+}
+
+.modal__container .modal__header {
+    color: var(--dark-color);
+    padding: var(--unit-4) 0;
+}
+
+.modal__container .modal__body {
+    overflow-y: auto;
+    padding: 0 0 var(--unit-4) 0;
+    position: relative;
+}
+
+.modal__container .modal__footer {
+    padding: var(--unit-4) 0 0 0;
+    text-align: right;
+}

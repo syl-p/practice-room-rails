@@ -1,18 +1,18 @@
 <%
   total_duration = tags_with_duration.sum(&:duration)
 %>
-<div class="card flex-1">
-  <div class="card-header">
+<div class="card">
+  <div class="card__header">
     <h3>Repartition de votre pratique par tags</h3>
   </div>
-  <div class="card-body">
+  <div class="card__body">
     <ul>
       <% tags_with_duration.each do |tag| %>
-        <li class="d-flex items-center gap-3">
-          <span class="d-block">
+        <li class="u-d-flex u-items-center u-gap-3">
+          <span class="d-block u-w-50">
             <%= tag.name %>
           </span>
-          <progress class="progress flex-1" value="<%= (tag.duration.to_f/total_duration) * 100 %>" max="100"></progress>
+          <progress class="progress u-flex-1" value="<%= (tag.duration.to_f/total_duration) * 100 %>" max="100"></progress>
         </li>
       <% end %>
     </ul>

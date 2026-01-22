@@ -2,13 +2,13 @@
 <%= turbo_frame_tag record_id_gen(practice, activity) do %>
   <%= content_tag tag_container, class: "activity-card mb-2",
                   style: "view-transition-name:activity-#{activity.id}" do %>
-    <div class="activity-header">
-      <div class="activity-body">
-        <h3 class="mb-1 h5">
+    <div class="activity-card__header">
+      <div class="activity-card__body">
+        <h3 class="u-mb-0 h5">
           <%= link_to activity.title, practice_activity_path(practice, activity),
                       data: { turbo_frame: "_top" } %>
         </h3>
-        <p class="text-muted text-small">
+        <p class="u-text-muted u-text-small">
           Proposé par <%= link_to activity.user.username, activity.user,
                                   data: { turbo_frame: "_top" } %>
         </p>
@@ -16,11 +16,11 @@
           <%= render(TagComponent.new(tag.name, variant: :outline)) %>
         <% end %>
       </div>
-      <div class="activity-right">
+      <div class="activity-card__right">
         <%= render partial: "practices/activities/dropdown", locals: {practice:, activity:} %>
       </div>
     </div>
-    <div class="activity-footer">
+    <div class="activity-card__footer">
       <%= render partial: "practices/practice_entries/add",
                  locals: {practice_id: @practice, activity_id: activity.id} %>
     </div>

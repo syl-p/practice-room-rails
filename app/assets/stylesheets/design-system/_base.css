@@ -1,0 +1,286 @@
+/* Base Styles - Based on Spectre.css v0.5.9 */
+/* Includes normalize.css v5.0.0 and Spectre base styles */
+
+/* Normalize.css - Manual fork */
+/* Document ========================================================================== */
+
+html {
+    font-family: sans-serif; /* 1 */
+    -ms-text-size-adjust: 100%; /* 3 */
+    -webkit-text-size-adjust: 100%; /* 3 */
+}
+
+/* Sections ========================================================================== */
+
+body {
+    margin: 0;
+}
+
+article,
+aside,
+footer,
+header,
+nav,
+section {
+    display: block;
+}
+
+h1 {
+    font-size: 2em;
+    margin: 0.67em 0;
+}
+
+/* Grouping content ========================================================================== */
+
+figcaption,
+figure,
+main {
+    display: block;
+}
+
+hr {
+    box-sizing: content-box;
+    height: 0;
+    overflow: visible;
+}
+
+/* Text-level semantics ========================================================================== */
+
+a {
+    background-color: transparent;
+    -webkit-text-decoration-skip: objects;
+}
+
+a:active,
+a:hover {
+    outline-width: 0;
+}
+
+address {
+    font-style: normal;
+}
+
+b,
+strong {
+    font-weight: inherit;
+}
+
+b,
+strong {
+    font-weight: bolder;
+}
+
+code,
+kbd,
+pre,
+samp {
+    font-family: var(--mono-font-family);
+    font-size: 1em;
+}
+
+dfn {
+    font-style: italic;
+}
+
+small {
+    font-size: 80%;
+    font-weight: 400;
+}
+
+sub,
+sup {
+    font-size: 75%;
+    line-height: 0;
+    position: relative;
+    vertical-align: baseline;
+}
+
+sub {
+    bottom: -0.25em;
+}
+
+sup {
+    top: -0.5em;
+}
+
+/* Embedded content ========================================================================== */
+
+audio,
+video {
+    display: inline-block;
+}
+
+audio:not([controls]) {
+    display: none;
+    height: 0;
+}
+
+img {
+    border-style: none;
+}
+
+svg:not(:root) {
+    overflow: hidden;
+}
+
+/* Forms ========================================================================== */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin: 0;
+}
+
+button,
+input {
+    overflow: visible;
+}
+
+button,
+select {
+    text-transform: none;
+}
+
+button,
+html [type="button"],
+[type="reset"],
+[type="submit"] {
+    -webkit-appearance: button;
+}
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+    border-style: none;
+    padding: 0;
+}
+
+fieldset {
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+
+legend {
+    box-sizing: border-box;
+    color: inherit;
+    display: table;
+    max-width: 100%;
+    padding: 0;
+    white-space: normal;
+}
+
+progress {
+    display: inline-block;
+    vertical-align: baseline;
+}
+
+textarea {
+    overflow: auto;
+}
+
+[type="checkbox"],
+[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+}
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+    height: auto;
+}
+
+[type="search"] {
+    -webkit-appearance: textfield;
+    outline-offset: -2px;
+}
+
+[type="search"]::-webkit-search-cancel-button,
+[type="search"]::-webkit-search-decoration {
+    -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+    -webkit-appearance: button;
+    font: inherit;
+}
+
+/* Interactive ========================================================================== */
+
+details,
+menu {
+    display: block;
+}
+
+summary {
+    display: list-item;
+    outline: none;
+}
+
+/* Scripting ========================================================================== */
+
+canvas {
+    display: inline-block;
+}
+
+template {
+    display: none;
+}
+
+/* Hidden ========================================================================== */
+
+[hidden] {
+    display: none;
+}
+
+/* Spectre Base Styles */
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-size: var(--html-font-size);
+    line-height: var(--html-line-height);
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    background: var(--body-bg);
+    color: var(--body-font-color);
+    font-family: var(--body-font-family);
+    font-size: var(--font-size);
+    overflow-x: hidden;
+    text-rendering: optimizeLegibility;
+}
+
+a {
+    color: var(--link-color);
+    outline: none;
+    text-decoration: none;
+}
+
+a:focus {
+    box-shadow: 0 0 0 0.1rem rgba(87, 85, 217, 0.2);
+}
+
+a:focus,
+a:hover,
+a:active,
+a.active {
+    color: var(--link-color-dark);
+    text-decoration: underline;
+}
+
+a:visited {
+    color: var(--link-color-light);
+}

@@ -1,0 +1,57 @@
+/* Labels Component */
+/* Based on Spectre.css v0.5.9 with pure BEM methodology */
+
+.label {
+    border-radius: var(--border-radius);
+    color: var(--light-color);
+    display: inline-block;
+    font-size: var(--font-size-sm);
+    font-weight: 500;
+    line-height: 1.25;
+    padding: var(--unit-h) var(--unit-1);
+    text-transform: uppercase;
+    vertical-align: baseline;
+    white-space: nowrap;
+}
+
+/* Label variants */
+.label--primary {
+    background: var(--primary-color);
+}
+
+.label--secondary {
+    background: var(--secondary-color);
+    color: var(--primary-color);
+}
+
+.label--success {
+    background: var(--success-color);
+}
+
+.label--warning {
+    background: var(--warning-color);
+    color: var(--dark-color);
+}
+
+.label--error {
+    background: var(--error-color);
+}
+
+/* Label shapes */
+.label--rounded {
+    border-radius: 5rem;
+    padding-left: var(--unit-2);
+    padding-right: var(--unit-2);
+}
+
+/* BEM elements for complex labels */
+.label__text {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.label__icon {
+    display: inline-block;
+    margin-right: var(--unit-o);
+    vertical-align: middle;
+}

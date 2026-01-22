@@ -3,14 +3,14 @@
      data-author="<%= comment.user.username %>"
      <% if comment.parent_id.nil? %>
        data-controller="comment"
-       data-comment-hidden-classes-value="d-hide"
+       data-comment-hidden-classes-value="u-d-hide"
      <% end %>>
-    <div class="tile-icon">
+    <div class="tile__icon">
       <%= link_to comment.user, data: {turbo: false}, class: "mr-3" do %>
         <%= render(AvatarComponent.new(user: comment.user)) %>
       <% end %>
     </div>
-    <div class="tile-content">
+    <div class="tile__content">
       <p class="text-muted">
         <time pubdate datetime="<%= comment.created_at %>" title="<%= comment.created_at %>">
           il y a <%= time_ago_in_words comment.created_at %>
@@ -37,7 +37,7 @@
         <% end %>
       </div>
     </div>
-    <div class="tile-action">
+    <div class="tile__action">
       <% if authenticated? %>
         <%= render partial: "comments/dropdown", locals: {comment: } %>
       <% end %>

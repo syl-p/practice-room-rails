@@ -1,0 +1,20 @@
+.empty {
+    background: var(--bg-color);
+    border-radius: var(--border-radius);
+    color: var(--gray-color-dark);
+    padding: var(--unit-16) var(--unit-8);
+    text-align: center;
+}
+
+.empty__icon {
+    margin-bottom: var(--unit-8);
+}
+
+.empty__title,
+.empty__subtitle {
+    margin: var(--unit-4) auto;
+}
+
+.empty__action {
+    margin-top: var(--unit-8);
+}
