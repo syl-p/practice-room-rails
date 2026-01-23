@@ -4,7 +4,7 @@
       <% (@start_at..@end_at).each do |wd| %>
         <li>
           <%= link_to practice_practice_entries_path(practice_id: @practice.id, date: wd),
-                      class: "block text-center p-2 rounded-full border relative #{'bg-primary text-white' if wd == @current_date}" do %>
+                      class: "block text-center p-2 rounded-full border relative #{'shadow-lg bg-primary text-white' if wd == @current_date}" do %>
             <span class="block"><%= wd.day %></span>
             <span class="block text-sm"><%= I18n.l(wd, format: "%b") %></span>
           <% end %>

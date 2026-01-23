@@ -34,13 +34,23 @@ export default class extends Controller {
         .then(html => Turbo.renderStreamMessage(html))
   }
 
-  selectTag(event) {
+  confirmTag(event) {
     event.preventDefault()
+    event.stopPropagation()
+
     const tag = this.inputTarget.value.trim()
     if (!tag) return;
     if(this.selectedTags.includes(tag)) return
 
     this.selectedTags.push(tag)
+    this.inputTarget.value = ""
+    this.#render()
+  }
+
+  selectTag({params: {value}}) {
+    if(this.selectedTags.includes(value)) return
+
+    this.selectedTags.push(value)
     this.inputTarget.value = ""
     this.#render()
   }

@@ -1,9 +1,12 @@
 <% if @tags.present? %>
-    <%= turbo_stream.update "tags" do %>
-      <% @tags.each do |tag| %>
-        <option data-action="click->tags-selector#selectTag" value="<%= tag.name %>">
-          <%= tag.name %>
-        </option>
-      <% end %>
-    <% end %>
+        <%= turbo_stream.update :tag_list do %>
+            <ul class="w-full static shadow">
+              <% @tags.each do |tag| %>
+                <li>
+                  <a data-tags-selector-value-param="<%= tag.name %>"
+                     data-action="click->tags-selector#selectTag"><%= tag.name %></a>
+                </li>
+              <% end %>
+            </ul>
+        <% end %>
 <% end %>

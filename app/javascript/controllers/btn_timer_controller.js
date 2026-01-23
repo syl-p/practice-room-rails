@@ -1,23 +1,28 @@
 import { Controller } from "@hotwired/stimulus"
-const START_LABEL = "Pratiquer"
-const PAUSE_LABEL = "Pause"
-const RESUME_LABEL = "Continuer"
 
 // Connects to data-controller="btn-timer"
 export default class extends Controller {
   static targets = ["playBtn", "pauseBtn", "display", "input", "submitButton"]
 
   connect() {
-    this.running = false
-    this.startTime = null
-    this.elapsedTime = 0
+    this.startedAt = this.element.dataset.startedAt ? parseInt(this.element.dataset.startedAt, 10) : null
+    this.elapsedTime = this.element.dataset.elapsedTime
+        ? parseInt(this.element.dataset.elapsedTime, 10)
+        : 0
+
     this.timerInterval = null
+
+    if(this.startedAt) {
+      this.#startInterval()
+    }
+
     this.element.addEventListener('turbo:submit-end',  (event) => {
       this.onSubmitEnd(event)
     })
   }
 
   disconnect() {
+    clearInterval(this.timerInterval)
     this.element.removeEventListener("turbo:submit-end",  (event) => {
       this.onSubmitEnd(event)
     })
@@ -25,25 +30,31 @@ export default class extends Controller {
 
   start(e) {
     e.preventDefault()
+    
+    this.startedAt = Date.now()
+    this.element.dataset.startedAt = this.startedAt
+
     this.pauseBtnTarget.classList.remove("hidden")
     this.playBtnTarget.classList.add("hidden")
-    this.running = true
-    this.startTime = Date.now()
-    this.timerInterval = setInterval(() => {
-      const now = Date.now()
-      const total = this.elapsedTime + (now - this.startTime)
-      this.#updateDisplay(total)
-    }, 500)
+
+    // tick
+    this.#startInterval()
   }
 
   pause(e) {
     e.preventDefault()
-    this.running = false
     clearInterval(this.timerInterval)
-    const now = Date.now()
-    this.elapsedTime += now - this.startTime
-    this.#updateDisplay(this.elapsedTime)
+
+    this.elapsedTime += Date.now() - this.startedAt
+    this.element.dataset.elapsedTime = this.elapsedTime
+    delete this.element.dataset.startedAt
+
     this.inputTarget.value = Math.floor(this.elapsedTime / 1000)
+
+    this.startedAt = null
+    clearInterval(this.timerInterval)
+    this.timerInterval = null
+
     this.pauseBtnTarget.classList.add("hidden")
     this.playBtnTarget.classList.remove("hidden")
     this.submitButtonTarget.classList.remove("hidden")
@@ -56,17 +67,33 @@ export default class extends Controller {
   }
 
   #reset() {
-    this.running = false
-    this.startTime = null
-    this.timerInterval = null
-    this.inputTarget.value = null
+    this.startedAt = null
     this.elapsedTime = 0
 
+    clearInterval(this.timerInterval)
+    this.timerInterval = null
+    this.inputTarget.value = null
+
+    delete this.element.dataset.elapsedTime
+    delete this.element.dataset.startedAt
+
     // UI
+    this.playBtnTarget.classList.remove("hidden")
     this.pauseBtnTarget.classList.add("hidden")
     this.submitButtonTarget.classList.add("hidden")
     this.displayTarget.textContent = "--:--"
-    this.#updateDisplay(0)
+  }
+
+
+  #render() {
+    const running = this.startedAt ? Date.now() - this.startedAt : 0
+    this.#updateDisplay(this.elapsedTime + running)
+  }
+
+  #startInterval() {
+    this.timerInterval = setInterval(() => {
+      this.#render()
+    }, 500)
   }
 
   #updateDisplay(ms) {

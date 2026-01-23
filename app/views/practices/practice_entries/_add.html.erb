@@ -1,6 +1,6 @@
 <%= form_with url: practice_practice_entries_path(practice_id:, activity_id:),
               html: { id: "timer-#{activity_id}"},
-              data: {turbo: true, controller: "btn-timer"} do |f| %>
+              data: {turbo: true, controller: "btn-timer", "turbo-permanent": true} do |f| %>
   <%= f.hidden_field :duration, data: {btn_timer_target: "input"} %>
   <%= f.hidden_field :practice_id, value: "1", data: {btn_timer_target: "input"} %>
 

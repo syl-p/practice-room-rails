@@ -22,25 +22,7 @@
       </div>
 
       <% if authenticated? %>
-        <%= render DropdownComponent.new(variant: :ghost) do |component| %>
-          <% component.with_trigger_btn do %>
-            ...
-          <% end %>
-
-          <% component.with_dropdown_menu do %>
-            <ul class="py-1" role="none">
-              <% if can? comment, :update? %>
-                <li><%= link_to "Editer", edit_comment_path(comment), class: "block px-4 py-2 text-sm text-gray-700" %></li>
-              <% end %>
-
-              <% if can? comment, :delete? %>
-                <li><%= button_to comment_path(comment), method: :delete, class: "block px-4 py-2 text-sm text-gray-700", data: {turbo: false} do %>
-                  Supprimer
-                <% end %></li>
-              <% end %>
-            </ul>
-          <% end %>
-        <% end %>
+        <%= render partial: "comments/dropdown", locals: {comment:} %>
       <% end %>
     </footer>
 

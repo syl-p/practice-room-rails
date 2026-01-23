@@ -6,24 +6,25 @@
   end
 %>
 
-<div data-controller="tags-selector"
+<div class="mb-6"
+     data-controller="tags-selector"
      data-tags-selector-tag-classes-value="<%= [TailwindHelper::TAG_CLASSES, TailwindHelper::OUTLINE_CLASSES].join(' ') %>"
      data-tags-selector-search-url-value="<%= tags_path %>"
      data-tags-selector-preselected-tags-value="<%= preselected_tags.pluck(:name).to_json %>">
-  <label class="<%= TailwindHelper::LABEL_CLASSES %>">Tags</label>
+  <label class="<%= TailwindHelper::LABEL_CLASSES %>" for="search">Tags</label>
   <input type="hidden" name="<%= field_name %>"
          data-tags-selector-target="dataToSend"/>
   
-  <div class="py-4">
-    <input class="border p-2 rounded w-full"
+  <div class="w-full flex space-x-3 items-center relative <%= TailwindHelper::INPUT_CLASSES %>">
+    <ul class="flex flex-wrap space-x-3"
+        data-tags-selector-target="listToShow"></ul>
+    <input class="flex-1"
            autocomplete="off"
            placeholder="Chercher un tag ..."
            data-tags-selector-target="input"
-           data-action="input->tags-selector#search change->tags-selector#selectTag"
+           data-action="input->tags-selector#search keydown.enter->tags-selector#confirmTag"
            type="text" name="search" list="tags" />
-    <datalist id="tags"></datalist>
 
-    <ul class="mt-2 flex flex-wrap gap-2"
-        data-tags-selector-target="listToShow"></ul>
   </div>
+  <%= turbo_frame_tag :tag_list %>
 </div>
