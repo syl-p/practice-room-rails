@@ -10,8 +10,15 @@
         </p>
       </div>
       <div>
-        <%= button_to practice_practice_entry_path(practice_id: @practice.id, id: practice_entry.id),
-                      method: :delete, class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::OUTLINE_CLASSES].join(' ') do %> x <% end %>
+        <%= ui_action_to practice_practice_entry_path(
+                           practice_id: @practice.id,
+                           id: practice_entry.id
+                         ),
+                         as: :button,
+                         method: :delete,
+                         variant: :ghost do %>
+          <%= icon "x-mark" %>
+        <% end %>
       </div>
     </div>
   </div>

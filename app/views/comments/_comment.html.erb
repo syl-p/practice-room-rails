@@ -1,9 +1,9 @@
 <%= turbo_frame_tag dom_id(comment) do %>
   <article
-    class="pt-6 text-base bg-white rounded-lg dark:bg-gray-900"
+    class="comment pt-6 text-base bg-white rounded-lg dark:bg-gray-900"
     data-author="<%= comment.user.username %>"
     <% if comment.parent_id.nil? %>
-    data-controller="comment"
+    data-controller="comment" data-comment-comment-outlet=".comment"
     <% end %>
     >
     <footer class="flex justify-between items-center mb-2">
@@ -36,15 +36,15 @@
       </p>
     </div>
 
-    <div class="ml-6">
+    <div class="ml-6 mt-6">
+      <%= turbo_frame_tag "#{dom_id(comment)}_comments" do %>
+        <%=  render partial: "comments/comment", collection: comment.replies, as: :comment  %>
+      <% end %>
+
       <% if comment.parent_id.nil? && authenticated? %>
         <%= turbo_frame_tag record_id_gen(comment, Comment.new) do %>
           <%= render partial: "comments/form", locals: {commentable: comment, comment: Comment.new, class: 'hidden'} %>
         <% end %>
-      <% end %>
-
-      <%= turbo_frame_tag "#{dom_id(comment)}_comments" do %>
-        <%=  render partial: "comments/comment", collection: comment.replies, as: :comment  %>
       <% end %>
     </div>
   </article>

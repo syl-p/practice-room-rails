@@ -29,6 +29,8 @@ class Practices::PracticeEntriesController < ApplicationController
 
   def destroy
     @practice_entry.destroy
+
+    @remaining_for_day = PracticeEntry.today.exists? ? 1 : 0
     flash[:success] = "Votre temps de pratique à été mise à jour."
   end
 

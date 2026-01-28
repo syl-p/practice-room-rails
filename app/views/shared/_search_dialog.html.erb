@@ -1,4 +1,4 @@
-<%= button_to new_search_path, method: :get, class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::OUTLINE_CLASSES].join(' '),
+<%= ui_action_to new_search_path, as: :link, variant: :outline,
               data: {turbo: true, turbo_frame: :remote_modal} do %>
   <%= icon "magnifying-glass", class: "size-6" %>
   <span class="sr-only">Search</span>

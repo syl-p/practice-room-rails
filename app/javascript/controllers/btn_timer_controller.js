@@ -2,9 +2,17 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="btn-timer"
 export default class extends Controller {
-  static targets = ["playBtn", "pauseBtn", "display", "input", "submitButton"]
+  static values = {
+    activityId: Number,
+    playLabel: String,
+    pauseLabel: String
+  }
+
+  static targets = ["toggleBtn", "display", "input", "submitButton"]
 
   connect() {
+    this.state = "idle"
+
     this.startedAt = this.element.dataset.startedAt ? parseInt(this.element.dataset.startedAt, 10) : null
     this.elapsedTime = this.element.dataset.elapsedTime
         ? parseInt(this.element.dataset.elapsedTime, 10)
@@ -19,6 +27,9 @@ export default class extends Controller {
     this.element.addEventListener('turbo:submit-end',  (event) => {
       this.onSubmitEnd(event)
     })
+
+    document.addEventListener('timer:start', (e) => this.#onStart(e))
+    document.addEventListener('timer:stop', () => this.#onStop())
   }
 
   disconnect() {
@@ -28,21 +39,41 @@ export default class extends Controller {
     })
   }
 
-  start(e) {
-    e.preventDefault()
-    
+  get manager() {
+    const el = document.querySelector("[data-controller~='timer-manager']")
+    if (!el) return null
+
+    return this.application.getControllerForElementAndIdentifier(
+        el,
+        "timer-manager"
+    )
+  }
+
+  toggle() {
+    if (this.state === "running") {
+      this.pause()
+    } else {
+      this.start()
+    }
+  }
+
+  start() {
+    this.state = "running"
+
     this.startedAt = Date.now()
     this.element.dataset.startedAt = this.startedAt
 
-    this.pauseBtnTarget.classList.remove("hidden")
-    this.playBtnTarget.classList.add("hidden")
-
     // tick
     this.#startInterval()
+
+    // Update Manager
+    if (this.manager) this.manager.start(this.activityIdValue)
+
+    this.toggleBtnTarget.innerHTML = this.pauseLabelValue
   }
 
   pause(e) {
-    e.preventDefault()
+    this.state = "paused"
     clearInterval(this.timerInterval)
 
     this.elapsedTime += Date.now() - this.startedAt
@@ -55,14 +86,19 @@ export default class extends Controller {
     clearInterval(this.timerInterval)
     this.timerInterval = null
 
-    this.pauseBtnTarget.classList.add("hidden")
-    this.playBtnTarget.classList.remove("hidden")
     this.submitButtonTarget.classList.remove("hidden")
+    this.toggleBtnTarget.innerHTML = this.playLabelValue
   }
 
   onSubmitEnd(event) {
     if (event?.target?.id === this.element.id) {
       this.#reset()
+    }
+
+    // Update Manager
+    if (this.manager) {
+      this.state = "idle"
+      this.manager.stop()
     }
   }
 
@@ -78,10 +114,9 @@ export default class extends Controller {
     delete this.element.dataset.startedAt
 
     // UI
-    this.playBtnTarget.classList.remove("hidden")
-    this.pauseBtnTarget.classList.add("hidden")
-    this.submitButtonTarget.classList.add("hidden")
+    this.toggleBtnTarget.innerHTML = this.playLabelValue
     this.displayTarget.textContent = "--:--"
+    this.submitButtonTarget.classList.add("hidden")
   }
 
 
@@ -101,5 +136,25 @@ export default class extends Controller {
     const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0")
     const seconds = String(totalSeconds % 60).padStart(2, "0")
     this.displayTarget.textContent = `${minutes}:${seconds}`
+  }
+
+  #onStart(event) {
+    const {activityId} = event.detail
+    if (activityId !== this.activityIdValue) {
+      this.#disable()
+    }
+  }
+
+  #onStop() {
+    console.log("stop")
+    this.#enable()
+  }
+
+  #disable() {
+    this.toggleBtnTarget.disabled = true
+  }
+
+  #enable() {
+    this.toggleBtnTarget.disabled = false
   }
 }

@@ -6,6 +6,8 @@
   <%= render partial: "practices/practice_entries/item", locals: {practice_entry: @practice_entry} %>
 <% end %>
 
+<%= turbo_stream.update :practice_entries_empty, "" %>
+
 <%= turbo_stream.update "flash" do %>
   <%= render partial: "shared/flash" %>
 <% end %>

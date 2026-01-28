@@ -1,31 +1,29 @@
 <%= form_with url: practice_practice_entries_path(practice_id:, activity_id:),
+              builder: TailwindFormBuilder,
               html: { id: "timer-#{activity_id}"},
-              data: {turbo: true, controller: "btn-timer", "turbo-permanent": true} do |f| %>
+              data: {turbo: true,  "turbo-permanent": true,
+                     controller: "btn-timer",
+                     btn_timer_play_label_value: "Pratiquer",
+                     btn_timer_pause_label_value: "Faire une pause",
+                     btn_timer_activity_id_value: activity_id,
+              } do |f| %>
   <%= f.hidden_field :duration, data: {btn_timer_target: "input"} %>
   <%= f.hidden_field :practice_id, value: "1", data: {btn_timer_target: "input"} %>
 
-  <div class="flex space-x-0 items-center">
-    <span class="<%= [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::SECONDARY_CLASSES].join(" ") %>">
+  <%= render BtnGroupComponent.new do %>
+    <span class="<%= tw_merge(TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::SECONDARY_CLASSES) %>">
       <%= icon "clock" %>
       <span  data-btn-timer-target="display">
         --:--
       </span>
     </span>
 
-    <%= f.button class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(" "),
-                 data: {btn_timer_target: "playBtn", action: "click->btn-timer#start"} do %>
-      <%= icon "play" %>
-      <span class="sr-only">Pratiquer</span>
+    <%= ui_action_to as: :button, variant: :primary,
+                 data: {btn_timer_target: "toggleBtn", action: "click->btn-timer#toggle"} do %>
+      Pratiquer
     <% end %>
+  <% end %>
 
-    <%= f.button class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::SECONDARY_CLASSES, "hidden"].join(" "),
-                 data: {btn_timer_target: "pauseBtn", action: "click->btn-timer#pause"} do %>
-      <%= icon "pause" %>
-      <span class="sr-only">Stop</span>
-    <% end %>
-
-    <%= f.submit "Enregistrer", class: ["hidden", TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(" "),
-                 data: {btn_timer_target: "submitButton"} %>
-
-  </div>
+  <%= f.submit "Terminer", class: "hidden",
+               data: {btn_timer_target: "submitButton"} %>
 <% end %>

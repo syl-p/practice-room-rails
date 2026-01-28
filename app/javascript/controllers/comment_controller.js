@@ -3,6 +3,7 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="comment"
 export default class extends Controller {
   static targets = [ "form" ]
+  static outlets = ["comment"]
 
   connect() {
   }
@@ -10,6 +11,13 @@ export default class extends Controller {
   display($event) {
     $event.preventDefault();
     this.formTarget.classList.remove('hidden')
+
+    // Close others
+    this.commentOutlets.forEach(comment => {
+      if (comment === this) return
+
+      comment.formTarget.classList.add('hidden')
+    })
   }
 
   submit() {

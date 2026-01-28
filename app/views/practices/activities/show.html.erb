@@ -1,8 +1,9 @@
 <article class="container mx-auto mt-10">
-  <%= link_to practice_path(@practice), class: "flex space-x-2" do %>
+  <%= ui_action_to practice_path(@practice), as: :link, variant: :ghost, class: "flex space-x-2" do %>
     <%= icon "chevron-left" %>
     <span class="block">Retour à ma pratique</span>
   <% end %>
+
   <header class="rounded bg-background shadow p-4 mt-6 flex space-x-3 items-center" style="view-transition-name:activity-<%= @activity.id %>">
     <%= render partial: "practices/practice_entries/add",
                locals: {practice_id: session[:current_practice_id], activity_id: @activity.id} %>

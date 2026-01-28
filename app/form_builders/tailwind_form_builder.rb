@@ -26,10 +26,7 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def submit(value = nil, options = {})
-    options[:class] ||= "btn btn-primary"
-    @template.content_tag(:div, class: [ TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES ].join) do
-      super(value, options)
-    end
+    super(value, merge_default_classes(options, [ TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES ].join(' ')))
   end
 
   private

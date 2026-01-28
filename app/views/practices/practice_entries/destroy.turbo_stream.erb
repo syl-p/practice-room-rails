@@ -4,6 +4,12 @@
   <%= render partial: "shared/user_practices" %>
 <% end %>
 
+<% if @remaining_for_day.zero? %>
+  <%= turbo_stream.update :practice_entries_empty do %>
+    <%= render partial: "practices/practice_entries/empty_state" %>
+  <% end %>
+<% end %>
+
 <%= turbo_stream.update "flash" do %>
   <%= render partial: "shared/flash" %>
 <% end %>
