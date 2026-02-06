@@ -44,7 +44,7 @@ class Practices::PracticeEntriesController < ApplicationController
       @duration = Integer(params[:duration])
       raise ArgumentError if @duration <= 0
     rescue ArgumentError, TypeError
-      flash[:alert] = "Duration not valid."
+      flash[:error] = "Duration not valid."
       render turbo_stream: turbo_stream.replace("flash", partial: "shared/flash") and return
     end
   end
@@ -53,7 +53,7 @@ class Practices::PracticeEntriesController < ApplicationController
     begin
       @activity = Activity.find(params[:activity_id])
     rescue ActiveRecord::RecordNotFound
-      flash[:alert] = "Activity not found."
+      flash[:error] = "Activity not found."
     end
   end
 
@@ -61,7 +61,7 @@ class Practices::PracticeEntriesController < ApplicationController
     begin
       @practice = Practice.find(params[:practice_id]) || session[:current_practice_id]
     rescue ActiveRecord::RecordNotFound
-      flash[:alert] = "Practice not found."
+      flash[:error] = "Practice not found."
     end
   end
 

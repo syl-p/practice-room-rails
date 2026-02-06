@@ -10,6 +10,4 @@
   <% end %>
 <% end %>
 
-<%= turbo_stream.update "flash" do %>
-  <%= render partial: "shared/flash" %>
-<% end %>
+<%= turbo_flash_stream %>

@@ -19,7 +19,7 @@ class PracticesController < ApplicationController
 
     tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
     if tags.present?
-      @practice.tags = find_tags(tags)
+      @practice.tags = find_or_create_tags(tags)
     end
 
     Current.user.practices << @practice
@@ -29,7 +29,7 @@ class PracticesController < ApplicationController
   def update
     tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
     if tags.present?
-      @practice.tags = find_tags(tags)
+      @practice.tags = find_or_create_tags(tags)
     end
 
     if @practice.update(practice_params)
@@ -53,8 +53,8 @@ class PracticesController < ApplicationController
       params.require(:practice).permit(:name, :description)
     end
 
-    def find_tags(labels)
-      Tag.where(name: labels)
+    def find_or_create_tags(labels)
+      labels.map { |name| Tag.find_or_create_by!(name: name) }
     end
 
     def set_stats
@@ -66,7 +66,7 @@ class PracticesController < ApplicationController
         end_at: current_date.end_of_day
       )
 
-      tags_with_duration = Tag.for_practice_with_duration(@practice.id).order("duration DESC")
+      tags_with_duration = Tag.for_practice_with_duration(@practice.id).limit(3).order("duration DESC")
 
       @stats = {
         more_than_10_mn_today: practices_activities_service.more_than_10_mn_today?,

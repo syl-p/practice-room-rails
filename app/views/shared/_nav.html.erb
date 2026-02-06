@@ -1,10 +1,10 @@
 <header data-turbo-permanent class="supports-backdrop-blur:bg-background/60 sticky top-0 z-40 w-full border-b bg-background/95 backdrop-blur">
   <div class="container flex h-14 items-center">
-    <div class="hidden lg:block flex-1">
+    <div class="hidden md:block">
       <%= link_to "PRM", root_path, class: "block text-xl uppercase font-bold", data: {turbo: false} %>
     </div>
 
-    <div class="Sflex items-center space-x-3 flex-1">
+    <div class="">
       <% if authenticated? && params[:id] %>
         <%= turbo_frame_tag "user_practices" do %>
           <%= render partial: "shared/user_practices" %>
@@ -12,16 +12,14 @@
       <% end %>
     </div>
 
-    <div class="flex items-center space-x-2 justify-end">
-      <nav class="flex items-center space-x-3">
-        <% if authenticated? %>
-          <%= render partial: "shared/search_dialog" %>
-          <%= render partial: "shared/notifications" %>
-          <%= render partial: "shared/user_dropdown" %>
-        <% else %>
-          <%= link_to "se connecter", new_session_path, data: {turbo: false} %>
-        <% end %>
-      </nav>
-    </div>
+    <nav class="flex items-center space-x-3 justify-end flex-1">
+      <% if authenticated? %>
+        <%#= render partial: "shared/search_dialog" %>
+        <%= render partial: "shared/notifications" %>
+        <%= render partial: "shared/user_dropdown" %>
+      <% else %>
+        <%= link_to "se connecter", new_session_path, data: {turbo: false} %>
+      <% end %>
+    </nav>
   </div>
 </header>

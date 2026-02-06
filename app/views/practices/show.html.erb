@@ -1,8 +1,8 @@
 <header class="mb-6 lg:flex lg:space-x-3 bg-secondary py-10">
   <div class="container mx-auto">
-    <div class="flex space-x-3 items-center mb-6">
+    <div class="flex space-x-3 mb-6">
       <div class="flex-1">
-        <h1 class="text-4xl md:text-5xl font-bold uppercase mb-3">
+        <h1 class="text-3xl md:text-5xl font-bold uppercase mb-3">
           Aujourd'hui, votre pratique <br>
           <span class="underline"><%= @practice.name %></span>
         </h1>
@@ -10,10 +10,10 @@
       </div>
       <%= render partial: "practices/dropdown", locals: {practice: @practice} %>
     </div>
-    <div class="lg:flex lg:space-x-6 lg:space-y-0 space-y-6 mb-6">
+    <div class="flex space-x-6 flex-nowrap overflow-hidden overflow-x-auto w-full min-w-[300px]">
       <%= render partial: "practices/duration_by_tags", locals: {tags_with_duration: @stats[:tags_with_duration]} %>
-      <div class="bg-background border rounded p-6 flex flex-col justify-between flex-1">
-        <h2 class="text-xl mb-3 flex-1">Objectifs de la journée</h2>
+      <div class="bg-background border rounded p-6 flex-1">
+        <h2 class="mb-3">Objectifs de la journée</h2>
         <div class="flex space-x-3 items-center">
           <%= render partial: "practices/daily_stat", locals: {
             state: @stats[:more_than_10_mn_today][:state],

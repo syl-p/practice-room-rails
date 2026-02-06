@@ -1,5 +1,5 @@
 <%= turbo_stream.update "flash" do %>
-  <%= render partial: "shared/flash" %>
+  <%= render partial: "shared/flash_zone" %>
 <% end %>
 
 <%= turbo_stream.remove record_id_gen(@practice, @activity) %>

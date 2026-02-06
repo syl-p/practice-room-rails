@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 
 class BreadcrumbComponent < ViewComponent::Base
+
+  # @param [Array<Hash>] links
   def initialize(links)
     @links = links
   end

@@ -4,11 +4,10 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
   static values = {
     activityId: Number,
-    playLabel: String,
-    pauseLabel: String
   }
 
-  static targets = ["toggleBtn", "display", "input", "submitButton"]
+  static targets = [
+      "toggleBtn", "display", "elapsed", "input", "submitButton", "idle", "playing", "paused"]
 
   connect() {
     this.state = "idle"
@@ -69,7 +68,10 @@ export default class extends Controller {
     // Update Manager
     if (this.manager) this.manager.start(this.activityIdValue)
 
-    this.toggleBtnTarget.innerHTML = this.pauseLabelValue
+    this.idleTarget.classList.add("hidden")
+    this.playingTarget.classList.remove("hidden")
+    this.pausedTarget.classList.add("hidden")
+    this.displayTarget.classList.remove("hidden")
   }
 
   pause(e) {
@@ -86,8 +88,9 @@ export default class extends Controller {
     clearInterval(this.timerInterval)
     this.timerInterval = null
 
+    this.playingTarget.classList.add("hidden")
     this.submitButtonTarget.classList.remove("hidden")
-    this.toggleBtnTarget.innerHTML = this.playLabelValue
+    this.pausedTarget.classList.remove("hidden")
   }
 
   onSubmitEnd(event) {
@@ -114,8 +117,13 @@ export default class extends Controller {
     delete this.element.dataset.startedAt
 
     // UI
-    this.toggleBtnTarget.innerHTML = this.playLabelValue
-    this.displayTarget.textContent = "--:--"
+
+    this.idleTarget.classList.remove("hidden")
+    this.pausedTarget.classList.add("hidden")
+    this.playingTarget.classList.add("hidden")
+    this.displayTarget.classList.add("hidden")
+
+    this.elapsedTarget.textContent = "--:--"
     this.submitButtonTarget.classList.add("hidden")
   }
 
@@ -135,7 +143,7 @@ export default class extends Controller {
     const totalSeconds = Math.floor(ms / 1000)
     const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, "0")
     const seconds = String(totalSeconds % 60).padStart(2, "0")
-    this.displayTarget.textContent = `${minutes}:${seconds}`
+    this.elapsedTarget.textContent = `${minutes}:${seconds}`
   }
 
   #onStart(event) {

@@ -1,8 +1,8 @@
 <% current_practice_id = session[:current_practice_id] %>
-<div class="flex space-x-0">
-  <%= button_to "Ajouter à ma pratique", practice_attach_activity_path(practice_id: current_practice_id, id: activity.id),
-                method: :post, class: [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(" "),
-  data: {turbo_frame: "_top"} %>
+<%= render BtnGroupComponent.new do %>
+  <%= ui_action_to "Ajouter à ma pratique", practice_attach_activity_path(practice_id: current_practice_id, id: activity.id),
+                   as: :button, method: :post, data: {turbo_frame: "_top"} %>
+
   <%= render DropdownComponent.new(variant: :outline) do |component| %>
     <% component.with_trigger_btn do %>
       <% icon "chevron-down" %>
@@ -22,4 +22,4 @@
       </ul>
     <% end %>
   <% end %>
-</div>
+<% end %>

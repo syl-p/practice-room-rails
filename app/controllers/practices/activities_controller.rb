@@ -15,10 +15,10 @@ class Practices::ActivitiesController < ApplicationController
      @practice.activities << @activity
      @practice.save
      flash[:success] = "Activity Attached!"
+     redirect_to practice_path(@practice)
   rescue
     flash[:error] = "Activity already attached"
-  ensure
-     redirect_to practice_path(@practice)
+    redirect_to practice_path(@practice)
   end
 
   def detach

@@ -8,6 +8,4 @@
 
 <%= turbo_stream.update :practice_entries_empty, "" %>
 
-<%= turbo_stream.update "flash" do %>
-  <%= render partial: "shared/flash" %>
-<% end %>
+<%= turbo_flash_stream %>

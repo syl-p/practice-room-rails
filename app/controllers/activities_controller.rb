@@ -16,7 +16,7 @@ class ActivitiesController < ApplicationController
 
     tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
     if tags.present?
-      @activity.tags = find_tags(tags)
+      @activity.tags = find_or_create_tags(tags)
     end
 
     if @activity.save
@@ -35,7 +35,7 @@ class ActivitiesController < ApplicationController
 
     tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
     if tags.present?
-      @activity.tags = find_tags(tags)
+      @activity.tags = find_or_create_tags(tags)
     end
 
     if @activity.update(activity_params)
@@ -62,7 +62,7 @@ class ActivitiesController < ApplicationController
     params.require(:activity).permit(:title, :content, :status, medium_ids: [])
   end
 
-  def find_tags(labels)
-    Tag.where(name: labels)
+  def find_or_create_tags(labels)
+    labels.map { |name| Tag.find_or_create_by!(name: name) }
   end
 end
