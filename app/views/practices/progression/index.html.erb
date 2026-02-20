@@ -1,0 +1,11 @@
+<section class="container mx-auto">
+  <header class="flex items-center mb-6">
+    <%= link_to practice_path(@practice), class: "flex-1 flex space-x-2 items-center text-sm" do %>
+      <%= icon "chevron-left" %>
+      <span class="block">Retour à ma pratique</span>
+    <% end %>
+  </header>
+
+  <h2 class="font-semibold tracking-tight mb-3">Statistiques pour votre pratique <%= @practice.name %></h2>
+  <%= render partial: "practices/progression/duration_by_tags", locals: {tags_with_duration: @stats[:tags_with_duration]} %>
+</section>

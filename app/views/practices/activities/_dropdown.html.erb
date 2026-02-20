@@ -7,7 +7,7 @@
     <ul class="py-1" role="none">
       <% if can? activity, :edit? %>
         <li>
-            <%= link_to "Editer", edit_activity_path(activity) %>
+            <%= link_to "Editer", edit_activity_path(activity), class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer" %>
         </li>
       <% end %>
       <li>

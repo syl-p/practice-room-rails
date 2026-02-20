@@ -35,6 +35,7 @@ Rails.application.routes.draw do
       post "activity/:id/attach", to: "activities#attach", as: "attach_activity", defaults: { format: :turbo_stream }
       delete "activity/:id/attach", to: "activities#detach", as: "detach_activity", defaults: { format: :turbo_stream }
       resources :practice_entries, only: [ :index, :create, :destroy ]
+      resources :progression, only: [:index]
     end
   end
 

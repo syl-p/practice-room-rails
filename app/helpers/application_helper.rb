@@ -13,8 +13,10 @@ module ApplicationHelper
   def turbo_flash_stream
     safe_join(
       flash.map do |type, message|
+        flash_type = type
+        flash_message = message
         turbo_stream.append :flash do
-          render partial: "shared/flash", locals: { type: type, message: message }
+          render partial: "shared/flash", locals: { type: flash_type, message: flash_message }
         end
       end
     )

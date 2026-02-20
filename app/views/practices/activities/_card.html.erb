@@ -1,22 +1,22 @@
 <% tag = local_assigns.fetch("tag", :article) %>
 <%= turbo_frame_tag record_id_gen(practice, activity) do %>
   <%= content_tag tag, style: "view-transition-name:activity-#{activity.id}",
-                  class: "rounded bg-background shadow p-4 mb-6 flex space-x-3 items-center" do %>
-      <%= render partial: "practices/practice_entries/add",
-                 locals: {practice_id: practice.id, activity_id: activity.id} %>
+                  class: "rounded-lg bg-background border shadow p-4 mb-6" do %>
+    <div class="sm:flex sm:space-x-3 sm:items-center">
       <div class="flex-1">
         <h3 class="font-bold">
           <%= link_to activity.title, practice_activity_path(practice, activity), data: { turbo_frame: "_top" } %>
         </h3>
         <p class="text-sm text-muted-foreground mb-3">
-          Proposé par <%= link_to activity.user.username, activity.user, data: { turbo_frame: "_top" } %>
+          <%= activity.content.truncate(200) %>...
         </p>
-        <% activity.tags.each do |tag| %>
-          <%= render(TagComponent.new(tag.name, variant: :outline)) %>
-        <% end %>
       </div>
-      <div class="hidden lg:block">
-        <%= render partial: "practices/activities/dropdown", locals: {practice:, activity:} %>
-      </div>
+      <%= render partial: "practices/practice_entries/add",
+                 locals: {practice_id: practice.id, activity_id: activity.id} %>
+    </div>
+
+    <% activity.tags.each do |tag| %>
+      <%= render(TagComponent.new(tag.name, variant: :outline)) %>
+    <% end %>
   <% end %>
 <% end %>

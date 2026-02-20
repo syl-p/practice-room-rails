@@ -1,0 +1,36 @@
+<div class="border rounded-lg p-3 min-w-[250px] flex space-x-3 items-center">
+  <div class="relative inline-flex items-center justify-center overflow-hidden w-20 h-20">
+    <svg class="w-20 h-20" viewBox="0 0 80 80">
+      <!-- Background circle -->
+      <circle
+            r="<%= normalized_radius %>"
+            cx="40"
+            cy="40"
+            stroke-width="<%= stroke %>"
+            stroke="lightgray"
+            fill="transparent"
+            />
+      <!-- Progress circle -->
+      <circle
+            class="<%= color_classes %>"
+            r="<%= normalized_radius %>"
+            cx="40"
+            cy="40"
+            stroke-width="<%= stroke %>"
+            stroke-dasharray="<%= circumference %>"
+            stroke-dashoffset="<%= stroke_dash_offset %>"
+            stroke-linecap="round"
+            stroke="currentColor"
+            fill="transparent"
+            transform="rotate(-90 40 40)"
+            />
+    </svg>
+    <span class="absolute text-blue-700 text-xs font-semibold">
+      <%= "#{progress}%" %>
+    </span>
+  </div>
+  <div>
+    <p class="font-bold text-sm mb-1"><%= label_title %></p>
+    <p class="text-xs"><%= label_subtitle %></p>
+  </div>
+</div>

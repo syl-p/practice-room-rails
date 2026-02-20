@@ -24,8 +24,8 @@ class Practices::ActivitiesController < ApplicationController
   def detach
     authorize!(@practice)
     @practice.activities.delete(@activity)
-
     flash[:success] = "Activity Detached!"
+    redirect_to practice_path(@practice)
   end
 
   private

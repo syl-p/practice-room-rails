@@ -1,7 +1,7 @@
 <%
   total_duration = tags_with_duration.sum(&:duration)
 %>
-<div class="bg-background border rounded p-6 min-w-[300px]">
+<div class="bg-background border rounded p-6 w-full">
   <h2 class="mb-3">Repartition de votre pratique par tags</h2>
   <ul>
     <% tags_with_duration.each do |tag| %>

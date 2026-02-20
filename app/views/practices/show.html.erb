@@ -1,43 +1,31 @@
-<header class="mb-6 lg:flex lg:space-x-3 bg-secondary py-10">
-  <div class="container mx-auto">
-    <div class="flex space-x-3 mb-6">
-      <div class="flex-1">
-        <h1 class="text-3xl md:text-5xl font-bold uppercase mb-3">
-          Aujourd'hui, votre pratique <br>
-          <span class="underline"><%= @practice.name %></span>
-        </h1>
-        <p><%= @practice.description %></p>
-      </div>
-      <%= render partial: "practices/dropdown", locals: {practice: @practice} %>
-    </div>
-    <div class="flex space-x-6 flex-nowrap overflow-hidden overflow-x-auto w-full min-w-[300px]">
-      <%= render partial: "practices/duration_by_tags", locals: {tags_with_duration: @stats[:tags_with_duration]} %>
-      <div class="bg-background border rounded p-6 flex-1">
-        <h2 class="mb-3">Objectifs de la journée</h2>
-        <div class="flex space-x-3 items-center">
-          <%= render partial: "practices/daily_stat", locals: {
-            state: @stats[:more_than_10_mn_today][:state],
-            goal: @stats[:more_than_10_mn_today][:goal],
-            label_title: '10 minutes',
-            label_subtitle: 'Au moins 10 minutes de pratique'
-          } %>
+<section class="container mx-auto">
+  <header class="mb-6">
+    <%= render DayPickerComponent.new(practice: @practice, current_date: Date.today) %>
+  </header>
+  <article class="mb-6">
+    <h2 class="flex-1 font-semibold tracking-tight mb-3">
+      Vos objectifs du jour
+    </h2>
+    <div class="flex space-x-6 flex-nowrap overflow-hidden overflow-x-auto w-full">
+      <%= render DonutStatComponent.new(
+        state: @stats[:more_than_10_mn_today][:state],
+        goal: @stats[:more_than_10_mn_today][:goal],
+        label_title: '10 minutes',
+        label_subtitle: 'Au moins 10 minutes de pratique'
+      ) %>
 
-          <%= render partial: "practices/daily_stat", locals: {
-            state: @stats[:have_3_exercises_today][:state],
-            goal: @stats[:have_3_exercises_today][:goal],
-            label_title: '3 activitiés différentes',
-            label_subtitle: 'Pratiquez au moins 3 activitités'
-          } %>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
 
-<section class="container" data-controller="timer-manager">
-  <article class="flex-1 mb-10">
-    <header class="flex space-x-3 items-center mb-6">
-      <h2 class="text-2xl flex-1 font-semibold tracking-tight">
+      <%= render DonutStatComponent.new(
+        state: @stats[:have_3_exercises_today][:state],
+        goal: @stats[:have_3_exercises_today][:goal],
+        label_title: '3 activitiés différentes',
+        label_subtitle: 'Pratiquez au moins 3 activitités'
+      ) %>
+    </div>
+  </article>
+  <article data-controller="timer-manager">
+    <header class="flex space-x-3 items-center mb-3">
+      <h2 class="flex-1 font-semibold tracking-tight">
         Vos activités
         (<%= turbo_frame_tag :activities_count do %>
           <%= @practice.activities.count %>
@@ -50,17 +38,15 @@
         <%= render partial: "practices/activities/card",
                    collection: @practice.activities, as: :activity,
                    locals: {practice: @practice, classes: 'mb-3'} %>
+        <footer>
+          <%= ui_action_to new_activity_path, as: :link, variant: :secondary, class: "w-full flex space-x-3 items-center", data: {turbo: false} do %>
+            <%= icon "plus" %>
+            <span class="block">Ajouter une activité</span>
+          <% end %>
+        </footer>
       <% else %>
         <%= render partial: "practices/activities/empty_state" %>
       <% end %>
     <% end %>
   </article>
-  <aside>
-    <h2 class="text-2xl mb-3 font-semibold tracking-tight">Journal de votre pratique</h2>
-    <%= turbo_frame_tag :practice_entries,
-                        src: practice_practice_entries_path(practice_id: @practice.id),
-                        loading: :lazy do %>
-      Chargement...
-      <% end %>
-  </aside>
 </section>

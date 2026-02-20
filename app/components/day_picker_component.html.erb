@@ -1,0 +1,27 @@
+<nav>
+  <ul class="flex flex-nowrap space-x-3 items-center justify-center">
+    <% (@start_at..@end_at).each do |wd| %>
+      <li>
+        <% day_dom = capture do %>
+          <span class="block text-xs uppercase"><%= I18n.l(wd, format: "%a") %></span>
+          <span class="block"><%= wd.day %></span>
+          <span class="block text-xs"><%= I18n.l(wd, format: "%b") %></span>
+        <% end %>
+
+        <% if wd.future? %>
+          <div class="block text-center p-1 rounded-lg border relative cursor-not-allowed opacity-75">
+            <%= day_dom %>
+          </div>
+        <% else %>
+          <%= link_to path_for(wd), class: day_classes(wd) do %>
+            <%= day_dom %>
+
+            <% if has_entries?(wd) %>
+              <div class="absolute top-0 right-0 -mt-1 -mr-1 rounded-full bg-primary w-3 h-3"></div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</nav>

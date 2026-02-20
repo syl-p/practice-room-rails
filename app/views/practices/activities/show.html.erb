@@ -1,8 +1,11 @@
-<article class="container mx-auto mt-10">
-  <%= ui_action_to practice_path(@practice), as: :link, variant: :ghost, class: "flex space-x-2 mb-3" do %>
-    <%= icon "chevron-left" %>
-    <span class="block">Retour à ma pratique</span>
-  <% end %>
+<article class="container mx-auto">
+  <header class="flex space-x-3 items-center justify-between mb-6">
+    <%= ui_action_to practice_path(@practice), as: :link, variant: :ghost, class: "flex items-center" do %>
+      <%= icon "chevron-left" %>
+      <span class="block">Retour à ma pratique</span>
+    <% end %>
+    <%= render partial: "practices/activities/dropdown", locals: {practice: @practice, activity: @activity} %>
+  </header>
 
   <%= render partial: "practices/activities/card", locals: {tag: :header, practice: @practice, activity: @activity } %>
 

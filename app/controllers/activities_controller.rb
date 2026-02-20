@@ -14,10 +14,10 @@ class ActivitiesController < ApplicationController
     @activity = Activity.new(activity_params)
     @activity.user = Current.user
 
-    tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
-    if tags.present?
-      @activity.tags = find_or_create_tags(tags)
-    end
+    # update tags
+    tag_params = params[:activity][:tag_labels].to_s
+    tags = tag_params.split(",").reject(&:blank?)
+    @activity.tags = find_or_create_tags(tags)
 
     if @activity.save
       redirect_to @activity, flash: { success: "Bravo ! Votre activité à été créée." }
@@ -33,10 +33,10 @@ class ActivitiesController < ApplicationController
   def update
     authorize!(@activity)
 
-    tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
-    if tags.present?
-      @activity.tags = find_or_create_tags(tags)
-    end
+    # update tags
+    tag_params = params[:activity][:tag_labels].to_s
+    tags = tag_params.split(",").reject(&:blank?)
+    @activity.tags = find_or_create_tags(tags)
 
     if @activity.update(activity_params)
       redirect_to @activity, flash: { success: "Votre activité à été mise à jour." }

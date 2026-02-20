@@ -66,12 +66,9 @@ class PracticesController < ApplicationController
         end_at: current_date.end_of_day
       )
 
-      tags_with_duration = Tag.for_practice_with_duration(@practice.id).limit(3).order("duration DESC")
-
       @stats = {
         more_than_10_mn_today: practices_activities_service.more_than_10_mn_today?,
-        have_3_exercises_today: practices_activities_service.have_3_exercises_today?,
-        tags_with_duration:
+        have_3_exercises_today: practices_activities_service.have_3_exercises_today?
       }
     end
 end

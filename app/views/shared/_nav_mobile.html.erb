@@ -1,0 +1,20 @@
+<div data-turbo-permanent
+  class="bg-white border shadow-xl rounded-2xl fixed bottom-4 left-1/2 -translate-x-1/2 px-3 py-2 z-50">
+  <ul class="flex items-center space-x-3">
+    <%
+      active_class = 'bg-primary text-white disabled'
+      [
+        {path: @practice, label: "Pratique", icon: "rocket-launch", active: current_page?(@practice)},
+        {path: practice_practice_entries_path(practice_id: @practice.id, day: Date.current), label: 'Historique', icon: "calendar", active: controller_name == "practice_entries"},
+        {path: practice_progression_index_path(practice_id: @practice.id), label: "Progression", icon: "chart-bar", active: controller_name == "progression"}
+      ].each do |link| %>
+      <li>
+        <%= link_to link[:path],
+          class: "flex flex-col items-center justify-center px-3 py-2 rounded-xl transition-all duration-200 min-w-[60px] #{link[:active] ? active_class : ' hover:bg-secondary'}" do %>
+          <span class="text-lg mb-1"><%= icon link[:icon] %></span>
+          <span class="text-xs font-medium"><%= link[:label] %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
