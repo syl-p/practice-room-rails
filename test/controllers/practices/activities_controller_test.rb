@@ -34,7 +34,7 @@ class Practices::ActivitiesControllerTest < ActionDispatch::IntegrationTest
 
     sign_in(practice.user)
 
-    get practice_activities_url(practice, tag_ids: [tag1.id])
+    get practice_activities_url(practice, tag_ids: [ tag1.id ])
 
     assert_response :success
 
