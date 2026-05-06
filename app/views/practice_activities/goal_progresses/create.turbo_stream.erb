@@ -1,0 +1,5 @@
+<%= turbo_stream.prepend :progresses do %>
+  <%= render partial: "practice_activities/goal_progresses/goal_progress", locals: {progress: @goal_progress, goal: @goal} %>
+<% end %>
+
+<%= turbo_flash_stream %>

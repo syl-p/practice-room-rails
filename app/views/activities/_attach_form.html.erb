@@ -1,6 +1,6 @@
 <% current_practice_id = session[:current_practice_id] %>
 <%= render BtnGroupComponent.new do %>
-  <%= ui_action_to "Ajouter à ma pratique", practice_attach_activity_path(practice_id: current_practice_id, id: activity.id),
+  <%= ui_action_to "Ajouter à ma pratique", practice_practice_activities_path(practice_id: current_practice_id, activity_id: activity.id),
                    as: :button, method: :post, data: {turbo_frame: "_top"} %>
 
   <%= render DropdownComponent.new(variant: :outline) do |component| %>
@@ -11,7 +11,7 @@
       <ul class="py-1" role="none">
         <% Current.user.cached_practices.each do |practice| %>
           <li>
-            <%= button_to practice.name, practice_attach_activity_path(practice_id: practice.id, id: activity.id),
+            <%= button_to practice.name, practice_practice_activities_path(practice_id: practice.id, activity_id: activity.id),
                           method: :post, class: "block px-4 py-2 text-sm text-gray-700" %></li>
         <% end %>
         <li>

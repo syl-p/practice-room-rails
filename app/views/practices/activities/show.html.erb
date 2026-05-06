@@ -1,36 +1,70 @@
 <article class="container mx-auto">
-  <header class="flex space-x-3 items-center justify-between mb-6">
-    <%= ui_action_to practice_path(@practice), as: :link, variant: :ghost, class: "flex items-center" do %>
-      <%= icon "chevron-left" %>
-      <span class="block">Retour à ma pratique</span>
-    <% end %>
-    <%= render partial: "practices/activities/dropdown", locals: {practice: @practice, activity: @activity} %>
-  </header>
+    <header class="flex space-x-3 items-center justify-between mb-6">
+        <%= ui_action_to practice_path(@practice), as: :link, variant: :outline, class: "flex items-center" do %>
+          <%= icon "chevron-left" %>
+          <span class="block">Retour à ma pratique</span>
+        <% end %>
+        <%= render partial: "practices/activities/dropdown", locals: {practice: @practice, activity: @activity} %>
+    </header>
 
-  <%= render partial: "practices/activities/card", locals: {tag: :header, practice: @practice, activity: @activity } %>
+    <%= render partial: "practices/activities/card", locals: {tag: :header, practice: @practice, activity: @activity } %>
 
-  <div class="my-10 lg:grid lg:grid-cols-6 gap-4">
-    <article class="mb-6 lg:mb-0 lg:col-span-4">
-      <%= @activity.content %>
-    </article>
-    <aside class="lg:col-span-2">
-      <%= render partial: "practices/activities/media", locals: {media: @activity.media} %>
-    </aside>
-  </div>
-  <div class="w-full flex justify-center">
-    <div class="shrink-0 bg-border h-[1px] w-full my-4"></div>
-  </div>
-  <footer>
-    <h2 class="text-xl mb-3">
-      Discussions
-    </h2>
+    <section class="lg:grid lg:grid-cols-6 gap-6">
+      <article class="lg:col-span-4">
+        <%= render TabsComponent.new do |component| %>
+          <% component.with_tab(id: "content", label: "Description") do %>
+            <%= @activity.content %>
+          <% end %>
 
-    <%= turbo_frame_tag record_id_gen(@activity, Comment.new) do %>
-      <%= render partial: "comments/form", locals: {comment: Comment.new, commentable: @activity} if authenticated? %>
-    <% end %>
+          <% if @activity.media.any? %>
+            <% component.with_tab(id: "media", label: "Media associés") do %>
+              <%= render partial: "practices/activities/media", locals: {media: @activity.media} %>
+            <% end %>
+          <% end %>
 
-    <%= turbo_frame_tag "#{dom_id(@activity)}_comments" do %>
-      <%= render partial: "comments/comment", collection: @activity.comments, as: :comment %>
-    <% end %>
-  </footer>
+
+          <% component.with_tab(id: "goal", label: "Objectif", button_class: "block lg:hidden") do %>
+            <% if @practice_activity.goals.present? %>
+              <!-- Mettre à jour les progrès -->
+              <%= turbo_frame_tag :goal_tab, src: practice_activity_goal_path(practice_activity_id: @practice_activity.id, id: @practice_activity.goals.first.id), loading: :lazy do %>
+                ...
+              <% end %>
+            <% else %>
+              <!-- Proposer de définir un objectif -->
+              <%= turbo_frame_tag :goal_tab, src: new_practice_activity_goal_path(practice_activity_id: @practice_activity.id), loading: :lazy do %>
+                ...
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <% component.with_tab(id: "comments", label: "Discussions") do %>
+            <p class="text-sm text-muted-foreground mb-3">
+              Participer à des discussions concernant cette activité.
+            </p>
+            <%= turbo_frame_tag record_id_gen(@activity, Comment.new) do %>
+              <%= render partial: "comments/form", locals: {comment: Comment.new, commentable: @activity} if authenticated? %>
+            <% end %>
+
+            <%= turbo_frame_tag "#{dom_id(@activity)}_comments" do %>
+              <%= render partial: "comments/comment", collection: @activity.comments, as: :comment %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </article>
+      <aside class="hidden lg:block lg:col-span-2">
+        <div class="rounded-lg bg-background border shadow p-4">
+          <% if @practice_activity.goals.present? %>
+            <!-- Mettre à jour les progrès -->
+            <%= turbo_frame_tag :goal_sidebar, src: practice_activity_goal_path(practice_activity_id: @practice_activity.id, id: @practice_activity.goals.first.id), loading: :lazy do %>
+              ...
+            <% end %>
+          <% else %>
+            <!-- Proposer de définir un objectif -->
+            <%= turbo_frame_tag :goal_sidebar, src: new_practice_activity_goal_path(practice_activity_id: @practice_activity.id), loading: :lazy do %>
+              ...
+            <% end %>
+          <% end %>
+        </div>
+      </aside>
+    </section>
 </article>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_12_10_141608) do
+ActiveRecord::Schema[8.0].define(version: 2026_04_19_141134) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -46,6 +46,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_141608) do
     t.string "slug", null: false
     t.text "content", null: false
     t.integer "status", default: 0, null: false
+    t.string "default_unit"
+    t.integer "default_target_value"
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -75,6 +77,25 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_10_141608) do
     t.datetime "updated_at", null: false
     t.index ["commentable_type", "commentable_id"], name: "index_comments_on_commentable"
     t.index ["user_id"], name: "index_comments_on_user_id"
+  end
+
+  create_table "goal_progresses", force: :cascade do |t|
+    t.integer "goal_id"
+    t.float "value", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["goal_id"], name: "index_goal_progresses_on_goal_id"
+  end
+
+  create_table "goals", force: :cascade do |t|
+    t.integer "practice_activity_id"
+    t.integer "user_id"
+    t.string "unit"
+    t.float "target_value"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["practice_activity_id"], name: "index_goals_on_practice_activity_id"
+    t.index ["user_id"], name: "index_goals_on_user_id"
   end
 
   create_table "media", force: :cascade do |t|

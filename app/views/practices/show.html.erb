@@ -1,13 +1,13 @@
 <section class="container mx-auto">
-  <header class="mb-6">
-    <%= render DayPickerComponent.new(practice: @practice, current_date: Date.today) %>
-  </header>
-  <article class="mb-6">
-    <h2 class="flex-1 font-semibold tracking-tight mb-3">
-      Vos objectifs du jour
-    </h2>
-    <div class="flex space-x-6 flex-nowrap overflow-hidden overflow-x-auto w-full">
-      <%= render DonutStatComponent.new(
+    <header class="mb-6">
+        <%= render DayPickerComponent.new(practice: @practice, current_date: Date.today) %>
+    </header>
+    <article class="mb-6">
+        <h2 class="flex-1 font-semibold tracking-tight mb-3">
+            Vos objectifs du jour
+        </h2>
+        <div class="flex space-x-6 flex-nowrap overflow-hidden overflow-x-auto w-full">
+            <%= render DonutStatComponent.new(
         state: @stats[:more_than_10_mn_today][:state],
         goal: @stats[:more_than_10_mn_today][:goal],
         label_title: '10 minutes',
@@ -21,32 +21,20 @@
         label_title: '3 activitiés différentes',
         label_subtitle: 'Pratiquez au moins 3 activitités'
       ) %>
-    </div>
-  </article>
-  <article data-controller="timer-manager">
-    <header class="flex space-x-3 items-center mb-3">
-      <h2 class="flex-1 font-semibold tracking-tight">
-        Vos activités
-        (<%= turbo_frame_tag :activities_count do %>
-          <%= @practice.activities.count %>
-        <% end %>)
-      </h2>
-      <%= render partial: "practices/activities/filters", locals: {practice: @practice} %>
-    </header>
-    <%= turbo_frame_tag :activities do %>
-      <% if @practice.activities.any? %>
-        <%= render partial: "practices/activities/card",
-                   collection: @practice.activities, as: :activity,
-                   locals: {practice: @practice, classes: 'mb-3'} %>
-        <footer>
-          <%= ui_action_to new_activity_path, as: :link, variant: :secondary, class: "w-full flex space-x-3 items-center", data: {turbo: false} do %>
-            <%= icon "plus" %>
-            <span class="block">Ajouter une activité</span>
-          <% end %>
-        </footer>
-      <% else %>
-        <%= render partial: "practices/activities/empty_state" %>
-      <% end %>
-    <% end %>
-  </article>
+        </div>
+    </article>
+    <article data-controller="timer-manager">
+        <header class="flex space-x-3 items-center mb-3">
+            <h2 class="flex-1 font-semibold tracking-tight">
+                Vos activités
+                (<%= turbo_frame_tag :activities_count do %>
+                    <%= @practice.activities.count %>
+                <% end %>)
+            </h2>
+            <%= render partial: "practices/activities/filters", locals: {practice: @practice} %>
+        </header>
+        <%= turbo_frame_tag :activities, src: practice_activities_path(practice_id: @practice.id), loading: :lazy do %>
+          ...
+        <% end %>
+    </article>
 </section>

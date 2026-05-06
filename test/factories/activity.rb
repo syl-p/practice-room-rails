@@ -4,6 +4,8 @@ FactoryBot.define do
     content { Faker::Lorem.paragraph }
     slug { nil }
     user { association :user }
+    default_unit { %w[bpm km reps].sample }
+    default_target_value { Faker::Number.between(from: 1, to: 100) }
 
     transient do
       tag_pool { [] }
@@ -23,6 +25,18 @@ FactoryBot.define do
 
     trait :public do
       status { :published }
+    end
+
+    trait :with_comments do
+      after(:create) do |activity|
+        FactoryBot.create_list(:comment, 5, commentable: activity)
+      end
+    end
+
+    trait :with_media do
+      after(:create) do |activity|
+        activity.media = create(:medium)
+      end
     end
   end
 end

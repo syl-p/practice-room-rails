@@ -1,17 +1,12 @@
 <% if media.present? %>
-  <div class="rounded-lg border bg-card text-card-foreground shadow p-3">
-    <h3 class="text-2xl font-semibold tracking-tight">
-      Media associés
-    </h3>
     <p class="text-sm text-muted-foreground mb-3">
-      Retrouvez ici les différentes ressources proposées par l'auteur.
+        Retrouvez ici les différentes ressources proposées par l'auteur.
     </p>
     <ul class="divide-y divide-gray-200">
-      <% media.each do |medium| %>
+        <% media.each do |medium| %>
         <li class="p-4 hover:bg-gray-50">
-          <%= render partial: "media/item", locals: { medium:} %>
+            <%= render partial: "media/item", locals: { medium:} %>
         </li>
-      <% end %>
+        <% end %>
     </ul>
-  </div>
 <% end %>

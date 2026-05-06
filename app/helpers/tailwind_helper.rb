@@ -20,7 +20,7 @@ module TailwindHelper
     secondary: SECONDARY_CLASSES,
     outline: OUTLINE_CLASSES,
     ghost: GHOST_CLASSES,
-    destructive: DESTRUCTIVE_CLASSES,
+    destructive: DESTRUCTIVE_CLASSES
   }
 
   # merge classes

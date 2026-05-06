@@ -1,0 +1,2 @@
+module PracticeActivities::GoalProgressesHelper
+end

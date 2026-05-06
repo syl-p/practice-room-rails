@@ -13,7 +13,7 @@ export default class extends Controller {
     window.addEventListener('media:selected', this.updateList.bind(this))
 
     this.selectedListTarget.innerHTML = this.mediumSelectedValue
-        .map(id => this.#createItem(id))
+        .map(media => this.#createItem(media))
         .join('')
   }
 
@@ -22,7 +22,7 @@ export default class extends Controller {
     this.mediumTargets.forEach(e => e.remove())
 
     this.selectedListTarget.innerHTML = items
-        .map(({id}) => this.#createItem(id))
+        .map(media => this.#createItem(media))
         .join('')
 
     this.#ifEmptyAddEmptyField()
@@ -35,17 +35,17 @@ export default class extends Controller {
     this.#updateSelectorLink()
   }
 
-  #createItem(id) {
+  #createItem(media) {
     return `
           <div data-media-preview-target="medium" 
-               data-id="${id}" class="relative border p-2 flex flex-col justify-center">
-            ${id}
+               data-id="${media.id}" class="relative border p-2 flex flex-col justify-center">
+            ${media.id}
             <button 
                 type="button"
                 class="absolute top-1 right-1"
                 data-action="click->media-preview#delete:prevent" 
-                data-media-preview-id-param="${id}">x</button>
-            <input type="hidden" name="activity[medium_ids][]" value="${id}" />
+                data-media-preview-id-param="${media.id}">x</button>
+            <input type="hidden" name="activity[medium_ids][]" value="${media.id}" />
           </div>
     `
   }

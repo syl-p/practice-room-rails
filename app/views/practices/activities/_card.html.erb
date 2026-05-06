@@ -14,9 +14,10 @@
       <%= render partial: "practices/practice_entries/add",
                  locals: {practice_id: practice.id, activity_id: activity.id} %>
     </div>
-
-    <% activity.tags.each do |tag| %>
-      <%= render(TagComponent.new(tag.name, variant: :outline)) %>
-    <% end %>
+    <div class="hidden md:block">
+      <% activity.tags.each do |tag| %>
+        <%= render(TagComponent.new(tag.name, variant: :outline)) %>
+      <% end %>
+    </div>
   <% end %>
 <% end %>

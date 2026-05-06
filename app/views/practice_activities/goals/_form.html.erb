@@ -1,0 +1,5 @@
+<%= form_with model: [goal.practice_activity, goal], builder: TailwindFormBuilder do |f| %>
+    <%= f.number_field :target_value %>
+    <%= f.text_field :unit %>
+    <%= f.submit "Enregistrer", class: "btn btn-primary" %>
+<% end %>

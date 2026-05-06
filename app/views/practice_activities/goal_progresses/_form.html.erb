@@ -1,0 +1,7 @@
+<%= form_with model: [goal.practice_activity, goal, GoalProgress.new], local: true, builder: TailwindFormBuilder do |form| %>
+  <div class="mb-4 flex space-x-3 items-center">
+    <%= form.number_field :value, step: 0.01, class: "mb-3" %>
+    <span class="block">/ <%= @goal.target_value %> <%= @goal.unit %></span>
+  </div>
+  <%= form.submit "Enregistrer le progrès" %>
+<% end %>

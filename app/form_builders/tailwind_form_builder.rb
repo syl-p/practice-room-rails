@@ -5,6 +5,12 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def number_field(method, options = {})
+    form_group(method, options) do
+      super(method, merge_default_classes(options, TailwindHelper::INPUT_CLASSES))
+    end
+  end
+
   def email_field(method, options = {})
     form_group(method, options) do
       super(method, merge_default_classes(options, TailwindHelper::INPUT_CLASSES))
@@ -26,7 +32,7 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def submit(value = nil, options = {})
-    super(value, merge_default_classes(options, [ TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES ].join(' ')))
+    super(value, merge_default_classes(options, [ TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES ].join(" ")))
   end
 
   private

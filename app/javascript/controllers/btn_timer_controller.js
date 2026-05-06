@@ -27,6 +27,7 @@ export default class extends Controller {
       this.onSubmitEnd(event)
     })
 
+    // Manager event
     document.addEventListener('timer:start', (e) => this.#onStart(e))
     document.addEventListener('timer:stop', () => this.#onStop())
   }
@@ -154,7 +155,6 @@ export default class extends Controller {
   }
 
   #onStop() {
-    console.log("stop")
     this.#enable()
   }
 

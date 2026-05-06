@@ -30,12 +30,18 @@ Rails.application.routes.draw do
     end
 
     scope module: :practices do
-      get "activity/:id", to: "activities#show", as: :activity
-      post "activity/filter", to: "activities#filter", as: "filter_activities", defaults: { format: :turbo_stream }
-      post "activity/:id/attach", to: "activities#attach", as: "attach_activity", defaults: { format: :turbo_stream }
-      delete "activity/:id/attach", to: "activities#detach", as: "detach_activity", defaults: { format: :turbo_stream }
+      resources :activities, only: %i[index show]
       resources :practice_entries, only: [ :index, :create, :destroy ]
-      resources :progression, only: [:index]
+      resources :progression, only: [ :index ]
+      resources :practice_activities, only: [ :create, :destroy ]
+    end
+  end
+
+  resources :practice_activities, only: [] do
+    scope module: :practice_activities do
+      resources :goals, only: [ :show, :new, :create ] do
+        resources :goal_progresses, only: [ :new, :create ]
+      end
     end
   end
 

@@ -1,0 +1,3 @@
+<%= turbo_frame_tag :activities do %>
+  <%= render partial: "practices/activities/list", locals: { activities: @activities, practice: @practice } %>
+<% end %>

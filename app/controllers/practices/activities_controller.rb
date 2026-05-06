@@ -1,31 +1,23 @@
 class Practices::ActivitiesController < ApplicationController
   before_action :set_practice
-  before_action :set_activity, only: [ :show, :attach, :detach ]
+  before_action :set_activity, only: [ :show ]
 
   def show
     authorize!(@activity)
+    @practice_activity = @practice.practice_activities.find_by(activity: @activity)
   end
 
-  def filter
-    @activities = Practices::ActivitiesService.new(@practice.id, params[:tag_ids]).call
-  end
-
-  def attach
-     authorize!(@practice)
-     @practice.activities << @activity
-     @practice.save
-     flash[:success] = "Activity Attached!"
-     redirect_to practice_path(@practice)
-  rescue
-    flash[:error] = "Activity already attached"
-    redirect_to practice_path(@practice)
-  end
-
-  def detach
-    authorize!(@practice)
-    @practice.activities.delete(@activity)
-    flash[:success] = "Activity Detached!"
-    redirect_to practice_path(@practice)
+  def index
+    @activities = Practices::ActivitiesService.new(@practice.id, tag_ids).call
+    respond_to do |format|
+      format.turbo_stream do
+        render turbo_stream: [
+          turbo_stream.update(:activities, partial: "practices/activities/list", locals: { activities: @activities, practice: @practice }),
+          turbo_stream.update(:activities_count, @activities.count)
+        ]
+      end
+      format.html
+    end
   end
 
   private
@@ -35,5 +27,16 @@ class Practices::ActivitiesController < ApplicationController
 
   def set_practice
     @practice = Practice.find(params[:practice_id])
+  end
+
+  def tag_ids
+    case params[:tag_ids]
+    when Array
+      params[:tag_ids]
+    when String
+      params[:tag_ids].split(",")
+    else
+      []
+    end
   end
 end

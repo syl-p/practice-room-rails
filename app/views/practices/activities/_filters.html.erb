@@ -1,20 +1,19 @@
-<% if authenticated? %>
-  <%= form_with url: practice_filter_activities_path(practice_id: practice.id), method: :post do |f| %>
-    <div class="hidden lg:flex lg:items-center lg:space-x-6">
-      <% @practice.tags.each do |tag| %>
-        <label>
-          <%= f.check_box :tag_ids, {
-            multiple: true,
-            class: "hidden peer",
-            onchange: "this.form.requestSubmit();"
-          },
-                          tag.id,
-                          false %>
-          <span class="p-2 text-muted-foreground cursor-pointer peer-checked:font-bold peer-checked:border-b-4 peer-checked:border-primary">
-            <%= tag.name %>
-          </span>
-        </label>
-      <% end %>
-    </div>
-  <% end %>
+<%= form_with url: practice_activities_path(practice_id: practice.id, format: :turbo_stream),
+              method: :get, data: {turbo: true} do |f| %>
+  <div class="hidden lg:flex lg:items-center lg:space-x-6">
+    <% @practice.tags.each do |tag| %>
+      <label>
+        <%= f.check_box :tag_ids, {
+          multiple: true,
+          class: "hidden peer",
+          onchange: "this.form.requestSubmit();"
+        },
+        tag.id,
+        false %>
+        <span class="p-2 text-muted-foreground cursor-pointer peer-checked:font-bold peer-checked:border-b-4 peer-checked:border-primary">
+          <%= tag.name %>
+        </span>
+      </label>
+    <% end %>
+  </div>
 <% end %>

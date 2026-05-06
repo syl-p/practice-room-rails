@@ -1,0 +1,2 @@
+module Practices::PracticeActivitiesHelper
+end

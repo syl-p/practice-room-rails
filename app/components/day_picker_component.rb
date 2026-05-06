@@ -27,6 +27,7 @@ class DayPickerComponent < ViewComponent::Base
     @practice_entries.select { |entry| entry.created_at.to_date == day }.any?
   end
 
+  # @param [Date] day
   def day_classes(day)
     classes = "block text-center p-1 rounded-lg relative"
     classes += " border-2" if active?(day)

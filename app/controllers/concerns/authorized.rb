@@ -11,6 +11,8 @@ module Authorized
     end
   end
 
+  # @param [ApplicationRecord] record
+  # @param [Symbol | nil] query
   def authorize!(record, query = nil)
     if self.before_authorize_method
       self.send(self.before_authorize_method)
@@ -40,6 +42,7 @@ module Authorized
 
 
   private
+  # @return [ApplicationRecord] record
   def get_policy(record)
     "#{record.class}Policy".constantize.new(Current.session&.user, record)
   rescue NameError

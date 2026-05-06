@@ -20,7 +20,7 @@
             <!-- Checked: "text-indigo-900", Not Checked: "text-gray-900" -->
             <span id="privacy-setting-0-label" class="block text-sm font-medium"> <%= status %>
             </span>
-                <!-- Checked: "text-indigo-700", Not Checked: "text-gray-500" -->
+            <!-- Checked: "text-indigo-700", Not Checked: "text-gray-500" -->
             <span id="privacy-setting-0-description" class="block text-sm"></span>
           </span>
             </label>
@@ -32,7 +32,7 @@
         <legend>Media associés</legend>
         <div class="flex space-x-3"
              data-controller="media-preview"
-             data-media-preview-medium-selected-value="<%= @activity.media.pluck(:id).to_json %>">
+             data-media-preview-medium-selected-value="<%= @activity.media.to_json %>">
             <ul class="flex space-x-3" data-media-preview-target="selectedList">
             </ul>
             <%= link_to media_path(selected_ids: @activity.media.pluck(:id)),
