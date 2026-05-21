@@ -5,14 +5,16 @@ class RegistrationControllerTest < ActionDispatch::IntegrationTest
   #   assert true
   # end
 
-  test "create new user and sign in" do
+  test "create new user, redirect to new practice" do
     post registration_path(params: {
       user: {
         username: "test",
-        email: "test@test.test"
+        email_address: "test@test.test",
+        password: "password",
+        password_confirmation: "password"
       }
     })
 
-    assert_response :success
+    assert_redirected_to root_path
   end
 end

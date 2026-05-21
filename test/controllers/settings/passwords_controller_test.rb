@@ -32,9 +32,9 @@ class Settings::PasswordsControllerTest < ActionDispatch::IntegrationTest
     # success
     put settings_password_path, params: {
       user: {
-        password_challenge: "passwords",
-        password: "password",
-        password_confirmation: "password"
+        password_challenge: "password",
+        password: "passwords",
+        password_confirmation: "passwords"
       }
     }
 

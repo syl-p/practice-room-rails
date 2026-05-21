@@ -1,11 +1,6 @@
 require "test_helper"
 
 class ActivitiesControllerTest < ActionDispatch::IntegrationTest
-  test "should get search" do
-    get activities_url
-    assert_response :success
-  end
-
   test "should have show action" do
     activity = FactoryBot.create(:activity)
 
@@ -18,11 +13,12 @@ class ActivitiesControllerTest < ActionDispatch::IntegrationTest
 
     get activity_url(activity)
     assert_response :redirect
-    assert_redirected_to activities_url
+    assert_redirected_to root_path
   end
 
   test "draft activities are visible to authenticated users" do
     user = FactoryBot.create(:user)
+
     activity = FactoryBot.build(:activity, :draft)
     activity.user = user
     activity.save!

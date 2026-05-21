@@ -7,12 +7,12 @@ class CommentsControllerTest < ActionDispatch::IntegrationTest
     assert_response :redirect
   end
 
-  test "authenticated user can post a comment" do
+  test "authenticated user can post a comment with turbo" do
     user = FactoryBot.create(:user, password: "password")
     sign_in(user)
 
     activity = FactoryBot.create(:activity, :public)
-    post activity_comments_url(activity_id: activity.id), params: { comment: { content: "This is a test comment." } }
+    post activity_comments_url(activity_id: activity.id), params: { comment: { content: "This is a test comment." } }, as: :turbo_stream
     assert_response :success
   end
 end

@@ -1,25 +1,31 @@
-<% current_practice_id = session[:current_practice_id] %>
-<%= render BtnGroupComponent.new do %>
-  <%= ui_action_to "Ajouter à ma pratique", practice_practice_activities_path(practice_id: current_practice_id, activity_id: activity.id),
-                   as: :button, method: :post, data: {turbo_frame: "_top"} %>
+<% if Current.user.cached_practices.any? %>
+	<% current_practice_id = session[:current_practice_id] %>
+	<%= render BtnGroupComponent.new do %>
+		<%= ui_action_to "Ajouter à ma pratique", practice_practice_activities_path(practice_id: current_practice_id, activity_id: activity.id),
+										as: :button, method: :post, data: {turbo_frame: "_top"} %>
 
-  <%= render DropdownComponent.new(variant: :outline) do |component| %>
-    <% component.with_trigger_btn do %>
-      <% icon "chevron-down" %>
-    <% end %>
-    <% component.with_dropdown_menu do %>
-      <ul class="py-1" role="none">
-        <% Current.user.cached_practices.each do |practice| %>
-          <li>
-            <%= button_to practice.name, practice_practice_activities_path(practice_id: practice.id, activity_id: activity.id),
-                          method: :post, class: "block px-4 py-2 text-sm text-gray-700" %></li>
-        <% end %>
-        <li>
-          <%= link_to "Créér une nouvelle pratique", new_practices_path,
-                      data: {turbo: false},
-                      class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer" %>
-        </li>
-      </ul>
-    <% end %>
-  <% end %>
+		<%= render DropdownComponent.new(variant: :outline) do |component| %>
+			<% component.with_trigger_btn do %>
+				<% icon "chevron-down" %>
+			<% end %>
+			<% component.with_dropdown_menu do %>
+				<ul class="py-1" role="none">
+					<% Current.user.cached_practices.each do |practice| %>
+						<li>
+							<%= button_to practice.name, practice_practice_activities_path(practice_id: practice.id, activity_id: activity.id),
+														method: :post, class: "block px-4 py-2 text-sm text-gray-700" %></li>
+					<% end %>
+					<li>
+						<%= link_to "Créér une nouvelle pratique", new_practices_path,
+												data: {turbo: false},
+												class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer" %>
+					</li>
+				</ul>
+			<% end %>
+		<% end %>
+	<% end %>
+<% else %>
+	<%= link_to "Créér une nouvelle pratique", new_practices_path,
+												data: {turbo: false},
+												class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer" %>
 <% end %>

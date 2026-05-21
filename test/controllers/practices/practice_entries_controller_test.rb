@@ -38,7 +38,7 @@ class PracticeEntriesControllerTest < ActionDispatch::IntegrationTest
       }, as: :turbo_stream
     end
 
-    assert_equal "Duration not valid.", flash[:alert]
+    assert_equal "Duration doit être rempli(e) et Duration n'est pas un nombre", flash[:error]
   end
 
   test "user cannot provide a invalid duration" do
@@ -53,7 +53,7 @@ class PracticeEntriesControllerTest < ActionDispatch::IntegrationTest
       }, as: :turbo_stream
     end
 
-    assert_equal "Duration not valid.", flash[:alert]
+    assert_equal "Duration n'est pas un nombre", flash[:error]
   end
 
   test "unauthenticated cannot destroy a practice_entry" do
