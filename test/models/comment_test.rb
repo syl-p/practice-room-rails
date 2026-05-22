@@ -9,7 +9,7 @@ class CommentTest < ActiveSupport::TestCase
   test "comment should have content" do
     comment = FactoryBot.build(:comment, content: nil)
     assert_not comment.valid?
-    assert_includes comment.errors[:content], "can't be blank"
+    assert_includes comment.errors[:content], "doit être rempli(e)"
   end
 
   test "should associate comment to a commentable model" do

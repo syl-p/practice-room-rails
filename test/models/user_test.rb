@@ -6,27 +6,29 @@ class UserTest < ActiveSupport::TestCase
     assert user.valid?
   end
 
+=begin
   test "username should be composed of characters and numbers" do
     user = FactoryBot.build(:user)
     # TODO
   end
+=end
 
   test "should be invalid without an email address" do
     user = FactoryBot.build(:user, email_address: nil)
     assert_not user.valid?
-    assert_includes user.errors[:email_address], "can't be blank"
+    assert_includes user.errors[:email_address], "doit être rempli(e)"
   end
 
   test "should be invalid without a password" do
     user = FactoryBot.build(:user, password: nil)
     assert_not user.valid?
-    assert_includes user.errors[:password], "can't be blank"
+    assert_includes user.errors[:password], "doit être rempli(e)"
   end
 
   test "password must be confirmed" do
     user = FactoryBot.build(:user, password: "password", password_confirmation: "different")
     assert_not user.valid?
-    assert_includes user.errors[:password_confirmation], "doesn't match Password"
+    assert_includes user.errors[:password_confirmation], "ne concorde pas avec Password"
   end
 
   test "check email address format" do
@@ -39,6 +41,6 @@ class UserTest < ActiveSupport::TestCase
     FactoryBot.create(:user, email_address: "test@test.test")
     user = FactoryBot.build(:user, email_address: "test@test.test")
     assert_not user.valid?
-    assert_includes user.errors[:email_address], "has already been taken"
+    assert_includes user.errors[:email_address], "est déjà utilisé(e)"
   end
 end
