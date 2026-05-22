@@ -17,8 +17,6 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
-  (method, options = {})
-
   def text_area(method, options = {})
     form_group(method, options) do
       super(method, merge_default_classes(options, TailwindHelper::TEXT_AREA_CLASSES))

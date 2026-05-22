@@ -16,14 +16,18 @@ class PracticesController < ApplicationController
 
   def create
     @practice = Practice.new(practice_params)
+    @practice.user = Current.user
 
     tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
     if tags.present?
       @practice.tags = find_or_create_tags(tags)
     end
 
-    Current.user.practices << @practice
-    redirect_to @practice, flash: { success: "Practice was successfully created." }
+    if @practice.save
+      redirect_to @practice, flash: { success: "Practice was successfully created." }
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def update
