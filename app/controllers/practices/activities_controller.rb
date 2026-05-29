@@ -9,6 +9,7 @@ class Practices::ActivitiesController < ApplicationController
 
   def index
     @activities = Practices::ActivitiesService.new(@practice.id, tag_ids).call
+
     respond_to do |format|
       format.turbo_stream do
         render turbo_stream: [

@@ -33,8 +33,9 @@
             </h2>
             <%= render partial: "practices/activities/filters", locals: {practice: @practice} %>
         </header>
-        <%= turbo_frame_tag :activities, src: practice_activities_path(practice_id: @practice.id), loading: :lazy do %>
-          ...
+				
+        <%= turbo_frame_tag :activities do %>
+          <%= render partial: "practices/activities/list", locals: { activities: @practice.activities, practice: @practice } %>
         <% end %>
     </article>
 </section>
