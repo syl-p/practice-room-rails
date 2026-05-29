@@ -15,9 +15,10 @@
         <% else %>
           <%= link_to path_for(wd), class: day_classes(wd) do %>
             <%= day_dom %>
-
             <% if has_entries?(wd) %>
-              <div class="absolute top-0 right-0 -mt-1 -mr-1 rounded-full bg-primary w-3 h-3"></div>
+							<%= render TooltipComponent.new("#{helpers.display_time(entries_duration_for(wd))}", position: :right) do %>
+								<div class="rounded-full bg-primary w-3 h-3 p-1"></div>
+							<% end %>
             <% end %>
           <% end %>
         <% end %>

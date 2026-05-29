@@ -5,7 +5,7 @@ class DayPickerComponent < ViewComponent::Base
   # @param [Date] current_date
   def initialize(practice:, current_date:)
     @practice = practice
-    @practice_entries = @practice.practice_entries.where(date: @start_at..@end_at)
+    @practice_entries = @practice.practice_entries.where(date: @start_at..@end_at).select("COALESCE(SUM(duration),0) as duration, created_at").group("practice_entries.id")
     @current_date = current_date
 
     @start_at = @current_date.beginning_of_week
@@ -27,12 +27,17 @@ class DayPickerComponent < ViewComponent::Base
     @practice_entries.select { |entry| entry.created_at.to_date == day }.any?
   end
 
+  def entries_duration_for(day)
+    entry = @practice_entries.find { |entry| entry.created_at.to_date == day }
+    entry ? entry.duration : 0
+  end
+
   # @param [Date] day
   def day_classes(day)
     classes = "block text-center p-1 rounded-lg relative"
     classes += " border-2" if active?(day)
     classes += " border" unless active?(day)
-    classes += " shadow-lg bg-primary text-white" if today?(day)
+    classes += " shadow-lg bg-secondary" if today?(day)
     classes
   end
 
