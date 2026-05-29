@@ -5,7 +5,7 @@ class Tag < ApplicationRecord
     joins("INNER JOIN taggings tp
           ON tp.tag_id = tags.id
           AND tp.taggable_type = 'Practice'
-          AND tp.taggable_id = #{practice_id}")
+          AND tp.taggable_id = ?", practice_id)
       .joins("INNER JOIN taggings ta
               ON ta.tag_id = tags.id
               AND ta.taggable_type = 'Activity'")
