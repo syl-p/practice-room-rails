@@ -1,7 +1,7 @@
 class Practices::PracticeActivitiesController < ApplicationController
-  before_action :set_practice_activity, only: :destroy
-  before_action :set_practice, only: :create
+  before_action :set_practice
   before_action :set_activity, only: :create
+  before_action :set_practice_activity, only: :destroy
 
   def create
     authorize!(@practice, :attach?)
@@ -15,7 +15,8 @@ class Practices::PracticeActivitiesController < ApplicationController
   end
 
   def destroy
-    authorize!(@practice, :detach?)
+    authorize! @practice_activity
+
     @practice_activity.destroy
     flash[:success] = "Activity Detached!"
     redirect_to practice_path(@practice)
@@ -31,6 +32,6 @@ class Practices::PracticeActivitiesController < ApplicationController
   end
 
   def set_practice_activity
-    @practice_activity = PracticeActivity.find(params[:id])
+    @practice_activity = PracticeActivity.find_by(practice_id: params[:practice_id], activity_id: params[:id])
   end
 end

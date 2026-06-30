@@ -39,9 +39,13 @@ Rails.application.routes.draw do
 
   resources :practice_activities, only: [] do
     scope module: :practice_activities do
-      resources :goals, only: [ :show, :new, :create ] do
-        resources :goal_progresses, only: [ :new, :create ]
-      end
+      resources :goals, only: [ :new, :create ]
+    end
+  end
+
+  resources :goals, only: :show do
+    scope module: :goals do
+      resources :goal_progresses, only: [ :index, :create ]
     end
   end
 

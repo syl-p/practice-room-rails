@@ -8,6 +8,7 @@ class User < ApplicationRecord
   has_many :goals
   has_many :notifications
   has_and_belongs_to_many :bookmarks, class_name: "Activity", join_table: "bookmarks"
+
   validates :username, presence: true, uniqueness: { case_sensitive: false }
   validates :email_address, presence: true, uniqueness: { case_sensitive: false }
   validates :email_address, format: { with: URI::MailTo::EMAIL_REGEXP, message: "must be a valid email address" }
@@ -17,13 +18,21 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
+  after_touch :delete_cached_practices
+
   def cached_practices
-    cache_key = [ self, "practices", Date.current ]
+  	today = Date.current
+    cache_key = [ self, "practices", today ]
     Rails.cache.fetch(cache_key, expires_in: 1.day) do
-      practices.left_joins(:practice_entries)
-               .select("practices.*, COALESCE(SUM(practice_entries.duration),0) as duration")
+      practices.left_joins(:today_entries)
                .group("practices.id")
+               .select("practices.*, COALESCE(SUM(practice_entries.duration),0) as duration")
     end
+  end
+
+  def delete_cached_practices
+    cache_key = [ self, "practices", Date.current ]
+    Rails.cache.delete(cache_key)
   end
 
   def update_with_password(params)

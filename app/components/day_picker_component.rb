@@ -5,7 +5,7 @@ class DayPickerComponent < ViewComponent::Base
   # @param [Date] current_date
   def initialize(practice:, current_date:)
     @practice = practice
-    @practice_entries = @practice.practice_entries.where(date: @start_at..@end_at).select("COALESCE(SUM(duration),0) as duration, created_at").group("practice_entries.id")
+    @practice_entries = @practice.practice_entries.today.select("COALESCE(SUM(duration),0) as duration, created_at").group("practice_entries.id")
     @current_date = current_date
 
     @start_at = @current_date.beginning_of_week

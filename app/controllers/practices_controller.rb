@@ -3,6 +3,8 @@ class PracticesController < ApplicationController
   before_action :set_stats, only: [ :show ]
 
   def show
+    authorize! @practice
+
     redirect_to new_practice_path, flash: { error: "Veuillez créer une pratique" } unless @practice.present?
     session[:current_practice_id] = @practice.id
   end
@@ -19,6 +21,7 @@ class PracticesController < ApplicationController
     @practice.user = Current.user
 
     tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
+
     if tags.present?
       @practice.tags = find_or_create_tags(tags)
     end
@@ -31,7 +34,10 @@ class PracticesController < ApplicationController
   end
 
   def update
+    authorize! @practice
+
     tags = params[:tag_labels].to_s.split(",").reject(&:blank?)
+
     if tags.present?
       @practice.tags = find_or_create_tags(tags)
     end
@@ -44,6 +50,8 @@ class PracticesController < ApplicationController
   end
 
   def destroy
+    authorize! @practice
+
     @practice.destroy!
     redirect_to root_path, status: :see_other, flash: { success: "Practice was successfully destroyed." }
   end

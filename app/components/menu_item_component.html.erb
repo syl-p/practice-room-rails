@@ -1,0 +1,15 @@
+<% if button? %>
+  <%= button_to @href, method: @method,
+        class: "block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 cursor-pointer" do %>
+    <%= content %>
+  <% end %>
+<% elsif link? %>
+  <%= link_to @href,
+        class: "block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" do %>
+    <%= content %>
+  <% end %>
+<% else %>
+  <div class="block px-4 py-2 text-sm text-gray-700" role="none">
+    <%= content %>
+  </div>
+<% end %>

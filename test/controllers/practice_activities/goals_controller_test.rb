@@ -17,6 +17,6 @@ class PracticeActivities::GoalsControllerTest < ActionDispatch::IntegrationTest
     end
 
     last_goal = @practice_activity.goals.last
-    assert_redirected_to practice_activity_goal_path(practice_activity_id: @practice_activity.id, id: last_goal&.id)
+    assert_redirected_to goal_path(id: last_goal&.id)
   end
 end

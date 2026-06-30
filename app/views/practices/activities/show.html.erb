@@ -4,7 +4,7 @@
           <%= icon "chevron-left" %>
           <span class="block">Retour à ma pratique</span>
         <% end %>
-        <%= render partial: "practices/activities/dropdown", locals: {practice: @practice, activity: @activity} %>
+        <%= render partial: "practices/activities/dropdown", locals: {practice: @practice, activity: @activity, practice_activity: @practice_activity} %>
     </header>
 
     <%= render partial: "practices/activities/card", locals: {tag: :header, practice: @practice, activity: @activity } %>
@@ -26,7 +26,7 @@
           <% component.with_tab(id: "goal", label: "Objectif", button_class: "block lg:hidden") do %>
             <% if @practice_activity.goals.present? %>
               <!-- Mettre à jour les progrès -->
-              <%= turbo_frame_tag :goal_tab, src: practice_activity_goal_path(practice_activity_id: @practice_activity.id, id: @practice_activity.goals.first.id), loading: :lazy do %>
+              <%= turbo_frame_tag :goal_tab, src: goal_path(id: @practice_activity.goals.first.id), loading: :lazy do %>
                 ...
               <% end %>
             <% else %>
@@ -55,7 +55,7 @@
         <div class="rounded-lg bg-background border shadow p-4">
           <% if @practice_activity.goals.present? %>
             <!-- Mettre à jour les progrès -->
-            <%= turbo_frame_tag :goal_sidebar, src: practice_activity_goal_path(practice_activity_id: @practice_activity.id, id: @practice_activity.goals.first.id), loading: :lazy do %>
+            <%= turbo_frame_tag :goal_sidebar, src: goal_path(id: @practice_activity.goals.first.id), loading: :lazy do %>
               ...
             <% end %>
           <% else %>

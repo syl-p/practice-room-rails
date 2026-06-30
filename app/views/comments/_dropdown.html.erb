@@ -4,16 +4,18 @@
   <% end %>
 
   <% component.with_dropdown_menu do %>
-    <ul class="py-1" role="none">
+    <%= render MenuComponent.new() do |menu| %>
       <% if can? comment, :update? %>
-        <li><%= link_to "Editer", edit_comment_path(comment) %></li>
-      <% end %>
+        <%= menu.with_item(href: edit_comment_path(comment)) do %>
+          Editer
+        <% end %>
+       <% end %>
 
-      <% if can? comment, :delete? %>
-        <li><%= button_to comment_path(comment), method: :delete, data: {turbo: false} do %>
-            Supprimer
-          <% end %></li>
+      <% if can? comment, :destroy? %>
+        <%= menu.with_item(href: comment_path(comment), method: :delete, data: {turbo: false}) do %>
+          Supprimer
+        <% end %>
       <% end %>
-    </ul>
+    <% end %>
   <% end %>
 <% end %>

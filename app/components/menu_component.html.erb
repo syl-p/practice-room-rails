@@ -1,0 +1,11 @@
+<% if header %>
+  <div class="py-1" role="none">
+    <%= header %>
+  </div>
+<% end %>
+
+<ul class="py-1" role="none">
+  <% items.each do |item| %>
+    <li><%= item %></li>
+  <% end %>
+</ul>

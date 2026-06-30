@@ -1,21 +1,19 @@
 <%= render DropdownComponent.new(variant: :outline) do |component| %>
   <% component.with_trigger_btn do %>
-    ...
+    <%= icon "ellipsis-horizontal" %>
   <% end %>
 
   <% component.with_dropdown_menu do %>
-    <ul class="py-1" role="none">
+    <%= render MenuComponent.new() do |menu| %>
       <% if can? activity, :edit? %>
-        <li>
-            <%= link_to "Editer", edit_activity_path(activity), class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer" %>
-        </li>
+        <%= menu.with_item(href: edit_activity_path(activity)) do %>
+          Editer
+        <% end %>
       <% end %>
-      <li>
-        <%= button_to "Détacher",
-                      practice_practice_activity_path(practice, activity),
-                      class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer",
-                      method: :delete %>
-      </li>
-    </ul>
+
+      <%= menu.with_item(href: practice_practice_activity_path(practice, activity), method: :delete) do %>
+        Détacher
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>

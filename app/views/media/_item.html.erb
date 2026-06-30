@@ -15,12 +15,17 @@
   <div>
     <%= render DropdownComponent.new(variant: :ghost) do |component| %>
       <% component.with_trigger_btn do %>
-        ...
+        <%= icon "ellipsis-horizontal" %>
       <% end %>
 
       <% component.with_dropdown_menu do %>
-        <ul class="py-1" role="none">
-        </ul>
+        <%= render MenuComponent.new do |menu| %>
+          <% if can? medium, :destroy? %>
+            <%= menu.with_item(href: medium_path(medium), method: :delete) do %>
+              <span>Supprimer</span>
+            <% end %>
+          <% end %>
+        <% end %>
       <% end %>
     <% end %>
   </div>

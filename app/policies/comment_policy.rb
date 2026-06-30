@@ -3,7 +3,7 @@ class CommentPolicy <  ApplicationPolicy
     user&.id == record.user_id
   end
 
-  def delete?
+  def destroy?
     user&.id == record.user_id
   end
 end

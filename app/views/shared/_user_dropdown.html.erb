@@ -15,23 +15,25 @@
   <% end %>
 
   <% component.with_dropdown_menu do %>
-    <div class="py-1" role="none">
-      <p class="truncate px-3.5 py-3">
-        <span class="block text-xs text-gray-500" role="none">Connecté en tant que...</span>
-        <span class="mt-0.5 font-semibold" role="none">
-          <%= Current.user.username %>
-        </span>
-      </p>
-    </div>
-    <ul class="py-1" role="none">
-      <% dropdown_menu_links.each do |link| %>
-        <li>
-          <%= link_to link[:name], link[:href], class: "block px-4 py-2 text-sm text-gray-700" %>
-        </li>
+    <%= render MenuComponent.new do |menu| %>
+      <%= menu.with_item() do %>
+        <p class="truncate">
+          <span class="block text-xs text-gray-500" role="none">Connecté en tant que...</span>
+          <span class="mt-0.5 font-semibold" role="none">
+            <%= Current.user.username %>
+          </span>
+        </p>
       <% end %>
-      <li>
-        <%= button_to "Se déconnecter", session_path, method: :delete, class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer" %>
-      </li>
-    </ul>
+
+      <%= menu.with_item(href: edit_settings_profile_path) do %>
+        Vos informations
+      <% end %>
+      <%= menu.with_item(href: Current.user) do %>
+        Votre profil
+      <% end %>
+      <%= menu.with_item(href: session_path, method: :delete) do %>
+        Se déconnecter
+      <% end %>
+    <% end %>
   <% end %>
 <% end %>

@@ -23,4 +23,13 @@ class MediumTest < ActiveSupport::TestCase
 
     assert_not medium.errors.any?
   end
+
+  # test "Medium prevent file size over 3MB" do
+  #   file = File.new(Rails.root.join("test/fixtures/files/large_file.pdf"))
+  #   user = FactoryBot.create(:user)
+  #   medium = Medium.create file: file, user: user
+
+  #   assert medium.errors.any?
+  #   assert_equal medium.errors.messages[:file].first, "Must be a valid file size"
+  # end
 end

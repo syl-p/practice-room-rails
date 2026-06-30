@@ -11,7 +11,7 @@ class ActivityPolicy < ApplicationPolicy
     user&.id == record.user_id
   end
 
-  def delete?
+  def destroy?
     user&.id == record.user_id
   end
 end

@@ -1,6 +1,5 @@
-class PracticeActivities::GoalProgressesController < ApplicationController
-  before_action :goal_progress_params, only: [ :create ]
-  before_action :set_practice_activity, only: [ :index, :create ]
+class Goals::GoalProgressesController < ApplicationController
+  before_action :goal_progress_params, only: [ :index, :create ]
   before_action :set_goal, only: [ :index, :create ]
 
   def index
@@ -20,10 +19,6 @@ class PracticeActivities::GoalProgressesController < ApplicationController
   end
 
   private
-  def set_practice_activity
-    @practice_activity = PracticeActivity.find(params[:practice_activity_id])
-  end
-
   def set_goal
     @goal = Goal.find(params[:goal_id])
   end

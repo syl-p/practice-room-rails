@@ -1,0 +1,13 @@
+<% if @goal_progress.persisted? %>
+	<%= turbo_stream.prepend :progresses do %>
+		<%= render partial: "goals/goal_progresses/goal_progress",
+			locals: {progress: @goal_progress, goal: @goal} %>
+	<% end %>
+<% else %>
+	<%= turbo_stream.update dom_id(@goal_progress) do %>
+		<%= render partial: "goals/goal_progresses/form",
+			locals: {goal: @goal, goal_progress: @goal_progress} %>
+	<% end %>
+<% end %>
+
+<%= turbo_flash_stream %>

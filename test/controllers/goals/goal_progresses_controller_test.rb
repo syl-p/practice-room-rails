@@ -1,7 +1,7 @@
 require "test_helper"
 
-class PracticeActivities::GoalProgressesControllerTest < ActionDispatch::IntegrationTest
-  test "one goal progress by day" do
+class Goals::GoalProgressesControllerTest < ActionDispatch::IntegrationTest
+	test "one goal progress by day" do
     practice = FactoryBot.create(:practice)
     activity = FactoryBot.create(:activity)
     sign_in(practice.user)
@@ -11,7 +11,7 @@ class PracticeActivities::GoalProgressesControllerTest < ActionDispatch::Integra
     goal = FactoryBot.create(:goal, practice_activity: practice_activity)
 
     assert_difference("GoalProgress.count") do
-      post practice_activity_goal_goal_progresses_path(practice_activity_id: practice_activity.id, goal_id: goal.id), params: {
+      post goal_goal_progresses_path(goal_id: goal.id), params: {
         goal_progress: {
           value: 30
         }
@@ -22,7 +22,7 @@ class PracticeActivities::GoalProgressesControllerTest < ActionDispatch::Integra
 
     # Already created today
     assert_no_difference("GoalProgress.count") do
-      post practice_activity_goal_goal_progresses_path(practice_activity_id: practice_activity.id, goal_id: goal.id), params: {
+      post goal_goal_progresses_path(goal_id: goal.id), params: {
         goal_progress: {
           value: 50
         }
