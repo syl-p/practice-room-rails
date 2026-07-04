@@ -1,9 +1,6 @@
 <article class="container mx-auto">
     <header class="flex space-x-3 items-center justify-between mb-6">
-        <%= ui_action_to practice_path(@practice), as: :link, variant: :outline, class: "flex items-center" do %>
-          <%= icon "chevron-left" %>
-          <span class="block">Retour à ma pratique</span>
-        <% end %>
+        <%= render partial: "practices/back_to_practice_link" %>
         <%= render partial: "practices/activities/dropdown", locals: {practice: @practice, activity: @activity, practice_activity: @practice_activity} %>
     </header>
 

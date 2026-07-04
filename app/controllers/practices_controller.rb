@@ -71,7 +71,7 @@ class PracticesController < ApplicationController
 
     def set_stats
       current_date = Date.today
-      practices_activities_service = PracticeEntriesService.new(
+      practices_entries_service = PracticeEntriesService.new(
         user: Current.user,
         practice_id: @practice.id,
         start_at: current_date.beginning_of_day,
@@ -79,8 +79,8 @@ class PracticesController < ApplicationController
       )
 
       @stats = {
-        more_than_10_mn_today: practices_activities_service.more_than_10_mn_today?,
-        have_3_exercises_today: practices_activities_service.have_3_exercises_today?
+        more_than_10_mn_today: practices_entries_service.more_than_10_mn_today?,
+        have_3_exercises_today: practices_entries_service.have_3_exercises_today?
       }
     end
 end

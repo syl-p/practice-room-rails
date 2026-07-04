@@ -1,11 +1,18 @@
 <section class="container mx-auto">
-  <header class="flex items-center mb-6">
-    <%= link_to practice_path(@practice), class: "flex-1 flex space-x-2 items-center text-sm" do %>
-      <%= icon "chevron-left" %>
-      <span class="block">Retour à ma pratique</span>
-    <% end %>
+  <header class="mb-6">
+    <%= render partial: "practices/back_to_practice_link" %>
+		<div class="mt-6">
+			<h2 class="font-semibold tracking-tight">
+				Statistiques pour votre pratique <%= @practice.name %>
+			</h2>
+			<p class="text-sm text-gray-500">
+				Ces éléments sont calculés à partir du temps total enregistré pour chaque activité de votre pratique.
+			</p>
+		</div>
   </header>
 
-  <h2 class="font-semibold tracking-tight mb-3">Statistiques pour votre pratique <%= @practice.name %></h2>
-  <%= render partial: "practices/progression/duration_by_tags", locals: {tags_with_duration: @stats[:tags_with_duration]} %>
+	<div class="space-y-6 lg:flex lg:justify-between lg:space-y-0 lg:space-x-6 mb-6">
+		<%= render partial: "practices/progression/duration_by_tags", locals: {tags_with_duration: @stats[:tags_with_duration]} %>
+		<%= render partial: "practices/progression/top_activities", locals: {top_practiced_activities: @stats[:top_practiced_activities]} %>
+	</div>
 </section>

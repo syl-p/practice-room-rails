@@ -8,7 +8,7 @@ class Practices::ActivitiesController < ApplicationController
   end
 
   def index
-    @activities = Practices::ActivitiesService.new(@practice.id, tag_ids).call
+    @activities = Practices::ActivitiesService.new(@practice).filter_by_tags(tag_ids)
 
     respond_to do |format|
       format.turbo_stream do
