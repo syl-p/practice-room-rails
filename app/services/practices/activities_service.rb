@@ -23,6 +23,12 @@ class Practices::ActivitiesService
   # @param [Number] limit
   # @return [Array<Activity>]
   def top_practiced_activities(limit = 10)
-    @practice.activities.joins(:practice_entries).where("practice_entries.user_id": @user.id).group(:id).order("SUM(practice_entries.duration) desc").limit(limit)
+    @practice.activities
+             .joins(:practice_entries)
+             .where("practice_entries.user_id" => @user.id)
+             .group(:id)
+             .select("activities.*, SUM(practice_entries.duration) as total_duration")
+             .order("total_duration desc")
+             .limit(limit)
   end
 end

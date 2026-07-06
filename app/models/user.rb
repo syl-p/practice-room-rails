@@ -21,7 +21,7 @@ class User < ApplicationRecord
   after_touch :delete_cached_practices
 
   def cached_practices
-  	today = Date.current
+    today = Date.current
     cache_key = [ self, "practices", today ]
     Rails.cache.fetch(cache_key, expires_in: 1.day) do
       practices.left_joins(:today_entries)

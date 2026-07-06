@@ -1,10 +1,11 @@
 <div class="bg-background border rounded p-6 w-full">
-	<h2 class="mb-3">Vos activités les plus pratiquées</h2>
+	<h2 class="mb-3 font-bold">Vos activités les plus pratiquées</h2>
 	<ul>
 		<% top_practiced_activities.each_with_index do |activity, index| %>
 			<li>
 				<span class="text-xl font-bold"><%= index + 1 %></span>.
 				<%= link_to activity.title, practice_activity_path(@practice, activity) %>
+				(<%= activity.total_duration %> minutes au total)
 			</li>
 		<% end %>
 	</ul>

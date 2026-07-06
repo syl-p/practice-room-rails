@@ -1,7 +1,7 @@
 require "test_helper"
 
 class Goals::GoalProgressesControllerTest < ActionDispatch::IntegrationTest
-	test "one goal progress by day" do
+  test "one goal progress by day" do
     practice = FactoryBot.create(:practice)
     activity = FactoryBot.create(:activity)
     sign_in(practice.user)
