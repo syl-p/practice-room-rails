@@ -1,7 +1,9 @@
-<% notifications.each do |notification| %>
-  <%= render notification %>
-<% end %>
-
-<% if notifications.blank? %>
+<% if notifications.any? %>
+	<ul class="divide-y divide-gray-200">
+		<% notifications.each do |notification| %>
+			<li><%= render notification %></li>
+		<% end %>
+	</ul>
+<% else %>
   <p class="px-4 py-2">Aucune notification.</p>
 <% end %>

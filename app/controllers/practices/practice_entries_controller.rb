@@ -7,8 +7,7 @@ class Practices::PracticeEntriesController < ApplicationController
   def index
     session[:current_practice_id] = @practice.id
     @current_date = parse_date(params[:date]) || Date.today
-    @practice_entries = @practice
-                                   .practice_entries.at(@current_date.beginning_of_day, @current_date.end_of_day)
+    @practice_entries = @practice.practice_entries.at(@current_date.beginning_of_day, @current_date.end_of_day)
   end
 
   def create

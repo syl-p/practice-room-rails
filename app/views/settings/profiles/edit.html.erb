@@ -6,7 +6,7 @@
     <%= form_with model: Current.user, url: settings_profile_path, builder: TailwindFormBuilder, data: {turbo: false} do |f| %>
       <fieldset class="border p-6 rounded-lg lg:col-span-4 mb-6">
         <legend>Informations générales</legend>
-        <%= render partial: 'registration/avatar_uploader', locals: {user: Current.user, f:} %>
+        <%= render partial: 'settings/profiles/avatar_uploader', locals: {user: Current.user, f:} %>
         <%= f.text_field :username %>
         <%= f.email_field :email_address %>
         <%= f.text_area :bio %>

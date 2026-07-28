@@ -10,6 +10,7 @@ class Settings::ProfilesController < ApplicationController
     if Current.user.update(user_params)
       redirect_to edit_settings_profile_path, notice: "Vos nouvelles informations ont été enregistrées !"
     else
+      Current.user.avatar.purge
       render :edit, status: :unprocessable_entity
     end
   end

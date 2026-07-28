@@ -12,15 +12,7 @@ FactoryBot.define do
       end
 
       after(:create) do |user, evaluator|
-        practices = FactoryBot.create_list(:practice, 3, user: user, tag_pool: evaluator.tag_pool)
-        activities = FactoryBot.create_list(:activity, 5, user: user, tag_pool: evaluator.tag_pool)
-
-        practices.each do |practice|
-          activities.sample(rand(1..3)).each do |activity|
-            FactoryBot.create(:practice_activity, practice: practice, activity: activity)
-            FactoryBot.create(:goal, practice_activity: PracticeActivity.last, user: user)
-          end
-        end
+        FactoryBot.create_list(:practice, 3, :with_activities, user: user, tag_pool: evaluator.tag_pool)
       end
     end
   end

@@ -18,6 +18,9 @@ class User < ApplicationRecord
 
   has_one_attached :avatar
 
+  validate :check_file_extension
+  validate :check_file_size
+
   after_touch :delete_cached_practices
 
   def cached_practices
@@ -50,5 +53,21 @@ class User < ApplicationRecord
     params.delete(:password)
     params.delete(:password_confirmation)
     update(params)
+  end
+
+  def check_file_extension
+    return unless avatar.attached?
+
+    unless avatar.content_type.in?(%w[image/jpeg image/jpg image/png])
+      errors.add :avatar, "Must be a valid file extension"
+    end
+  end
+
+  def check_file_size
+    return unless avatar.attached?
+
+    if avatar.blob.byte_size > 3.megabytes
+      errors.add :avatar, "Must be a valid file size"
+    end
   end
 end

@@ -1,11 +1,11 @@
 <%
   practices = Current.user.cached_practices
-  selected_practice_id = params[:practice_id] || session[:current_practice_id] || practices.first&.id
-  selected_practice = practices.find_by(id: selected_practice_id)
+  selected_practice_id = params[:practice_id] || session[:current_practice_id]
+  selected_practice = selected_practice_id.present? ? practices.find_by(id: selected_practice_id) : practices.first
   others_practices = practices - [selected_practice]
 %>
 
-<% if practices.any? %>
+<% if practices.any? && selected_practice.present? %>
   <%= render BtnGroupComponent.new do %>
     <%= ui_action_to "#{selected_practice.name} (#{display_time(selected_practice.duration)})" , practice_path(selected_practice), as: :link, variant: :secondary, data: {turbo: false} %>
     <%= render DropdownComponent.new(variant: :outline) do |component| %>

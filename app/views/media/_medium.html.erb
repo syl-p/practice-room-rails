@@ -11,14 +11,14 @@
     <p class="truncate flex-1"><%= medium.file.filename %></p>
     <%= render DropdownComponent.new(variant: :outline) do |component| %>
       <% component.with_trigger_btn do %>
-        ...
+        <%= icon "ellipsis-horizontal" %>
       <% end %>
       <% component.with_dropdown_menu do %>
-        <ul class="py-1" role="none">
-          <li>
-            <%= button_to "Supprimer", medium, method: :delete, class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer" %>
-          </li>
-        </ul>
+				<%= render MenuComponent.new do |menu| %>
+					<% menu.with_item do %>
+						<%= button_to "Supprimer", medium, method: :delete, class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer" %>
+					<% end %>
+				<% end %>
       <% end %>
     <% end %>
   </div>

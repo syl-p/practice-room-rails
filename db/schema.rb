@@ -90,8 +90,9 @@ ActiveRecord::Schema[8.0].define(version: 2026_04_19_141134) do
   create_table "goals", force: :cascade do |t|
     t.integer "practice_activity_id"
     t.integer "user_id"
-    t.string "unit"
-    t.float "target_value"
+    t.string "unit", null: false
+    t.float "target_value", null: false
+    t.boolean "active", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["practice_activity_id"], name: "index_goals_on_practice_activity_id"

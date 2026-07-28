@@ -11,7 +11,7 @@ class AvatarComponent < ViewComponent::Base
   end
 
   def avatar_path
-    url_for(@user.avatar) if @user.avatar.attached? && @user.avatar.blob.present?
+    url_for(@user.avatar) if @user.avatar.attached? && @user.avatar.blob.persisted?
   end
 
   def size_classes

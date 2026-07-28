@@ -12,5 +12,11 @@ FactoryBot.define do
       practice.tags << evaluator.tag_pool.sample(5) if evaluator.tag_pool.any?
       practice.save
     end
+
+    trait :with_activities do
+      after(:create) do |practice|
+        create_list(:practice_activity, rand(1..5), :with_goal, practice: practice)
+      end
+    end
   end
 end

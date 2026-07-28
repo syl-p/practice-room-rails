@@ -3,8 +3,8 @@ class CreateGoals < ActiveRecord::Migration[8.0]
     create_table :goals do |t|
       t.belongs_to :practice_activity
       t.belongs_to :user
-      t.string :unit
-      t.float :target_value
+      t.string :unit, null: false
+      t.float :target_value, null: false
       t.boolean :active, default: true
       t.timestamps
 

@@ -1,7 +1,6 @@
 <%= form_with id: dom_id(goal_progress),
 							model: [goal, goal_progress],
-							data: {turbo: true},
-							local: true, builder: TailwindFormBuilder do |form| %>
+							builder: TailwindFormBuilder do |form| %>
   <div class="mb-4 flex space-x-3 items-center">
     <%= form.number_field :value, step: 0.01, class: "mb-3" %>
     <span class="block">/ <%= @goal.target_value %> <%= @goal.unit %></span>

@@ -133,7 +133,6 @@ export default class extends Controller {
 
     // ON FINISH
     xhr.onload = () => {
-      const contentType = xhr.getResponseHeader("Content-Type")
       progress.classList.add('hidden')
 
       if(xhr.status !== 200) {
