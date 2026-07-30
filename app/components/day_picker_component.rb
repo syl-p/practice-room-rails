@@ -8,7 +8,9 @@ class DayPickerComponent < ViewComponent::Base
     @current_date = current_date
     @start_at = @current_date.beginning_of_week
     @end_at = @current_date.end_of_week
-    @practice_entries = @practice.practice_entries.at(@start_at, @end_at).select("COALESCE(SUM(duration),0) as duration, created_at").group("practice_entries.id")
+    @practice_entries = @practice.practice_entries.at(@start_at, @end_at)
+      .select("COALESCE(SUM(duration),0) as duration, created_at")
+      .group("DATE(created_at)")
   end
 
   # @param [Date] day

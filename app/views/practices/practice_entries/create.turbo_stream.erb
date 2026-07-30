@@ -8,6 +8,10 @@
   <% end %>
 
   <%= turbo_stream.update :practice_entries_empty, "" %>
+
+	<%= turbo_stream.replace :date_picker do %>
+		<%= render DayPickerComponent.new(practice: @practice, current_date: Date.today) %>
+	<% end %>
 <% end %>
 
 <%= turbo_flash_stream %>

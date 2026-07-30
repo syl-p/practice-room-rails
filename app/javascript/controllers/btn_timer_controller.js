@@ -10,8 +10,6 @@ export default class extends Controller {
       "toggleBtn", "display", "elapsed", "input", "submitButton", "idle", "playing", "paused"]
 
   connect() {
-    this.state = "idle"
-
     this.startedAt = this.element.dataset.startedAt ? parseInt(this.element.dataset.startedAt, 10) : null
     this.elapsedTime = this.element.dataset.elapsedTime
         ? parseInt(this.element.dataset.elapsedTime, 10)
@@ -19,6 +17,7 @@ export default class extends Controller {
 
     this.timerInterval = null
 
+		// STATE CHECKING
     if (this.startedAt) {
 			this.state = "running"
 			this.#startInterval()

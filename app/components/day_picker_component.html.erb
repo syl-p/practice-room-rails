@@ -1,7 +1,7 @@
-<nav>
+<nav id="date_picker">
   <ul class="flex flex-nowrap space-x-3 items-center justify-center">
     <% (@start_at..@end_at).each do |wd| %>
-      <li>
+      <li id="<%= wd %>">
         <% day_dom = capture do %>
           <span class="block text-xs uppercase"><%= I18n.l(wd, format: "%a") %></span>
           <span class="block"><%= wd.day %></span>
