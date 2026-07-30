@@ -12,14 +12,14 @@
                      data: {btn_timer_target: "toggleBtn", action: "click->btn-timer#toggle"} do %>
       <!-- État idle -->
       <span data-btn-timer-target="idle" class="flex space-x-3 items-center">
-      Pratiquer
-    </span>
+				Pratiquer
+			</span>
 
       <!-- Display -->
       <span data-btn-timer-target="display" class="hidden flex space-x-3 items-center">
-      <span><%= icon "clock" %></span>
-      <span data-btn-timer-target="elapsed">--:--</span>
-    </span>
+      	<span><%= icon "clock" %></span>
+				<span data-btn-timer-target="elapsed">--:--</span>
+			</span>
 
       <!-- État playing -->
       <span data-btn-timer-target="playing" class="hidden flex space-x-3 items-center">

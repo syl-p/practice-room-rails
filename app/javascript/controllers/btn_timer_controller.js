@@ -19,8 +19,13 @@ export default class extends Controller {
 
     this.timerInterval = null
 
-    if(this.startedAt) {
-      this.#startInterval()
+    if (this.startedAt) {
+			this.state = "running"
+			this.#startInterval()
+    } else if (this.elapsedTime > 0) {
+			this.state = "paused"
+    } else {
+			this.state = "idle"
     }
 
     this.element.addEventListener('turbo:submit-end',  (event) => {
