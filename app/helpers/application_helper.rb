@@ -9,6 +9,18 @@ module ApplicationHelper
     Time.at(t).utc.strftime("%H:%M:%S")
   end
 
+  def human_duration(seconds)
+    if seconds >= 3600
+      hours = seconds / 3600
+      "#{hours} heure#{'s' unless hours == 1}"
+    elsif seconds >= 60
+      minutes = seconds / 60
+      "#{minutes} minute#{'s' unless minutes == 1}"
+    else
+      "#{seconds} seconde#{'s' unless seconds == 1}"
+    end
+  end
+
   # Rerender flash messages in ui with turbo stream
   def turbo_flash_stream
     safe_join(

@@ -1,22 +1,16 @@
-class SearchService < ApplicationService
+class SearchService
+  attr_reader :results
+
   def initialize(term)
     @term = term
-  end
-
-  def call
-    results = {
+    @results = {
       users: [],
       activities: []
     }
 
     return results unless @term.present?
 
-    users = User.where("username LIKE ?", "%#{@term}%").limit(5)
-    activities = Activity.where("title LIKE ?", "%#{@term}%").limit(10)
-
-    results = {
-      users: users,
-      activities: activities
-    }
+    @results[:users] = User.where("username LIKE ?", "%#{@term}%").limit(5)
+    @results[:activities] = Activity.where("title LIKE ?", "%#{@term}%").limit(10)
   end
 end

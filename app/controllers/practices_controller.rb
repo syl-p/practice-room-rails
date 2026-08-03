@@ -80,7 +80,7 @@ class PracticesController < ApplicationController
 
       @stats = {
         more_than_10_mn_today: practices_entries_service.more_than_10_mn_today?,
-        have_3_exercises_today: practices_entries_service.have_3_exercises_today?
+        have_3_activities_today: practices_entries_service.have_3_activities_today?
       }
     end
 end

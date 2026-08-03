@@ -5,7 +5,7 @@
 			<li>
 				<span class="text-xl font-bold"><%= index + 1 %></span>.
 				<%= link_to activity.title, practice_activity_path(@practice, activity) %>
-				(<%= activity.total_duration %> minutes au total)
+				(<%= human_duration activity.total_duration %>)
 			</li>
 		<% end %>
 	</ul>

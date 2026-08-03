@@ -1,4 +1,4 @@
-class Practices::PracticeEntriesService < ApplicationService
+class Practices::PracticeEntriesService
   attr_reader :practice_entries
 
   # @param [User] user
@@ -21,7 +21,7 @@ class Practices::PracticeEntriesService < ApplicationService
     }
   end
 
-  def have_3_exercises_today?
+  def have_3_activities_today?
     activity_count = @practice_entries.group(:activity_id).count
     {
       state: activity_count.keys.size,

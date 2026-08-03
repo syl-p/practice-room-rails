@@ -7,20 +7,19 @@
             Vos objectifs du jour
         </h2>
         <div class="flex space-x-6 flex-nowrap overflow-hidden overflow-x-auto w-full">
-            <%= render DonutStatComponent.new(
-        state: @stats[:more_than_10_mn_today][:state],
-        goal: @stats[:more_than_10_mn_today][:goal],
-        label_title: '10 minutes',
-        label_subtitle: 'Au moins 10 minutes de pratique'
-      ) %>
+					<%= render DonutStatComponent.new(
+						state: @stats[:more_than_10_mn_today][:state],
+						goal: @stats[:more_than_10_mn_today][:goal],
+						label_title: '10 minutes',
+						label_subtitle: 'Au moins 10 minutes de pratique'
+					) %>
 
-
-      <%= render DonutStatComponent.new(
-        state: @stats[:have_3_exercises_today][:state],
-        goal: @stats[:have_3_exercises_today][:goal],
-        label_title: '3 activitiés différentes',
-        label_subtitle: 'Pratiquez au moins 3 activitités'
-      ) %>
+					<%= render DonutStatComponent.new(
+						state: @stats[:have_3_activities_today][:state],
+						goal: @stats[:have_3_activities_today][:goal],
+						label_title: '3 activitiés différentes',
+						label_subtitle: 'Pratiquez au moins 3 activitités'
+					) %>
         </div>
     </article>
     <article data-controller="timer-manager">
