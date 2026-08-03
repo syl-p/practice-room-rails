@@ -7,7 +7,7 @@
 
 <% if practices.any? && selected_practice.present? %>
   <%= render BtnGroupComponent.new do %>
-    <%= ui_action_to "#{selected_practice.name} (#{display_time(selected_practice.duration)})" , practice_path(selected_practice), as: :link, variant: :secondary, data: {turbo: false} %>
+    <%= ui_action_to "#{selected_practice.name} (#{display_time(selected_practice.duration)})" , practice_path(selected_practice), as: :link, variant: :secondary, data: {turbo: false}, class: "overflow-hidden truncate" %>
     <%= render DropdownComponent.new(variant: :outline) do |component| %>
       <% component.with_trigger_btn do %>
         <%= icon "chevron-down" %>

@@ -71,7 +71,7 @@ class PracticesController < ApplicationController
 
     def set_stats
       current_date = Date.today
-      practices_entries_service = PracticeEntriesService.new(
+      practices_entries_service = Practices::PracticeEntriesService.new(
         user: Current.user,
         practice_id: @practice.id,
         start_at: current_date.beginning_of_day,

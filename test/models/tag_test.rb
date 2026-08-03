@@ -1,6 +1,25 @@
 require "test_helper"
 
 class TagTest < ActiveSupport::TestCase
+  test "tag name must be present" do
+    tag = Tag.new
+    assert_not tag.valid?
+    assert tag.errors[:name].any?
+  end
+  test "tag name must be capitalized" do
+    tag = Tag.new(name: "test")
+    tag.save
+    assert_equal "Test", tag.name
+  end
+
+  test "tag name must be unique" do
+    Tag.create(name: "test")
+
+    tag_with_error = Tag.new(name: "test")
+    assert_not tag_with_error.valid?
+    assert tag_with_error.errors.any?
+  end
+
   test "get practice_entries duration by tags" do
     practice = FactoryBot.create(:practice)
     tag = FactoryBot.create(:tag)

@@ -1,6 +1,10 @@
-class PracticeEntriesService < ApplicationService
+class Practices::PracticeEntriesService < ApplicationService
   attr_reader :practice_entries
 
+  # @param [User] user
+  # @param [Integer] practice_id
+  # @param [Date] start_at
+  # @param [Date] end_at
   def initialize(user:, practice_id:, start_at:, end_at:)
     @user = user
     @start_at = start_at
@@ -18,9 +22,9 @@ class PracticeEntriesService < ApplicationService
   end
 
   def have_3_exercises_today?
-    count = @practice_entries.count
+    activity_count = @practice_entries.group(:activity_id).count
     {
-      state: count,
+      state: activity_count.keys.size,
       goal: 3
     }
   end
