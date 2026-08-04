@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :activity do
     title { Faker::Lorem.sentence(word_count: 3) }
-    content { Faker::Lorem.paragraph }
+    content { Faker::HTML::Letters }
     slug { nil }
     user { association :user }
     default_unit { %w[bpm km reps].sample }
