@@ -21,8 +21,10 @@ export default class extends Controller {
     if (this.startedAt) {
 			this.state = "running"
 			this.#startInterval()
+			this.manager?.start(this.activityIdValue)
     } else if (this.elapsedTime > 0) {
 			this.state = "paused"
+			this.manager?.start(this.activityIdValue)
     } else {
 			this.state = "idle"
     }

@@ -1,6 +1,7 @@
 class Tag < ApplicationRecord
   has_many :taggings, dependent: :destroy
   validates :name, presence: true, uniqueness: true
+  normalizes :name, with: ->(name) { name.strip.capitalize }
 
   scope :for_practice_with_duration, ->(practice_id) {
     joins("INNER JOIN taggings tp
@@ -18,9 +19,4 @@ class Tag < ApplicationRecord
       .select("tags.*, SUM(practice_entries.duration) AS duration")
       .group("tags.id")
   }
-
-  before_save :capitalize_name
-  def capitalize_name
-    self.name = name.capitalize
-  end
 end
