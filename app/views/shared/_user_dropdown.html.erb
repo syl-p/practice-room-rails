@@ -18,7 +18,7 @@
     <%= render MenuComponent.new do |menu| %>
       <%= menu.with_item() do %>
         <p class="truncate">
-          <span class="block text-xs text-gray-500" role="none">Connecté en tant que...</span>
+          <span class="block text-xs text-muted-foreground" role="none">Connecté en tant que...</span>
           <span class="mt-0.5 font-semibold" role="none">
             <%= Current.user.username %>
           </span>

@@ -3,28 +3,14 @@
       <%= render DayPickerComponent.new(practice: @practice, current_date: Date.today) %>
     </header>
     <article class="mb-6">
-        <h2 class="flex-1 font-semibold tracking-tight mb-3">
+        <h2 class="h2 flex-1 mb-3">
             Vos objectifs du jour
         </h2>
-        <div class="flex space-x-6 flex-nowrap overflow-hidden overflow-x-auto w-full">
-					<%= render DonutStatComponent.new(
-						state: @stats[:more_than_10_mn_today][:state],
-						goal: @stats[:more_than_10_mn_today][:goal],
-						label_title: "#{human_duration_short(@stats[:more_than_10_mn_today][:state])} / 10 min",
-						label_subtitle: 'Au moins 10 minutes de pratique'
-					) %>
-
-					<%= render DonutStatComponent.new(
-						state: @stats[:have_3_activities_today][:state],
-						goal: @stats[:have_3_activities_today][:goal],
-						label_title: "#{@stats[:have_3_activities_today][:state]} / 3 activités",
-						label_subtitle: 'Pratiquez au moins 3 activités'
-					) %>
-        </div>
+				<%= render partial: "practices/daily_stats" %>
     </article>
     <article data-controller="timer-manager">
         <header class="flex space-x-3 items-center mb-3">
-            <h2 class="flex-1 font-semibold tracking-tight">
+            <h2 class="h2 flex-1">
                 Vos activités
                 (<%= turbo_frame_tag :activities_count do %>
                     <%= @practice.activities.count %>

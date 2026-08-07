@@ -14,7 +14,7 @@
   <span class="block font-semibold uppercase text-sm text-muted-foreground mb-3">Activités:</span>
   <ul role="list" class="divide-y divide-primary-foreground">
     <% @results[:activities].each do |activity| %>
-      <li class="hover:bg-gray-50">
+      <li class="hover:bg-muted">
         <%= link_to activity.title, activity, data: {turbo: true, turbo_frame: :remote_modal}, class: "block p-4" %>
       </li>
     <% end %>

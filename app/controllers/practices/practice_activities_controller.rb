@@ -1,5 +1,4 @@
-class Practices::PracticeActivitiesController < ApplicationController
-  before_action :set_practice
+class Practices::PracticeActivitiesController < Practices::BaseController
   before_action :set_activity, only: :create
   before_action :set_practice_activity, only: :destroy
 
@@ -23,9 +22,6 @@ class Practices::PracticeActivitiesController < ApplicationController
   end
 
   private
-  def set_practice
-    @practice = Practice.find(params[:practice_id])
-  end
 
   def set_activity
     @activity = Activity.find(params[:activity_id])

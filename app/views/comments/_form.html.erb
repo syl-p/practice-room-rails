@@ -7,7 +7,7 @@
 
   <%= f.submit "Commenter", data: {
     action: 'click->comment#submit',
-  } %>
+  }, variant: :outline %>
 
   <% if comment.persisted? %>
     <%= link_to "Annuler", comment %>

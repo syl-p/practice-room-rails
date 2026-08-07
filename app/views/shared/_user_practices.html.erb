@@ -13,16 +13,16 @@
         <%= icon "chevron-down" %>
       <% end %>
       <% component.with_dropdown_menu do %>
-        <ul class="divide-y divide-gray-200">
+        <ul class="divide-y divide-border">
           <% others_practices.each do |practice| %>
             <li>
-              <%= link_to practice_path(practice.id), class: "flex items-center px-4 py-2 hover:bg-gray-100", data: {turbo: false} do %>
+              <%= link_to practice_path(practice.id), class: "flex items-center px-4 py-2 hover:bg-muted", data: {turbo: false} do %>
                 <%= practice.name %> (<%= display_time(practice.duration) %>)
             <% end %>
             </li>
           <% end %>
           <li>
-            <%= link_to new_practice_path, class: "flex items-center space-x-3 px-4 py-2 hover:bg-gray-100", data: {turbo: false} do %>
+            <%= link_to new_practice_path, class: "flex items-center space-x-3 px-4 py-2 hover:bg-muted", data: {turbo: false} do %>
               <%= icon "plus" %>
               <span class="block">Nouvelle pratique</span>
             <% end %>

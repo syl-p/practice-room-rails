@@ -1,24 +1,26 @@
 <%= form_with url: practice_practice_entries_path(practice_id:, activity_id:),
               builder: TailwindFormBuilder,
               html: { id: "timer-#{activity_id}"},
+							class: "flex space-x-3 items-center",
               data: {turbo: true,  "turbo-permanent": true,
                      controller: "btn-timer",
                      btn_timer_activity_id_value: activity_id,
               } do |f| %>
   <%= f.hidden_field :duration, data: {btn_timer_target: "input"} %>
   <%= f.hidden_field :practice_id, value: "1", data: {btn_timer_target: "input"} %>
-  <div class="flex space-x-3">
-    <%= ui_action_to as: :button, variant: :primary,
-                     data: {btn_timer_target: "toggleBtn", action: "click->btn-timer#toggle"} do %>
-      <!-- État idle -->
-      <span data-btn-timer-target="idle" class="flex space-x-3 items-center">
-				Pratiquer
-			</span>
+	<%= render BtnGroupComponent.new do %>
+		<!-- Display -->
+		<span data-btn-timer-target="display" class="<%= [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::SECONDARY_CLASSES].join(' ') %>">
+			<span><%= icon "clock" %></span>
+			<span data-btn-timer-target="elapsed">--:--</span>
+		</span>
 
-      <!-- Display -->
-      <span data-btn-timer-target="display" class="hidden flex space-x-3 items-center">
-      	<span><%= icon "clock" %></span>
-				<span data-btn-timer-target="elapsed">--:--</span>
+    <%= ui_action_to as: :button,
+                     data: {btn_timer_target: "toggleBtn", action: "click->btn-timer#toggle"} do %>
+
+			<!-- État idle -->
+      <span data-btn-timer-target="idle" class="flex space-x-3 items-center">
+				<%= icon "play" %> <span class="sr-only">Pratiquer</span>
 			</span>
 
       <!-- État playing -->
@@ -32,7 +34,8 @@
       </span>
     <% end %>
 
-    <%= f.submit "Terminer", class: "hidden",
-                 data: {btn_timer_target: "submitButton"} %>
-  </div>
+	<% end %>
+
+	<%= f.submit "Terminer", class: "hidden",
+	             data: {btn_timer_target: "submitButton"} %>
 <% end %>

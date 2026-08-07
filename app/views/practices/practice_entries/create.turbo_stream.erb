@@ -12,6 +12,10 @@
 	<%= turbo_stream.replace :date_picker do %>
 		<%= render DayPickerComponent.new(practice: @practice, current_date: Date.today) %>
 	<% end %>
+
+	<%= turbo_stream.replace :dayli_stats do %>
+		<%= render partial: "practices/daily_stats" %>
+	<% end %>
 <% end %>
 
 <%= turbo_flash_stream %>

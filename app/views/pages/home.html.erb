@@ -1,16 +1,16 @@
 <section class="mt-10 container">
   <header class="p-6 bg-secondary rounded-lg mb-10">
-    <h1 class="text-4xl lg:text-5xl">Practice room</h1>
+    <h1 class="h1 lg:text-5xl">Practice room</h1>
     <p class="text-muted-foreground">La plateforme pour pratiquer vos passions avec vos potes !</p>
   </header>
   <% if authenticated? %>
-    <h2 class="text-primary mb-6 text-3xl">Reprenons là où nous en étions</h2>
+    <h2 class="h2 mb-6">Reprenons là où nous en étions</h2>
     <div class="space-y-6 lg:flex lg:space-x-6 lg:space-y-0 lg:items-stretch lg:flex-nowrap lg:overflow-hidden lg:overflow-x-auto lg:is-overflow-x-scroll lg:w-full">
         <%= link_to new_practices_path, class: "min-w-[300px] flex flex-col justify-center items-center rounded-md border border-dashed bg-primary-foreground hover:bg-secondary p-6" do %>
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
             <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
           </svg>
-          <span className="text-body font-body text-neutral-400 text-center mt-3">
+          <span class="text-muted-foreground text-center mt-3">
               Crééer une nouvelle pratique
             </span>
         <% end %>

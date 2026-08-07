@@ -13,12 +13,12 @@
 					<% Current.user.cached_practices.each do |practice| %>
 						<li>
 							<%= button_to practice.name, practice_practice_activities_path(practice_id: practice.id, activity_id: activity.id),
-														method: :post, class: "block px-4 py-2 text-sm text-gray-700" %></li>
+														method: :post, class: "block px-4 py-2 text-sm text-foreground" %></li>
 					<% end %>
 					<li>
 						<%= link_to "Créér une nouvelle pratique", new_practices_path,
 												data: {turbo: false},
-												class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer" %>
+												class: "block px-4 py-2 text-sm text-foreground cursor-pointer" %>
 					</li>
 				</ul>
 			<% end %>
@@ -27,5 +27,5 @@
 <% else %>
 	<%= link_to "Créér une nouvelle pratique", new_practices_path,
 												data: {turbo: false},
-												class: "block px-4 py-2 text-sm text-gray-700 cursor-pointer" %>
+												class: "block px-4 py-2 text-sm text-foreground cursor-pointer" %>
 <% end %>

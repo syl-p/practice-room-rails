@@ -1,5 +1,4 @@
-class Practices::ActivitiesController < ApplicationController
-  before_action :set_practice
+class Practices::ActivitiesController < Practices::BaseController
   before_action :set_activity, only: [ :show ]
 
   def show
@@ -24,10 +23,6 @@ class Practices::ActivitiesController < ApplicationController
   private
   def set_activity
     @activity = Activity.find(params[:id])
-  end
-
-  def set_practice
-    @practice = Practice.find(params[:practice_id])
   end
 
   def tag_ids

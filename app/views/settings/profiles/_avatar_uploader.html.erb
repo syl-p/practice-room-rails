@@ -2,11 +2,11 @@
 <!-- AVATAR UPLOADER -->
 <div class="flex space-x-3 items-center mb-3" data-controller="avatar-uploader">
   <div>
-    <figure class="rounded-full relative overflow-hidden flex flex-col items-center justify-center bg-gray-100 dark:bg-gray-600 w-12 h-12">
+    <figure class="rounded-full relative overflow-hidden flex flex-col items-center justify-center bg-muted w-12 h-12">
       <% url_image = user.avatar.attached? && user.avatar.blob.persisted? ? url_for(user.avatar) : '' %>
       <%= image_tag url_image, class: "w-full h-full object-cover", data: {avatar_uploader_target: "avatar"} %>
 
-      <legend class="flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 bg-gray-100 dark:bg-gray-600
+      <legend class="flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 bg-muted
                     <%= 'hidden' if user.avatar.attached? %>"
               data-avatar-uploader-target="initials">
         <span class="block">SP</span>

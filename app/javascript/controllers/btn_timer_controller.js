@@ -83,7 +83,6 @@ export default class extends Controller {
     this.idleTarget.classList.add("hidden")
     this.playingTarget.classList.remove("hidden")
     this.pausedTarget.classList.add("hidden")
-    this.displayTarget.classList.remove("hidden")
   }
 
   pause(e) {
@@ -133,7 +132,6 @@ export default class extends Controller {
     this.idleTarget.classList.remove("hidden")
     this.pausedTarget.classList.add("hidden")
     this.playingTarget.classList.add("hidden")
-    this.displayTarget.classList.add("hidden")
 
     this.elapsedTarget.textContent = "--:--"
     this.submitButtonTarget.classList.add("hidden")

@@ -30,7 +30,13 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
   end
 
   def submit(value = nil, options = {})
-    super(value, merge_default_classes(options, [ TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES ].join(" ")))
+    variant = options.delete(:variant) || :primary
+    btn_classes = [
+      TailwindHelper::BTN_BASE_CLASSES,
+      TailwindHelper::BUTTON_VARIANTS.fetch(variant)
+    ].join(" ")
+
+    super(value, merge_default_classes(options, btn_classes))
   end
 
   private

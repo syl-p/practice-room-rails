@@ -13,19 +13,13 @@ class Practices::PracticeEntriesService
                                                       .where(practice_id:)
   end
 
-  def more_than_10_mn_today?
-    practice_time = @practice_entries.sum(:duration)
-    {
-      state: practice_time,
-      goal: 10.minutes
-    }
+  # @return [Numeric]
+  def total_duration
+    @practice_entries.sum(:duration)
   end
 
-  def have_3_activities_today?
-    activity_count = @practice_entries.group(:activity_id).count
-    {
-      state: activity_count.keys.size,
-      goal: 3
-    }
+  # @return [Numeric]
+  def activities_count
+    @practice_entries.group(:activity_id).count.keys.size
   end
 end

@@ -1,8 +1,8 @@
-<h3 class="font-bold">Objectif: <%= @goal.target_value %> <%= @goal.unit %></h3>
+<h3 class="h3">Objectif: <%= @goal.target_value %> <%= @goal.unit %></h3>
 <p class="text-sm text-muted-foreground mb-3">Ici vous pouvez mettre à jour vos progrès et suivre votre progression vers cet objectif.</p>
 <%= render partial: "goals/goal_progresses/form", locals: { goal: @goal } %>
 
-<h4 class="font-bold mt-6 mb-4">Mes progrès</h4>
-<%= turbo_frame_tag :progresses, tag: :ul, class: "divide-y divide-gray-200" do %>
+<h4 class="h4 mt-6 mb-4">Mes progrès</h4>
+<%= turbo_frame_tag :progresses, tag: :ul, class: "divide-y divide-border" do %>
   <%= render partial: "goals/goal_progresses/goal_progress", collection: @goal.cached_progresses, as: :progress, locals: {goal: @goal } %>
 <% end %>

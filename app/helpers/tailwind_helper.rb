@@ -31,6 +31,8 @@ module TailwindHelper
   end
 
   # render a button/link cta with tailwind variant classes
+  # @param [Symbol] as
+  # @param [Symbol] variant
   def ui_action_to(name = nil, options = nil, as:, variant: :primary, **html_options, &block)
     html_options ||= {}
 

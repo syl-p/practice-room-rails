@@ -79,8 +79,8 @@ class PracticesController < ApplicationController
       )
 
       @stats = {
-        more_than_10_mn_today: practices_entries_service.more_than_10_mn_today?,
-        have_3_activities_today: practices_entries_service.have_3_activities_today?
+        total_duration: practices_entries_service.total_duration,
+        activities_count: practices_entries_service.activities_count
       }
     end
 end

@@ -3,7 +3,7 @@
     <%= render DayPickerComponent.new(practice: @practice, current_date: @current_date) %>
   </header>
 
-  <h2 class="font-semibold tracking-tight mb-3">Historique du <%= l(@current_date, format: :short) %></h2>
+  <h2 class="h2 mb-3">Historique du <%= l(@current_date, format: :short) %></h2>
   <%= turbo_frame_tag :practice_entries_list do %>
     <% @practice_entries.each do |practice_entry| %>
       <%= render partial: "practices/practice_entries/item", locals: {practice_entry:} %>

@@ -1,5 +1,4 @@
-class Practices::PracticeEntriesController < ApplicationController
-  before_action :set_practice
+class Practices::PracticeEntriesController < Practices::BaseController
   before_action :set_activity, only: [ :create ]
   before_action :set_duration, only: [ :create ]
   before_action :set_practice_entry, only: [ :destroy ]
@@ -19,6 +18,7 @@ class Practices::PracticeEntriesController < ApplicationController
     )
 
     if @practice_entry.save
+      set_stats
       flash[:success] = "Votre temps de pratique à été mise à jour."
     else
       flash.now[:error] = @practice_entry.errors.full_messages.to_sentence
@@ -43,10 +43,6 @@ class Practices::PracticeEntriesController < ApplicationController
 
   def set_activity
     @activity = Activity.find(params[:activity_id])
-  end
-
-  def set_practice
-    @practice = Practice.find(params[:practice_id])
   end
 
   def parse_date(date_param)

@@ -8,7 +8,7 @@
     <p class="overflow-hidden m-0 text-sm font-medium text-ellipsis">
       <%= link_to medium.name  || medium.file.filename.to_s, url_for(medium.file) %>
     </p>
-    <p class="text-xs font-light text-gray-500">
+    <p class="text-xs font-light text-muted-foreground">
       <%= number_to_human_size medium.file.byte_size %> - <%= l medium.created_at, format: :short %>
     </p>
   </div>

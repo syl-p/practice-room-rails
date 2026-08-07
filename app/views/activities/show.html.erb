@@ -4,7 +4,7 @@
       <header class="mb-6">
         <div class="lg:flex lg:space-x-3">
           <div class="flex-1">
-            <h2 class="text-2xl font-bold">
+            <h2 class="h2">
               <%= link_to @activity.title, @activity, data: { turbo_frame: "_top" } %>
             </h2>
             <p class="font-light text-sm text-muted-foreground mb-3">
@@ -23,7 +23,7 @@
         <div class="mt-3">
           <% if @activity.media.count > 0 %>
             <div class="mb-3">
-              <h3 class="mb-3">Media (<%= @activity.media.count %>):</h3>
+              <h3 class="h3 mb-3">Media (<%= @activity.media.count %>):</h3>
               <ul class="flex space-x-3">
                 <% @activity.media.each do |medium| %>
                   <li><%= medium.name || medium.file.filename.to_s %></li>
@@ -32,7 +32,7 @@
             </div>
           <% end %>
           <div class="mb-3">
-            <h3 class="mb-3">Tags:</h3>
+            <h3 class="h3 mb-3">Tags:</h3>
             <% @activity.tags.each do |tag| %>
               <%= render(TagComponent.new(tag.name, variant: :outline)) %>
             <% end %>
@@ -43,7 +43,7 @@
         <div class="shrink-0 bg-border h-[1px] w-full my-4"></div>
       </div>
       <footer>
-        <h2 class="text-xl mb-3 flex space-x-3 items-center">
+        <h2 class="h3 mb-3 flex space-x-3 items-center">
           <%= icon "chat-bubble-left-right", class: "size-6" %>
           <span class="block">Discussions</span>
         </h2>

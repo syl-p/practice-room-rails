@@ -2,9 +2,9 @@
     <p class="text-sm text-muted-foreground mb-3">
         Retrouvez ici les différentes ressources proposées par l'auteur.
     </p>
-    <ul class="divide-y divide-gray-200">
+    <ul class="divide-y divide-border">
         <% media.each do |medium| %>
-        <li class="p-4 hover:bg-gray-50">
+        <li class="p-4 hover:bg-muted">
             <%= render partial: "media/item", locals: { medium:} %>
         </li>
         <% end %>
