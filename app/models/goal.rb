@@ -6,6 +6,7 @@ class Goal < ApplicationRecord
 
   validates :target_value, presence: true, numericality: { greater_than: 0 }
   validates :unit, presence: true
+  normalizes :unit, with: ->(unit) { unit.strip.capitalize }
 
   def cached_progresses
     Rails.cache.fetch([ self, "progresses" ], expires_in: 1.hour) do

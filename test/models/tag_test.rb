@@ -6,6 +6,7 @@ class TagTest < ActiveSupport::TestCase
     assert_not tag.valid?
     assert tag.errors[:name].any?
   end
+
   test "tag name must be capitalized" do
     tag = Tag.new(name: "test")
     tag.save

@@ -10,6 +10,7 @@ export default class extends Controller {
       "toggleBtn", "display", "elapsed", "input", "submitButton", "idle", "playing", "paused"]
 
   connect() {
+		// PROPS
     this.startedAt = this.element.dataset.startedAt ? parseInt(this.element.dataset.startedAt, 10) : null
     this.elapsedTime = this.element.dataset.elapsedTime
         ? parseInt(this.element.dataset.elapsedTime, 10)
@@ -17,18 +18,22 @@ export default class extends Controller {
 
     this.timerInterval = null
 
+
 		// STATE CHECKING
+		if(this.startedAt || this.elapsedTime > 0) {
+			this.manager?.start(this.activityIdValue)
+		}
+			
     if (this.startedAt) {
 			this.state = "running"
 			this.#startInterval()
-			this.manager?.start(this.activityIdValue)
     } else if (this.elapsedTime > 0) {
 			this.state = "paused"
-			this.manager?.start(this.activityIdValue)
     } else {
 			this.state = "idle"
     }
 
+		// EVENT LISTENERS
     this.element.addEventListener('turbo:submit-end',  (event) => {
       this.onSubmitEnd(event)
     })
