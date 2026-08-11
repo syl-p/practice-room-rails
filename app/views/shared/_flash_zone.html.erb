@@ -1,4 +1,4 @@
-<div id="flash-zone" class="fixed z-[100] bottom-6 left-6 flex flex-col space-y-6">
+<div id="flash-zone" class="fixed z-[100] bottom-3 left-3 lg:bottom-6 lg:left-6 flex flex-col space-y-6 w-[calc(100vw_-_theme(spacing.6))] max-w-md">
   <%= turbo_frame_tag "flash" do %>
     <% flash.each do |type, message| %>
       <%= render partial: "shared/flash", locals: {type:, message:} %>

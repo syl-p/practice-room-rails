@@ -1,5 +1,5 @@
 <%= ui_action_to new_search_path, as: :link, variant: :outline,
-              data: {turbo: true, turbo_frame: :remote_modal} do %>
+              data: {search_shortcut_target: "trigger", turbo: true, turbo_frame: :remote_modal} do %>
   <%= icon "magnifying-glass", class: "size-6" %>
-  <span class="sr-only">Search</span>
+  <span class="sr-only">Rechercher</span>
 <% end %>

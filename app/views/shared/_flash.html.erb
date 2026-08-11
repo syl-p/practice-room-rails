@@ -1,5 +1,5 @@
 <div data-controller="flash" data-flash-target="toast"
-     class="opacity-100 -translate-x-full transition-transform ease-in-out duration-300 transform mb-3">
+     class="opacity-100 -translate-x-full transition-transform ease-in-out duration-300 transform mb-3 w-full">
   <%= render AlertComponent.new(variant: type) do |component| %>
     <% component.with_title do %>
       <%= message %>

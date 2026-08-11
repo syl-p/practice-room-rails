@@ -1,0 +1,21 @@
+<div id="practice_nav" role="navigation" aria-label="Navigation de la pratique"
+  class="bg-background border shadow-lg rounded-2xl fixed bottom-[max(1rem,env(safe-area-inset-bottom))] left-1/2 -translate-x-1/2 px-2 py-1.5 z-50">
+  <ul class="flex items-center space-x-1">
+    <%
+      practice_active = current_page?(@practice) || %w[activities practice_activities].include?(controller_name)
+      [
+        {path: @practice, label: "Pratique", icon: "rocket-launch", active: practice_active},
+        {path: practice_practice_entries_path(practice_id: @practice.id, day: Date.current), label: 'Historique', icon: "calendar", active: controller_name == "practice_entries"},
+        {path: practice_progression_index_path(practice_id: @practice.id), label: "Progression", icon: "chart-bar", active: controller_name == "progression"}
+      ].each do |link| %>
+      <li>
+        <%= link_to link[:path],
+          class: "flex flex-col items-center justify-center px-2 py-1.5 rounded-xl transition-all duration-200 min-w-[52px] #{link[:active] ? 'bg-primary text-white' : ' hover:bg-secondary'}",
+          aria: ({current: "page"} if link[:active]) do %>
+          <span class="mb-0.5"><%= icon(link[:icon], class: "size-4") %></span>
+          <span class="text-xs font-medium"><%= link[:label] %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

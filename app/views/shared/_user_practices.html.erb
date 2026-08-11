@@ -7,27 +7,31 @@
 
 <% if practices.any? && selected_practice.present? %>
   <%= render BtnGroupComponent.new do %>
-    <%= ui_action_to "#{selected_practice.name} (#{display_time(selected_practice.duration)})" , practice_path(selected_practice), as: :link, variant: :secondary, data: {turbo: false}, class: "overflow-hidden truncate" %>
-    <%= render DropdownComponent.new(variant: :outline) do |component| %>
+    <%= ui_action_to practice_path(selected_practice), as: :link, variant: :secondary, data: {turbo: false}, class: "min-w-0 max-w-[40vw] sm:max-w-xs" do %>
+      <span class="truncate min-w-0"><%= selected_practice.name %></span>
+      <span class="hidden sm:inline shrink-0">(<%= display_time(selected_practice.duration) %>)</span>
+    <% end %>
+
+		<%= render DropdownComponent.new(variant: :outline) do |component| %>
       <% component.with_trigger_btn do %>
         <%= icon "chevron-down" %>
       <% end %>
+
       <% component.with_dropdown_menu do %>
-        <ul class="divide-y divide-border">
-          <% others_practices.each do |practice| %>
-            <li>
-              <%= link_to practice_path(practice.id), class: "flex items-center px-4 py-2 hover:bg-muted", data: {turbo: false} do %>
-                <%= practice.name %> (<%= display_time(practice.duration) %>)
-            <% end %>
-            </li>
-          <% end %>
-          <li>
-            <%= link_to new_practice_path, class: "flex items-center space-x-3 px-4 py-2 hover:bg-muted", data: {turbo: false} do %>
-              <%= icon "plus" %>
-              <span class="block">Nouvelle pratique</span>
-            <% end %>
-          </li>
-        </ul>
+				<%= render MenuComponent.new do |menu| %>
+					<% others_practices.each do |practice| %>
+						<% menu.with_item(href: practice_path(practice.id), data: {turbo: false}) do %>
+							<%= practice.name %> (<%= display_time(practice.duration) %>)
+						<% end %>
+					<% end %>
+
+					<% menu.with_item(href: new_practice_path, data: {turbo: false}) do %>
+						<div class="flex space-x-3 align-center">
+							<%= icon "plus" %>
+							<span class="block">Nouvelle pratique</span>
+						</div>
+					<% end %>
+				<% end %>
       <% end %>
     <% end %>
   <% end %>

@@ -1,15 +1,20 @@
+<%
+	base_classes = "block px-4 py-2 text-sm text-foreground hover:bg-muted"
+	classes = @html_options[:class] ? "#{base_classes} #{@html_options.delete(:class)}" : base_classes
+%>
+
 <% if button? %>
-  <%= button_to @href, method: @method,
-        class: "block w-full text-left px-4 py-2 text-sm text-foreground hover:bg-muted cursor-pointer" do %>
+  <%= button_to @href, method: @method, **@html_options,
+        class: classes do %>
     <%= content %>
   <% end %>
 <% elsif link? %>
-  <%= link_to @href,
-        class: "block px-4 py-2 text-sm text-foreground hover:bg-muted" do %>
+  <%= link_to @href, **@html_options,
+        class: classes do %>
     <%= content %>
   <% end %>
 <% else %>
-  <div class="block px-4 py-2 text-sm text-foreground" role="none">
-    <%= content %>
-  </div>
+	<%= content_tag :div, **@html_options, class: classes, role: "none" do %>
+		<%= content %>
+	<% end %>
 <% end %>

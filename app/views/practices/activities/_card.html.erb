@@ -8,7 +8,7 @@
           <%= link_to activity.title, practice_activity_path(practice, activity), data: { turbo_frame: "_top" } %>
         </h3>
         <p class="text-sm text-muted-foreground mb-3">
-          <%= activity.content.to_plain_text.truncate(200) %>
+          <%= activity.content.to_plain_text.truncate(150) %>
         </p>
       </div>
       <%= render partial: "practices/practice_entries/add",

@@ -8,11 +8,11 @@
     <%= render partial: "shared/nav" %>
     <%= render partial: "shared/flash_zone" %>
 
-    <main class="min-h-screen pt-8 pb-28">
+    <main class="min-h-screen pt-20 pb-28">
       <%= yield %>
     </main>
 
     <%= turbo_frame_tag :remote_modal %>
-    <%= render partial: "shared/nav_mobile" if (controller.class.module_parent_name == "Practices" || controller_name == 'practices') && (params[:id].present? || params[:practice_id].present?)%>
+    <%= render partial: "shared/practice_nav" if (controller.class.module_parent_name == "Practices" || controller_name == 'practices') && (params[:id].present? || params[:practice_id].present?)%>
   </body>
 </html>
