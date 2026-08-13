@@ -132,6 +132,101 @@
         focus:border-primary
         transition;
     }
+
+    .trix-content {
+        @apply text-muted-foreground leading-relaxed;
+    }
+
+    .trix-content > *:first-child {
+        @apply mt-0;
+    }
+
+    .trix-content > *:last-child {
+        @apply mb-0;
+    }
+
+    .trix-content h1 {
+        @apply text-2xl font-bold tracking-tight text-foreground mt-8 mb-4;
+    }
+
+    .trix-content h2 {
+        @apply text-xl font-semibold tracking-tight text-foreground mt-6 mb-3;
+    }
+
+    .trix-content h3 {
+        @apply text-lg font-semibold text-foreground mt-5 mb-2;
+    }
+
+    .trix-content h4 {
+        @apply text-base font-semibold text-foreground mt-4 mb-2;
+    }
+
+    .trix-content p {
+        @apply my-3;
+    }
+
+    .trix-content a {
+        @apply text-primary underline underline-offset-4 hover:opacity-80;
+    }
+
+    .trix-content strong {
+        @apply font-semibold text-foreground;
+    }
+
+    .trix-content ul {
+        @apply my-3 ml-5 list-disc marker:text-muted-foreground;
+    }
+
+    .trix-content ol {
+        @apply my-3 ml-5 list-decimal marker:text-muted-foreground;
+    }
+
+    .trix-content ul ul,
+    .trix-content ul ol,
+    .trix-content ol ul,
+    .trix-content ol ol {
+        @apply my-1 ml-5;
+    }
+
+    .trix-content li {
+        @apply my-1 pl-1;
+    }
+
+    .trix-content blockquote {
+        @apply my-4 border-l-4 border-border pl-4 italic;
+    }
+
+    .trix-content pre {
+        @apply my-4 overflow-x-auto rounded-lg bg-muted p-4 text-sm leading-relaxed;
+    }
+
+    .trix-content code {
+        @apply rounded bg-muted px-1.5 py-0.5 text-sm;
+    }
+
+    .trix-content pre code {
+        @apply bg-transparent p-0;
+    }
+
+    .trix-content img {
+        @apply max-w-full h-auto rounded-md;
+    }
+
+    .trix-content hr {
+        @apply my-6 border-border;
+    }
+
+    .trix-content figure {
+        @apply my-4;
+    }
+
+    .trix-content figcaption {
+        @apply mt-2 text-center text-sm text-muted-foreground;
+    }
+
+    trix-editor {
+        @apply rounded-md border border-input px-3 py-2 focus-visible:ring-2 focus-visible:ring-ring;
+    }
 }
 
 input[type="range"] {
