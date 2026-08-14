@@ -1,30 +1,33 @@
 <% error = user.errors[:avatar] %>
 <!-- AVATAR UPLOADER -->
-<div class="flex space-x-3 items-center mb-3" data-controller="avatar-uploader">
-  <div>
-    <figure class="rounded-full relative overflow-hidden flex flex-col items-center justify-center bg-muted w-12 h-12">
+<div class="flex flex-col gap-4 mb-3 md:flex-row md:items-center" data-controller="avatar-uploader">
+  <div class="flex flex-col items-center gap-2 md:items-start">
+    <figure class="rounded-full relative overflow-hidden flex flex-col items-center justify-center bg-muted w-16 h-16 md:w-20 md:h-20">
       <% url_image = user.avatar.attached? && user.avatar.blob.persisted? ? url_for(user.avatar) : '' %>
       <%= image_tag url_image, class: "w-full h-full object-cover", data: {avatar_uploader_target: "avatar"} %>
 
-      <legend class="flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 bg-muted
-                    <%= 'hidden' if user.avatar.attached? %>"
-              data-avatar-uploader-target="initials">
-        <span class="block">SP</span>
-      </legend>
+      <div class="flex flex-col justify-center items-center h-full w-full absolute top-0 left-0 bg-muted
+                  <%= 'hidden' if user.avatar.attached? %>"
+           data-avatar-uploader-target="initials">
+        <span class="block text-sm font-semibold text-muted-foreground"><%= user.username.to_s.first.upcase.presence || "?" %></span>
+      </div>
     </figure>
 
-    <%= button_tag  "reset", class: "#{'hidden' if !user.avatar.attached?}",
-                    data: {action: "click->avatar-uploader#reset", 'avatar_uploader_target': 'resetBtn'} %>
+    <%= ui_action_to as: :button, variant: :ghost,
+                     class: "#{'hidden' if !user.avatar.attached?}",
+                     data: {action: "click->avatar-uploader#reset", avatar_uploader_target: "resetBtn"} do %>
+      <%= icon "x-mark", class: "size-4" %> Supprimer
+    <% end %>
   </div>
 
-	<div class="form-group <%= "has-error" if error.present? %>">
-		<%= f.label :avatar, class: TailwindHelper::LABEL_CLASSES %>
-		<%= f.file_field :avatar, data: {avatar_uploader_target: "input", action: "change->avatar-uploader#change"} %>
-		<% if error.present? %>
-			<span class="<%= TailwindHelper::ERROR_CLASSES %>"><%= error.first %></span>
-		<% end %>
-	</div>
+  <div class="form-group flex-1 <%= "has-error" if error.present? %>">
+    <%= f.label :avatar, class: TailwindHelper::LABEL_CLASSES %>
+    <%= f.file_field :avatar, class: "block w-full text-sm text-gray-500", data: {avatar_uploader_target: "input", action: "change->avatar-uploader#change"} %>
+    <% if error.present? %>
+      <span class="<%= TailwindHelper::ERROR_CLASSES %>"><%= error.first %></span>
+    <% end %>
+  </div>
 
-	<%= f.hidden_field :avatar_removed, data: {avatar_uploader_target: "removedField"}%>
+  <%= f.hidden_field :avatar_removed, data: {avatar_uploader_target: "removedField"} %>
 </div>
 <!-- END AVATAR UPLOADER -->

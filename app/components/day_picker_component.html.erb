@@ -1,15 +1,18 @@
-<nav id="date_picker">
-  <ul class="flex flex-nowrap space-x-3 items-center justify-center">
+<nav id="date_picker", class="flex space-x-1 items-center justify-center">
+	<%= link_to path_for(previous_week) do %>
+		<%= icon("chevron-left") %>
+	<% end %>
+  <ul class="flex flex-nowrap space-x-2 items-center justify-center">
     <% (@start_at..@end_at).each do |wd| %>
       <li id="<%= wd %>">
         <% day_dom = capture do %>
           <span class="block text-xs uppercase"><%= I18n.l(wd, format: "%a") %></span>
-          <span class="block"><%= wd.day %></span>
+          <span class="block text-sm"><%= wd.day %></span>
           <span class="block text-xs"><%= I18n.l(wd, format: "%b") %></span>
         <% end %>
 
         <% if wd.future? %>
-          <div class="block text-center p-1 rounded-lg border relative cursor-not-allowed opacity-75">
+          <div class="block text-center p-1 rounded-lg border relative cursor-not-allowed opacity-60">
             <%= day_dom %>
           </div>
         <% else %>
@@ -25,4 +28,7 @@
       </li>
     <% end %>
   </ul>
+	<%= link_to path_for(next_week) do %>
+		<%= icon("chevron-right") %>
+	<% end %>
 </nav>

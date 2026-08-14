@@ -1,17 +1,23 @@
-<section class="container mx-auto pt-20 md:grid md:grid-cols-6 md:gap-6">
-  <aside class="md:col-span-1">
+<section class="container mx-auto md:grid md:grid-cols-6 md:gap-6">
+  <aside class="md:col-span-1 mb-6 md:mb-0">
     <%= render partial: "settings/nav" %>
   </aside>
   <article class="md:col-span-5">
+    <header class="mb-6">
+      <h1 class="h2">Vos informations</h1>
+      <p class="text-sm text-muted-foreground mt-2">Mettez à jour vos informations personnelles.</p>
+    </header>
+
     <%= form_with model: Current.user, url: settings_profile_path, builder: TailwindFormBuilder, data: {turbo: false} do |f| %>
-      <fieldset class="border p-6 rounded-lg lg:col-span-4 mb-6">
-        <legend>Informations générales</legend>
+      <div class="max-w-2xl">
         <%= render partial: 'settings/profiles/avatar_uploader', locals: {user: Current.user, f:} %>
         <%= f.text_field :username %>
         <%= f.email_field :email_address %>
-        <%= f.text_area :bio %>
-      </fieldset>
-      <%= f.submit "Modifier" %>
+        <%= f.text_area :bio, rows: 4 %>
+        <div class="flex justify-end mt-6">
+          <%= f.submit "Modifier" %>
+        </div>
+      </div>
     <% end %>
   </article>
 </section>

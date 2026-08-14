@@ -1,19 +1,22 @@
-<section class="container mx-auto pt-20 md:grid md:grid-cols-6 md:gap-6">
-  <aside class="md:col-span-1">
+<section class="container mx-auto md:grid md:grid-cols-6 md:gap-6">
+  <aside class="md:col-span-1 mb-6 md:mb-0">
     <%= render partial: "settings/nav" %>
   </aside>
   <article class="md:col-span-5">
-    <%= form_with model: Current.user, url: settings_password_path, builder: TailwindFormBuilder, data: {turbo: false} do |f| %>
-      <fieldset class="border p-6 rounded-lg lg:col-span-4 mb-6">
-        <legend>
-          Mot de passe
-        </legend>
+    <header class="mb-6">
+      <h1 class="h2">Mot de passe</h1>
+      <p class="text-sm text-muted-foreground mt-2">Modifiez le mot de passe de votre compte.</p>
+    </header>
 
+    <%= form_with model: Current.user, url: settings_password_path, builder: TailwindFormBuilder, data: {turbo: false} do |f| %>
+      <div class="max-w-2xl">
         <%= f.password_field :password_challenge %>
         <%= f.password_field :password %>
         <%= f.password_field :password_confirmation %>
-      </fieldset>
-      <%= f.submit "Modifier" %>
+        <div class="flex justify-end mt-6">
+          <%= f.submit "Modifier" %>
+        </div>
+      </div>
     <% end %>
   </article>
 </section>

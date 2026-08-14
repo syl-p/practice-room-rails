@@ -42,10 +42,18 @@ class DayPickerComponent < ViewComponent::Base
   # @return [String]
   def day_classes(day)
     classes = "block text-center p-1 rounded-lg relative"
-    classes += " border-2" if active?(day)
+    classes += " border-2 border-primary" if active?(day)
     classes += " border" unless active?(day)
-    classes += " shadow-lg bg-secondary" if today?(day)
+    classes += " shadow-lg bg-primary/75 text-secondary" if today?(day)
     classes
+  end
+
+  def previous_week
+    @start_at - 1.week
+  end
+
+  def next_week
+    @end_at + 1.week
   end
 
   # @param [Date] day
