@@ -19,7 +19,7 @@ class AvatarComponent < ViewComponent::Base
     when :xs
       "w-4 h-4"
     when :sm
-      "w-4 h-4"
+      "w-6 h-6"
     when :md
       "w-8 h-8"
     when :lg

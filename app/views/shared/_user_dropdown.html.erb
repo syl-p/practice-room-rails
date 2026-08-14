@@ -7,7 +7,7 @@
 
 <%= render DropdownComponent.new do |component| %>
   <% component.with_trigger_btn do %>
-    <%= render AvatarComponent.new(user: Current.user) %>
+    <%= render AvatarComponent.new(user: Current.user, size: :sm) %>
     <span class="hidden lg:block">
       <%= Current.user.username %>
     </span>

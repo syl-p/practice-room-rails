@@ -6,7 +6,7 @@ RailsIcons.configure do |config|
   # config.libraries.heroicons.default_variant = "" # Set a default variant for Heroicons
   # config.libraries.heroicons.exclude_variants = [:mini, :micro] # Exclude specific variants
 
-  # config.libraries.heroicons.outline.default.css = "size-6"
+  config.libraries.heroicons.outline.default.css = "size-4"
   # config.libraries.heroicons.outline.default.stroke_width = "1.5"
   # config.libraries.heroicons.outline.default.data = {}
 

@@ -1,7 +1,7 @@
 <div data-controller="notifications">
   <%= render DropdownComponent.new(variant: :outline) do |component| %>
     <% component.with_trigger_btn do %>
-      <%= icon "bell", class: "size-6" %>
+      <%= icon "bell" %>
       <span data-notifications-target="indicator"
             class="indicator <%= "hidden" unless Current.user.notifications.unread.present? %> bottom-3 left-3 absolute w-3.5 h-3.5 bg-red-400 animate-pulse border-2 border-white dark:border-gray-800 rounded-full"></span>
     <% end %>
