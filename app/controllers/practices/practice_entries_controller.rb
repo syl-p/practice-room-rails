@@ -1,4 +1,7 @@
-class Practices::PracticeEntriesController < Practices::BaseController
+class Practices::PracticeEntriesController < ApplicationController
+  include CurrentPractice
+  set_practice_id_param :practice_id
+
   before_action :set_activity, only: [ :create ]
   before_action :set_duration, only: [ :create ]
   before_action :set_practice_entry, only: [ :destroy ]

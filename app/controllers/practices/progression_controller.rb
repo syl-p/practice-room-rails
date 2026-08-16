@@ -1,4 +1,7 @@
-class Practices::ProgressionController < Practices::BaseController
+class Practices::ProgressionController < ApplicationController
+  include CurrentPractice
+  set_practice_id_param :practice_id
+
   before_action :set_stats, only: [ :index ]
 
   def index

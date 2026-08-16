@@ -1,4 +1,7 @@
-class Practices::ActivitiesController < Practices::BaseController
+class Practices::ActivitiesController < ApplicationController
+  include CurrentPractice
+  set_practice_id_param :practice_id
+
   before_action :set_activity, only: [ :show ]
 
   def show

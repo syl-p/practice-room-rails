@@ -1,4 +1,6 @@
 class PracticesController < ApplicationController
+  include CurrentPractice
+
   before_action :set_practice, only: %i[ show edit update destroy ]
   before_action :set_stats, only: [ :show ]
 
