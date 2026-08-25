@@ -3,7 +3,9 @@
 								collection: activities, as: :activity,
 								locals: {practice: practice, classes: 'mb-3'} %>
 	<footer>
-			<%= ui_action_to new_activity_path, as: :link, variant: :secondary, class: "w-full flex space-x-3 items-center", data: {turbo: false} do %>
+			<%= ui_action_to onboarding_activities_new_path(),
+											 as: :link, variant: :secondary,
+											 class: "w-full flex space-x-3 items-center", data: {turbo_frame: :remote_modal} do %>
 			<%= icon "plus" %>
 			<span class="block">Ajouter une activité</span>
 			<% end %>

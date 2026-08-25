@@ -3,6 +3,6 @@
 %>
 
 <nav class="mb-3 flex space-x-3">
-  <%= link_to "Liste de vos medias", media_path, class: "#{active_classes if action_name === 'index'}" %>
-  <%= link_to "Upload de medias", new_medium_path, class: "#{active_classes if action_name === 'new'}" %>
+  <%= link_to "Vos médias", media_path, class: "#{active_classes if action_name === 'index'}" %>
+  <%= link_to "Ajouter un média", new_medium_path, class: "#{active_classes if action_name === 'new'}" %>
 </nav>

@@ -1,0 +1,19 @@
+<%= render layout: "layouts/remote_modal" do %>
+	<%= render partial: "onboarding/activities/steps/nav" %>
+	<% method = @activity.persisted? ? :patch : :post %>
+	<% url = @activity.persisted? ? onboarding_activity_step_path(@activity, @step) : onboarding_activities_path %>
+
+	<%= form_with model: @step_object, url:, method:, builder: TailwindFormBuilder,
+								data: {controller: "media-selection", media_selection_selected_ids_value: @activity.media.pluck(:id)} do |f| %>
+		<fieldset class="mb-6">
+			<legend>
+				Medias
+			</legend>
+				<%= render "onboarding/activities/forms/media_form", f:,  activity: @activity %>
+				<div class="flex items-center justify-between">
+					<%= ui_action_to "Précédent", onboarding_activity_step_path(@activity, Onboarding::Activity::STEPS[Onboarding::Activity::STEPS.index(@step) - 1]), as: :link, variant: :secondary %>
+					<%= f.submit "Attacher ces ressources", data: {media_selection_target: "submitButton"} %>
+				</div>
+		</fieldset>
+	<% end %>
+<% end %>

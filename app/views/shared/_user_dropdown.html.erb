@@ -7,8 +7,8 @@
 
 <%= render DropdownComponent.new do |component| %>
   <% component.with_trigger_btn do %>
-    <%= render AvatarComponent.new(user: Current.user, size: :sm) %>
-    <span class="hidden lg:block">
+    <%= render AvatarComponent.new(user: Current.user, size: :md) %>
+    <span class="hidden md:block">
       <%= Current.user.username %>
     </span>
     <span class="sr-only">Ouvrir le menu utilisateur</span>
@@ -18,7 +18,7 @@
     <%= render MenuComponent.new do |menu| %>
       <%= menu.with_item() do %>
         <p class="truncate">
-          <span class="block text-xs text-muted-foreground" role="none">Connecté en tant que...</span>
+          <span class="block text-xs text-muted-foreground" role="none">Connecté en tant que</span>
           <span class="mt-0.5 font-semibold" role="none">
             <%= Current.user.username %>
           </span>

@@ -14,7 +14,6 @@ class Activity < ApplicationRecord
   has_and_belongs_to_many :media
   has_rich_text :content
 
-
   validates :title, presence: true
   validate :validate_content_presence
 

@@ -16,6 +16,9 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root "pages#home"
 
+  get "a-propos", to: "pages#about", as: :about
+  get "contact", to: "pages#contact", as: :contact
+
   resources :users, only: %i[show]
   resource :registration, controller: "registration", only: %i[new create]
 
@@ -55,8 +58,17 @@ Rails.application.routes.draw do
 
   resources :notifications, only: %i[index]
 
-  resources :activities do
+  resources :activities, only: [ :index, :show ] do
     resources :comments, module: :activities
+  end
+
+  namespace :onboarding do
+    get "activities/new", to: "activities/steps#show"
+    post "activities", to: "activities/steps#update"
+
+    resources :activities, only: [] do
+      resources :steps, only: [ :show, :update ], param: :step, controller: "activities/steps"
+    end
   end
 
   post "bookmarks/:activity_id",  to: "bookmarks#create", as: "new_bookmark"

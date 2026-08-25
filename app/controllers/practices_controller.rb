@@ -7,7 +7,7 @@ class PracticesController < ApplicationController
   def show
     authorize! @practice
 
-    redirect_to new_practice_path, flash: { error: "Veuillez créer une pratique" } unless @practice.present?
+    redirect_to new_practice_path, flash: { error: "On a besoin d'une pratique pour commencer !" } unless @practice.present?
     session[:current_practice_id] = @practice.id
   end
 
@@ -29,7 +29,7 @@ class PracticesController < ApplicationController
     end
 
     if @practice.save
-      redirect_to @practice, flash: { success: "Practice was successfully created." }
+      redirect_to @practice, flash: { success: "Pratique créée, c'est parti !" }
     else
       render :new, status: :unprocessable_entity
     end
@@ -45,7 +45,7 @@ class PracticesController < ApplicationController
     end
 
     if @practice.update(practice_params)
-      redirect_to @practice, flash: { success: "Practice was successfully updated." }
+      redirect_to @practice, flash: { success: "Pratique mise à jour." }
     else
       render :edit, status: :unprocessable_entity
     end
@@ -55,7 +55,7 @@ class PracticesController < ApplicationController
     authorize! @practice
 
     @practice.destroy!
-    redirect_to root_path, status: :see_other, flash: { success: "Practice was successfully destroyed." }
+    redirect_to root_path, status: :see_other, flash: { success: "Pratique supprimée." }
   end
 
   private

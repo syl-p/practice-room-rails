@@ -23,7 +23,7 @@
         <div class="mt-3">
           <% if @activity.media.count > 0 %>
             <div class="mb-3">
-              <h3 class="h3 mb-3">Media (<%= @activity.media.count %>):</h3>
+              <h3 class="h3 mb-3">Médias (<%= @activity.media.count %>) :</h3>
               <ul class="flex space-x-3">
                 <% @activity.media.each do |medium| %>
                   <li><%= medium.name || medium.file.filename.to_s %></li>
@@ -32,7 +32,7 @@
             </div>
           <% end %>
           <div class="mb-3">
-            <h3 class="h3 mb-3">Tags:</h3>
+            <h3 class="h3 mb-3">Tags :</h3>
             <% @activity.tags.each do |tag| %>
               <%= render(TagComponent.new(tag.name, variant: :outline)) %>
             <% end %>

@@ -1,6 +1,6 @@
-<%= form_with model: @activity, local: true, builder: TailwindFormBuilder, data: {turbo: false} do |f| %>
+<%= form_with model: @activity, builder: TailwindFormBuilder do |f| %>
   <div class="lg:grid lg:grid-cols-6 gap-4">
-    <fieldset class="border p-6 rounded-lg lg:col-span-4 mb-6 ">
+    <fieldset class="lg:col-span-4 mb-6">
       <legend>Contenu principal</legend>
       <%= f.text_field :title %>
 			<%= f.label :content, "Contenu" %>
@@ -8,12 +8,10 @@
       <%= render partial: "tags/tags_selector", locals: {preselected_tags: @activity.tags, field_name: 'activity[tag_labels]'} %>
     </fieldset>
     <aside class="lg:col-span-2">
-      <fieldset class="mb-6 border p-6 rounded-lg">
-        <legend>
-          Visibilité
-        </legend>
+      <fieldset class="mb-6">
+        <legend>Visibilité</legend>
 
-        <div  class="bg-white rounded-md -space-y-px">
+        <div  class="bg-background rounded-md -space-y-px">
           <% Activity.statuses.keys.each do |status| %>
             <label class="rounded-tl-md rounded-tr-md relative border p-4 flex cursor-pointer focus:outline-none" for="<%= "activity_status_#{status.parameterize.underscore}" %>">
               <%= f.radio_button :status, status %>
@@ -29,7 +27,7 @@
         </div>
       </fieldset>
 
-      <fieldset class="mb-6 border p-6 rounded-lg lg:col-span-2">
+      <fieldset class="mb-6 lg:col-span-2">
         <legend>Media associés</legend>
         <div class="flex space-x-3"
              data-controller="media-preview"

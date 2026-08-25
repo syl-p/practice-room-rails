@@ -14,7 +14,7 @@
           <% end %>
 
           <% if @activity.media.any? %>
-            <% component.with_tab(id: "media", label: "Media associés") do %>
+            <% component.with_tab(id: "media", label: "Médias") do %>
               <%= render partial: "practices/activities/media", locals: {media: @activity.media} %>
             <% end %>
           <% end %>
@@ -36,7 +36,7 @@
 
           <% component.with_tab(id: "comments", label: "Discussions") do %>
             <p class="text-sm text-muted-foreground mb-3">
-              Participer à des discussions concernant cette activité.
+              Échangez sur cette activité.
             </p>
             <%= turbo_frame_tag record_id_gen(@activity, Comment.new) do %>
               <%= render partial: "comments/form", locals: {comment: Comment.new, commentable: @activity} if authenticated? %>

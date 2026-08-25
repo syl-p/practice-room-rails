@@ -1,5 +1,5 @@
-<ul>
+<ul class="grid grid-cols-3 gap-3 mb-6">
   <% media.each do |medium| %>
-    <li><%= medium.file.filename %></li>
+    <li><%= render partial: "media/medium", locals: {medium:, selected: false } %></li>
   <% end %>
 </ul>

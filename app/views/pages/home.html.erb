@@ -1,22 +1,229 @@
-<section class="mt-10 container">
-  <header class="p-6 bg-secondary rounded-lg mb-10">
-    <h1 class="h1 lg:text-5xl">Practice room</h1>
-    <p class="text-muted-foreground">La plateforme pour pratiquer vos passions avec vos potes !</p>
-  </header>
-  <% if authenticated? %>
-    <h2 class="h2 mb-6">Reprenons là où nous en étions</h2>
-    <div class="space-y-6 lg:flex lg:space-x-6 lg:space-y-0 lg:items-stretch lg:flex-nowrap lg:overflow-hidden lg:overflow-x-auto lg:is-overflow-x-scroll lg:w-full">
-        <%= link_to new_practices_path, class: "min-w-[300px] flex flex-col justify-center items-center rounded-md border border-dashed bg-primary-foreground hover:bg-secondary p-6" do %>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-          </svg>
-          <span class="text-muted-foreground text-center mt-3">
-              Crééer une nouvelle pratique
-            </span>
-        <% end %>
-      <% @practices.each do |practice| %>
-          <%= render practice %>
-      <% end %>
+<% content_for :title, "Practice Room - Suivez et partagez vos routines de pratique" %>
+<% content_for :description, "Practice Room est la plateforme communautaire pour musiciens, sportifs et passionnés. Suivez votre progression, partagez vos exercices et motivez-vous avec la communauté." %>
+
+<% if authenticated? %>
+
+  <%# Hero accueil connecté — cohérent avec le hero marketing %>
+  <section class="bg-primary text-primary-foreground pt-32 pb-12 px-4">
+    <div class="container mx-auto">
+      <span class="inline-block mb-4 rounded-full bg-primary-foreground/10 px-4 py-1.5 text-sm font-medium backdrop-blur">
+        Bon retour parmi nous
+      </span>
+      <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-3 leading-tight">
+        On reprend ?
+      </h1>
+      <p class="text-lg text-primary-foreground/80 max-w-xl">
+        Vos pratiques vous attendent. Sélectionnez-en une pour reprendre exactement là où vous en étiez.
+      </p>
     </div>
-  <% end %>
-</section>
+  </section>
+
+  <%# Liste des pratiques %>
+  <section class="py-10 px-4">
+    <div class="container mx-auto">
+      <div class="flex items-end justify-between mb-6">
+        <div>
+          <h2 class="text-xl font-bold tracking-tight">Vos pratiques</h2>
+          <p class="text-sm text-muted-foreground mt-1">
+            <%= @practices.size %> pratique<%= "s" if @practices.size > 1 %> en cours
+          </p>
+        </div>
+      </div>
+      <div class="space-y-6 lg:flex lg:space-x-6 lg:space-y-0 lg:items-stretch lg:flex-nowrap lg:overflow-hidden lg:overflow-x-auto lg:is-overflow-x-scroll lg:w-full">
+        <%= link_to new_practices_path, class: "min-w-[300px] flex flex-col justify-center items-center rounded-xl border-2 border-dashed border-border hover:border-primary/40 hover:bg-secondary/50 p-8 transition-colors" do %>
+          <div class="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center mb-3">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6 text-primary">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+          </div>
+          <span class="font-medium text-muted-foreground text-center">
+            Nouvelle pratique
+          </span>
+        <% end %>
+        <% @practices.each do |practice| %>
+          <%= render practice %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+<% else %>
+
+  <%# ===== LANDING PAGE POUR LES VISITEURS ===== %>
+
+  <%# Hero — fond primary, textes blancs %>
+  <section class="bg-primary text-primary-foreground pt-32 pb-20 px-4">
+    <div class="container mx-auto text-center max-w-4xl">
+      <span class="inline-block mb-6 rounded-full bg-primary-foreground/10 px-4 py-1.5 text-sm font-medium backdrop-blur">
+        Gratuit et open source
+      </span>
+      <h1 class="text-4xl md:text-6xl font-bold tracking-tight mb-6 leading-tight">
+        Votre progression mérite<br>mieux qu'un carnet sous la poussière
+      </h1>
+      <p class="text-lg md:text-xl text-primary-foreground/80 mb-10 max-w-2xl mx-auto leading-relaxed">
+        Practice Room, c'est un endroit simple pour suivre vos séances,
+        partager vos exercices et rester motivé — avec des gens qui pratiquent
+        aussi sérieusement que vous.
+      </p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <%= ui_action_to "Créer mon compte", new_registration_path, as: :link, variant: :secondary, class: "text-base h-12 px-8 bg-white text-primary hover:bg-white/90 border border-white/20", data: { turbo: false } %>
+        <%= ui_action_to "Voir ce que ça donne", "#features", as: :link, variant: :primary, class: "text-base h-12 px-8 bg-transparent border border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10" %>
+      </div>
+    </div>
+  </section>
+
+  <%# Fonctionnalités — fond léger, cards avec bordures colorées %>
+  <section id="features" class="py-20 px-4 bg-secondary/50">
+    <div class="container mx-auto">
+      <div class="text-center mb-16">
+        <span class="inline-block mb-3 text-sm font-semibold text-primary uppercase tracking-wider">Ce qu'on met entre vos mains</span>
+        <h2 class="h2 text-3xl md:text-4xl mb-4">Tout ce qu'il faut, rien de trop</h2>
+        <p class="text-muted-foreground text-lg max-w-2xl mx-auto">
+          Pas de fonctionnalités superflues. Juste les bons outils
+          pour que votre pratique avance, tous les jours.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <article class="group rounded-xl border bg-card p-6 transition-shadow hover:shadow-md">
+          <div class="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Votre journal de pratique</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Notez ce que vous avez fait, combien de temps, et regardez
+            vos stats s'accumuler sans effort.
+          </p>
+        </article>
+
+        <article class="group rounded-xl border bg-card p-6 transition-shadow hover:shadow-md">
+          <div class="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Une communauté qui pratique</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Découvrez ce que les autres pratiquent, empruntez leurs exercices,
+            partagez les vôtres. On apprend mieux ensemble.
+          </p>
+        </article>
+
+        <article class="group rounded-xl border bg-card p-6 transition-shadow hover:shadow-md">
+          <div class="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 0 1 3 19.875v-6.75ZM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V8.625ZM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25C20.496 3 21 3.504 21 4.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 0 1-1.125-1.125V4.125Z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Des stats qui parlent</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Objectifs personnels, temps cumulé, régularité…
+            Vous voyez exactement où vous en êtes, et ça donne envie de continuer.
+          </p>
+        </article>
+
+        <article class="group rounded-xl border bg-card p-6 transition-shadow hover:shadow-md">
+          <div class="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m15.75 10.5 4.72-4.72a.75.75 0 0 1 1.28.53v11.38a.75.75 0 0 1-1.28.53l-4.72-4.72M4.5 18.75h9a2.25 2.25 0 0 0 2.25-2.25v-9a2.25 2.25 0 0 0-2.25-2.25h-9A2.25 2.25 0 0 0 2.25 7.5v9a2.25 2.25 0 0 0 2.25 2.25Z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Vos fichiers avec vous</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Vidéos, partitions, MP3, photos… attachez tout à vos exercices
+            pour tout avoir à portée de main.
+          </p>
+        </article>
+
+        <article class="group rounded-xl border bg-card p-6 transition-shadow hover:shadow-md">
+          <div class="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg mb-2">On vous suit de près</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Abonnez-vous à vos amis pratiquants, recevez des alertes
+            sur leurs nouvelles séances et restez dans le coup.
+          </p>
+        </article>
+
+        <article class="group rounded-xl border bg-card p-6 transition-shadow hover:shadow-md">
+          <div class="w-11 h-11 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/15 transition-colors">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M11.48 3.499a.562.562 0 0 1 1.04 0l2.125 5.111a.563.563 0 0 0 .475.345l5.518.442c.499.04.701.663.321.988l-4.204 3.602a.563.563 0 0 0-.182.557l1.285 5.385a.562.562 0 0 1-.84.61l-4.725-2.885a.562.562 0 0 0-.586 0L6.982 20.54a.562.562 0 0 1-.84-.61l1.285-5.386a.562.562 0 0 0-.182-.557l-4.204-3.602a.562.562 0 0 1 .321-.988l5.518-.442a.563.563 0 0 0 .475-.345L11.48 3.5Z" />
+            </svg>
+          </div>
+          <h3 class="font-bold text-lg mb-2">Pour toutes les disciplines</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Guitare, course à pied, piano, yoga, dessin…
+            Peu importe votre truc, ici on pratique tous au même endroit.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <%# Comment ça marche — fond blanc, colonnes desktop %>
+  <section class="py-20 px-4">
+    <div class="container mx-auto max-w-5xl">
+      <div class="text-center mb-16">
+        <span class="inline-block mb-3 text-sm font-semibold text-primary uppercase tracking-wider">C'est facile</span>
+        <h2 class="h2 text-3xl md:text-4xl mb-4">On vous montre ?</h2>
+        <p class="text-muted-foreground text-lg">
+          Trois petites étapes et vous êtes lancé.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+        <div class="text-center md:text-left">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-lg mb-4">
+            1
+          </div>
+          <h3 class="font-bold text-lg mb-2">Créez votre compte</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Deux secondes chrono. Choisissez votre pseudo, indiquez
+            ce que vous pratiquez, et c'est parti.
+          </p>
+        </div>
+
+        <div class="text-center md:text-left">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-lg mb-4">
+            2
+          </div>
+          <h3 class="font-bold text-lg mb-2">Ajoutez vos exercices</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Créez vos propres exercices ou piochez dans ceux de la communauté.
+            Ajoutez vos fichiers, définissez vos objectifs.
+          </p>
+        </div>
+
+        <div class="text-center md:text-left">
+          <div class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary text-primary-foreground font-bold text-lg mb-4">
+            3
+          </div>
+          <h3 class="font-bold text-lg mb-2">Pratiquez, point.</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Enregistrez vos sessions, consultez vos stats,
+            et laissez la motivation venir toute seule.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%# CTA final — fond primary %>
+  <section class="py-20 px-4 bg-primary text-primary-foreground">
+    <div class="container mx-auto text-center max-w-2xl">
+      <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">Envie de tester ?</h2>
+      <p class="text-primary-foreground/80 text-lg mb-8">
+        C'est gratuit, c'est open source, et ça s'installe en quelques secondes.
+        On vous attend.
+      </p>
+      <%= ui_action_to "Créer mon compte", new_registration_path, as: :link, variant: :secondary, data: { turbo: false } %>
+    </div>
+  </section>
+
+<% end %>

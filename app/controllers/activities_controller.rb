@@ -20,7 +20,7 @@ class ActivitiesController < ApplicationController
     @activity.tags = find_or_create_tags(tags)
 
     if @activity.save
-      redirect_to @activity, flash: { success: "Bravo ! Votre activité à été créée." }
+      redirect_to @activity, flash: { success: "Activité créée, bien joué !" }
     else
       render :new
     end
@@ -39,7 +39,7 @@ class ActivitiesController < ApplicationController
     @activity.tags = find_or_create_tags(tags)
 
     if @activity.update(activity_params)
-      redirect_to @activity, flash: { success: "Votre activité à été mise à jour." }
+      redirect_to @activity, flash: { success: "Activité mise à jour." }
     else
       render :edit
     end
@@ -49,7 +49,7 @@ class ActivitiesController < ApplicationController
     authorize!(@activity)
 
     @activity.destroy
-    redirect_to activities_url, flash: { success: "Activity was successfully destroyed." }
+    redirect_to activities_url, flash: { success: "Activité supprimée." }
   end
 
   private

@@ -227,6 +227,14 @@
     trix-editor {
         @apply rounded-md border border-input px-3 py-2 focus-visible:ring-2 focus-visible:ring-ring;
     }
+
+    fieldset {
+        @apply border border-border rounded-lg p-6;
+    }
+
+    legend {
+        @apply text-sm font-semibold text-foreground px-2 bg-primary/5 rounded-md uppercase tracking-wider;
+    }
 }
 
 input[type="range"] {

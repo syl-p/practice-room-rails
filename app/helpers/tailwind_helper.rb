@@ -2,10 +2,12 @@
 
 module TailwindHelper
   TAG_CLASSES = "inline-flex items-center rounded-full px-2 py-1 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"
-  INPUT_CLASSES = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5"
-  TEXT_AREA_CLASSES = "bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5"
-  LABEL_CLASSES = "block mb-2 text-sm font-medium text-gray-900"
-  ERROR_CLASSES = "text-sm text-red-500 mb-3"
+  INPUT_CLASSES = "bg-background border border-input text-foreground text-sm rounded-lg focus:ring-ring focus:border-ring block w-full p-2.5"
+  TEXT_AREA_CLASSES = "bg-background border border-input text-foreground text-sm rounded-lg focus:ring-ring focus:border-ring block w-full p-2.5"
+  LABEL_CLASSES = "block mb-2 text-sm font-medium text-foreground"
+  ERROR_CLASSES = "text-sm text-destructive mb-3"
+  FIELDSET_CLASSES = "border border-border rounded-lg p-6"
+  LEGEND_CLASSES = "text-sm font-semibold text-foreground px-2 bg-primary/5 rounded-md uppercase tracking-wider"
 
   BTN_BASE_CLASSES = "inline-flex items-center gap-3 justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 "
 

@@ -22,7 +22,7 @@ class Practices::PracticeEntriesController < ApplicationController
 
     if @practice_entry.save
       set_stats
-      flash[:success] = "Votre temps de pratique à été mise à jour."
+      flash[:success] = "Temps de pratique mis à jour."
     else
       flash.now[:error] = @practice_entry.errors.full_messages.to_sentence
     end

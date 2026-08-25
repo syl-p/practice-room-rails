@@ -5,7 +5,7 @@
   <article class="md:col-span-5">
     <header class="mb-6">
       <h1 class="h2">Mot de passe</h1>
-      <p class="text-sm text-muted-foreground mt-2">Modifiez le mot de passe de votre compte.</p>
+      <p class="text-sm text-muted-foreground mt-2">Changez le mot de passe de votre compte.</p>
     </header>
 
     <%= form_with model: Current.user, url: settings_password_path, builder: TailwindFormBuilder, data: {turbo: false} do |f| %>

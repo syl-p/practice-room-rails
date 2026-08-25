@@ -15,7 +15,7 @@ class PracticeActivities::GoalsController < ApplicationController
     @goal.practice_activity = @practice_activity
 
     if @goal.save
-      redirect_to goal_path(id: @goal.id), flash: { success: "Goal was successfully created." }
+      redirect_to goal_path(id: @goal.id), flash: { success: "Objectif créé !" }
     else
       render :new, status: :unprocessable_entity
     end

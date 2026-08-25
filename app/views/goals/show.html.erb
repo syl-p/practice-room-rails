@@ -1,5 +1,5 @@
 <% show_content = capture do %>
-  <p class="text-sm text-muted-foreground mb-3">Ici vous pouvez mettre à jour vos progrès et suivre votre progression vers cet objectif.</p>
+  <p class="text-sm text-muted-foreground mb-3">Mettez à jour vos progrès et suivez votre progression.</p>
   <%= render partial: "goals/goal_progresses/form",
 		locals: { goal: @goal, goal_progress: GoalProgress.new } %>
 
@@ -10,7 +10,7 @@
 <% end %>
 
 <%= turbo_frame_tag :goal_sidebar do %>
-  <h3 class="h3">Objectif: <%= @goal.target_value %> <%= @goal.unit %></h3>
+  <h3 class="h3">Objectif : <%= @goal.target_value %> <%= @goal.unit %></h3>
   <%= show_content %>
 <% end %>
 

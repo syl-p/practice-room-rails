@@ -1,5 +1,5 @@
 <% if @practice_entry.persisted? %>
-  <%= turbo_stream.replace "user_practices" do %>
+  <%= turbo_stream.update "user_practices" do %>
     <%= render partial: "shared/user_practices" %>
   <% end %>
 
@@ -13,7 +13,7 @@
 		<%= render DayPickerComponent.new(practice: @practice, current_date: Date.today) %>
 	<% end %>
 
-	<%= turbo_stream.replace :dayli_stats do %>
+	<%= turbo_stream.replace :daily_stats do %>
 		<%= render partial: "practices/daily_stats" %>
 	<% end %>
 <% end %>

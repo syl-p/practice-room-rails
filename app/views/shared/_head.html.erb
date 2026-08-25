@@ -1,10 +1,19 @@
 <title><%= content_for(:title) || "Practice Room" %></title>
+<meta name="description" content="<%= content_for(:description) || "Practice Room - Suivez et partagez vos routines de pratique" %>">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="view-transition" content="same-origin" />
 <meta name="turbo-refresh-method" content="morph">
 <meta name="turbo-refresh-scroll" content="preserve">
+
+<meta property="og:title" content="<%= content_for(:title) || "Practice Room" %>">
+<meta property="og:description" content="<%= content_for(:description) || "La plateforme communautaire pour suivre et partager vos routines de pratique." %>">
+<meta property="og:url" content="<%= request.original_url %>">
+<meta property="og:type" content="<%= content_for(:og_type) || "website" %>">
+<meta property="og:site_name" content="Practice Room">
+
+<link rel="canonical" href="<%= request.original_url %>">
 
 <%= csrf_meta_tags %>
 <%= csp_meta_tag %>

@@ -2,21 +2,40 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="media-selection"
 export default class extends Controller {
-  static targets = ['item']
+	#selectedItems = new Set()
+  static targets = ['item', 'inputs', 'submitButton']
+	static values = {
+		selectedIds: Array
+	}
 
   connect() {
+		this.selectedIdsValue.map(String).forEach(id => {
+			this.#selectedItems.add(id)
+			this.#preSelect(id)
+		})
+		this.#updateUi()
   }
 
-  submit() {
-    const items = this.itemTargets.filter(cbx => cbx.checked).map(cbx => ({
-      id: cbx.value,
-      thumbUrl: cbx.dataset.thumbUrl
-    }))
+  toggle({params}) {
+		const id = String(params.id)
 
-    window.dispatchEvent(new CustomEvent('media:selected', {
-      detail: {
-        items
-      }
-    }))
-  }
+		if(this.#selectedItems.has(id)) {
+			this.#selectedItems.delete(id)
+		} else {
+			this.#selectedItems.add(id)
+		}
+		this.#updateUi()
+	}
+
+	#updateUi() {
+		// this.submitButtonTarget.disabled = this.#selectedItems.size === 0
+		this.inputsTarget.innerHTML = [...this.#selectedItems]
+			.map(id => `<input type="hidden" name="onboarding_activity_media_step[medium_ids][]" value="${id}"/>`)
+			.join("")
+	}
+
+	#preSelect(id) {
+		const checkbox = this.itemTargets.find(item => item.value === id)
+		if (checkbox) checkbox.checked = true
+	}
 }
