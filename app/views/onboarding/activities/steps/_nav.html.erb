@@ -1,6 +1,6 @@
 <nav aria-label="Étapes de création">
 	<ul class="flex flex-wrap gap-2 items-center justify-center mb-6">
-		<% Onboarding::Activity::STEPS.each_with_index do |step, index| %>
+		<% Onboarding::Activity::STEPS.reject { |s| s == "confirmation" }.each_with_index do |step, index| %>
 			<li>
 				<%= link_to step_nav_url(step),
 						class: step_nav_classes(step),

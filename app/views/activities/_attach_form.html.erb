@@ -9,18 +9,16 @@
 				<% icon "chevron-down" %>
 			<% end %>
 			<% component.with_dropdown_menu do %>
-				<ul class="py-1" role="none">
+				<%= render MenuComponent.new do |menu| %>
 					<% Current.user.cached_practices.each do |practice| %>
-						<li>
-							<%= button_to practice.name, practice_practice_activities_path(practice_id: practice.id, activity_id: activity.id),
-														method: :post, class: "block px-4 py-2 text-sm text-foreground" %></li>
+						<% menu.with_item(href: practice_practice_activities_path(practice_id: practice.id, activity_id: activity.id)) do %>
+							<%= practice.name %>
+						<% end %>
 					<% end %>
-					<li>
-						<%= link_to "Créer une nouvelle pratique", new_practices_path,
-												data: {turbo: false},
-												class: "block px-4 py-2 text-sm text-foreground cursor-pointer" %>
-					</li>
-				</ul>
+					<% menu.with_item(href: new_practices_path) do %>
+						Créer une nouvelle pratique
+					<% end %>
+				<% end %>
 			<% end %>
 		<% end %>
 	<% end %>
