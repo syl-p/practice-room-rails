@@ -69,6 +69,13 @@ Rails.application.routes.draw do
     resources :activities, only: [] do
       resources :steps, only: [ :show, :update ], param: :step, controller: "activities/steps"
     end
+
+    get "practices/new", to: "practices/steps#show"
+    post "practices", to: "practices/steps#update"
+
+    resources :practices, only: [] do
+      resources :steps, only: [ :show, :update ], param: :step, controller: "practices/steps"
+    end
   end
 
   post "bookmarks/:activity_id",  to: "bookmarks#create", as: "new_bookmark"

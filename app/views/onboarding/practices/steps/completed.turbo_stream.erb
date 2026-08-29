@@ -1,0 +1,4 @@
+<%= turbo_stream.replace "remote_modal" do %>
+	<turbo-frame id="remote_modal"></turbo-frame>
+	<script>Turbo.visit("<%= practice_path(@practice) %>")</script>
+<% end %>
