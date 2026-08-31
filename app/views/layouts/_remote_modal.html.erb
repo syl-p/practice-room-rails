@@ -1,0 +1,7 @@
+<%= turbo_frame_tag :remote_modal do %>
+	<dialog data-controller="remote-modal" class="backdrop:bg-background/80 backdrop:backdrop-blur-sm w-[calc(100%-1.5rem)] lg:w-[900px] max-w-full max-h-[85dvh] overflow-y-auto gap-4 border bg-background shadow-lg duration-200 rounded-md">
+		<div class="p-4 sm:p-6 min-w-0">
+			<%= yield %>
+		</div>
+	</dialog>
+<% end %>

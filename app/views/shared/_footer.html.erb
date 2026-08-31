@@ -1,17 +1,52 @@
-<footer class="border border-t p-6 md:p-10 mt-20">
-  <div class="container mx-auto flex flex-col md:flex-row items-end justify-between gap-6">
-    <div class="text-center md:text-left">
-      <h2 class="h3">
-        Practice Room
-      </h2>
-      <p class="mt-2 text-sm text-muted-foreground">
-        Votre nouvel outil pour gerer vos routines de pratique. Pratiquer avec simplicité et efficacité.
-      </p>
+<footer class="bg-primary text-primary-foreground">
+  <div class="container mx-auto py-16 px-4">
+    <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+      <%# Colonne brand %>
+      <div class="space-y-4 lg:col-span-1">
+        <p class="font-bold text-lg tracking-tight">Practice Room</p>
+        <p class="text-sm text-primary-foreground/70 leading-relaxed">
+          La plateforme communautaire pour suivre et partager vos routines de pratique.
+        </p>
+      </div>
+
+      <%# Colonne navigation %>
+      <div class="space-y-4">
+        <p class="font-semibold text-sm uppercase tracking-wider text-primary-foreground/50">Navigation</p>
+        <ul class="space-y-2.5 text-sm">
+          <li><%= link_to "Accueil", root_path, class: "text-primary-foreground/80 hover:text-primary-foreground transition-colors" %></li>
+          <%# TODO: add blog_index_path when blog routes are implemented %>
+          <%#= link_to "Blog", blog_index_path, class: "text-primary-foreground/80 hover:text-primary-foreground transition-colors" %>
+          <li><%= link_to "A propos", about_path, class: "text-primary-foreground/80 hover:text-primary-foreground transition-colors" %></li>
+          <li><%= link_to "Contact", contact_path, class: "text-primary-foreground/80 hover:text-primary-foreground transition-colors" %></li>
+        </ul>
+      </div>
+
+      <%# Colonne communauté %>
+      <div class="space-y-4">
+        <p class="font-semibold text-sm uppercase tracking-wider text-primary-foreground/50">Communauté</p>
+        <ul class="space-y-2.5 text-sm">
+          <li><a href="https://discord.gg/8vCbhQUK7M" target="_blank" rel="noopener noreferrer" class="text-primary-foreground/80 hover:text-primary-foreground transition-colors">Discord</a></li>
+          <li><a href="https://github.com/syl-p/practice-room-rails" target="_blank" rel="noopener noreferrer" class="text-primary-foreground/80 hover:text-primary-foreground transition-colors">GitHub</a></li>
+        </ul>
+      </div>
+
+      <%# Colonne légal %>
+      <div class="space-y-4">
+        <p class="font-semibold text-sm uppercase tracking-wider text-primary-foreground/50">Légal</p>
+        <ul class="space-y-2.5 text-sm">
+          <li><%= link_to "Mentions légales", "#", class: "text-primary-foreground/80 hover:text-primary-foreground transition-colors" %></li>
+          <li><%= link_to "Politique de confidentialité", "#", class: "text-primary-foreground/80 hover:text-primary-foreground transition-colors" %></li>
+          <li><%= link_to "Conditions d'utilisation", "#", class: "text-primary-foreground/80 hover:text-primary-foreground transition-colors" %></li>
+        </ul>
+      </div>
     </div>
-    <nav class="flex gap-4 text-sm">
-      <a href="#" class="transition-colors">Accueil</a>
-      <a href="#" class="transition-colors">Fonctionnalités</a>
-      <a href="#" class="transition-colors">Contact</a>
-    </nav>
+
+    <div class="mt-12 border-t border-primary-foreground/20 pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-primary-foreground/60">
+      <p>&copy; <%= Date.current.year %> Practice Room. Projet open source.</p>
+      <div class="flex items-center space-x-4">
+        <a href="https://discord.gg/8vCbhQUK7M" target="_blank" rel="noopener noreferrer" class="hover:text-primary-foreground transition-colors">Discord</a>
+        <a href="https://github.com/syl-p/practice-room-rails" target="_blank" rel="noopener noreferrer" class="hover:text-primary-foreground transition-colors">GitHub</a>
+      </div>
+    </div>
   </div>
 </footer>

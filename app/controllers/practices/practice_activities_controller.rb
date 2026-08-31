@@ -9,10 +9,10 @@ class Practices::PracticeActivitiesController < ApplicationController
     authorize!(@practice, :attach?)
     @practice.activities << @activity
     @practice.save
-    flash[:success] = "Activity Attached!"
+    flash[:success] = "Activité ajoutée à votre pratique !"
     redirect_to practice_path(@practice)
   rescue
-    flash[:error] = "Activity already attached"
+    flash[:error] = "Cette activité est déjà dans votre pratique"
     redirect_to practice_path(@practice)
   end
 
@@ -20,7 +20,7 @@ class Practices::PracticeActivitiesController < ApplicationController
     authorize! @practice_activity
 
     @practice_activity.destroy
-    flash[:success] = "Activity Detached!"
+    flash[:success] = "Activité détachée de votre pratique."
     redirect_to practice_path(@practice)
   end
 

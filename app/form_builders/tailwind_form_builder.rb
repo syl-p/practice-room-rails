@@ -23,6 +23,12 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def rich_textarea(method, options = {})
+    form_group(method, options) do
+      super(method, merge_default_classes(options, TailwindHelper::TEXT_AREA_CLASSES))
+    end
+  end
+
   def password_field(method, options = {})
     form_group(method, options) do
       super(method, merge_default_classes(options, TailwindHelper::INPUT_CLASSES))

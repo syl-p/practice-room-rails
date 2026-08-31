@@ -8,7 +8,7 @@ class Settings::ProfilesController < ApplicationController
     end
 
     if Current.user.update(user_params)
-      redirect_to edit_settings_profile_path, flash: {success: "Vos nouvelles informations ont été enregistrées !"}
+      redirect_to edit_settings_profile_path, flash: { success: "Profil mis à jour !" }
     else
       Current.user.avatar.purge
       render :edit, status: :unprocessable_entity

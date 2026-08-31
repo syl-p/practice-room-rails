@@ -12,7 +12,7 @@ class CommentsController < ApplicationController
     authorize! @comment, :update?
 
     if @comment.update(comment_params)
-      redirect_to @comment, notice: "Comment was successfully updated."
+      redirect_to @comment, notice: "Commentaire mis à jour."
     else
       render :edit
     end
@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    redirect_to @comment.commentable, notice: "Comment was successfully destroyed."
+    redirect_to @comment.commentable, notice: "Commentaire supprimé."
   end
 
   private

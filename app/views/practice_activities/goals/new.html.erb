@@ -1,10 +1,10 @@
 <% new_content = capture do %>
-    <p class="text-sm text-muted-foreground mb-3">Definissez votre objectif ici.</p>
+    <p class="text-sm text-muted-foreground mb-3">Définissez votre objectif ici.</p>
     <%= render partial: "form", locals: { goal: @goal } %>
 <% end %>
 
 <%= turbo_frame_tag :goal_sidebar do %>
-  <h3 class="h3 mb-4">Définir mon objectif</h3>
+  <h3 class="h3 mb-4">Mon objectif</h3>
   <%= new_content %>
 <% end %>
 

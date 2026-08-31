@@ -1,8 +1,13 @@
-<% content_for :title, "Editing practice" %>
+<% content_for :title, "Modifier votre pratique" %>
 
-<section class="container py-20">
-  <%= render BreadcrumbComponent.new([{label: @practice.name, path: practice_path(@practice)}, {label: 'Edit', path: '#'}]) %>
-  <h1 class="h1 mb-6">Modification de votre pratique</h1>
-
+<section class="container">
+	<header class="mb-6">
+		<%= render partial: "practices/back_to_practice_link" %>
+		<div class="mt-6">
+			<h2 class="h2">
+				Modifier ma pratique
+			</h2>
+		</div>
+	</header>
   <%= render "form", practice: @practice %>
 </section>

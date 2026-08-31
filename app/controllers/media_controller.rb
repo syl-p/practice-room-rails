@@ -20,7 +20,7 @@ class MediaController < ApplicationController
     @medium.destroy!
 
     respond_to do |format|
-      format.html { redirect_to media_path, status: :see_other, notice: "Media supprimé !" }
+      format.html { redirect_to media_path, status: :see_other, notice: "Média supprimé." }
       format.json { head :no_content }
     end
   end

@@ -1,0 +1,12 @@
+<%= render DropdownComponent.new(variant: :outline) do |component| %>
+	<% component.with_trigger_btn do %>
+		<%= icon "ellipsis-horizontal" %>
+	<% end %>
+	<% component.with_dropdown_menu do %>
+		<%= render MenuComponent.new do |menu| %>
+			<% menu.with_item do %>
+				<%= button_to "Supprimer", medium, method: :delete, class: "block px-4 py-2 text-sm text-foreground cursor-pointer" %>
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>

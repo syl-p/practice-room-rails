@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <%= render partial: "shared/head" %>
+  </head>
+
+  <body class="bg-background">
+    <%= render partial: "shared/marketing_nav" %>
+
+    <main>
+      <%= yield %>
+    </main>
+
+    <%= render partial: "shared/footer" %>
+  </body>
+</html>

@@ -1,0 +1,206 @@
+<% content_for :title, "A propos - Practice Room" %>
+<% content_for :description, "Practice Room est un projet open source né de la passion pour la pratique régulière. Découvrez notre mission, notre équipe et notre philosophie." %>
+
+<%# Header — fond primary %>
+<section class="bg-primary text-primary-foreground pt-32 pb-16 px-4">
+  <div class="container mx-auto max-w-4xl">
+    <span class="inline-block mb-4 rounded-full bg-primary-foreground/10 px-4 py-1.5 text-sm font-medium backdrop-blur">
+      Notre histoire
+    </span>
+    <h1 class="text-4xl md:text-5xl font-bold tracking-tight mb-4 leading-tight">
+      On vous raconte ?
+    </h1>
+    <p class="text-lg text-primary-foreground/80 max-w-2xl leading-relaxed">
+      Derrière Practice Room, il y a des gens qui pratiquent tous les jours
+      et qui avaient envie de se construire l'outil qu'ils n'ont jamais trouvé.
+    </p>
+  </div>
+</section>
+
+<%# Mission — deux colonnes desktop %>
+<section class="py-16 px-4">
+  <div class="container mx-auto max-w-5xl">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+      <div class="lg:col-span-2">
+        <span class="inline-block mb-3 text-sm font-semibold text-primary uppercase tracking-wider">Notre mission</span>
+        <h2 class="text-2xl font-bold tracking-tight mb-0">Pourquoi on fait tout ça</h2>
+      </div>
+      <div class="lg:col-span-3 space-y-4">
+        <p class="text-muted-foreground leading-relaxed">
+          On le sait tous&nbsp;: rester régulier dans sa pratique, c'est dur.
+          Pas parce qu'on manque de motivation, mais parce qu'on n'a pas toujours
+          les bons réflexes. Notre idée est simple&nbsp;: donner à chacun un endroit
+          pour <strong class="text-foreground">suivre ce qu'on fait</strong>,
+          <strong class="text-foreground">partager ce qu'on a trouvé</strong> et
+          <strong class="text-foreground">bénéficier de l'énergie des autres</strong>.
+        </p>
+        <p class="text-muted-foreground leading-relaxed">
+          Que vous jouiez de la guitare, couriez des semi-marathons, pratiquiez le yoga
+          ou dessiniez chaque matin — ici, on s'en fout du domaine. Ce qui compte,
+          c'est de montrer que vous êtes là, et de le prouver en pratiquant.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# Valeurs — fond coloré, cards en grille 2 colonnes %>
+<section class="py-16 px-4 bg-secondary/50">
+  <div class="container mx-auto max-w-5xl">
+    <div class="text-center mb-12">
+      <span class="inline-block mb-3 text-sm font-semibold text-primary uppercase tracking-wider">Nos valeurs</span>
+      <h2 class="text-2xl font-bold tracking-tight">Ce à quoi on tient</h2>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="rounded-xl border bg-card p-6 flex gap-4">
+        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg mb-1">Tout est ouvert</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Le code est sur GitHub, à portée de clic. Vous pouvez le lire,
+            le modifier, le copier, le forké. Pas de portes closes ici.
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-xl border bg-card p-6 flex gap-4">
+        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg mb-1">Les pratiquants d'abord</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            C'est fait par des gens qui pratiquent, pour des gens qui pratiquent.
+            On ne construit pas pour les metrics, on construit pour vous.
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-xl border bg-card p-6 flex gap-4">
+        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 13.5l10.5-11.25L12 10.5h8.25L9.75 21.75 12 13.5H3.75z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg mb-1">Rien de superflu</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Pas de dashboards compliqués, pas de menus à rallonge.
+            Juste ce qu'il faut pour pratiquer, suivre, repartir.
+          </p>
+        </div>
+      </div>
+
+      <div class="rounded-xl border bg-card p-6 flex gap-4">
+        <div class="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 text-primary">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.455 2.456L21.75 6l-1.036.259a3.375 3.375 0 0 0-2.455 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
+          </svg>
+        </div>
+        <div>
+          <h3 class="font-bold text-lg mb-1">Pas de frontières</h3>
+          <p class="text-sm text-muted-foreground leading-relaxed">
+            Guitare, course, piano, yoga, dessin, cuisine…
+            Practice Room ne juge pas votre passion, il la respecte.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# Équipe — fond blanc, layout 2 colonnes %>
+<section class="py-16 px-4">
+  <div class="container mx-auto max-w-5xl">
+    <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-start">
+      <div class="lg:col-span-2">
+        <span class="inline-block mb-3 text-sm font-semibold text-primary uppercase tracking-wider">L'équipe</span>
+        <h2 class="text-2xl font-bold tracking-tight mb-0">Qui se cache derrière</h2>
+      </div>
+      <div class="lg:col-span-3 space-y-4">
+        <p class="text-muted-foreground leading-relaxed">
+          À l'heure actuelle, on est une petite bande de développeurs
+          qui pratiquent autant leur instrument que leur clavier.
+          Le projet est né un soir de colère après une séance de pratique
+          où on avait oublié la moitié de ce qu'on avait fait la veille.
+        </p>
+        <p class="text-muted-foreground leading-relaxed">
+          On croit sincèrement qu'un bon outil peut vous empêcher de lâcher.
+          Pas en vous poussant, mais en vous montrant que vous avancez —
+          même quand vous n'en avez pas l'impression.
+        </p>
+        <div class="pt-4 flex flex-col sm:flex-row gap-4">
+          <%= ui_action_to "Passer sur Discord", "https://discord.gg/8vCbhQUK7M", as: :link, variant: :primary, class: "h-11", data: { turbo: false } %>
+          <%= ui_action_to "Jeter un oeil au code", "https://github.com/syl-p/practice-room-rails", as: :link, variant: :outline, class: "h-11", data: { turbo: false } %>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%# Stack technique — fond coloré, badges visuels %>
+<section class="py-16 px-4 bg-secondary/50">
+  <div class="container mx-auto max-w-5xl">
+    <div class="text-center mb-12">
+      <span class="inline-block mb-3 text-sm font-semibold text-primary uppercase tracking-wider">Stack technique</span>
+      <h2 class="text-2xl font-bold tracking-tight">Ce qui fait tourner Practice Room</h2>
+    </div>
+
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div class="flex items-center gap-3 rounded-lg border bg-card px-5 py-4">
+        <span class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></span>
+        <div>
+          <p class="font-semibold text-sm">Ruby on Rails 8</p>
+          <p class="text-xs text-muted-foreground">Le framework qui fait tout, en Ruby</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 rounded-lg border bg-card px-5 py-4">
+        <span class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></span>
+        <div>
+          <p class="font-semibold text-sm">Hotwire</p>
+          <p class="text-xs text-muted-foreground">Turbo + Stimulus, rapide sans JS lourd</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 rounded-lg border bg-card px-5 py-4">
+        <span class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></span>
+        <div>
+          <p class="font-semibold text-sm">Tailwind CSS</p>
+          <p class="text-xs text-muted-foreground">CSS utility-first, sans complication</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 rounded-lg border bg-card px-5 py-4">
+        <span class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></span>
+        <div>
+          <p class="font-semibold text-sm">ViewComponent</p>
+          <p class="text-xs text-muted-foreground">Des composants réutilisables, partout</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 rounded-lg border bg-card px-5 py-4">
+        <span class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></span>
+        <div>
+          <p class="font-semibold text-sm">Solid Stack</p>
+          <p class="text-xs text-muted-foreground">Queue, Cache & Cable, le tout intégré</p>
+        </div>
+      </div>
+
+      <div class="flex items-center gap-3 rounded-lg border bg-card px-5 py-4">
+        <span class="w-2 h-2 rounded-full bg-primary flex-shrink-0"></span>
+        <div>
+          <p class="font-semibold text-sm">SQLite</p>
+          <p class="text-xs text-muted-foreground">Simple, embarquée, pas de config</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

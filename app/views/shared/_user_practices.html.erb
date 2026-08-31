@@ -25,7 +25,7 @@
 						<% end %>
 					<% end %>
 
-					<% menu.with_item(href: new_practice_path, data: {turbo: false}) do %>
+					<% menu.with_item(href: onboarding_practices_new_path, data: {turbo: true, turbo_frame: :remote_modal}) do %>
 						<div class="flex space-x-3 align-center">
 							<%= icon "plus" %>
 							<span class="block">Nouvelle pratique</span>

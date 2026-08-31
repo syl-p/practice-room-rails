@@ -1,0 +1,54 @@
+<%= render layout: "layouts/remote_modal" do %>
+	<div class="flex flex-col items-center text-center">
+		<div class="mb-4 rounded-full bg-primary/10 p-3">
+			<%= icon "check-circle", class: "size-10 text-primary" %>
+		</div>
+
+		<h2 class="h2 mb-2">Félicitations !</h2>
+		<p class="text-muted-foreground mb-6">
+			Votre activité « <strong><%= @activity.title %></strong> » est prête.
+		</p>
+
+		<div class="w-full rounded-lg border border-border p-4 mb-6 text-left space-y-3">
+			<div class="flex items-center justify-between">
+				<span class="text-sm font-medium text-muted-foreground">Statut</span>
+				<span class="inline-flex items-center rounded-full px-2 py-1 text-xs font-semibold
+					<%= @activity.published? ? "bg-primary/10 text-primary" : "bg-secondary text-secondary-foreground" %>">
+					<%= @activity.published? ? "Publiée" : "Brouillon" %>
+				</span>
+			</div>
+
+			<% if @activity.tags.any? %>
+				<div class="flex items-center justify-between">
+					<span class="text-sm font-medium text-muted-foreground">Tags</span>
+					<div class="flex flex-wrap gap-1 justify-end">
+						<% @activity.tags.each do |tag| %>
+							<%= render(TagComponent.new(tag.name, variant: :outline)) %>
+						<% end %>
+					</div>
+				</div>
+			<% end %>
+
+			<% if @activity.media.any? %>
+				<div class="flex items-center justify-between">
+					<span class="text-sm font-medium text-muted-foreground">Médias</span>
+					<span class="text-sm"><%= @activity.media.count %> fichier<%= "s" if @activity.media.count > 1 %></span>
+				</div>
+			<% end %>
+		</div>
+
+		<p class="text-sm text-muted-foreground mb-6">Souhaitez-vous l'ajouter à votre pratique ?</p>
+
+		<div class="flex flex-col sm:flex-row items-center justify-center gap-3 w-full">
+			<%= render partial: "activities/attach_form", locals: { activity: @activity } %>
+
+			<%#= ui_action_to "Voir mon activité", activity_path(@activity),
+											as: :link, variant: :secondary, data: { turbo_frame: "_top" } %>
+		</div>
+
+		<p class="mt-4">
+			<%= link_to "Plus tard", root_path, data: { turbo_frame: "_top" },
+							class: "text-sm text-muted-foreground hover:text-foreground underline underline-offset-4" %>
+		</p>
+	</div>
+<% end %>

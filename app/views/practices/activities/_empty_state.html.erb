@@ -1,7 +1,7 @@
 <div class="w-full text-center bg-secondary rounded-lg p-8">
-  <h3>Aucune activités prêtes.</h3>
+  <h3>Aucune activité pour l'instant.</h3>
   <div>
-		<%= ui_action_to "Créer une activité", new_activity_path, as: :link, variant: :primary %>
-    <%= ui_action_to "Chercher une activité", new_search_path, as: :link, variant: :outline, class: "mt-4", data: {turbo: true, turbo_frame: :remote_modal} %>
+		<%= ui_action_to "Créer une activité", onboarding_activities_new_path, as: :link, variant: :primary, data: {turbo: true, turbo_frame: :remote_modal} %>
+    <%= ui_action_to "Trouver une activité", new_search_path, as: :link, variant: :outline, class: "mt-4", data: {turbo: true, turbo_frame: :remote_modal} %>
   </div>
 </div>

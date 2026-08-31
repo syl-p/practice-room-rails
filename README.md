@@ -1,78 +1,53 @@
-# # Bienvenue dans **Practice Room** 🎶
-RUBY 8, HOTWIRE TURBO ET STIMULUS: 
+# Practice Room
 
-+ SOLID QUEUE
-+ SOLID CACHE
-+ SOLID CABLE
+Plateforme communautaire open source pour suivre et partager vos routines de pratique.
 
-## Découvrez une nouvelle façon de pratiquer avec plaisir !
+## C'est quoi ?
 
-Bienvenue sur **"Practice Room"**, la plateforme communautaire et open source qui transforme votre routine de pratique en une aventure enrichissante. Que vous soyez musicien, sportif, ou passionné de tout autre domaine, notre objectif est de rendre la pratique quotidienne plus motivante et engageante.
+Practice Room s'adresse à tous ceux qui pratiquent — musiciens, sportifs, artistes, passionnés — et qui veulent un outil simple pour structurer leur entraînement au quotidien.
 
-## 🚀 Pourquoi choisir Practice Room ?
+Pas de dashboards compliqués, pas de menus à rallonge. Juste ce qu'il faut pour pratiquer, suivre, repartir.
 
-- **Communauté Active :** Rejoignez une communauté vibrante où les utilisateurs partagent leurs exercices, échangent des idées et se motivent mutuellement.
+## Ce qu'on met entre vos mains
 
-- **Challengez-vous :** Mettez-vous au défi et défiez d'autres membres pour pimenter votre pratique. La compétition amicale vous propulsera vers de nouveaux sommets.
+- **Journal de pratique** — Notez ce que vous avez fait, combien de temps, et regardez vos stats s'accumuler.
+- **Exercices** — Créez les vôtres ou piochez dans ceux de la communauté. Ajoutez des fichiers, définissez des objectifs.
+- **Communauté** — Découvrez ce que les autres pratiquent, échangez, partagez les vôtres.
+- **Notifications** — Abonnez-vous à vos amis pratiquants, recevez des alertes sur leurs nouvelles séances.
+- **Médias** — Vidéos, partitions, MP3, photos… attachez tout à vos exercices.
 
-- **Gestion du Temps :** Tenez un journal de pratique détaillé, suivez votre progression, et recevez des statistiques quotidiennes pour rester motivé.
+## Stack technique
 
-- **Enrichissez vos Exercices :** Ajoutez des ressources (pdf, images, mp3, etc.) à vos exercices pour les rendre plus complets et efficaces.
+| Couche | Technologie |
+|--------|-------------|
+| Langage | Ruby 3.2 |
+| Framework | Rails 8.0 |
+| Base de données | SQLite3 (Solid Suite pour cache/queue/cable) |
+| Frontend | Hotwire (Turbo + Stimulus) + Importmap |
+| CSS | Tailwind CSS 3.3 |
+| Composants UI | ViewComponent |
+| Authentification | Custom (bcrypt, sessions cookie signées) |
+| Tests | Minitest + FactoryBot + Capybara |
+| Déploiement | Kamal (Docker) |
 
-## 🌟 Fonctionnalités Principales :
-
-### 🎵 Renseignez vos exercices
-
-- Explorez une liste d'exercices variés partagés par la communauté.
-- Ajoutez vos exercices préférés à vos favoris pour un accès rapide.
-- Attachez des ressources multimédias pour une pratique plus immersive.
-
-### ⏰ Gérez votre temps de pratique
-
-- Utilisez votre journal de pratique pour enregistrer le temps passé sur chaque activité.
-- Visualisez des statistiques dans votre espace personnel pour un suivi quotidien.
-
-### 🤝 Pratiquez à plusieurs
-
-- Partagez vos exercices avec la communauté en mode public.
-- Collaborez en proposant des versions alternatives et en laissant des commentaires.
-
-### 🔔 Suivez et soyez suivi
-
-- Abonnez-vous aux membres inspirants pour recevoir des notifications sur leurs activités.
-- Restez informé sur les nouveaux exercices, versions alternatives et défis.
-
-### 🏆 Gamification (en cours)
-
-- Recevez des récompenses en fonction de votre pratique et de votre participation.
-- Gagnez des badges et suivez des défis quotidiens pour une expérience encore plus stimulante.
-
-## 🛠️ Détails Techniques
-### Pour lancer le projet en local:
+## Pour lancer le projet en local
 
 ```shell
-bundle
-```
-
-```shell
-bin/rails db:create
-bin/rails db:migrate
-bin/rails db:seed
-```
-
-```shell
+bundle install
+bin/rails db:create db:migrate db:seed
 bin/dev
 ```
-## 🗺️ Roadmap & Corrections
 
-Suivez notre progression directement sur [l'onglet "projects"](https://github.com/users/syl-p/projects/13/views/1).
-
-## 👋 Communauté, Contact, Équipe...
+## Communauté
 
 Rejoignez notre Discord, que vous soyez membre actif ou que vous souhaitiez participer au développement.
 
 > [Lien d'invitation au serveur Discord](https://discord.gg/8vCbhQUK7M)
 
----
+## Roadmap
 
-_Prêt à transformer votre pratique quotidienne en une aventure passionnante ? Rejoignez Practice Room aujourd'hui !_ 🎸🏋️‍♂️
+Suivez notre progression sur [l'onglet "projects"](https://github.com/users/syl-p/projects/13/views/1).
+
+## Licence
+
+Projet open source. Le code est sur GitHub, à portée de clic. Vous pouvez le lire, le modifier, le forker. Pas de portes closes ici.

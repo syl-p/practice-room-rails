@@ -1,0 +1,23 @@
+<header class="fixed top-0 z-40 w-full border-b bg-background/80 backdrop-blur supports-backdrop-blur:bg-background/60">
+  <div class="container mx-auto flex h-14 items-center justify-between">
+    <%= link_to root_path, class: "flex items-center space-x-2 font-bold text-lg tracking-tight" do %>
+      Practice Room
+    <% end %>
+
+    <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-muted-foreground">
+      <%# TODO: add blog_index_path when blog routes are implemented %>
+      <%#= link_to "Blog", blog_index_path, class: "hover:text-foreground transition-colors" %>
+      <%= link_to "A propos", about_path, class: "hover:text-foreground transition-colors" %>
+      <%= link_to "Contact", contact_path, class: "hover:text-foreground transition-colors" %>
+    </nav>
+
+    <div class="flex items-center space-x-2">
+      <% if authenticated? %>
+        <%= ui_action_to "Mon espace", root_path, as: :link, variant: :primary %>
+      <% else %>
+        <%= ui_action_to "Se connecter", new_session_path, as: :link, variant: :ghost, class: "text-muted-foreground", data: { turbo: false } %>
+        <%= ui_action_to "S'inscrire", new_registration_path, as: :link, variant: :primary, data: { turbo: false } %>
+      <% end %>
+    </div>
+  </div>
+</header>

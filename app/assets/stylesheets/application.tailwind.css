@@ -225,7 +225,29 @@
     }
 
     trix-editor {
-        @apply rounded-md border border-input px-3 py-2 focus-visible:ring-2 focus-visible:ring-ring;
+        @apply rounded-md border border-input px-3 py-2 focus-visible:ring-2 focus-visible:ring-ring max-w-full;
+    }
+
+    /* Le contenu du Trix editor doit se replier et non déborder horizontalement */
+    trix-editor {
+        overflow-wrap: break-word;
+    }
+
+    trix-editor *,
+    trix-editor {
+        word-break: break-word;
+    }
+
+    dialog {
+        max-width: calc(100% - 1.5rem);
+    }
+
+    fieldset {
+        @apply border border-border rounded-lg p-6;
+    }
+
+    legend {
+        @apply text-sm font-semibold text-foreground px-2 bg-primary/5 rounded-md uppercase tracking-wider;
     }
 }
 

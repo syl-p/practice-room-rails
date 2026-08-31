@@ -6,7 +6,8 @@
       [
         {path: @practice, label: "Pratique", icon: "rocket-launch", active: practice_active},
         {path: practice_practice_entries_path(practice_id: @practice.id, day: Date.current), label: 'Historique', icon: "calendar", active: controller_name == "practice_entries"},
-        {path: practice_progression_index_path(practice_id: @practice.id), label: "Progression", icon: "chart-bar", active: controller_name == "progression"}
+        {path: practice_progression_index_path(practice_id: @practice.id), label: "Progression", icon: "chart-bar", active: controller_name == "progression"},
+        {path: edit_practice_path(@practice), label: "Modifier", icon: "pencil", active: controller_name == "practices" && action_name == "edit"}
       ].each do |link| %>
       <li>
         <%= link_to link[:path],

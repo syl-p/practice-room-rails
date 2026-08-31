@@ -1,6 +1,6 @@
 <%= turbo_stream.remove dom_id(@practice_entry) %>
 
-<%= turbo_stream.replace "user_practices" do %>
+<%= turbo_stream.update "user_practices" do %>
   <%= render partial: "shared/user_practices" %>
 <% end %>
 

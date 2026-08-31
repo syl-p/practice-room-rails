@@ -4,7 +4,7 @@ class Settings::PasswordsController < ApplicationController
 
   def update
     if Current.user.update(user_params)
-      redirect_to edit_settings_password_path, flash: { success: "Votre mot de passe à bien été changé !" }
+      redirect_to edit_settings_password_path, flash: { success: "Mot de passe changé !" }
     else
       render :edit, status: :unprocessable_entity
     end

@@ -12,9 +12,9 @@ class Goals::GoalProgressesController < ApplicationController
     @goal_progress.value = goal_progress_params[:value]
 
     if @goal_progress.save
-      flash[:success] = "Progression enregistrée pour votre objectif !"
+      flash[:success] = "Progression enregistrée !"
     else
-      flash[:error] = "Une erreur est survenue lors de l'enregistrement de votre progression."
+      flash[:error] = "Oups, une erreur est survenue. Réessayez."
     end
   end
 

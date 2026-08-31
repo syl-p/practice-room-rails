@@ -1,0 +1,15 @@
+<%= render layout: "layouts/remote_modal" do %>
+	<%= render partial: "onboarding/practices/steps/nav" %>
+	<% method = @practice.persisted? ? :patch : :post %>
+	<% url = @practice.persisted? ? onboarding_practice_step_path(@practice, @step) : onboarding_practices_new_path %>
+	<%= form_with model: @step_object, url:, method:, builder: TailwindFormBuilder do |f| %>
+		<fieldset class="mb-6">
+			<legend>Sélectionnez des tags</legend>
+			<%= render "onboarding/practices/forms/tags_form", f:,  practice: @practice %>
+		</fieldset>
+		<div class="flex items-center justify-between">
+			<%= ui_action_to "Précédent", onboarding_practice_step_path(@practice, Onboarding::Practice::STEPS[Onboarding::Practice::STEPS.index(@step) - 1]), as: :link, variant: :secondary %>
+			<%= f.submit "Suivant" %>
+		</div>
+	<% end %>
+<% end %>

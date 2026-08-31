@@ -1,0 +1,14 @@
+<%= render layout: "layouts/remote_modal" do %>
+	<%= render partial: "onboarding/practices/steps/nav" %>
+	<% method = @practice.persisted? ? :patch : :post %>
+	<% url = @practice.persisted? ? onboarding_practice_step_path(@practice, @step) : onboarding_practices_path %>
+	<%= form_with model: @step_object, url:, method:, builder: TailwindFormBuilder do |f| %>
+		<fieldset class="mb-6">
+			<legend>Titre et description</legend>
+			<%= render "onboarding/practices/forms/content_form", f:,  practice: @practice %>
+		</fieldset>
+		<div class="flex items-center justify-end">
+			<%= f.submit "Suivant" %>
+		</div>
+	<% end %>
+<% end %>

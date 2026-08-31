@@ -6,8 +6,8 @@
   <% component.with_dropdown_menu do %>
     <%= render MenuComponent.new() do |menu| %>
       <% if can? activity, :edit? %>
-        <%= menu.with_item(href: edit_activity_path(activity)) do %>
-          Editer
+        <%= menu.with_item(href: onboarding_activity_step_path({ activity_id: activity.id, step: Onboarding::Activity::STEPS.first }), data: {turbo: true, turbo_frame: :remote_modal}) do %>
+          Modifier
         <% end %>
       <% end %>
 

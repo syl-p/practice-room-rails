@@ -4,14 +4,14 @@
     </header>
     <article class="mb-6">
         <h2 class="h2 flex-1 mb-3">
-            Vos objectifs du jour
+            Objectifs du jour
         </h2>
 				<%= render partial: "practices/daily_stats" %>
     </article>
     <article data-controller="timer-manager">
         <header class="flex space-x-3 items-center mb-3">
             <h2 class="h2 flex-1">
-                Vos activités
+                Activités
                 (<%= turbo_frame_tag :activities_count do %>
                     <%= @practice.activities.count %>
                 <% end %>)
