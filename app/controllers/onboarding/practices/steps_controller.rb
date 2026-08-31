@@ -16,7 +16,7 @@ class Onboarding::Practices::StepsController < ApplicationController
         redirect_to onboarding_practice_step_path({ practice_id: @practice.id, step: next_step })
       else
         flash[:success] = "Votre pratique est prête."
-        render "completed", formats: [:turbo_stream]
+        render "completed", formats: [ :turbo_stream ]
       end
     else
       render "onboarding/practices/steps/#{@step.downcase}", status: :unprocessable_entity
@@ -47,9 +47,9 @@ class Onboarding::Practices::StepsController < ApplicationController
   def set_practice
     @practice = if params[:practice_id].present?
                   Current.user.practices.find(params[:practice_id])
-                else
+    else
                   Current.user.practices.build
-                end
+    end
   end
 
   # get params from the step_class path key

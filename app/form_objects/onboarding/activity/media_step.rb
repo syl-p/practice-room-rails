@@ -7,7 +7,7 @@ class Onboarding::Activity::MediaStep < Onboarding::Activity::Step
   end
 
   def self.permitted_params
-    [medium_ids: []]
+    [ medium_ids: [] ]
   end
 
   def prefill_step
