@@ -2,12 +2,12 @@
 	<ul class="flex flex-wrap gap-2 items-center justify-center mb-6">
 		<% Onboarding::Practice::STEPS.reject { |s| s == "confirmation" }.each_with_index do |step, index| %>
 			<li>
-				<%= link_to step_nav_url(step),
-				            class: step_nav_classes(step),
-				            tabindex: (step_nav_enabled?(step) ? nil : -1),
-				            aria: { current: ("step" if step == @step), disabled: (!step_nav_enabled?(step) || nil) } do %>
+				<%= link_to practice_step_nav_url(step),
+				            class: practice_step_nav_classes(step),
+				            tabindex: (practice_step_nav_enabled?(step) ? nil : -1),
+				            aria: { current: ("step" if step == @step), disabled: (!practice_step_nav_enabled?(step) || nil) } do %>
 					<span class="text-xs opacity-60 mr-1"><%= index + 1 %></span>
-					<%= step_nav_label(step) %>
+					<%= practice_step_nav_label(step) %>
 				<% end %>
 			</li>
 		<% end %>
