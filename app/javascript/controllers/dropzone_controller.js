@@ -2,23 +2,26 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="dropzone"
 export default class extends Controller {
-  static targets = ['input', 'list']
+  static targets = ['dropContainer', 'input', 'list', 'itemTemplate']
   static values = {
     uploadUrl: String,
     draggingClasses: String
   }
 
   connect() {
-    this.element.addEventListener("click", this.openFileDialog.bind(this))
-    this.element.addEventListener("dragover", this.dragOver.bind(this))
-    this.element.addEventListener("dragleave", this.dragLeave.bind(this))
-    this.element.addEventListener("drop", this.drop.bind(this))
+    this.dropContainerTarget.addEventListener("click", this.openFileDialog.bind(this))
+    this.dropContainerTarget.addEventListener("dragover", this.dragOver.bind(this))
+    this.dropContainerTarget.addEventListener("dragleave", this.dragLeave.bind(this))
+    this.dropContainerTarget.addEventListener("drop", this.drop.bind(this))
 
     this.items = []
   }
 
   inputTargetConnected(input) {
-    input.addEventListener("change", this.#refreshList.bind(this))
+    input.addEventListener("change", async () => {
+			await this.#refreshList()
+			this.submit()
+		})
   }
 
   openFileDialog(event) {
@@ -29,43 +32,48 @@ export default class extends Controller {
 
   dragOver(event) {
     event.preventDefault()
-    this.element.classList.add(...this.draggingClassesValue.split(" "))
+    this.dropContainerTarget.classList.add(...this.draggingClassesValue.split(" "))
   }
 
   dragLeave(event) {
-    this.element.classList.remove(...this.draggingClassesValue.split(" "))
+    this.dropContainerTarget.classList.remove(...this.draggingClassesValue.split(" "))
   }
 
   drop(event) {
     event.preventDefault()
-    this.element.classList.remove(...this.draggingClassesValue.split(" "))
+    this.dropContainerTarget.classList.remove(...this.draggingClassesValue.split(" "))
 
     const files = event.dataTransfer.files
-    if (files.length > 0) {
+
+		if (files.length > 0) {
       this.inputTarget.files = files
       this.inputTarget.dispatchEvent(new Event("change"))
     }
   }
 
-  #refreshList() {
-    this.items = []
+	async #refreshList() {
+		this.items = []
+		const files = Array.from(this.inputTarget.files)
 
-    // Update items property
-    Array.from(this.inputTarget.files).forEach((file, index) => {
-      const reader = this.#getReader(file)
-      reader.onload = (e) => {
-        const item = {
-          index,
-          file: file,
-          name: file.name,
-          path: reader.result
-        }
+		await Promise.all(files.map((file, index) => {
+			return new Promise((resolve, _reject) => {
+				const reader = this.#getReader(file)
 
-        this.items.push(item)
-        this.#appendItemToList(item)
-      }
-    })
-  }
+				reader.onload = (e) => {
+					const item = {
+						index,
+						file: file,
+						name: file.name,
+						path: reader.result
+					}
+
+					this.items.push(item)
+					this.#appendItemToList(item)
+					resolve()
+				}
+			})
+		}))
+	}
 
   #getReader(file) {
     const reader = new FileReader();
@@ -74,25 +82,29 @@ export default class extends Controller {
   }
 
   #appendItemToList(item) {
-    const li = document.createElement('li')
-    li.dataset.id = item.index
+    const preview = document.createElement('div')
+		preview.setAttribute("id", `upload-${item.index}`)
+		preview.setAttribute("class", "media-card uploading")
 
-    li.innerHTML = `
-        <div class="border p-3 mb-3">
-          <div class="flex space-x-3">
-            <p>${item.name}</p>
-            <button
-              data-action="click->dropzone#removeFile" 
-              data-dropzone-index-param="${item.index}">
-              x
-            </button>
-          </div>
-          <progress class="hidden" value="0" max="100" style="width: 100%;"></progress>
-          <p class="status"></p>
-        </div>
+		const isImage = item.file.type.startsWith('image/')
+
+		preview.innerHTML = `
+			<div class="media-card-thumbnail ${isImage ? '' : 'media-card-thumbnail-placeholder'}">
+				${isImage
+			? `<img src="${item.path}" alt="${item.name}" class="media-card-thumbnail" />`
+			: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+							 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+						 </svg>`
+		}
+			</div>
+			<div class="media-card-overlay">
+				<span class="media-card-filename">${item.name}</span>
+				<progress value="0" max="100" class="w-full mt-1"></progress>
+				<p class="status"></p>
+			</div>
     `
     
-    this.listTarget.appendChild(li)
+    this.listTarget.appendChild(preview)
   }
 
   removeFile(e) {
@@ -101,10 +113,10 @@ export default class extends Controller {
     const index = e.params.index
 
     this.items.splice(index, 1)
-    const li = this.listTarget.querySelector(`[data-id="${index}"]`)
+    const preview = this.listTarget.querySelector(`#upload-${index}`)
 
-    if(li)
-      this.listTarget.removeChild(li)
+    if(preview)
+      this.listTarget.removeChild(preview)
 
     const dataTransfer = new DataTransfer()
     this.items.forEach(item => dataTransfer.items.add(item.file))
@@ -112,9 +124,9 @@ export default class extends Controller {
   }
 
   #uploadFile(item) {
-    const li = this.listTarget.querySelector(`[data-id="${item.index}"]`)
-    const status = li.querySelector('.status')
-    const progress = li.querySelector('progress')
+    const preview = this.listTarget.querySelector(`#upload-${item.index}`)
+    const status = preview.querySelector('.status')
+    const progress = preview.querySelector('progress')
 
     const formData = new FormData()
     formData.append('file', item.file)
@@ -138,11 +150,9 @@ export default class extends Controller {
       if(xhr.status !== 200) {
         status.textContent = "❌ Échec création Medium"
       } else {
-        status.textContent = "✅ Upload réussi"
+				Turbo.renderStreamMessage(xhr.responseText)
+				preview.remove()
       }
-
-      // TURBO Work here !
-      Turbo.renderStreamMessage(xhr.responseText)
     }
 
     xhr.onerror = () => {
@@ -153,9 +163,6 @@ export default class extends Controller {
   }
 
   submit(event) {
-    event.preventDefault()
-    event.stopPropagation()
-
     this.items.forEach(item => {
       this.#uploadFile(item)
     })

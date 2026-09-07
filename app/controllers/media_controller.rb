@@ -10,7 +10,10 @@ class MediaController < ApplicationController
     @medium.file.attach(params[:file])
 
     if @medium.save
-      render json: @medium
+      respond_to do |format|
+        format.turbo_stream
+        format.json { render json: @medium, status: 200 }
+      end
     else
       render json: { errors: @medium.errors.full_messages }, status: :unprocessable_entity
     end
@@ -18,11 +21,6 @@ class MediaController < ApplicationController
 
   def destroy
     @medium.destroy!
-
-    respond_to do |format|
-      format.html { redirect_to media_path, status: :see_other, notice: "Média supprimé." }
-      format.json { head :no_content }
-    end
   end
 
   private

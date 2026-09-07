@@ -10,32 +10,37 @@ export default class extends Controller {
 
   connect() {
 		this.selectedIdsValue.map(String).forEach(id => {
-			this.#selectedItems.add(id)
-			this.#preSelect(id)
+			this.#updateItem(id)
 		})
-		this.#updateUi()
+		this.#updateFields()
   }
 
   toggle({params}) {
 		const id = String(params.id)
-
-		if(this.#selectedItems.has(id)) {
-			this.#selectedItems.delete(id)
-		} else {
-			this.#selectedItems.add(id)
-		}
-		this.#updateUi()
+		this.#updateItem(id)
+		this.#updateFields()
 	}
 
-	#updateUi() {
-		// this.submitButtonTarget.disabled = this.#selectedItems.size === 0
+	#updateFields() {
+		this.submitButtonTarget.disabled = this.#selectedItems.size === 0
+
 		this.inputsTarget.innerHTML = [...this.#selectedItems]
-			.map(id => `<input type="hidden" name="onboarding_activity_media_step[medium_ids][]" value="${id}"/>`)
+			.map(id => `<input type="hidden" id="medium-hidden-input-${id}" name="onboarding_activity_media_step[medium_ids][]" value="${id}"/>`)
 			.join("")
 	}
 
-	#preSelect(id) {
+	#updateItem(id) {
 		const checkbox = this.itemTargets.find(item => item.value === id)
-		if (checkbox) checkbox.checked = true
+		const card = checkbox?.closest('.media-card')
+
+		if(this.#selectedItems.has(id)) {
+			this.#selectedItems.delete(id)
+			card?.classList.remove('selected')
+			checkbox.checked = false
+		} else {
+			this.#selectedItems.add(id)
+			card?.classList.add('selected')
+			checkbox.checked = true
+		}
 	}
 }

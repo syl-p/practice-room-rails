@@ -1,6 +1,3 @@
-<%# Locals: activity %>
-<%= render partial: "media/list",
-           locals: { media: Current.user.media,
-                     selected_ids: activity.media.pluck(:id) } %>
-<input type="hidden" name="onboarding_activity_media_step[medium_ids][]" />
-<div data-media-selection-target="inputs"></div>
+<%= turbo_frame_tag :media_library, src: media_path({selected_ids: activity.media.pluck(:id)}), loading: :lazy do %>
+	...
+<% end %>

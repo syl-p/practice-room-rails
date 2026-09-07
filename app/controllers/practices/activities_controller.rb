@@ -2,7 +2,7 @@ class Practices::ActivitiesController < ApplicationController
   include CurrentPractice
   set_practice_id_param :practice_id
 
-  before_action :set_activity, only: [ :show ]
+  before_action :set_activity, only: [ :show, :destroy ]
 
   def show
     authorize!(@activity)
@@ -21,6 +21,13 @@ class Practices::ActivitiesController < ApplicationController
       end
       format.html
     end
+  end
+
+  def destroy
+    authorize!(@activity)
+
+    @activity.destroy
+    redirect_to @practice, flash: { success: "Activité supprimée." }
   end
 
   private

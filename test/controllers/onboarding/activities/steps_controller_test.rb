@@ -71,4 +71,20 @@ class Onboarding::Activities::StepsControllerTest < ActionDispatch::IntegrationT
     assert_redirected_to onboarding_activity_step_path({ activity_id: activity.id, step: "media" })
     assert_equal activity.reload.status, "published"
   end
+
+  # Authorization
+  test "Could not edit an another user's activity edit" do
+    another_user = FactoryBot.create(:user)
+    activity = FactoryBot.create(:activity, user: another_user)
+
+    get onboarding_activity_step_path({ activity_id: activity.id, step: "content" })
+    assert_response :not_found
+
+    patch onboarding_activity_step_path({ activity_id: activity.id, step: "status" }), params: {
+      onboarding_activity_status_step: {
+        status: "published"
+      }
+    }
+    assert_response :not_found
+  end
 end

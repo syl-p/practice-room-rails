@@ -10,9 +10,13 @@
           Modifier
         <% end %>
       <% end %>
-
+			<% if can? activity, :destroy? %>
+				<%= menu.with_item(href: practice_activity_path({ practice_id: practice.id, activity_id: activity.id }), method: :delete) do %>
+					Supprimer
+				<% end %>
+			<% end %>
       <%= menu.with_item(href: practice_practice_activity_path(practice, activity), method: :delete) do %>
-        Détacher
+        Détacher de la pratique
       <% end %>
     <% end %>
   <% end %>

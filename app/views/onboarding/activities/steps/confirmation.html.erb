@@ -47,7 +47,7 @@
 		</div>
 
 		<p class="mt-4">
-			<%= link_to "Plus tard", root_path, data: { turbo_frame: "_top" },
+			<%= link_to "Plus tard", root_path, data: { action: "click->remote-modal#close" },
 							class: "text-sm text-muted-foreground hover:text-foreground underline underline-offset-4" %>
 		</p>
 	</div>

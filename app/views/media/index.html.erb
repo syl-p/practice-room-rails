@@ -1,25 +1,50 @@
+<%# Locals: activity %>
 <%
-  selected_ids = Array(params[:selected_ids]).map(&:to_i)
+	selected_ids = Array(params[:selected_ids]).map(&:to_i)
 %>
-
-<%= turbo_frame_tag :remote_modal do %>
-  <dialog data-controller="remote-modal media-selection"
-          class="media-selection p-8 backdrop:bg-background/80 backdrop:backdrop-blur-sm w-full md:max-w-[600px] lg:min-w-[900px] max-w-2xl border bg-background shadow-lg duration-200 rounded-md">
-    <%= render "media/modal_links" %>
-		<% if @media.any? %>
-			<ul class="grid grid-cols-3 gap-3 mb-6">
-				<% @media.each do |medium| %>
-					<li>
-						<%= render medium, {selected: selected_ids.include?(medium.id)}%>
-					</li>
+<%= turbo_frame_tag :media_library do %>
+	<div class="media-library"
+			 data-controller="media-library dropzone"
+			 data-dropzone-dragging-classes-value="dragover"
+			 data-dropzone-upload-url-value="<%= media_url %>">
+		<%# Toolbar %>
+		<div class="media-toolbar">
+			<div class="media-toolbar-search">
+				<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+				</svg>
+				<input type="text" placeholder="Rechercher un média..."/>
+			</div>
+			<div class="media-toolbar-actions">
+				<%= file_field_tag :file, multiple: true, class: "sr-only", data: { dropzone_target: "input" } %>
+				<%= ui_action_to(as: :button, variant: :outline, data: { action: "click->dropzone#openFileDialog" }) do %>
+					<svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+					</svg>
+					Ajouter
 				<% end %>
-			</ul>
+			</div>
+		</div>
 
-			<button
-				class="<%= [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::PRIMARY_CLASSES].join(' ') %>"
-				data-action="click->media-selection#submit click->remote-modal#close">Sélectionner</button>
-		<% else %>
-			<%= render partial: "media/empty_state" %>
+		<%# DropContainer (Hidden or Visible) %>
+		<div class="upload-zone"
+				 data-dropzone-target="dropContainer"
+				 data-media-library-target="emptyState">
+			<svg xmlns="http://www.w3.org/2000/svg" class="upload-zone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5m-13.5-9L12 3m0 0 4.5 4.5M12 3v13.5" />
+			</svg>
+			<p class="upload-zone-text">
+				<strong>Cliquez pour ajouter</strong> ou glissez-déposez vos fichiers
+			</p>
+			<p class="upload-zone-hint">PNG, JPG, GIF, MP4, PDF — Max 3 Mo</p>
+		</div>
+
+		<%# Media Grid %>
+		<%= turbo_frame_tag :media_list, class: "media-grid", data: {dropzone_target: "list"} do %>
+			<% Current.user.media.each do |medium| %>
+				<%= render partial: "media/medium",
+									 locals: { medium: medium, selected: selected_ids.include?(medium.id) } %>
+			<% end %>
 		<% end %>
-  </dialog>
+	</div>
 <% end %>

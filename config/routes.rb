@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     end
 
     scope module: :practices do
-      resources :activities, only: %i[index show]
+      resources :activities, only: %i[index show destroy]
       resources :practice_entries, only: [ :index, :create, :destroy ]
       resources :progression, only: [ :index ]
       resources :practice_activities, only: [ :create, :destroy ]
@@ -58,7 +58,7 @@ Rails.application.routes.draw do
 
   resources :notifications, only: %i[index]
 
-  resources :activities, only: [ :index, :show ] do
+  resources :activities, only: [ :show ] do
     resources :comments, module: :activities
   end
 

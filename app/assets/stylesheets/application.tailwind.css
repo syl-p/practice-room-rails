@@ -360,3 +360,147 @@ input[type="range"]::-ms-track {
     overflow: hidden;
     transition: all 0.2s;
 }
+
+/* Media Library */
+.media-library {
+    @apply flex flex-col gap-4;
+}
+
+.media-toolbar {
+    @apply flex items-center justify-between gap-3 pb-3 border-b border-border;
+}
+
+.media-toolbar-search {
+    @apply relative flex-1 max-w-xs;
+}
+
+.media-toolbar-search input {
+    @apply w-full pl-9 pr-3 py-2 text-sm border border-input rounded-lg bg-background focus:ring-2 focus:ring-ring focus:border-ring;
+}
+
+.media-toolbar-search svg {
+    @apply absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-muted-foreground pointer-events-none;
+}
+
+.media-toolbar-actions {
+    @apply flex items-center gap-2;
+}
+
+.media-grid {
+    @apply grid grid-cols-4 sm:grid-cols-5 md:grid-cols-6 gap-2;
+}
+
+.media-card {
+    @apply relative rounded-lg overflow-hidden border-2 border-transparent bg-secondary transition-all duration-150;
+    aspect-ratio: 1 / 1;
+}
+
+.media-card:hover {
+    @apply border-primary/40 ring-1 ring-primary/20;
+}
+
+.media-card.selected {
+    @apply border-primary ring-2 ring-primary/30;
+}
+
+.media-card > label {
+    @apply block w-full h-full;
+}
+
+.media-card-thumbnail {
+    @apply w-full h-full object-cover block;
+}
+
+.media-card-thumbnail-placeholder {
+    @apply w-full h-full flex items-center justify-center bg-secondary text-muted-foreground;
+}
+
+.media-card-overlay {
+    @apply absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent opacity-0 transition-opacity duration-150 pointer-events-none;
+}
+
+.media-card:hover .media-card-overlay {
+    @apply opacity-100;
+}
+
+.media-card.selected .media-card-overlay {
+    @apply opacity-100;
+}
+
+.media-card.uploading .media-card-overlay {
+    @apply opacity-100;
+}
+
+.media-card.uploading progress {
+    @apply w-full h-1.5 rounded-full overflow-hidden appearance-none [&::-webkit-progress-bar]:bg-white/20 [&::-webkit-progress-value]:bg-primary;
+}
+
+.media-card.uploading .status {
+    @apply text-xs text-center mt-1;
+}
+
+.media-card-filename {
+    @apply absolute bottom-0 left-0 right-0 px-2 py-1.5 text-xs text-white truncate;
+}
+
+.media-card-checkbox {
+    @apply absolute top-2 left-2 w-5 h-5 rounded border-2 border-white bg-black/30 backdrop-blur-sm flex items-center justify-center transition-all duration-150;
+}
+
+.media-card.selected .media-card-checkbox {
+    @apply bg-primary border-primary;
+}
+
+.media-card-checkbox svg {
+    @apply w-3 h-3 text-white opacity-0 transition-opacity duration-150;
+}
+
+.media-card.selected .media-card-checkbox svg {
+    @apply opacity-100;
+}
+
+.media-card-dropdown {
+    @apply absolute top-1 right-1 z-10 opacity-0 transition-opacity duration-150;
+}
+
+.media-card:hover .media-card-dropdown {
+    @apply opacity-100;
+}
+
+/* Upload Zone */
+.upload-zone {
+    @apply relative border-2 border-dashed border-border rounded-lg p-8 text-center transition-all duration-200;
+}
+
+.upload-zone:hover {
+    @apply border-primary/50 bg-primary/5;
+}
+
+.upload-zone.dragover {
+    @apply border-primary bg-primary/10 scale-[1.01];
+}
+
+.upload-zone-icon {
+    @apply mx-auto w-12 h-12 text-muted-foreground mb-3;
+}
+
+.upload-zone-text {
+    @apply text-sm text-muted-foreground;
+}
+
+.upload-zone-text strong {
+    @apply text-foreground font-medium;
+}
+
+.upload-zone-hint {
+    @apply text-xs text-muted-foreground/70 mt-2;
+}
+
+/* Media selection footer */
+.media-selection-footer {
+    @apply flex items-center justify-between pt-3 border-t border-border;
+}
+
+.media-selection-count {
+    @apply text-sm text-muted-foreground;
+}

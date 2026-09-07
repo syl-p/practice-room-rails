@@ -4,8 +4,8 @@
 	<% end %>
 	<% component.with_dropdown_menu do %>
 		<%= render MenuComponent.new do |menu| %>
-			<% menu.with_item do %>
-				<%= button_to "Supprimer", medium, method: :delete, class: "block px-4 py-2 text-sm text-foreground cursor-pointer" %>
+			<% menu.with_item(href: medium_path(medium), data: {turbo_method: :delete,  turbo_confirm: "Supprimer ce média ?"}) do %>
+				Supprimer
 			<% end %>
 		<% end %>
 	<% end %>

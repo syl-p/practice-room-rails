@@ -1,0 +1,4 @@
+<%= turbo_stream.append :media_list do %>
+		<%= render partial: "media/medium",
+		           locals: { medium: @medium, selected: false } %>
+<% end %>

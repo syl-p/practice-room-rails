@@ -10,7 +10,11 @@
 				Medias
 			</legend>
 				<%= render "onboarding/activities/forms/media_form", f:,  activity: @activity %>
-				<div class="flex items-center justify-between">
+
+				<input type="hidden" name="onboarding_activity_media_step[medium_ids][]" />
+				<div data-media-selection-target="inputs"></div>
+
+				<div class="flex items-center justify-between mt-6">
 					<%= ui_action_to "Précédent", onboarding_activity_step_path(@activity, Onboarding::Activity::STEPS[Onboarding::Activity::STEPS.index(@step) - 1]), as: :link, variant: :secondary %>
 					<%= f.submit "Attacher ces ressources", data: {media_selection_target: "submitButton"} %>
 				</div>
