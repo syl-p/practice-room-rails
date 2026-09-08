@@ -1,23 +1,22 @@
-<%= render layout: "layouts/remote_modal" do %>
-	<%= render partial: "onboarding/activities/steps/nav" %>
-	<% method = @activity.persisted? ? :patch : :post %>
-	<% url = @activity.persisted? ? onboarding_activity_step_path(@activity, @step) : onboarding_activities_path %>
+<% method = @activity.persisted? ? :patch : :post %>
+<% url = @activity.persisted? ? onboarding_activity_step_path(@activity, @step) : onboarding_activities_path %>
 
-	<%= form_with model: @step_object, url:, method:, builder: TailwindFormBuilder,
-								data: {controller: "media-selection", media_selection_selected_ids_value: @activity.media.pluck(:id)} do |f| %>
+<%= turbo_frame_tag :remote_modal do %>
+	<%= render "layouts/onboarding_dialog",
+		model: @step_object, url:, method:,
+		form_options: { data: { controller: "media-selection", media_selection_selected_ids_value: @activity.media.pluck(:id) } },
+		header: render(partial: "onboarding/activities/steps/nav"),
+		footer: ->(f) {
+			tag.div(class: "flex items-center justify-between w-full") {
+				concat ui_action_to("Précédent", onboarding_activity_step_path(@activity, Onboarding::Activity::STEPS[Onboarding::Activity::STEPS.index(@step) - 1]), as: :link, variant: :secondary)
+				concat f.submit("Attacher ces ressources", data: { media_selection_target: "submitButton" })
+			}
+		} do |f| %>
 		<fieldset class="mb-6">
-			<legend>
-				Medias
-			</legend>
-				<%= render "onboarding/activities/forms/media_form", f:,  activity: @activity %>
-
-				<input type="hidden" name="onboarding_activity_media_step[medium_ids][]" />
-				<div data-media-selection-target="inputs"></div>
-
-				<div class="flex items-center justify-between mt-6">
-					<%= ui_action_to "Précédent", onboarding_activity_step_path(@activity, Onboarding::Activity::STEPS[Onboarding::Activity::STEPS.index(@step) - 1]), as: :link, variant: :secondary %>
-					<%= f.submit "Attacher ces ressources", data: {media_selection_target: "submitButton"} %>
-				</div>
+			<legend>Medias</legend>
+			<%= render "onboarding/activities/forms/media_form", f:, activity: @activity %>
+			<input type="hidden" name="onboarding_activity_media_step[medium_ids][]" />
+			<div data-media-selection-target="inputs"></div>
 		</fieldset>
 	<% end %>
 <% end %>
