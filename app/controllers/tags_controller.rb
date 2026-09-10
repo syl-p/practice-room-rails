@@ -1,6 +1,9 @@
 class TagsController < ApplicationController
   def search
-    return unless params[:pattern].present?
-    @tags = Tag.where("name LIKE ?", "%#{params[:pattern]}%").limit(10)
+    @tags = if params[:pattern].present?
+      Tag.where("name LIKE ?", "%#{params[:pattern]}%").limit(10)
+    else
+      Tag.none
+    end
   end
 end

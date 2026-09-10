@@ -1,13 +1,17 @@
-<% if @tags.present? %>
-        <%= turbo_stream.update :tag_list do %>
-            <ul class="w-full static shadow">
-              <% @tags.each do |tag| %>
-                <li>
-                  <a class="block px-4 py-2 text-sm text-foreground hover:bg-accent cursor-pointer"
-                     data-tags-selector-value-param="<%= tag.name %>"
-                     data-action="click->tags-selector#selectTag"><%= tag.name %></a>
-                </li>
-              <% end %>
-            </ul>
-        <% end %>
+<% if @tags.any? %>
+  <%= turbo_stream.update :tag_list do %>
+    <ul class="divide-y divide-border">
+      <% @tags.each_with_index do |tag, index| %>
+        <li class="<%= 'rounded-t-lg' if index.zero? %><%= 'rounded-b-lg' if index == @tags.size - 1 %>">
+          <a class="block px-4 py-2.5 text-sm text-foreground hover:bg-accent cursor-pointer transition-colors"
+             data-tags-selector-value-param="<%= tag.name %>"
+             data-action="click->tags-selector#selectTag"><%= tag.name %></a>
+        </li>
+      <% end %>
+    </ul>
+  <% end %>
+<% else %>
+  <%= turbo_stream.update :tag_list do %>
+    <div class="px-4 py-3 text-sm text-muted-foreground italic">Aucun tag trouvé. Tapez Entrée pour créer</div>
+  <% end %>
 <% end %>

@@ -6,7 +6,7 @@
   end
 %>
 
-<div class="mb-6"
+<div class="mb-6 relative"
      data-controller="tags-selector"
      data-tags-selector-tag-classes-value="<%= [TailwindHelper::TAG_CLASSES, TailwindHelper::OUTLINE_CLASSES].join(' ') %>"
      data-tags-selector-search-url-value="<%= tags_path %>"
@@ -15,10 +15,10 @@
   <input type="hidden" name="<%= field_name %>"
          data-tags-selector-target="dataToSend"/>
   
-  <div class="w-full flex space-x-3 items-center relative <%= TailwindHelper::INPUT_CLASSES %>">
-    <ul class="flex flex-wrap space-x-3"
+  <div class="w-full flex flex-wrap items-center gap-2 <%= TailwindHelper::INPUT_CLASSES %>">
+    <ul class="flex flex-wrap gap-2 items-center list-none m-0 p-0 min-w-0"
         data-tags-selector-target="listToShow"></ul>
-    <input class="flex-1"
+    <input class="flex-1 min-w-0 border-0 bg-transparent outline-none focus:ring-0 p-0 text-sm text-foreground placeholder:text-muted-foreground"
            autocomplete="off"
            placeholder="Chercher un tag ..."
            data-tags-selector-target="input"
@@ -26,5 +26,7 @@
            type="text" name="search" list="tags" />
 
   </div>
-  <%= turbo_frame_tag :tag_list %>
+  <%= turbo_frame_tag :tag_list,
+											class: "absolute z-10 left-0 right-0 mt-1 bg-background border border-border rounded-lg shadow-lg max-h-60 overflow-y-auto",
+											data: {tags_selector_target: "autocomplete"} %>
 </div>

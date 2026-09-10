@@ -2,7 +2,7 @@ import { Controller } from "@hotwired/stimulus"
 
 // Connects to data-controller="tag-selector"
 export default class extends Controller {
-  static targets = ['input', 'dataToSend', 'listToShow']
+  static targets = ['input', 'dataToSend', 'listToShow', 'autocomplete']
   static values = {
     searchUrl: String,
     preselectedTags: [],
@@ -65,13 +65,14 @@ export default class extends Controller {
   #render() {
     // RENDER LIST
     this.listToShowTarget.innerHTML = '' // clear list
+		this.autocompleteTarget.innerHTML = ''
     this.selectedTags.forEach((tagLabel, index) => {
       const li = document.createElement("li")
       li.innerHTML = `
         <div class="${this.tagClassesValue}" >
             ${tagLabel}
-            <button 
-                class="ml-2 text-black font-bold"
+            <button
+                class="ml-1.5 text-foreground/40 hover:text-foreground/80 text-xs leading-none"
                 data-label="${tagLabel}"
                 data-action="click->tags-selector#deleteTag:stop">
                 &times

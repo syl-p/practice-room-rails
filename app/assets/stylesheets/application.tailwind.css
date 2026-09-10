@@ -134,7 +134,7 @@
     }
 
     .trix-content {
-        @apply text-muted-foreground leading-relaxed;
+        @apply text-muted-foreground leading-relaxed max-w-full overflow-hidden;
     }
 
     .trix-content > *:first-child {

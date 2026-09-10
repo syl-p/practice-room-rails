@@ -31,7 +31,9 @@ export default class extends Controller {
 
 	#updateItem(id) {
 		const checkbox = this.itemTargets.find(item => item.value === id)
-		const card = checkbox?.closest('.media-card')
+		if (!checkbox) return
+
+		const card = checkbox.closest('.media-card')
 
 		if(this.#selectedItems.has(id)) {
 			this.#selectedItems.delete(id)
