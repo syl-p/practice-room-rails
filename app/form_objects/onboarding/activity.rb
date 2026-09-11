@@ -1,5 +1,5 @@
 module Onboarding
   module Activity
-    STEPS = %w[content tags status media confirmation].freeze
+    STEPS = %w[content tags status media summary].freeze
   end
 end

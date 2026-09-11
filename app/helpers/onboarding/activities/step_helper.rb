@@ -4,7 +4,7 @@ module Onboarding::Activities::StepHelper
     "tags" => "Tags",
     "status" => "Statut",
     "media" => "Médias",
-    "confirmation" => "Confirmation"
+    "summary" => "Résumé"
   }.freeze
 
   # @param [String] step

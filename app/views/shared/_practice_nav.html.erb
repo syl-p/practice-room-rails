@@ -7,12 +7,13 @@
         {path: @practice, label: "Pratique", icon: "rocket-launch", active: practice_active},
         {path: practice_practice_entries_path(practice_id: @practice.id, day: Date.current), label: 'Historique', icon: "calendar", active: controller_name == "practice_entries"},
         {path: practice_progression_index_path(practice_id: @practice.id), label: "Progression", icon: "chart-bar", active: controller_name == "progression"},
-        {path: edit_practice_path(@practice), label: "Modifier", icon: "pencil", active: controller_name == "practices" && action_name == "edit"}
+        {path: onboarding_practice_step_path({ practice_id: @practice.id, step: Onboarding::Practice::STEPS.first }), label: "Modifier", icon: "pencil", active: controller_name == "practices" && action_name == "edit", data: { turbo_frame: "remote_modal" }}
       ].each do |link| %>
       <li>
         <%= link_to link[:path],
           class: "flex flex-col items-center justify-center px-2 py-1.5 rounded-xl transition-all duration-200 min-w-[52px] #{link[:active] ? 'bg-primary text-white' : ' hover:bg-secondary'}",
-          aria: ({current: "page"} if link[:active]) do %>
+          aria: ({current: "page"} if link[:active]),
+          data: link[:data] do %>
           <span class="mb-0.5"><%= icon(link[:icon], class: "size-4") %></span>
           <span class="text-xs font-medium"><%= link[:label] %></span>
         <% end %>

@@ -72,6 +72,42 @@ class Onboarding::Activities::StepsControllerTest < ActionDispatch::IntegrationT
     assert_equal activity.reload.status, "published"
   end
 
+  # Activity media step
+  test "media step redirects to the summary step" do
+    activity = FactoryBot.create(:activity, user: @user)
+
+    patch onboarding_activity_step_path({ activity_id: activity.id, step: "media" }), params: {
+      onboarding_activity_media_step: { medium_ids: [] }
+    }
+
+    assert_redirected_to onboarding_activity_step_path({ activity_id: activity.id, step: "summary" })
+  end
+
+  # Activity summary step
+  test "show the summary step" do
+    activity = FactoryBot.create(:activity, user: @user)
+
+    get onboarding_activity_step_path({ activity_id: activity.id, step: "summary" })
+    assert_response :success
+  end
+
+  test "summary step can be navigated back to the media step" do
+    activity = FactoryBot.create(:activity, user: @user)
+
+    get onboarding_activity_step_path({ activity_id: activity.id, step: "summary" })
+
+    assert_select "a[href=?]", onboarding_activity_step_path({ activity_id: activity.id, step: "media" }), text: "Précédent"
+  end
+
+  test "summary step shows the step navigation including itself" do
+    activity = FactoryBot.create(:activity, user: @user)
+
+    get onboarding_activity_step_path({ activity_id: activity.id, step: "summary" })
+
+    assert_select "nav[aria-label='Étapes de création'] a[href=?]",
+                  onboarding_activity_step_path({ activity_id: activity.id, step: "summary" })
+  end
+
   # Authorization
   test "Could not edit an another user's activity edit" do
     another_user = FactoryBot.create(:user)

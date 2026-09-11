@@ -9,7 +9,7 @@
 		footer: ->(f) {
 			tag.div(class: "flex items-center justify-between w-full") {
 				concat ui_action_to("Précédent", onboarding_activity_step_path(@activity, Onboarding::Activity::STEPS[Onboarding::Activity::STEPS.index(@step) - 1]), as: :link, variant: :secondary)
-				concat f.submit("Attacher ces ressources", data: { media_selection_target: "submitButton" })
+				concat f.submit("Suivant")
 			}
 		} do |f| %>
 		<fieldset class="mb-6">
