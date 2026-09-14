@@ -431,8 +431,20 @@ input[type="range"]::-ms-track {
     @apply opacity-100;
 }
 
-.media-card.uploading progress {
-    @apply w-full h-1.5 rounded-full overflow-hidden appearance-none [&::-webkit-progress-bar]:bg-white/20 [&::-webkit-progress-value]:bg-primary;
+.media-card.uploading .progress-ring-container {
+    @apply absolute inset-0 z-10 flex items-center justify-center pointer-events-none;
+}
+
+.media-card.uploading .progress-ring {
+    @apply -rotate-90;
+}
+
+.media-card.uploading .progress-ring-circle {
+    transition: stroke-dashoffset 0.3s ease;
+}
+
+.media-card.uploading .progress-ring-text {
+    @apply absolute text-xs font-semibold text-white;
 }
 
 .media-card.uploading .status {

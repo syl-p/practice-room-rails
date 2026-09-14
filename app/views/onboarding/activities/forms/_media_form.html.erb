@@ -1,14 +1,17 @@
 <div class="media-library"
-     data-controller="media-library dropzone"
+     data-controller="media-library dropzone search"
      data-dropzone-dragging-classes-value="dragover"
-     data-dropzone-upload-url-value="<%= media_url %>">
+     data-dropzone-upload-url-value="<%= media_url %>"
+     data-search-url-value="<%= media_path %>">
 	<%# Toolbar %>
 	<div class="media-toolbar">
 		<div class="media-toolbar-search">
 			<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
 				<path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
 			</svg>
-			<input type="text" placeholder="Rechercher un média..."/>
+			<%= text_field_tag :pattern, nil,
+											 placeholder: "Rechercher un média...",
+											 data: {search_target: 'input', action: 'input->search#change'} %>
 		</div>
 		<div class="media-toolbar-actions">
 			<%= file_field_tag :file, multiple: true, class: "sr-only", data: { dropzone_target: "input" } %>
@@ -38,7 +41,5 @@
 											src: media_path({selected_ids: activity.media.pluck(:id)}),
 											loading: :lazy,
 											class: "media-grid",
-											data: {dropzone_target: "list"} do %>
-		...
-	<% end %>
+											data: {dropzone_target: "list"} %>
 </div>

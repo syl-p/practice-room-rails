@@ -93,13 +93,19 @@ export default class extends Controller {
 				${isImage
 			? `<img src="${item.path}" alt="${item.name}" class="media-card-thumbnail" />`
 			: `<svg xmlns="http://www.w3.org/2000/svg" class="w-8 h-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-							 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
-						 </svg>`
-		}
+						 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+					 </svg>`
+	}
+			</div>
+			<div class="progress-ring-container">
+				<svg class="progress-ring" width="48" height="48" viewBox="0 0 48 48">
+					<circle class="progress-ring-bg" cx="24" cy="24" r="20" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="4"/>
+					<circle class="progress-ring-circle" cx="24" cy="24" r="20" fill="none" stroke="white" stroke-width="4" stroke-dasharray="125.66" stroke-dashoffset="125.66" stroke-linecap="round"/>
+				</svg>
+				<span class="progress-ring-text">0%</span>
 			</div>
 			<div class="media-card-overlay">
 				<span class="media-card-filename">${item.name}</span>
-				<progress value="0" max="100" class="w-full mt-1"></progress>
 				<p class="status"></p>
 			</div>
     `
@@ -126,7 +132,8 @@ export default class extends Controller {
   #uploadFile(item) {
     const preview = this.listTarget.querySelector(`#upload-${item.index}`)
     const status = preview.querySelector('.status')
-    const progress = preview.querySelector('progress')
+		const circle = preview.querySelector('.progress-ring-circle')
+		const text = preview.querySelector('.progress-ring-text')
 
     const formData = new FormData()
     formData.append('file', item.file)
@@ -138,17 +145,19 @@ export default class extends Controller {
     // ON PROGRESS
     xhr.upload.addEventListener('progress', (event) => {
       if (event.lengthComputable) {
-        progress.classList.remove('hidden')
-        progress.value = Math.round((event.loaded / event.total) * 100)
+				const percent = Math.round((event.loaded / event.total) * 100)
+				const circumference = 2 * Math.PI * 20 // r=20
+				circle.style.strokeDashoffset = circumference - (percent / 100) * circumference
+				text.textContent = `${percent}%`
       }
     })
 
     // ON FINISH
     xhr.onload = () => {
-      progress.classList.add('hidden')
-
       if(xhr.status !== 200) {
         status.textContent = "❌ Échec création Medium"
+				circle.classList.add('hidden')
+				text.classList.add('hidden')
       } else {
 				Turbo.renderStreamMessage(xhr.responseText)
 				preview.remove()

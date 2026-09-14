@@ -2,6 +2,11 @@ class Medium < ApplicationRecord
   has_one_attached :file
   belongs_to :user
 
+  scope :matching_filename, lambda { |pattern|
+    joins(:file_blob)
+      .where("LOWER(active_storage_blobs.filename) LIKE ?", "%#{pattern.downcase}%")
+  }
+
   validates_presence_of :file
 
   validate :check_file_extension

@@ -5,7 +5,7 @@
 
 <%# Media Grid %>
 <%= turbo_frame_tag :media_list, class: "media-grid", data: {dropzone_target: "list"} do %>
-	<% Current.user.media.each do |medium| %>
+	<% @media.each do |medium| %>
 		<%= render partial: "media/medium",
 							 locals: { medium: medium, selected: selected_ids.include?(medium.id) } %>
 	<% end %>

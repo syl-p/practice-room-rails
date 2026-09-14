@@ -2,7 +2,11 @@ class MediaController < ApplicationController
   before_action :set_medium, only: [ :destroy ]
 
   def index
-    @media = Medium.where(user: Current.user)
+    @media = Current.user.media
+
+    if params[:pattern].present?
+      @media = @media.matching_filename(params[:pattern])
+    end
   end
 
   def create
