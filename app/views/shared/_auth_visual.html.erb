@@ -1,0 +1,22 @@
+<%
+  default_photo = "https://images.unsplash.com/photo-1505904267569-f02eaeb45a4c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1908&q=80"
+  photo = content_for(:auth_visual_photo).presence || default_photo
+  badge = content_for(:auth_visual_badge).presence || "Gratuit, open source, fait pour les musiciens"
+  motto = content_for(:auth_visual_motto).presence || "On note ce qu'on a joué, on partage ce qu'on a trouvé, on progresse ensemble."
+%>
+<aside class="hidden lg:block relative w-0 flex-1 overflow-hidden bg-primary">
+  <% if photo.start_with?("http") %>
+    <img src="<%= photo %>" class="absolute inset-0 h-full w-full object-cover" alt="">
+  <% else %>
+    <%= image_tag photo, class: "absolute inset-0 h-full w-full object-cover", alt: "" %>
+  <% end %>
+  <div class="absolute inset-0 bg-gradient-to-br from-primary/95 via-primary/80 to-primary/50"></div>
+  <div class="relative z-10 h-full flex flex-col items-center justify-center text-center px-10">
+    <span class="inline-flex items-center rounded-full bg-primary-foreground/10 px-4 py-1.5 text-sm font-medium text-primary-foreground backdrop-blur">
+      <%= badge %>
+    </span>
+    <p class="mt-6 max-w-md text-2xl xl:text-3xl font-bold tracking-tight text-primary-foreground leading-snug">
+      <%= motto %>
+    </p>
+  </div>
+</aside>

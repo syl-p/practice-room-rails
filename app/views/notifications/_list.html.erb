@@ -5,13 +5,5 @@
 		<% end %>
 	</ul>
 <% else %>
-	<div class="flex flex-col items-center justify-center gap-2 py-8 text-center">
-		<%= icon "inbox", class: "size-6 text-muted-foreground" %>
-		<div>
-			<p class="text-sm font-medium text-foreground">Vous êtes à jour</p>
-			<p class="mt-0.5 text-xs text-muted-foreground">
-				Rien de nouveau pour l'instant. Pendant ce temps, pratiquez.
-			</p>
-		</div>
-	</div>
+	<%= render partial: "notifications/empty_state" %>
 <% end %>

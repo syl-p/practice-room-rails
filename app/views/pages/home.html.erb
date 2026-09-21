@@ -51,9 +51,11 @@
 
   <%# ===== LANDING PAGE POUR LES VISITEURS ===== %>
 
-  <%# Hero — fond primary, focus musique %>
-  <section class="bg-primary text-primary-foreground pt-32 pb-20 px-4">
-    <div class="container mx-auto text-center max-w-4xl">
+  <%# Hero — fond photo musique, overlay primary %>
+  <section class="relative overflow-hidden bg-primary text-primary-foreground pt-32 pb-20 px-4">
+    <%= image_tag "marketing/hero-home.jpg", class: "absolute inset-0 h-full w-full object-cover", alt: "Une musicienne qui joue de la guitare dans une chambre douillette" %>
+    <div class="absolute inset-0 bg-primary/85"></div>
+    <div class="relative z-10 container mx-auto text-center max-w-4xl">
       <span class="inline-block mb-6 rounded-full bg-primary-foreground/10 px-4 py-1.5 text-sm font-medium backdrop-blur">
         Gratuit, open source, fait pour la musique
       </span>
@@ -105,6 +107,32 @@
             title: "3. La progression",
             description: "Vue desktop des stats : donuts par type de pratique, série de jours en cours et temps cumulé par activité."
           } %>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <%# La communauté — photo + texte, deux colonnes %>
+  <section class="py-20 px-4">
+    <div class="container mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-12 lg:gap-16 items-center">
+        <div class="lg:col-span-3">
+          <div class="relative overflow-hidden rounded-2xl">
+            <%= image_tag "marketing/musiciens-scene.jpg", class: "h-64 md:h-80 w-full object-cover", alt: "Des musiciens qui répètent ensemble sur scène", loading: "lazy" %>
+            <div class="absolute inset-0 bg-primary/15"></div>
+          </div>
+        </div>
+        <div class="lg:col-span-2">
+          <span class="inline-block mb-3 text-sm font-semibold text-primary uppercase tracking-wider">La communauté</span>
+          <h2 class="text-2xl md:text-3xl font-bold tracking-tight mb-4">
+            C'est ce qui nous pousse à continuer
+          </h2>
+          <p class="text-muted-foreground leading-relaxed mb-6">
+            On pratique tout seul à la maison, mais on n'avance pas seul.
+            Partagez vos exercices, empruntez ceux des autres, et laissez
+            la régularité de tout le monde vous tirer vers le haut.
+          </p>
+          <%= ui_action_to "Rejoindre le Discord", "https://discord.gg/8vCbhQUK7M", as: :link, variant: :primary, class: "h-11", data: { turbo: false } %>
         </div>
       </div>
     </div>

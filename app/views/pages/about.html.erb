@@ -1,9 +1,11 @@
 <% content_for :title, "A propos - Practice Room" %>
 <% content_for :description, "Practice Room est un projet open source né de la passion pour la pratique de la musique. Découvrez notre mission, nos valeurs et comment forker le projet pour votre communauté." %>
 
-<%# Header — fond primary %>
-<section class="bg-primary text-primary-foreground pt-32 pb-16 px-4">
-  <div class="container mx-auto max-w-4xl">
+<%# Header — fond photo pratique, overlay primary %>
+<section class="relative overflow-hidden bg-primary text-primary-foreground pt-32 pb-16 px-4">
+  <%= image_tag "marketing/apprendre-maison.jpg", class: "absolute inset-0 h-full w-full object-cover", alt: "Une femme qui apprend la guitare, confortablement installée sur son canapé" %>
+  <div class="absolute inset-0 bg-primary/85"></div>
+  <div class="relative z-10 container mx-auto max-w-4xl">
     <span class="inline-block mb-4 rounded-full bg-primary-foreground/10 px-4 py-1.5 text-sm font-medium backdrop-blur">
       Notre histoire
     </span>
