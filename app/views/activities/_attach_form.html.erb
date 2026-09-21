@@ -2,7 +2,7 @@
 	<% current_practice_id = session[:current_practice_id] %>
 	<%= render BtnGroupComponent.new do %>
 		<%= ui_action_to "Ajouter à ma pratique", practice_practice_activities_path(practice_id: current_practice_id, activity_id: activity.id),
-										as: :button, method: :post, data: {turbo_frame: "_top"} %>
+										as: :link, data: {turbo_frame: "_top", turbo_method: "post"} %>
 
 		<%= render DropdownComponent.new(variant: :outline) do |component| %>
 			<% component.with_trigger_btn do %>
