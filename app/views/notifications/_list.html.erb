@@ -1,9 +1,17 @@
 <% if notifications.any? %>
-	<ul class="divide-y divide-border">
+	<ul class="divide-y divide-border max-h-96 overflow-y-auto">
 		<% notifications.each do |notification| %>
 			<li><%= render notification %></li>
 		<% end %>
 	</ul>
 <% else %>
-  <p class="px-4 py-2">Aucune notification.</p>
+	<div class="flex flex-col items-center justify-center gap-2 py-8 text-center">
+		<%= icon "inbox", class: "size-6 text-muted-foreground" %>
+		<div>
+			<p class="text-sm font-medium text-foreground">Vous êtes à jour</p>
+			<p class="mt-0.5 text-xs text-muted-foreground">
+				Rien de nouveau pour l'instant. Pendant ce temps, pratiquez.
+			</p>
+		</div>
+	</div>
 <% end %>

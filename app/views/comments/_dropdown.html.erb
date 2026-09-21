@@ -7,7 +7,7 @@
     <%= render MenuComponent.new() do |menu| %>
       <% if can? comment, :update? %>
         <%= menu.with_item(href: edit_comment_path(comment)) do %>
-          Editer
+          Modifier
         <% end %>
        <% end %>
 

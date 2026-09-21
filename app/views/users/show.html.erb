@@ -1,5 +1,5 @@
 <header class="bg-secondary py-20 mb-6">
-  <div class="container flex-1 flex items-center justify-between space-x-3">
+  <div class="container flex-1 flex items-center justify-between space-x-3 max-w-5xl">
     <%= render(AvatarComponent.new(user: @user)) %>
     <div class="flex-1">
       <h1 class="h1">
@@ -11,7 +11,7 @@
     </div>
   </div>
 </header>
-<section class="grid grid-cols-6 gap-x-3 gap-y-3 container">
+<section class="grid grid-cols-6 gap-x-3 gap-y-3 container max-w-5xl">
   <aside class="col-span-2">
     <h2 class="h3 mb-3">
       À propos

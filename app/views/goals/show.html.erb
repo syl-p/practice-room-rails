@@ -1,16 +1,25 @@
 <% show_content = capture do %>
-  <p class="text-sm text-muted-foreground mb-3">Mettez à jour vos progrès et suivez votre progression.</p>
-  <%= render partial: "goals/goal_progresses/form",
-		locals: { goal: @goal, goal_progress: GoalProgress.new } %>
+  <div class="flex items-start justify-between gap-2">
+    <div class="min-w-0">
+      <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">Objectif</p>
+      <h3 class="h3 mt-0.5 truncate"><%= @goal.target_value %> <%= @goal.unit %></h3>
+    </div>
+    <span class="shrink-0 rounded-full border border-input bg-background px-2.5 py-1 text-xs font-medium text-muted-foreground shadow-sm">En cours</span>
+  </div>
+  <p class="mt-2 text-sm text-muted-foreground">Notez votre progression à chaque session, c'est ici que ça se joue.</p>
 
-  <h4 class="h4 mt-6 mb-4">Mes progrès</h4>
-  <%= turbo_frame_tag :progresses, tag: :ul, class: "divide-y divide-border" do %>
+  <div class="mt-4 rounded-xl border border-border bg-secondary/40 p-3">
+    <%= render partial: "goals/goal_progresses/form",
+      locals: { goal: @goal, goal_progress: GoalProgress.new } %>
+  </div>
+
+  <h4 class="h4 mt-6 mb-2">Mes progrès</h4>
+  <%= turbo_frame_tag :progresses, tag: :ul, class: "divide-y divide-border rounded-xl border border-border bg-background" do %>
     <%= render partial: "goals/goal_progresses/goal_progress", collection: @goal.cached_progresses, as: :progress, locals: {goal: @goal } %>
   <% end %>
 <% end %>
 
 <%= turbo_frame_tag :goal_sidebar do %>
-  <h3 class="h3">Objectif : <%= @goal.target_value %> <%= @goal.unit %></h3>
   <%= show_content %>
 <% end %>
 

@@ -1,25 +1,29 @@
 <%= turbo_frame_tag dom_id(practice_entry) do %>
-  <div class="rounded-lg border bg-secondary text-card-foreground shadow-sm p-4 mb-3">
-    <div class="flex-1 flex items-center">
-      <div class="flex-1">
-        <p class="text-xs text-muted-foreground">
-          <%= display_time(practice_entry.duration) %> à <%= practice_entry.created_at %></p>
-        <p>
-          <%= link_to practice_entry.activity.title, practice_activity_path(practice_id: @practice.id, id: practice_entry.activity.id),
-                      class: "block font-semibold truncate", data: {turbo: false} %>
-        </p>
-      </div>
-      <div>
-        <%= ui_action_to practice_practice_entry_path(
-                           practice_id: @practice.id,
-                           id: practice_entry.id
-                         ),
-                         as: :button,
-                         method: :delete,
-                         variant: :ghost do %>
-          <%= icon "x-mark" %>
-        <% end %>
-      </div>
+  <div class="mb-3 flex items-center gap-4 rounded-xl border border-border bg-background p-4 shadow-sm">
+    <div class="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+      <%= icon "play", class: "size-5" %>
+    </div>
+    <div class="min-w-0 flex-1">
+      <p class="text-xs text-muted-foreground">
+        <span class="font-semibold text-foreground"><%= display_time(practice_entry.duration) %></span>
+        <span class="mx-1.5 text-border">•</span>
+        <%= l practice_entry.created_at, format: :short %>
+      </p>
+      <p>
+        <%= link_to practice_entry.activity.title, practice_activity_path(practice_id: @practice.id, id: practice_entry.activity.id),
+                    class: "block truncate font-semibold hover:text-primary", data: {turbo: false} %>
+      </p>
+    </div>
+    <div>
+      <%= ui_action_to practice_practice_entry_path(
+                         practice_id: @practice.id,
+                         id: practice_entry.id
+                       ),
+                       as: :button,
+                       method: :delete,
+                       variant: :ghost do %>
+        <%= icon "x-mark", class: "size-4" %>
+      <% end %>
     </div>
   </div>
 <% end %>

@@ -1,4 +1,4 @@
-<div id="daily_stats" class="flex space-x-6 flex-nowrap overflow-hidden overflow-x-auto w-full">
+<div id="daily_stats" class="grid w-full gap-3 sm:grid-cols-2">
 	<%= render DonutStatComponent.new(
 		state: @stats[:total_duration],
 		goal: 10.minutes,

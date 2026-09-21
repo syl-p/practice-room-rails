@@ -41,10 +41,13 @@ class DayPickerComponent < ViewComponent::Base
   # @param [Date] day
   # @return [String]
   def day_classes(day)
-    classes = "block text-center p-1 rounded-lg relative"
-    classes += " border-2 border-primary" if active?(day)
-    classes += " border" unless active?(day)
-    classes += " shadow-lg bg-primary/75 text-secondary" if today?(day)
+    classes = "relative block w-full min-w-0 px-1 py-1.5 text-center transition-all sm:px-1.5"
+    if active?(day)
+      classes += " rounded-xl border-2 border-primary bg-primary text-primary-foreground shadow-md"
+    else
+      classes += " rounded-xl border border-border bg-background text-muted-foreground hover:border-primary/40 hover:bg-accent hover:text-foreground"
+    end
+    classes += " ring-1 ring-primary/40" if today?(day) && !active?(day)
     classes
   end
 

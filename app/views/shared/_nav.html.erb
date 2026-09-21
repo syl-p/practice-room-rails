@@ -1,6 +1,10 @@
 <header data-turbo-permanent data-controller="search-shortcut" class="supports-backdrop-blur:bg-background/60 fixed top-0 z-40 w-full border-b bg-background/95 backdrop-blur">
-  <div class="container mx-auto flex space-x-3 h-14 items-center">
-    <div class="flex-1">
+  <div class="container mx-auto flex h-14 max-w-[1320px] items-center gap-3">
+    <%= link_to (authenticated? && @practice.present? ? @practice : root_path), class: "hidden sm:flex shrink-0 items-center font-bold tracking-tight", data: { turbo: false } do %>
+      Practice Room
+    <% end %>
+
+    <div class="min-w-0 flex-1 lg:hidden">
       <% if authenticated? %>
         <%= turbo_frame_tag "user_practices" do %>
           <%= render partial: "shared/user_practices" %>
@@ -8,13 +12,13 @@
       <% end %>
     </div>
 
-    <nav class="flex items-center space-x-3 justify-end">
+    <nav class="ml-auto flex shrink-0 items-center gap-2">
       <% if authenticated? %>
         <%= render partial: "shared/search_dialog" %>
         <%= render partial: "shared/notifications" %>
         <%= render partial: "shared/user_dropdown" %>
       <% else %>
-        <%= link_to "Se connecter", new_session_path, data: {turbo: false} %>
+        <%= ui_action_to "Se connecter", new_session_path, as: :link, variant: :outline, data: { turbo: false } %>
       <% end %>
     </nav>
   </div>

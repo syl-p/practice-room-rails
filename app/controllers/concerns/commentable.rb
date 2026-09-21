@@ -10,13 +10,16 @@ module Commentable
     @comment.parent_id = @parent&.id
     replace_target = @parent ? @parent : @commentable
 
-    respond_to do |format|
+respond_to do |format|
       if @comment.save
         format.turbo_stream {
-          render turbo_stream: turbo_stream
-                                 .prepend("#{dom_id(@parent || @commentable)}_comments",
-                                          partial: "comments/comment",
-                                          locals: { comment: @comment, commentable: replace_target })
+          stream = turbo_stream.prepend("#{dom_id(@parent || @commentable)}_comments",
+                                        partial: "comments/comment",
+                                        locals: { comment: @comment, commentable: replace_target })
+          stream << turbo_stream.replace(record_id_gen(@parent || @commentable, Comment.new),
+                                         partial: "comments/form",
+                                         locals: { comment: Comment.new, commentable: replace_target, class: ("hidden" if @parent) })
+          render turbo_stream: stream
         }
         format.html {
           redirect_to @commentable

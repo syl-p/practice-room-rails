@@ -1,32 +1,38 @@
 <% tag = local_assigns.fetch("tag", :article) %>
+<% extra_classes = local_assigns[:classes] %>
 <%= turbo_frame_tag record_id_gen(practice, activity) do %>
   <%= content_tag tag, style: "view-transition-name:activity-#{activity.id}",
-                  class: "rounded-lg bg-background border shadow-sm px-3 py-2 mb-2 transition-colors hover:shadow-md" do %>
-    <div class="flex items-start justify-between gap-2">
+                  class: "group rounded-xl border border-border bg-background p-4 shadow-sm transition-all hover:border-primary/30 hover:shadow-md #{extra_classes}" do %>
+    <div class="flex items-start gap-3 sm:gap-4">
       <div class="min-w-0 flex-1">
-        <%= link_to practice_activity_path(practice, activity), data: { turbo_frame: "_top" }, class: "group block" do %>
-          <h3 class="h4 leading-snug group-hover:underline"><%= activity.title %></h3>
+        <%= link_to practice_activity_path(practice, activity), data: { turbo_frame: "_top" }, class: "block" do %>
+          <h3 class="h4 leading-snug group-hover:text-primary group-hover:underline group-hover:underline-offset-4"><%= activity.title %></h3>
         <% end %>
 
         <% if activity.content.present? %>
-          <p class="text-xs leading-4 text-muted-foreground line-clamp-1">
-            <%= activity.content.to_plain_text.truncate(150) %>
+          <p class="mt-1.5 line-clamp-2 text-sm leading-5 text-muted-foreground">
+            <%= activity.content.to_plain_text.truncate(160) %>
           </p>
         <% end %>
 
-        <div class="mt-3 flex flex-wrap gap-1">
-          <% activity.tags.each do |tag| %>
-            <%= render(TagComponent.new(tag.name, variant: :outline)) %>
-          <% end %>
-        </div>
+        <% if activity.tags.any? %>
+          <div class="mt-3 flex flex-wrap gap-1.5">
+            <% activity.tags.each do |tag| %>
+              <%= render(TagComponent.new(tag.name, variant: :outline)) %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+
+      <div class="shrink-0 self-start">
+        <%= render partial: "practices/practice_entries/add",
+                   locals: { practice_id: practice.id, activity_id: activity.id } %>
       </div>
     </div>
 
-    <div class="flex items-center justify-between gap-2">
-      <progress value="0" max="100" aria-label="Objectif en cours" class="h-1.5 flex-1 overflow-hidden rounded-full bg-secondary [&::-webkit-progress-bar]:rounded-full [&::-webkit-progress-bar]:bg-secondary [&::-webkit-progress-value]:rounded-full [&::-webkit-progress-value]:bg-primary [&::-webkit-progress-value]:transition-all [&::-webkit-progress-value]:duration-300 [&::-moz-progress-bar]:rounded-full [&::-moz-progress-bar]:bg-primary"></progress>
-
-      <%= render partial: "practices/practice_entries/add",
-                 locals: { practice_id: practice.id, activity_id: activity.id } %>
-    </div>
+		<div class="mt-4">
+			<progress value="0" max="100" aria-label="Objectif en cours"
+								class="h-1.5 w-full overflow-hidden rounded-full bg-border accent-highlight"></progress>
+		</div>
   <% end %>
 <% end %>

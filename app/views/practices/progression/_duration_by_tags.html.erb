@@ -2,15 +2,16 @@
   total_duration = tags_with_duration.sum(&:duration)
 %>
 
-<div class="bg-background border rounded p-6 w-full">
-  <h2 class="h2 mb-3">Répartition par tags</h2>
-  <ul>
+<div class="w-full rounded-xl border border-border bg-background p-6 shadow-sm">
+  <h2 class="h2 mb-4">Répartition par tags</h2>
+  <ul class="space-y-3">
     <% tags_with_duration.each do |tag| %>
-      <li class="flex items-center">
-        <span class="w-1/2">
-          <%= tag.name %>
-        </span>
-        <progress class="progress" value="<%= (tag.duration.to_f/total_duration) * 100 %>" max="100"></progress>
+      <li class="space-y-1.5">
+        <div class="flex items-center justify-between text-sm">
+          <span class="font-medium text-foreground"><%= tag.name %></span>
+          <span class="text-muted-foreground"><%= human_duration tag.duration %></span>
+        </div>
+        <progress class="block h-2 w-full overflow-hidden rounded-full bg-border accent-primary" value="<%= (tag.duration.to_f/total_duration) * 100 %>" max="100"></progress>
       </li>
     <% end %>
   </ul>

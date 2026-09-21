@@ -4,8 +4,9 @@ class DropdownComponent < ViewComponent::Base
   renders_one :trigger_btn
   renders_one :dropdown_menu
 
-  def initialize(variant: :outline)
+  def initialize(variant: :outline, menu_classes: "")
     @variant = variant
+    @menu_classes = menu_classes
   end
 
   def variant_class_name

@@ -1,7 +1,13 @@
-<div class="w-full text-center bg-secondary rounded-lg p-8">
-  <h3>Aucune activité pour l'instant.</h3>
-  <div>
-		<%= ui_action_to "Créer une activité", onboarding_activities_new_path, as: :link, variant: :primary, data: {turbo: true, turbo_frame: :remote_modal} %>
-    <%= ui_action_to "Trouver une activité", new_search_path, as: :link, variant: :outline, class: "mt-4", data: {turbo: true, turbo_frame: :remote_modal} %>
+<div class="w-full rounded-xl border border-dashed border-border bg-background p-10 text-center shadow-sm">
+  <div class="mx-auto mb-4 flex h-14 w-14 items-center justify-center rounded-full bg-secondary text-primary">
+    <%= icon "sparkles", class: "size-7" %>
+  </div>
+  <h3 class="h3 mb-1">Aucune activité pour l'instant.</h3>
+  <p class="mx-auto mb-6 max-w-sm text-sm text-muted-foreground">
+    Créez votre première activité ou piochez dans le catalogue pour commencer à pratiquer.
+  </p>
+  <div class="flex flex-col items-center justify-center gap-3 sm:flex-row">
+    <%= ui_action_to "Créer une activité", onboarding_activities_new_path, as: :link, variant: :primary, data: {turbo: true, turbo_frame: :remote_modal} %>
+    <%= ui_action_to "Trouver une activité", new_search_path, as: :link, variant: :outline, data: {turbo: true, turbo_frame: :remote_modal} %>
   </div>
 </div>

@@ -37,6 +37,6 @@ class DonutStatComponent < ViewComponent::Base
   end
 
   def color_classes
-    progress < 100 ? "text-blue-700" : "text-green-500"
+    progress < 100 ? "text-primary" : "text-success"
   end
 end

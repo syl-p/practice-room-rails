@@ -1,0 +1,27 @@
+<nav role="navigation" aria-label="Navigation de la pratique"
+  class="sticky top-14 px-5 py-6">
+  <div class="mb-5 border-b border-border pb-5">
+    <%= turbo_frame_tag "user_practices_sidebar" do %>
+      <%= render partial: "shared/user_practices", locals: { wrapper_class: "w-full", menu_classes: "w-52" } %>
+    <% end %>
+  </div>
+
+  <ul class="flex flex-col gap-1">
+    <%
+      practice_active = current_page?(@practice) || %w[activities practice_activities].include?(controller_name)
+      [
+        { path: @practice, label: "Pratique", icon: "rocket-launch", active: practice_active },
+        { path: practice_practice_entries_path(practice_id: @practice.id, day: Date.current), label: "Historique", icon: "calendar", active: controller_name == "practice_entries" },
+        { path: practice_progression_index_path(practice_id: @practice.id), label: "Progression", icon: "chart-bar", active: controller_name == "progression" }
+      ].each do |link| %>
+      <li>
+        <%= link_to link[:path],
+          class: "flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors #{link[:active] ? "bg-secondary text-foreground" : "text-muted-foreground hover:bg-secondary hover:text-foreground"}",
+          aria: ({ current: "page" } if link[:active]) do %>
+          <%= icon(link[:icon], class: "size-4 shrink-0") %>
+          <span><%= link[:label] %></span>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</nav>

@@ -1,10 +1,10 @@
 <% if media.present? %>
-    <p class="text-sm text-muted-foreground mb-3">
+    <p class="text-sm text-muted-foreground mb-4">
         Les ressources liées à cette activité.
     </p>
-    <ul class="divide-y divide-border">
+    <ul class="divide-y divide-border rounded-xl border border-border bg-background shadow-sm">
         <% media.each do |medium| %>
-        <li class="p-4 hover:bg-muted">
+        <li class="p-4 transition-colors hover:bg-accent/50">
             <%= render partial: "media/item", locals: { medium:} %>
         </li>
         <% end %>

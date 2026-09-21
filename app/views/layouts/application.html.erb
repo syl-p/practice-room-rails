@@ -8,11 +8,27 @@
     <%= render partial: "shared/nav" %>
     <%= render partial: "shared/flash_zone" %>
 
-    <main class="min-h-screen pt-20 pb-28">
-      <%= yield %>
+    <%
+      practice_area = (controller.class.module_parent_name == "Practices" || controller_name == "practices") &&
+        (params[:id].present? || params[:practice_id].present?)
+    %>
+
+    <main class="min-h-screen <%= practice_area ? "pt-14 pb-28 lg:pb-12" : "pt-20 pb-24" %> <%= practice_area ? "practice-area" : "" %>">
+      <% if practice_area %>
+        <div class="lg:grid lg:grid-cols-[240px_minmax(0,1fr)] lg:w-full lg:max-w-[1320px] lg:mx-auto lg:pt-6">
+          <aside class="hidden lg:block lg:border-r lg:border-border">
+            <%= render partial: "shared/practice_sidebar" %>
+          </aside>
+          <div class="min-w-0">
+            <%= yield %>
+          </div>
+        </div>
+      <% else %>
+        <%= yield %>
+      <% end %>
     </main>
 
     <%= turbo_frame_tag :remote_modal %>
-    <%= render partial: "shared/practice_nav" if (controller.class.module_parent_name == "Practices" || controller_name == 'practices') && (params[:id].present? || params[:practice_id].present?)%>
+    <%= render partial: "shared/practice_nav" if practice_area %>
   </body>
 </html>

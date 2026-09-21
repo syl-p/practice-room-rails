@@ -1,5 +1,9 @@
-<title><%= content_for(:title) || "Practice Room" %></title>
-<meta name="description" content="<%= content_for(:description) || "Practice Room - Suivez et partagez vos routines de pratique" %>">
+<%
+  page_title = content_for(:title).presence || "Practice Room — Le carnet de pratique des musiciens"
+  page_description = content_for(:description).presence || "Practice Room, le carnet de pratique des musiciens : notez vos séances, suivez vos progrès et partagez vos exercices avec la communauté."
+%>
+<title><%= page_title %></title>
+<meta name="description" content="<%= page_description %>">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="mobile-web-app-capable" content="yes">
@@ -7,11 +11,14 @@
 <meta name="turbo-refresh-method" content="morph">
 <meta name="turbo-refresh-scroll" content="preserve">
 
-<meta property="og:title" content="<%= content_for(:title) || "Practice Room" %>">
-<meta property="og:description" content="<%= content_for(:description) || "La plateforme communautaire pour suivre et partager vos routines de pratique." %>">
+<meta property="og:title" content="<%= page_title %>">
+<meta property="og:description" content="<%= page_description %>">
 <meta property="og:url" content="<%= request.original_url %>">
 <meta property="og:type" content="<%= content_for(:og_type) || "website" %>">
 <meta property="og:site_name" content="Practice Room">
+<% if (og_image = content_for(:og_image) || (Rails.env.production? ? "https://practice-room.websylvain.com/og-image.png" : request.base_url + "/og-image.png")) %>
+  <meta property="og:image" content="<%= og_image %>">
+<% end %>
 
 <link rel="canonical" href="<%= request.original_url %>">
 

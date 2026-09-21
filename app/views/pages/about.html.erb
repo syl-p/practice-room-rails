@@ -1,5 +1,5 @@
 <% content_for :title, "A propos - Practice Room" %>
-<% content_for :description, "Practice Room est un projet open source né de la passion pour la pratique régulière. Découvrez notre mission, notre équipe et notre philosophie." %>
+<% content_for :description, "Practice Room est un projet open source né de la passion pour la pratique de la musique. Découvrez notre mission, nos valeurs et comment forker le projet pour votre communauté." %>
 
 <%# Header — fond primary %>
 <section class="bg-primary text-primary-foreground pt-32 pb-16 px-4">
@@ -27,17 +27,18 @@
       </div>
       <div class="lg:col-span-3 space-y-4">
         <p class="text-muted-foreground leading-relaxed">
-          On le sait tous&nbsp;: rester régulier dans sa pratique, c'est dur.
+          On le sait tous&nbsp;: rester régulier à son instrument, c'est dur.
           Pas parce qu'on manque de motivation, mais parce qu'on n'a pas toujours
-          les bons réflexes. Notre idée est simple&nbsp;: donner à chacun un endroit
-          pour <strong class="text-foreground">suivre ce qu'on fait</strong>,
+          les bons réflexes. Notre idée est simple&nbsp;: donner à chaque musicien
+          un endroit pour <strong class="text-foreground">suivre ce qu'on a joué</strong>,
           <strong class="text-foreground">partager ce qu'on a trouvé</strong> et
           <strong class="text-foreground">bénéficier de l'énergie des autres</strong>.
         </p>
         <p class="text-muted-foreground leading-relaxed">
-          Que vous jouiez de la guitare, couriez des semi-marathons, pratiquiez le yoga
-          ou dessiniez chaque matin — ici, on s'en fout du domaine. Ce qui compte,
-          c'est de montrer que vous êtes là, et de le prouver en pratiquant.
+          On a commencé par la musique — guitare, piano, chant, batterie —
+          parce que c'est notre terrain. Mais l'outil se prête à tout&nbsp;:
+          course à pied, danse, dessin, yoga… Ce qui compte, c'est de
+          montrer que vous êtes là, et de le prouver en pratiquant.
         </p>
       </div>
     </div>
@@ -112,6 +113,27 @@
           </p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<%# Fork — le projet appartient à ceux qui le forkent %>
+<section class="py-20 px-4 bg-primary text-primary-foreground">
+  <div class="container mx-auto max-w-3xl text-center">
+    <span class="inline-block mb-4 rounded-full bg-primary-foreground/10 px-4 py-1.5 text-sm font-medium backdrop-blur">
+      Le code vous appartient
+    </span>
+    <h2 class="text-3xl md:text-4xl font-bold tracking-tight mb-4">
+      Et si vous lanciez votre propre communauté ?
+    </h2>
+    <p class="text-primary-foreground/80 text-lg mb-8 leading-relaxed">
+      Forkez le projet sur GitHub et adaptez-le à votre discipline —
+      sport, danse, dessin, chant. Exercices, historique, objectifs,
+      commentaires et médias sont déjà en place.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <%= ui_action_to "Forker sur GitHub", "https://github.com/syl-p/practice-room-rails", as: :link, variant: :secondary, class: "text-base h-12 px-8 hero-cta", data: { turbo: false } %>
+      <%= ui_action_to "Discuter sur Discord", "https://discord.gg/8vCbhQUK7M", as: :link, variant: :primary, class: "text-base h-12 px-8 bg-transparent border border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/10", data: { turbo: false } %>
     </div>
   </div>
 </section>

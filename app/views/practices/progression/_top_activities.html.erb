@@ -1,11 +1,11 @@
-<div class="bg-background border rounded p-6 w-full">
-	<h2 class="h2 mb-3">Activités les plus pratiquées</h2>
-	<ul>
+<div class="w-full rounded-xl border border-border bg-background p-6 shadow-sm">
+	<h2 class="h2 mb-2">Activités les plus pratiquées</h2>
+	<ul class="divide-y divide-border">
 		<% top_practiced_activities.each_with_index do |activity, index| %>
-			<li>
-				<span class="text-xl font-bold"><%= index + 1 %></span>.
-				<%= link_to activity.title, practice_activity_path(@practice, activity) %>
-				(<%= human_duration activity.total_duration %>)
+			<li class="flex items-center gap-3 py-3">
+				<span class="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-primary/10 text-sm font-bold text-primary"><%= index + 1 %></span>
+				<%= link_to activity.title, practice_activity_path(@practice, activity), class: "flex-1 truncate font-medium hover:text-primary" %>
+				<span class="shrink-0 text-sm text-muted-foreground"><%= human_duration activity.total_duration %></span>
 			</li>
 		<% end %>
 	</ul>

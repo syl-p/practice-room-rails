@@ -1,41 +1,48 @@
 <%= form_with url: practice_practice_entries_path(practice_id:, activity_id:),
               builder: TailwindFormBuilder,
               html: { id: "timer-#{activity_id}"},
-							class: "flex space-x-3 items-center",
+							class: "flex flex-col items-center gap-2",
               data: {turbo: true,  "turbo-permanent": true,
                      controller: "btn-timer",
                      btn_timer_activity_id_value: activity_id,
               } do |f| %>
+
   <%= f.hidden_field :duration, data: {btn_timer_target: "input"} %>
   <%= f.hidden_field :practice_id, value: "1", data: {btn_timer_target: "input"} %>
-	<%= render BtnGroupComponent.new do %>
-		<!-- Display -->
-		<span data-btn-timer-target="display" class="<%= [TailwindHelper::BTN_BASE_CLASSES, TailwindHelper::SECONDARY_CLASSES].join(' ') %>">
-			<span><%= icon "clock" %></span>
+
+	<div class="flex items-center gap-2">
+		<!-- Affichage du temps écoulé -->
+		<span data-btn-timer-target="display" class="inline-flex items-center gap-1.5 rounded-full border border-input bg-background py-1 pl-2.5 pr-3 text-sm font-semibold text-foreground tabular-nums shadow-sm">
+			<span><%= icon "clock", class: "size-4 text-muted-foreground" %></span>
 			<span data-btn-timer-target="elapsed">--:--</span>
 		</span>
 
-    <%= ui_action_to as: :button,
-                     data: {btn_timer_target: "toggleBtn", action: "click->btn-timer#toggle"} do %>
+		<button type="button"
+						data-btn-timer-target="toggleBtn"
+						data-action="click->btn-timer#toggle"
+						aria-label="Commencer à pratiquer"
+						class="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/25 ring-offset-background transition-all hover:scale-105 hover:bg-primary/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
 
 			<!-- État idle -->
-      <span data-btn-timer-target="idle" class="flex space-x-3 items-center">
-				<%= icon "play" %> <span class="sr-only">Pratiquer</span>
+			<span data-btn-timer-target="idle" class="flex items-center justify-center">
+				<%= icon "play", class: "size-6" %>
+				<span class="sr-only">Pratiquer</span>
 			</span>
 
-      <!-- État playing -->
-      <span data-btn-timer-target="playing" class="hidden flex space-x-3 items-center">
-        <%= icon "pause" %> <span class="sr-only">Pause</span>
-      </span>
+			<!-- État playing -->
+			<span data-btn-timer-target="playing" class="hidden flex items-center justify-center">
+				<%= icon "pause", class: "size-6" %>
+				<span class="sr-only">Mettre en pause</span>
+			</span>
 
-      <!-- État paused -->
-      <span data-btn-timer-target="paused" class="hidden flex space-x-3 items-center">
-        <%= icon "play" %> <span class="sr-only">Reprendre</span>
-      </span>
-    <% end %>
+			<!-- État paused -->
+			<span data-btn-timer-target="paused" class="hidden flex items-center justify-center">
+				<%= icon "play", class: "size-6" %>
+				<span class="sr-only">Reprendre</span>
+			</span>
+		</button>
+	</div>
 
-	<% end %>
-
-	<%= f.submit "Terminer", class: "hidden",
+	<%= f.submit "Terminer", class: "hidden w-full rounded-lg bg-secondary py-2 text-sm font-medium text-secondary-foreground transition-colors hover:bg-secondary/80",
 	             data: {btn_timer_target: "submitButton"} %>
 <% end %>

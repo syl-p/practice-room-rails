@@ -42,17 +42,40 @@
       <div class="w-full flex justify-center">
         <div class="shrink-0 bg-border h-[1px] w-full my-4"></div>
       </div>
-      <footer>
-        <h2 class="h3 mb-3 flex space-x-3 items-center">
+      <footer class="space-y-6">
+        <h2 class="h3 flex items-center gap-2">
           <%= icon "chat-bubble-left-right", class: "size-6" %>
-          <span class="block">Discussions</span>
+          <span>Discussions</span>
+          <span class="text-sm font-normal text-muted-foreground">
+            (<%= @activity.comments.count %>)
+          </span>
         </h2>
-        <%= turbo_frame_tag record_id_gen(@activity, Comment.new) do %>
-          <%= render partial: "comments/form", locals: {comment: Comment.new, commentable: @activity} if authenticated? %>
+
+        <% if authenticated? %>
+          <div class="rounded-xl border border-border bg-card p-4 shadow-sm">
+            <%= turbo_frame_tag record_id_gen(@activity, Comment.new) do %>
+              <%= render partial: "comments/form", locals: {comment: Comment.new, commentable: @activity} %>
+            <% end %>
+          </div>
+        <% else %>
+          <p class="rounded-xl border border-dashed border-border bg-secondary/40 p-4 text-sm text-muted-foreground">
+            <%= link_to "Connectez-vous", new_session_path, class: "font-medium text-primary hover:underline" %>
+            pour rejoindre la discussion.
+          </p>
         <% end %>
 
-        <%= turbo_frame_tag "#{dom_id(@activity)}_comments" do %>
+        <%= turbo_frame_tag "#{dom_id(@activity)}_comments", class: "divide-y divide-border" do %>
           <%= render partial: "comments/comment", collection: @activity.comments, as: :comment %>
+
+          <div class="comments-empty hidden flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-secondary/40 py-10 text-center">
+            <%= icon "chat-bubble-left-ellipsis", class: "size-6 text-muted-foreground" %>
+            <div>
+              <p class="text-sm font-medium text-foreground">Aucune discussion pour l'instant</p>
+              <p class="mt-1 text-xs text-muted-foreground">
+                Lancez le bal &nbsp;—&nbsp; mentionnez un musicien avec <span class="font-medium text-primary">@pseudo</span>.
+              </p>
+            </div>
+          </div>
         <% end %>
       </footer>
     </article>

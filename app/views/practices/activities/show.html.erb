@@ -1,16 +1,18 @@
-<article class="container mx-auto">
-    <header class="flex space-x-3 items-center justify-between mb-6">
+<article class="container mx-auto max-w-5xl">
+    <header class="mb-4 flex items-center justify-between gap-2">
         <%= render partial: "practices/back_to_practice_link" %>
         <%= render partial: "practices/activities/dropdown", locals: {practice: @practice, activity: @activity, practice_activity: @practice_activity} %>
     </header>
 
     <%= render partial: "practices/activities/card", locals: {tag: :header, practice: @practice, activity: @activity } %>
 
-    <section class="lg:grid lg:grid-cols-6 gap-6">
+    <section class="mt-6 lg:grid lg:grid-cols-6 gap-6">
       <article class="lg:col-span-4">
         <%= render TabsComponent.new do |component| %>
           <% component.with_tab(id: "content", label: "Description") do %>
-            <%= @activity.content %>
+            <div class="max-w-prose">
+              <%= @activity.content %>
+            </div>
           <% end %>
 
           <% if @activity.media.any? %>
@@ -35,21 +37,45 @@
           <% end %>
 
           <% component.with_tab(id: "comments", label: "Discussions") do %>
-            <p class="text-sm text-muted-foreground mb-3">
-              Échangez sur cette activité.
-            </p>
-            <%= turbo_frame_tag record_id_gen(@activity, Comment.new) do %>
-              <%= render partial: "comments/form", locals: {comment: Comment.new, commentable: @activity} if authenticated? %>
-            <% end %>
+            <div class="space-y-6">
+              <% if authenticated? %>
+                <div class="rounded-xl border border-border bg-card p-4 shadow-sm">
+                  <%= turbo_frame_tag record_id_gen(@activity, Comment.new) do %>
+                    <%= render partial: "comments/form", locals: {comment: Comment.new, commentable: @activity} %>
+                  <% end %>
+                </div>
+              <% else %>
+                <p class="rounded-xl border border-dashed border-border bg-secondary/40 p-4 text-sm text-muted-foreground">
+                  <%= link_to "Connectez-vous", new_session_path, class: "font-medium text-primary hover:underline" %>
+                  pour rejoindre la discussion.
+                </p>
+              <% end %>
 
-            <%= turbo_frame_tag "#{dom_id(@activity)}_comments" do %>
-              <%= render partial: "comments/comment", collection: @activity.comments, as: :comment %>
-            <% end %>
+              <div>
+                <h3 class="mb-1 text-sm font-semibold text-foreground">
+                  <%= pluralize(@activity.comments.count, "commentaire") %>
+                </h3>
+
+                <%= turbo_frame_tag "#{dom_id(@activity)}_comments", class: "divide-y divide-border" do %>
+                  <%= render partial: "comments/comment", collection: @activity.comments, as: :comment %>
+
+                  <div class="comments-empty hidden flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-secondary/40 py-10 text-center">
+                    <%= icon "chat-bubble-left-ellipsis", class: "size-6 text-muted-foreground" %>
+                    <div>
+                      <p class="text-sm font-medium text-foreground">Aucune discussion pour l'instant</p>
+                      <p class="mt-1 text-xs text-muted-foreground">
+                        Lancez le bal &nbsp;—&nbsp; mentionnez un musicien avec <span class="font-medium text-primary">@pseudo</span>.
+                      </p>
+                    </div>
+                  </div>
+                <% end %>
+              </div>
+            </div>
           <% end %>
         <% end %>
       </article>
       <aside class="hidden lg:block lg:col-span-2">
-        <div class="rounded-lg bg-background border shadow p-4">
+        <div class="rounded-xl border border-border bg-background p-5 shadow-sm lg:sticky lg:top-24">
           <% if @practice_activity.goals.present? %>
             <!-- Mettre à jour les progrès -->
             <%= turbo_frame_tag :goal_sidebar, src: goal_path(id: @practice_activity.goals.first.id), loading: :lazy do %>

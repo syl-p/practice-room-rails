@@ -1,15 +1,19 @@
 <% model = [local_assigns[:commentable], comment].compact %>
-<%= form_with model:, id: record_id_gen(*model), class: "#{local_assigns[:class]}", data: {
+<%= form_with model:, id: record_id_gen(*model), class: local_assigns[:class], data: {
   turbo: true,
   comment_target: "form"
 }, builder: TailwindFormBuilder do |f| %>
-  <%= f.text_area :content, class: "mb-3" %>
+  <%= f.text_area :content, rows: 3,
+        label: local_assigns.fetch(:label, "Votre commentaire"),
+        placeholder: "Partagez une idée, une question…" %>
 
-  <%= f.submit "Commenter", data: {
-    action: 'click->comment#submit',
-  }, variant: :outline %>
+  <div class="flex items-center justify-end gap-3">
+    <% if comment.persisted? %>
+      <%= link_to "Annuler", comment, class: "text-sm font-medium text-muted-foreground transition-colors hover:text-foreground" %>
+    <% end %>
 
-  <% if comment.persisted? %>
-    <%= link_to "Annuler", comment %>
-  <% end %>
+    <%= f.submit comment.persisted? ? "Enregistrer" : "Commenter", data: {
+      action: 'click->comment#submit',
+    }, variant: :primary %>
+  </div>
 <% end %>

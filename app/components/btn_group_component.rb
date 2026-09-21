@@ -1,11 +1,15 @@
 # frozen_string_literal: true
 
 class BtnGroupComponent < ViewComponent::Base
+  def initialize(wrapper_class: "")
+    @wrapper_class = wrapper_class
+  end
+
   def call
     content_tag :div,
                 role: "group",
                 class: "
-                    inline-flex
+                    inline-flex #{@wrapper_class}
                     [&>*]:rounded-none
                     [&>*]:border-0
                     [&>*:first-child]:rounded-l-lg

@@ -6,7 +6,7 @@ class User < ApplicationRecord
   has_many :practice_entries, dependent: :destroy
   has_many :practices, dependent: :destroy
   has_many :goals
-  has_many :notifications
+  has_many :notifications, dependent: :destroy
   has_and_belongs_to_many :bookmarks, class_name: "Activity", join_table: "bookmarks"
 
   validates :username, presence: true, uniqueness: { case_sensitive: false }

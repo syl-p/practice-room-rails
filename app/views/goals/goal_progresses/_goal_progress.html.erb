@@ -1,5 +1,5 @@
-<div id="<%= dom_id(progress) %>" class="p-4 hover:bg-muted">
-  <p class="text-sm text-muted-foreground mb-1">
+<div id="<%= dom_id(progress) %>" class="flex items-center justify-between gap-3 px-4 py-3">
+  <p class="text-sm font-semibold text-foreground">
     <%= progress.value %> <%= goal.unit %>
   </p>
   <p class="text-xs text-muted-foreground">
