@@ -1,7 +1,8 @@
 <header class="fixed top-0 z-40 w-full border-b bg-background/80 backdrop-blur supports-backdrop-blur:bg-background/60">
   <div class="container mx-auto flex h-14 items-center justify-between">
-    <%= link_to root_path, class: "flex items-center space-x-2 font-bold text-lg tracking-tight" do %>
-      Practice Room
+    <%= link_to root_path, class: "flex items-center space-x-2 font-bold text-lg tracking-tight", aria: { label: "Practice Room" } do %>
+      <%= render "shared/logo" %>
+			<p class="font-bold text-lg tracking-tight">Practice Room</p>
     <% end %>
 
     <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-muted-foreground">

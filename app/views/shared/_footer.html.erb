@@ -3,7 +3,10 @@
     <div class="grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
       <%# Colonne brand %>
       <div class="space-y-4 lg:col-span-1">
-        <p class="font-bold text-lg tracking-tight">Practice Room</p>
+        <%= link_to root_path, class: "flex items-center gap-2", aria: { label: "Practice Room" } do %>
+          <%= render "shared/logo", size: "h-7 w-7", tile_class: "text-primary-foreground", note_class: "text-primary" %>
+          <p class="font-bold text-lg tracking-tight">Practice Room</p>
+        <% end %>
         <p class="text-sm text-primary-foreground/70 leading-relaxed">
           La plateforme communautaire pour suivre et partager vos routines de pratique.
         </p>

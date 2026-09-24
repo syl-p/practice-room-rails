@@ -42,6 +42,9 @@
   <section class="min-h-full flex">
     <article class="flex-1 flex flex-col justify-center py-12 px-4 sm:px-6 lg:flex-none lg:px-20 xl:px-24">
       <div class="mx-auto w-full max-w-sm lg:w-96">
+        <%= link_to root_path, title: "Practice Room", class: "mb-6 flex items-center justify-center", data: { turbo: false } do %>
+          <%= render "shared/logo", size: "h-10 w-10" %>
+        <% end %>
         <%= link_to root_path, title: "Retour à l'accueil", class: "group -ml-1 mb-6 inline-flex items-center gap-1.5 rounded-md px-1 py-0.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground" do %>
           <%= icon "arrow-left", class: "size-4 shrink-0 transition-transform group-hover:-translate-x-0.5" %>
           Retour à l'accueil
