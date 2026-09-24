@@ -4,7 +4,7 @@
 
 <header>
   <h1 class="h1 mt-6">On se connecte ?</h1>
-  <p>Pas encore de compte ? <%= link_to "Créez-le ici", new_registration_path %>.</p>
+  <p>Pas encore de compte ? <%= link_to "Créez-le ici", new_registration_path, class: "font-medium text-primary underline-offset-2 hover:underline" %>.</p>
 </header>
 
 <div class="mt-8">
@@ -18,5 +18,5 @@
   <% end %>
   <br>
 
-  <%= link_to "Mot de passe oublié ?", new_password_path %>
+  <%= link_to "Mot de passe oublié ?", new_password_path, class: "text-sm font-medium text-muted-foreground underline-offset-2 hover:text-primary hover:underline" %>
 </div>

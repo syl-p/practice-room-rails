@@ -9,4 +9,8 @@
     <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username", placeholder: "votre@email.com", value: params[:email_address] %><br>
     <%= form.submit "Envoyer le lien de réinitialisation" %>
   <% end %>
+  <p class="mt-4 text-sm text-muted-foreground">
+    Vous vous en souvenez finalement ?
+    <%= link_to "Connectez-vous", new_session_path, class: "font-medium text-primary underline-offset-2 hover:underline" %>.
+  </p>
 </div>
