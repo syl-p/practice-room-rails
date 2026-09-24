@@ -12,6 +12,7 @@
   <% end %>
 
   <% component.with_dropdown_menu do %>
+    <%= render "shared/theme_switch" %>
     <%= render MenuComponent.new do |menu| %>
       <%= menu.with_item() do %>
         <p class="truncate">

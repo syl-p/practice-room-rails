@@ -1,0 +1,15 @@
+<footer class="border-t border-border">
+  <div class="px-4 py-8">
+    <div class="flex flex-col items-center justify-between gap-4 text-sm md:flex-row">
+      <p class="text-center text-muted-foreground md:text-left">
+        &copy; <%= Date.current.year %> Practice Room — open source, gratuit pour toujours.
+      </p>
+      <nav class="flex flex-wrap items-center justify-center gap-x-4 gap-y-2">
+        <%= link_to "Discord", "https://discord.gg/8vCbhQUK7M", target: "_blank", rel: "noopener noreferrer", class: "text-muted-foreground transition-colors hover:text-foreground hover:underline" %>
+        <%= link_to "GitHub", "https://github.com/syl-p/practice-room-rails", target: "_blank", rel: "noopener noreferrer", class: "text-muted-foreground transition-colors hover:text-foreground hover:underline" %>
+        <%= link_to "À propos", about_path, class: "text-muted-foreground transition-colors hover:text-foreground hover:underline" %>
+        <%= link_to "Contact", contact_path, class: "text-muted-foreground transition-colors hover:text-foreground hover:underline" %>
+      </nav>
+    </div>
+  </div>
+</footer>

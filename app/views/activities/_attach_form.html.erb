@@ -4,9 +4,9 @@
 		<%= ui_action_to "Ajouter à ma pratique", practice_practice_activities_path(practice_id: current_practice_id, activity_id: activity.id),
 										as: :link, data: {turbo_frame: "_top", turbo_method: "post"} %>
 
-		<%= render DropdownComponent.new(variant: :outline) do |component| %>
+		<%= render DropdownComponent.new(variant: :outline, menu_position: :up) do |component| %>
 			<% component.with_trigger_btn do %>
-				<% icon "chevron-down" %>
+				<% icon "chevron-up" %>
 			<% end %>
 			<% component.with_dropdown_menu do %>
 				<%= render MenuComponent.new do |menu| %>

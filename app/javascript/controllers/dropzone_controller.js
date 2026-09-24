@@ -100,7 +100,7 @@ export default class extends Controller {
 			<div class="progress-ring-container">
 				<svg class="progress-ring" width="48" height="48" viewBox="0 0 48 48">
 					<circle class="progress-ring-bg" cx="24" cy="24" r="20" fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="4"/>
-					<circle class="progress-ring-circle" cx="24" cy="24" r="20" fill="none" stroke="white" stroke-width="4" stroke-dasharray="125.66" stroke-dashoffset="125.66" stroke-linecap="round"/>
+					<circle class="progress-ring-circle stroke-primary" cx="24" cy="24" r="20" fill="none" stroke-width="4" stroke-dasharray="125.66" stroke-dashoffset="125.66" stroke-linecap="round"/>
 				</svg>
 				<span class="progress-ring-text">0%</span>
 			</div>

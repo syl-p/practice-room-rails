@@ -1,5 +1,5 @@
 <nav role="navigation" aria-label="Navigation de la pratique"
-  class="sticky top-14 px-5 py-6">
+  class="sticky top-14 flex h-[calc(100vh-5rem)] flex-col px-5 py-6">
   <div class="mb-5 border-b border-border pb-5">
     <%= turbo_frame_tag "user_practices_sidebar" do %>
       <%= render partial: "shared/user_practices", locals: { wrapper_class: "w-full", menu_classes: "w-52" } %>
@@ -24,4 +24,32 @@
       </li>
     <% end %>
   </ul>
+
+  <%# Utilisateur, ancré en bas de la sidebar %>
+  <div class="mt-auto border-t border-border pt-4">
+    <div class="relative" data-controller="dropdown">
+      <button type="button" data-action="click->dropdown#toggle" data-dropdown-target="triggerBtn" aria-haspopup="menu"
+        class="flex w-full items-center gap-2.5 rounded-lg px-2 py-1.5 text-left transition-colors hover:bg-secondary">
+        <%= render AvatarComponent.new(user: Current.user, size: :sm) %>
+        <span class="min-w-0 flex-1 truncate text-sm font-semibold"><%= Current.user.username %></span>
+        <%= icon "chevron-up", class: "size-4 shrink-0 text-muted-foreground" %>
+      </button>
+
+      <div class="absolute bottom-full right-0 z-20 mb-2 hidden w-56 rounded-md bg-white p-1 shadow-lg ring-1 ring-black/5 dark:bg-card"
+        data-dropdown-target="dropdownMenu" role="menu">
+        <%= render "shared/theme_switch" %>
+        <%= render MenuComponent.new do |menu| %>
+          <%= menu.with_item(href: edit_settings_profile_path) do %>
+            Vos informations
+          <% end %>
+          <%= menu.with_item(href: Current.user) do %>
+            Votre profil
+          <% end %>
+          <%= menu.with_item(href: session_path, method: :delete) do %>
+            Se déconnecter
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </nav>

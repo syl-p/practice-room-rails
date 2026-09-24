@@ -13,15 +13,18 @@
         (params[:id].present? || params[:practice_id].present?)
     %>
 
-    <main class="min-h-screen <%= practice_area ? "pt-14 pb-28 lg:pb-12" : "pt-20 pb-24" %> <%= practice_area ? "practice-area" : "" %>">
+    <main class="min-h-screen pt-20 pb-24">
       <% if practice_area %>
-        <div class="lg:grid lg:grid-cols-[240px_minmax(0,1fr)] lg:w-full lg:max-w-[1320px] lg:mx-auto lg:pt-6">
-          <aside class="hidden lg:block lg:border-r lg:border-border">
-            <%= render partial: "shared/practice_sidebar" %>
-          </aside>
-          <div class="min-w-0">
-            <%= yield %>
+        <div class="lg:w-full lg:max-w-[1320px] lg:mx-auto lg:pt-6">
+          <div class="lg:grid lg:grid-cols-[240px_minmax(0,1fr)]">
+            <aside class="hidden lg:block lg:border-r lg:border-border">
+              <%= render partial: "shared/practice_sidebar" %>
+            </aside>
+            <div class="min-w-0 pb-10">
+              <%= yield %>
+            </div>
           </div>
+          <%= render partial: "shared/practice_footer" %>
         </div>
       <% else %>
         <%= yield %>

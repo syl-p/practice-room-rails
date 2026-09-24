@@ -34,6 +34,17 @@
 <link rel="icon" href="/icon.svg" type="image/svg+xml">
 <link rel="apple-touch-icon" href="/icon.png">
 
+<script>
+  // Applique le thème avant le premier rendu pour éviter un flash clair/sombre
+  (function () {
+    try {
+      var theme = localStorage.getItem("practice-room:theme");
+      var dark = theme === "dark" || (theme !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+      document.documentElement.classList.toggle("dark", dark);
+    } catch (e) {}
+  })();
+</script>
+
 <%# Includes all stylesheet files in app/assets/stylesheets %>
 <%= stylesheet_link_tag "actiontext", "data-turbo-track": "reload" %>
 <%= stylesheet_link_tag "tailwind", "inter-font", "data-turbo-track": "reload" %>

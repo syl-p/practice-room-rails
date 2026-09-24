@@ -1,0 +1,21 @@
+<%# Sélecteur de thème : clair / sombre / système. À placer dans un menu dropdown. %>
+<div data-controller="theme" class="border-b border-border px-3 py-3">
+  <p class="px-1 pb-2 text-xs font-medium text-muted-foreground">Thème</p>
+  <div class="grid grid-cols-3 gap-1 rounded-lg bg-secondary p-1" role="radiogroup" aria-label="Thème du site">
+    <button type="button" role="radio" aria-checked="false" data-theme-target="option" data-theme-value="light" data-action="click->theme#select"
+      class="flex flex-col items-center gap-1 rounded-md px-1 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground">
+      <%= icon "sun" %>
+      <span>Clair</span>
+    </button>
+    <button type="button" role="radio" aria-checked="false" data-theme-target="option" data-theme-value="system" data-action="click->theme#select"
+      class="flex flex-col items-center gap-1 rounded-md px-1 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground">
+      <%= icon "computer-desktop" %>
+      <span>Système</span>
+    </button>
+    <button type="button" role="radio" aria-checked="false" data-theme-target="option" data-theme-value="dark" data-action="click->theme#select"
+      class="flex flex-col items-center gap-1 rounded-md px-1 py-1.5 text-xs font-medium text-muted-foreground transition-colors hover:text-foreground">
+      <%= icon "moon" %>
+      <span>Sombre</span>
+    </button>
+  </div>
+</div>

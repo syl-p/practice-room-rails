@@ -1,5 +1,5 @@
 <%= form_with model: [goal.practice_activity, goal], builder: TailwindFormBuilder do |f| %>
-	<%= f.number_field :target_value %>
-	<%= f.text_field :unit %>
+	<%= f.number_field :target_value, label: "Objectif à atteindre", required: true, placeholder: "200" %>
+	<%= f.text_field :unit, label: "Unité", required: true, placeholder: "Bpm, Minutes, %..." %>
 	<%= f.submit "Enregistrer", variant: :outline %>
 <% end %>

@@ -16,7 +16,9 @@
       <% if authenticated? %>
         <%= render partial: "shared/search_dialog" %>
         <%= render partial: "shared/notifications" %>
-        <%= render partial: "shared/user_dropdown" %>
+        <div class="lg:hidden">
+          <%= render partial: "shared/user_dropdown" %>
+        </div>
       <% else %>
         <%= ui_action_to "Se connecter", new_session_path, as: :link, variant: :outline, data: { turbo: false } %>
       <% end %>
