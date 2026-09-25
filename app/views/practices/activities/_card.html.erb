@@ -16,12 +16,25 @@
         <% end %>
 
         <% if activity.tags.any? %>
-          <div class="mt-3 flex flex-wrap gap-1.5">
+          <div class="hidden mt-3 lg:flex flex-wrap gap-1.5">
             <% activity.tags.each do |tag| %>
               <%= render(TagComponent.new(tag.name, variant: :outline)) %>
             <% end %>
           </div>
         <% end %>
+
+				<% practice_activity = practice.practice_activities.to_a.find {|pa| pa.activity_id == activity.id} %>
+				<% goal = practice_activity.active_goal %>
+				<% if goal&.last_progress %>
+					<div class="mt-4">
+						<div class="mb-1 flex items-center justify-between text-xs text-muted-foreground">
+							<span>Objectif en cours</span>
+							<span><%= goal.last_progress.value %> / <%= goal.target_value %> <%= goal.unit %></span>
+						</div>
+						<progress value="<%= goal.progress_pourcent %>" max="100" aria-label="Objectif en cours"
+			                class="h-1.5 w-full overflow-hidden rounded-full bg-border accent-highlight"></progress>
+					</div>
+				<% end %>
       </div>
 
 			<%= render partial: "practices/activities/timers", locals: {
@@ -30,9 +43,5 @@
 			} %>
     </div>
 
-		<div class="mt-4">
-			<progress value="0" max="100" aria-label="Objectif en cours"
-								class="h-1.5 w-full overflow-hidden rounded-full bg-border accent-highlight"></progress>
-		</div>
   <% end %>
 <% end %>

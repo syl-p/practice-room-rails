@@ -60,7 +60,7 @@ class PracticesController < ApplicationController
 
   private
     def set_practice
-      @practice = Practice.find(params[:id])
+      @practice = Practice.includes(practice_activities: :goals).find(params[:id])
     end
 
     def practice_params

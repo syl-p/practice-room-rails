@@ -13,7 +13,7 @@ module CurrentPractice
 
   private
   def set_practice
-    @practice = Practice.find(params[self.class.practice_id_param])
+    @practice = Practice.includes(practice_activities: :goals).find(params[self.class.practice_id_param])
   end
 
   def set_stats
