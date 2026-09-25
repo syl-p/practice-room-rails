@@ -1,0 +1,75 @@
+<%= form_with url: practice_practice_entries_path(practice_id:, activity_id:),
+              builder: TailwindFormBuilder,
+              html: { id: "timer-cd-#{activity_id}" },
+              class: "flex flex-col items-center gap-2",
+              data: { turbo: true,
+											"turbo-permanent": true,
+                      controller: "countdown-timer",
+                      countdown_timer_activity_id_value: activity_id } do |f| %>
+
+	<%= f.hidden_field :duration, data: { countdown_timer_target: "inputValue" } %>
+	<%= f.hidden_field :practice_id, value: practice_id, data: { countdown_timer_target: "inputValue" } %>
+
+	<div class="flex flex-col items-center gap-2">
+
+		<%# Readout (compte à rebours, visible dès que le timer tourne) %>
+		<span data-countdown-timer-target="display"
+		      class="hidden inline-flex items-center gap-1.5 rounded-full border border-input bg-background py-1 pl-2.5 pr-3 text-sm font-semibold text-foreground tabular-nums shadow-sm">
+      <span><%= icon "clock", class: "size-4 text-muted-foreground" %></span>
+      <span data-countdown-timer-target="readout">--:--</span>
+    </span>
+
+		<%# Sélecteur de durée (idle uniquement) : [- input +] %>
+		<div data-countdown-timer-target="setup" class="flex items-center gap-1">
+			<button type="button"
+			        data-countdown-timer-target="decrease"
+			        data-action="click->countdown-timer#decrease"
+			        aria-label="Réduire la durée"
+			        class="inline-flex size-8 items-center justify-center rounded-full border border-input text-foreground transition-colors hover:bg-secondary">
+				<%= icon "minus", class: "size-4" %>
+			</button>
+
+			<input type="time"
+			       value="00:10"
+			       min="00:01"
+			       max="02:00"
+			       step="60"
+			       aria-label="Durée de pratique"
+			       data-countdown-timer-target="timeInput"
+			       data-action="change->countdown-timer#durationChanged"
+			       class="h-8 w-24 rounded-full border border-input bg-background px-2 text-center text-sm font-semibold text-foreground tabular-nums shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring">
+
+			<button type="button"
+			        data-countdown-timer-target="increase"
+			        data-action="click->countdown-timer#increase"
+			        aria-label="Augmenter la durée"
+			        class="inline-flex size-8 items-center justify-center rounded-full border border-input text-foreground transition-colors hover:bg-secondary">
+				<%= icon "plus", class: "size-4" %>
+			</button>
+		</div>
+
+		<%# Bouton play / pause %>
+		<button type="button"
+		        data-countdown-timer-target="toggleBtn"
+		        data-action="click->countdown-timer#toggle"
+		        aria-label="Lancer le minuteur"
+		        class="inline-flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/25 ring-offset-background transition-all hover:scale-105 hover:bg-primary/85 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50">
+
+      <span data-countdown-timer-target="idle" class="flex items-center justify-center">
+				<%= icon "play", class: "size-6" %>
+				<span class="sr-only">Lancer</span>
+			</span>
+			<span data-countdown-timer-target="playing" class="hidden flex items-center justify-center">
+				<%= icon "pause", class: "size-6" %>
+				<span class="sr-only">Mettre en pause</span>
+			</span>
+			<span data-countdown-timer-target="paused" class="hidden flex items-center justify-center">
+				<%= icon "play", class: "size-6" %>
+				<span class="sr-only">Reprendre</span>
+			</span>
+		</button>
+	</div>
+
+	<%= f.submit "Terminer", class: "hidden w-full rounded-lg bg-secondary py-2 text-sm font-medium text-secondary-foreground transition-colors hover:bg-secondary/80",
+	             data: { countdown_timer_target: "submitButton" } %>
+<% end %>

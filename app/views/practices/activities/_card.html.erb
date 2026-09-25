@@ -24,10 +24,10 @@
         <% end %>
       </div>
 
-      <div class="shrink-0 self-start">
-        <%= render partial: "practices/practice_entries/add",
-                   locals: { practice_id: practice.id, activity_id: activity.id } %>
-      </div>
+			<%= render partial: "practices/activities/timers", locals: {
+				practice: practice,
+				activity: activity,
+			} %>
     </div>
 
 		<div class="mt-4">

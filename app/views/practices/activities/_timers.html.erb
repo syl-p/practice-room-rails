@@ -1,0 +1,33 @@
+<div class="shrink-0 self-start"
+     data-controller="timer-mode"
+     data-timer-mode-activity-id-value="<%= activity.id %>">
+
+	<%# Segmented control : choix du mode %>
+	<div data-timer-mode-target="switcher"
+	     class="mx-auto mb-2 flex w-fit items-center gap-0.5 rounded-full border border-input bg-background p-0.5 text-xs font-medium shadow-sm">
+		<button type="button"
+		        data-action="click->timer-mode#select"
+		        data-timer-mode-mode-param="chrono"
+		        data-active="true"
+		        class="rounded-full px-2.5 py-1 text-muted-foreground transition-colors data-[active=true]:bg-secondary data-[active=true]:text-foreground">
+			Chrono
+		</button>
+		<button type="button"
+		        data-action="click->timer-mode#select"
+		        data-timer-mode-mode-param="minuteur"
+		        data-active="false"
+		        class="rounded-full px-2.5 py-1 text-muted-foreground transition-colors data-[active=true]:bg-secondary data-[active=true]:text-foreground">
+			Minuteur
+		</button>
+	</div>
+
+	<div data-timer-mode-target="chrono">
+		<%= render partial: "practices/practice_entries/add",
+		           locals: { practice_id: practice.id, activity_id: activity.id } %>
+	</div>
+
+	<div data-timer-mode-target="minuteur" class="hidden">
+		<%= render partial: "practices/practice_entries/add_countdown",
+		           locals: { practice_id: practice.id, activity_id: activity.id } %>
+	</div>
+</div>
