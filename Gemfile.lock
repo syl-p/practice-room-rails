@@ -187,7 +187,7 @@ GEM
       railties (>= 7.1)
       stimulus-rails
       turbo-rails
-    msgpack (1.8.0)
+    msgpack (1.8.2)
     net-imap (0.5.8)
       date
       net-protocol
