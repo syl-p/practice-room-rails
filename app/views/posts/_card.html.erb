@@ -1,0 +1,17 @@
+<article class="group flex h-full flex-col overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-md">
+  <% if post.cover_attached? %>
+    <div class="aspect-[16/9] overflow-hidden">
+      <%= image_tag post.cover, alt: post.title, class: "h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02]", loading: "lazy" %>
+    </div>
+  <% end %>
+
+  <div class="flex flex-1 flex-col p-5">
+    <h3 class="text-lg font-bold tracking-tight leading-snug">
+      <%= link_to post.title, post, class: "hover:underline" %>
+    </h3>
+
+    <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground line-clamp-3"><%= post.excerpt %></p>
+
+    <%= render partial: "posts/meta", locals: { post: post } %>
+  </div>
+</article>
