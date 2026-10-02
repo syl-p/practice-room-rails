@@ -245,6 +245,32 @@
         @apply mt-2 text-center text-sm text-muted-foreground;
     }
 
+    /* Article de blog — lecture longue : on remonte le contraste et l'échelle
+       au-dessus de ce que .trix-content impose aux activités */
+    .article-content.trix-content {
+        @apply text-foreground/90 text-[1.0625rem] leading-[1.75];
+    }
+
+    .article-content h1 {
+        @apply text-3xl font-bold tracking-tight mt-10 mb-4;
+    }
+
+    .article-content h2 {
+        @apply text-2xl font-bold tracking-tight mt-10 mb-4;
+    }
+
+    .article-content h3 {
+        @apply text-xl font-semibold tracking-tight mt-8 mb-3;
+    }
+
+    .article-content h4 {
+        @apply text-lg font-semibold tracking-tight mt-6 mb-2;
+    }
+
+    .article-content blockquote {
+        @apply border-l-4 border-primary/40 not-italic text-foreground/80;
+    }
+
     trix-editor {
         @apply rounded-md border border-input px-3 py-2 focus-visible:ring-2 focus-visible:ring-ring max-w-full;
     }

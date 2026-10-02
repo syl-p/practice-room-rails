@@ -17,8 +17,7 @@
         <p class="font-semibold text-sm uppercase tracking-wider text-primary-foreground/50">Navigation</p>
         <ul class="space-y-2.5 text-sm">
           <li><%= link_to "Accueil", root_path, class: "text-primary-foreground/80 hover:text-primary-foreground transition-colors" %></li>
-          <%# TODO: add blog_index_path when blog routes are implemented %>
-          <%#= link_to "Blog", blog_index_path, class: "text-primary-foreground/80 hover:text-primary-foreground transition-colors" %>
+          <li><%= link_to "Blog", posts_path, class: "text-primary-foreground/80 hover:text-primary-foreground transition-colors" %></li>
           <li><%= link_to "A propos", about_path, class: "text-primary-foreground/80 hover:text-primary-foreground transition-colors" %></li>
           <li><%= link_to "Contact", contact_path, class: "text-primary-foreground/80 hover:text-primary-foreground transition-colors" %></li>
         </ul>
