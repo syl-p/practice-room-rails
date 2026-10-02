@@ -15,6 +15,7 @@ class MediaController < ApplicationController
 
     if @medium.save
       respond_to do |format|
+        format.html { render partial: "media/medium", locals: { medium: @medium, selected: false }, status: 200 }
         format.turbo_stream
         format.json { render json: @medium, status: 200 }
       end

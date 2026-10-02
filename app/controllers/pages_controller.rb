@@ -5,7 +5,7 @@ class PagesController < ApplicationController
   def home
     if authenticated?
       @practices = Current.user.cached_practices
-      redirect_to new_practices_path unless @practices.present?
+      redirect_to onboarding_practices_new_path unless @practices.present?
     end
   end
 

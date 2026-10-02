@@ -1,0 +1,13 @@
+<%= render DropdownComponent.new do |dropdown| %>
+	<% dropdown.with_trigger_btn do %>
+		<%= icon("ellipsis-horizontal") %>
+	<% end %>
+
+	<% dropdown.with_dropdown_menu do %>
+		<%= render MenuComponent.new do |menu| %>
+			<% menu.with_item(href: edit_goal_path(goal.id), data: {turbo: true}) do %>
+				Modifier
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>

@@ -1,0 +1,16 @@
+<%= render DropdownComponent.new do |component| %>
+	<% component.with_trigger_btn do %>
+		<%= icon("ellipsis-horizontal") %>
+	<% end %>
+
+	<% component.with_dropdown_menu do %>
+		<%= render MenuComponent.new do  |menu| %>
+			<%= menu.with_item(href: practice_practice_entry_path(
+				practice_id: @practice.id,
+				id: practice_entry.id
+			), method: :delete) do %>
+				Supprimer
+			<% end %>
+		<% end %>
+	<% end %>
+<% end %>

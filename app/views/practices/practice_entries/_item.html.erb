@@ -15,15 +15,7 @@
       </p>
     </div>
     <div>
-      <%= ui_action_to practice_practice_entry_path(
-                         practice_id: @practice.id,
-                         id: practice_entry.id
-                       ),
-                       as: :button,
-                       method: :delete,
-                       variant: :ghost do %>
-        <%= icon "x-mark", class: "size-4" %>
-      <% end %>
+			<%= render partial: "practices/practice_entries/dropdown", locals: {practice_entry:} %>
     </div>
   </div>
 <% end %>

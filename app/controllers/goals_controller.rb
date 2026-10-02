@@ -1,7 +1,13 @@
 class GoalsController < ApplicationController
-  before_action :set_goal, only: [ :show ]
+  before_action :set_goal, only: [ :show, :edit, :update ]
 
   def show
+  end
+
+  def edit
+  end
+
+  def update
   end
 
   private
