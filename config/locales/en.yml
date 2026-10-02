@@ -29,3 +29,10 @@
 
 en:
   hello: "Hello world"
+  posts:
+    comments_count:
+      one: "%{count} comment"
+      other: "%{count} comments"
+    reading_time:
+      one: "%{count} min read"
+      other: "%{count} min read"

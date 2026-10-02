@@ -1,0 +1,21 @@
+<% body_classes = [ "flex flex-col justify-center p-6 md:p-8", ("md:col-span-2" unless post.cover_attached?) ].compact.join(" ") %>
+
+<article class="group grid overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-shadow hover:shadow-md md:grid-cols-2">
+  <% if post.cover_attached? %>
+    <div class="overflow-hidden">
+      <%= image_tag post.cover, alt: post.title, class: "h-full w-full object-cover", loading: "eager" %>
+    </div>
+  <% end %>
+
+  <div class="<%= body_classes %>">
+    <span class="text-sm font-semibold text-primary uppercase tracking-wider">À la une</span>
+
+    <h2 class="mt-3 text-2xl md:text-3xl font-bold tracking-tight leading-tight">
+      <%= link_to post.title, post, class: "hover:underline" %>
+    </h2>
+
+    <p class="mt-3 text-muted-foreground leading-relaxed"><%= post.excerpt %></p>
+
+    <%= render partial: "posts/meta", locals: { post: post } %>
+  </div>
+</article>

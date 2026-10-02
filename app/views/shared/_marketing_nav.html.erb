@@ -6,8 +6,7 @@
     <% end %>
 
     <nav class="hidden md:flex items-center space-x-6 text-sm font-medium text-muted-foreground">
-      <%# TODO: add blog_index_path when blog routes are implemented %>
-      <%#= link_to "Blog", blog_index_path, class: "hover:text-foreground transition-colors" %>
+      <%= link_to "Blog", posts_path, class: "hover:text-foreground transition-colors" %>
       <%= link_to "A propos", about_path, class: "hover:text-foreground transition-colors" %>
       <%= link_to "Contact", contact_path, class: "hover:text-foreground transition-colors" %>
     </nav>

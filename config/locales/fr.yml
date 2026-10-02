@@ -1,0 +1,8 @@
+fr:
+  posts:
+    comments_count:
+      one: "%{count} commentaire"
+      other: "%{count} commentaires"
+    reading_time:
+      one: "%{count} minute de lecture"
+      other: "%{count} minutes de lecture"

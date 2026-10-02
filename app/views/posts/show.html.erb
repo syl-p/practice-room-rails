@@ -1,0 +1,112 @@
+<% content_for :title, "#{@post.title} - Practice Room" %>
+<% content_for :description, @post.description %>
+<% content_for :og_type, "article" %>
+<% content_for :og_image, rails_blob_url(@post.cover, only_path: false) if @post.cover_attached? %>
+
+<% content_for :head do %>
+  <% if @post.published_at? %>
+    <meta property="article:published_time" content="<%= @post.published_at.iso8601 %>">
+  <% end %>
+  <meta property="article:modified_time" content="<%= @post.updated_at.iso8601 %>">
+  <meta property="article:author" content="<%= @post.user.username %>">
+  <script type="application/ld+json"><%= raw({
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      mainEntityOfPage: post_url(@post),
+      headline: @post.title,
+      description: @post.description,
+      url: post_url(@post),
+      inLanguage: "fr",
+      datePublished: @post.published_at&.iso8601,
+      dateModified: @post.updated_at.iso8601,
+      image: (@post.cover_attached? ? rails_blob_url(@post.cover, only_path: false) : nil),
+      author: {
+        "@type": "Person",
+        name: @post.user.username,
+        url: user_url(@post.user)
+      },
+      publisher: {
+        "@type": "Organization",
+        name: "Practice Room",
+        url: root_url
+      }
+    }.compact.to_json) %></script>
+<% end %>
+
+<article class="pt-24 px-4 pb-16">
+  <div class="container mx-auto max-w-3xl">
+    <%= link_to posts_path, class: "group inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground" do %>
+      <%= icon "arrow-left", class: "size-4 shrink-0 transition-transform group-hover:-translate-x-0.5" %>
+      Tout le blog
+    <% end %>
+
+    <header class="mt-6">
+      <h1 class="text-3xl md:text-4xl font-bold tracking-tight leading-tight"><%= @post.title %></h1>
+      <p class="mt-4 text-lg leading-relaxed text-muted-foreground"><%= @post.excerpt %></p>
+      <%= render partial: "posts/meta", locals: { post: @post } %>
+    </header>
+
+    <% if @post.cover_attached? %>
+      <figure class="mt-8 overflow-hidden rounded-2xl border border-border">
+        <%= image_tag @post.cover, alt: @post.title, class: "w-full object-cover", loading: "eager" %>
+      </figure>
+    <% end %>
+
+    <div class="article-content max-w-prose mt-10">
+      <%= @post.content %>
+    </div>
+  </div>
+</article>
+
+<section class="py-16 px-4 bg-secondary/50 border-t border-border">
+  <div class="container mx-auto max-w-3xl text-center">
+    <h2 class="text-2xl font-bold tracking-tight mb-3">Alors, ça vous a parlé&nbsp;?</h2>
+    <p class="text-muted-foreground mb-8 max-w-xl mx-auto leading-relaxed">
+      Dites-le en commentaire, ou passez sur le Discord pour continuer la
+      discussion avec d'autres qui pratiquent.
+    </p>
+    <%= ui_action_to "Rejoindre le Discord", "https://discord.gg/8vCbhQUK7M", as: :link, variant: :primary, data: { turbo: false } %>
+  </div>
+</section>
+
+<section class="py-16 px-4">
+  <% comments = @post.comments.top_level.load %>
+
+  <div class="container mx-auto max-w-3xl space-y-6">
+    <header>
+      <h2 class="h2">
+        <%= t("posts.comments_count", count: comments.size) %>
+      </h2>
+      <p class="mt-1 text-sm text-muted-foreground">
+        Les réponses restent ici, sous l'article. Pas de boîte mail, pas d'algorithme.
+      </p>
+    </header>
+
+    <% if authenticated? %>
+      <div class="rounded-xl border border-border bg-card p-4 shadow-sm">
+        <%= turbo_frame_tag record_id_gen(@post, Comment.new) do %>
+          <%= render partial: "comments/form", locals: { comment: Comment.new, commentable: @post } %>
+        <% end %>
+      </div>
+    <% else %>
+      <p class="rounded-xl border border-dashed border-border bg-secondary/40 p-4 text-sm text-muted-foreground">
+        <%= link_to "Connectez-vous", new_session_path, class: "font-medium text-primary hover:underline", data: { turbo: false } %>
+        pour rejoindre la discussion.
+      </p>
+    <% end %>
+
+    <%= turbo_frame_tag "#{dom_id(@post)}_comments", class: "divide-y divide-border" do %>
+      <%= render partial: "comments/comment", collection: comments, as: :comment %>
+
+      <div class="comments-empty flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-secondary/40 py-10 text-center">
+        <%= icon "chat-bubble-left-ellipsis", class: "size-6 text-muted-foreground" %>
+        <div>
+          <p class="text-sm font-medium text-foreground">Aucun commentaire pour l'instant</p>
+          <p class="mt-1 text-xs text-muted-foreground">
+            Lancez le bal &nbsp;—&nbsp; mentionnez quelqu'un avec <span class="font-medium text-primary">@pseudo</span>.
+          </p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</section>
