@@ -66,7 +66,7 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "view_component", "~> 3.23"
+gem "view_component", "~> 4.9"
 gem "tailwindcss-rails", "~> 3.3.1"
 gem "rails-i18n", "~> 8.0"
 
