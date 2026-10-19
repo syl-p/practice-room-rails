@@ -8,10 +8,6 @@ class PostsController < ApplicationController
     @posts = Post.published.includes(:user).recent
   end
 
-  # Un brouillon n'existe pas pour le public : on renvoie un vrai 404 plutôt
-  # qu'une redirection, histoire de ne pas laisser indexer une page vide.
-  # cause: nil coupe le lien avec NotAuthorizedError, sinon le handler de
-  # rescue_from le retrouve et redirige vers la home.
   def show
     authorize! @post
   rescue NotAuthorizedError
