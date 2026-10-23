@@ -19,6 +19,7 @@ class Post < ApplicationRecord
   validates :meta_description, length: { maximum: 160 }, allow_blank: true
 
   before_validation :stamp_published_at
+  before_validation :refresh_draft_slug, if: :refresh_draft_slug?
 
   def to_param
     slug
@@ -38,6 +39,21 @@ class Post < ApplicationRecord
 
   private
     def stamp_published_at
-      self.published_at ||= Time.current if published?
+      if published?
+        self.published_at ||= Time.current
+      else
+        self.published_at = nil
+      end
+    end
+
+    # Tant que l'article est un brouillon, son url suit son titre.
+    # Une fois publié, le slug reste figé pour ne pas casser les liens.
+    def refresh_draft_slug?
+      persisted? && draft? && title.present? && slug.present?
+    end
+
+    def refresh_draft_slug
+      self.slug = nil
+      generate_slug
     end
 end

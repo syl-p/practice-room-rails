@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  enum :role, { member: 0, admin: 1 }, default: :member
+
   has_secure_password
   has_many :sessions, dependent: :destroy
   has_many :activities, dependent: :destroy

@@ -5,6 +5,10 @@ FactoryBot.define do
     bio { Faker::Lorem.paragraph }
     password { "password" }
 
+    trait :admin do
+      role { :admin }
+    end
+
     # create(:user, :with_practices, tag_pool: tags)
     trait :with_practices do
       transient do

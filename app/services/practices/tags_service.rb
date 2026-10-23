@@ -1,4 +1,4 @@
-class Practices::TagsService do
+class Practices::TagsService
   # @param [Practice] practice
   def initialize(practice)
     @practice = practice

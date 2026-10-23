@@ -1,4 +1,9 @@
 fr:
+  admin:
+    posts:
+      errors_count:
+        one: "%{count} erreur lors de l'enregistrement"
+        other: "%{count} erreurs lors de l'enregistrement"
   posts:
     comments_count:
       one: "%{count} commentaire"

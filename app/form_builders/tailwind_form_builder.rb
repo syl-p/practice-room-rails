@@ -23,6 +23,20 @@ class TailwindFormBuilder < ActionView::Helpers::FormBuilder
     end
   end
 
+  def select(method, choices = nil, options = {}, html_options = {})
+    html_options = merge_default_classes(html_options, TailwindHelper::INPUT_CLASSES)
+
+    form_group(method, options) do
+      super(method, choices, options, html_options)
+    end
+  end
+
+  def file_field(method, options = {})
+    form_group(method, options) do
+      super(method, merge_default_classes(options, TailwindHelper::INPUT_CLASSES))
+    end
+  end
+
   def rich_textarea(method, options = {})
     form_group(method, options) do
       super(method, merge_default_classes(options, TailwindHelper::TEXT_AREA_CLASSES))

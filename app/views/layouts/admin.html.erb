@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <%= render partial: "shared/head" %>
+  </head>
+
+  <body class="bg-background">
+    <div class="min-h-screen lg:grid lg:grid-cols-[260px_minmax(0,1fr)]">
+      <%= render partial: "admin/shared/sidebar" %>
+
+      <div class="min-w-0">
+        <header class="sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-background/95 px-4 backdrop-blur">
+          <p class="text-sm font-medium text-muted-foreground">Administration</p>
+
+          <div class="ml-auto flex items-center gap-2">
+            <%= ui_action_to "Voir le site", root_path, as: :link, variant: :outline, data: { turbo: false } %>
+            <%= render partial: "shared/user_dropdown" %>
+          </div>
+        </header>
+
+        <main class="px-4 py-8 lg:px-8">
+          <%= yield %>
+        </main>
+      </div>
+    </div>
+
+    <%= render partial: "shared/flash_zone" %>
+  </body>
+</html>

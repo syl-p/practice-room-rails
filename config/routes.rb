@@ -56,6 +56,17 @@ Rails.application.routes.draw do
     resources :comments, only: %i[create], module: :posts
   end
 
+  namespace :admin do
+    root "dashboard#index"
+
+    resources :posts do
+      member do
+        patch :publish
+        patch :unpublish
+      end
+    end
+  end
+
   resources :comments, only: %i[show edit update destroy] do
     resources :comments, only: %i[create], module: :comments
   end

@@ -29,6 +29,11 @@
 
 en:
   hello: "Hello world"
+  admin:
+    posts:
+      errors_count:
+        one: "%{count} error while saving"
+        other: "%{count} errors while saving"
   posts:
     comments_count:
       one: "%{count} comment"
