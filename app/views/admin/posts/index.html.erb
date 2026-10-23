@@ -1,0 +1,74 @@
+<% content_for :title, "Articles - Administration" %>
+
+<div class="space-y-6">
+  <header class="flex flex-wrap items-end justify-between gap-4">
+    <div>
+      <h1 class="h1">Articles</h1>
+      <p class="mt-2 text-muted-foreground">Écrivez, corrigez, publiez. Le blog public reste en lecture seule.</p>
+    </div>
+
+    <%= ui_action_to "Nouvel article", new_admin_post_path, as: :link, variant: :primary %>
+  </header>
+
+  <div class="flex flex-wrap items-center gap-3">
+    <nav class="flex gap-1 rounded-lg bg-secondary p-1">
+      <% [
+        ["Tous", ""],
+        ["Publiés", "published"],
+        ["Brouillons", "draft"]
+      ].each do |label, status| %>
+        <%= link_to label,
+          admin_posts_path(status: status.presence, search: @search.presence),
+          class: "rounded-md px-3 py-1.5 text-sm font-medium transition-colors #{@status == status ? "bg-background text-foreground shadow-sm" : "text-muted-foreground hover:text-foreground"}" %>
+      <% end %>
+    </nav>
+
+    <%= form_with url: admin_posts_path, method: :get, class: "ml-auto flex items-center gap-2" do %>
+      <%= hidden_field_tag :status, @status if @status.present? %>
+      <%= text_field_tag :search, @search, placeholder: "Rechercher un article…", class: TailwindHelper::INPUT_CLASSES %>
+      <%= submit_tag "Rechercher", class: "#{TailwindHelper::BTN_BASE_CLASSES} #{TailwindHelper::BUTTON_VARIANTS[:secondary]}" %>
+    <% end %>
+  </div>
+
+  <div class="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+    <% if @posts.any? %>
+      <ul class="divide-y divide-border">
+        <% @posts.each do |post| %>
+          <li class="flex flex-wrap items-center gap-3 px-5 py-4">
+            <div class="min-w-0 flex-1">
+              <%= link_to post.title, edit_admin_post_path(post), class: "block truncate font-medium text-foreground hover:underline" %>
+              <p class="mt-0.5 text-xs text-muted-foreground">
+                <%= post.user.username %>
+                &middot;
+                <%= l post.updated_at.to_date, format: :long %>
+              </p>
+            </div>
+
+            <%= render partial: "admin/posts/status_badge", locals: { post: post } %>
+
+            <div class="flex items-center gap-2">
+              <%= ui_action_to "Éditer", edit_admin_post_path(post), as: :link, variant: :outline %>
+
+              <% if post.published? %>
+                <%= ui_action_to "Dépublier", unpublish_admin_post_path(post), as: :button, variant: :secondary, method: :patch %>
+              <% else %>
+                <%= ui_action_to "Publier", publish_admin_post_path(post), as: :button, variant: :secondary, method: :patch %>
+              <% end %>
+
+              <%= ui_action_to "Supprimer", admin_post_path(post), as: :button, variant: :destructive, method: :delete,
+                data: { turbo_confirm: "Supprimer définitivement cet article ?" } %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+    <% else %>
+      <p class="px-5 py-12 text-center text-sm text-muted-foreground">
+        <% if @search.present? || @status.present? %>
+          Aucun article ne correspond à cette recherche.
+        <% else %>
+          Pas encore d'article. <%= link_to "Écrire le premier", new_admin_post_path, class: "font-medium text-primary hover:underline" %>.
+        <% end %>
+      </p>
+    <% end %>
+  </div>
+</div>

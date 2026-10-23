@@ -1,6 +1,8 @@
 require "test_helper"
 
 class CommentTest < ActiveSupport::TestCase
+  include ActiveJob::TestHelper
+
   test "should have a valid factory" do
     comment = FactoryBot.create(:comment)
     assert comment.valid?
@@ -35,5 +37,12 @@ class CommentTest < ActiveSupport::TestCase
     assert_includes parent_comment.replies, reply
     assert_equal reply.parent_id, parent_comment.id
     assert_equal reply.commentable, commentable
+  end
+
+  test "comment with mention should start job" do
+    user = FactoryBot.create(:user)
+    assert_enqueued_with(job: Comments::NotificationsJob) do
+      comment = FactoryBot.create(:comment, content: "content with mention @#{user.username}")
+    end
   end
 end

@@ -1,0 +1,22 @@
+<% content_for :title, "#{@post.title} - Administration" %>
+
+<div class="mb-6">
+  <%= link_to admin_posts_path, class: "group inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground" do %>
+    <%= icon "arrow-left", class: "size-4 shrink-0 transition-transform group-hover:-translate-x-0.5" %>
+    Retour aux articles
+  <% end %>
+
+  <div class="mt-4 flex flex-wrap items-end justify-between gap-4">
+    <div class="min-w-0">
+      <h1 class="h1 truncate"><%= @post.title %></h1>
+      <div class="mt-2 flex items-center gap-3">
+        <%= render partial: "admin/posts/status_badge", locals: { post: @post } %>
+        <span class="text-xs text-muted-foreground">/blog/<%= @post.slug %></span>
+      </div>
+    </div>
+
+    <%= ui_action_to "Voir l'article", post_path(@post), as: :link, variant: :outline, data: { turbo: false } %>
+  </div>
+</div>
+
+<%= render partial: "form", locals: { post: @post } %>

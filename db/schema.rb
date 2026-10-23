@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2026_08_04_104100) do
+ActiveRecord::Schema[8.0].define(version: 2026_10_21_154519) do
   create_table "action_text_rich_texts", force: :cascade do |t|
     t.string "name", null: false
     t.text "body"
@@ -129,6 +129,21 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_04_104100) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
+  create_table "posts", force: :cascade do |t|
+    t.integer "user_id", null: false
+    t.string "title", null: false
+    t.string "slug", null: false
+    t.text "excerpt", null: false
+    t.string "meta_description"
+    t.integer "status", default: 0, null: false
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["slug"], name: "index_posts_on_slug", unique: true
+    t.index ["status", "published_at"], name: "index_posts_on_status_and_published_at"
+    t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
   create_table "practice_activities", force: :cascade do |t|
     t.integer "practice_id"
     t.integer "activity_id"
@@ -194,6 +209,7 @@ ActiveRecord::Schema[8.0].define(version: 2026_08_04_104100) do
     t.string "password_digest", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "role", default: 0, null: false
     t.index ["email_address"], name: "index_users_on_email_address", unique: true
   end
 

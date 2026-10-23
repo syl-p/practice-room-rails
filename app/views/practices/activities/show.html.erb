@@ -21,7 +21,6 @@
             <% end %>
           <% end %>
 
-
           <% component.with_tab(id: "goal", label: "Objectif", button_class: "block lg:hidden") do %>
             <% if @practice_activity.goals.present? %>
               <!-- Mettre à jour les progrès -->
@@ -57,7 +56,7 @@
                 </h3>
 
                 <%= turbo_frame_tag "#{dom_id(@activity)}_comments", class: "divide-y divide-border" do %>
-                  <%= render partial: "comments/comment", collection: @activity.comments, as: :comment %>
+                  <%= render partial: "comments/comment", collection: @activity.comments.top_level.load, as: :comment %>
 
                   <div class="comments-empty hidden flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-border bg-secondary/40 py-10 text-center">
                     <%= icon "chat-bubble-left-ellipsis", class: "size-6 text-muted-foreground" %>

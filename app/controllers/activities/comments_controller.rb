@@ -4,7 +4,7 @@ class Activities::CommentsController < ApplicationController
   include Commentable
 
   def index
-    @comments = @commentable.comments.where(parent_id: nil).order(created_at: :desc)
+    @comments = @commentable.comments.top_level.order(created_at: :desc)
   end
 
   private

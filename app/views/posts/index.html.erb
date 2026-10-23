@@ -1,0 +1,71 @@
+<%
+  blog_description = "Des méthodes et des retours d'expérience pour tenir une pratique régulière. Musique, sport, dessin : ce qui aide vraiment à s'y mettre, et à y rester."
+%>
+
+<% content_for :title, "Le blog - Practice Room" %>
+<% content_for :description, blog_description %>
+<% content_for :og_type, "website" %>
+
+<% content_for :head do %>
+  <script type="application/ld+json"><%= raw({
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      name: "Le blog Practice Room",
+      description: blog_description,
+      url: posts_url,
+      inLanguage: "fr",
+      blogPost: @posts.map { |post| {
+        "@type": "BlogPosting",
+        headline: post.title,
+        description: post.description,
+        url: post_url(post),
+        datePublished: post.published_at&.iso8601
+      } }
+    }.to_json) %></script>
+<% end %>
+
+<section class="bg-primary text-primary-foreground pt-32 pb-16 px-4">
+  <div class="container mx-auto max-w-3xl">
+    <span class="inline-block mb-4 rounded-full bg-primary-foreground/10 px-4 py-1.5 text-sm font-medium backdrop-blur">
+      Le blog
+    </span>
+    <h1 class="text-3xl md:text-5xl font-bold tracking-tight mb-3 leading-tight">
+      Des idées pour mieux pratiquer
+    </h1>
+    <p class="text-lg text-primary-foreground/80 max-w-xl leading-relaxed">
+      Des méthodes, des retours d'expérience, des conseils concrets. Pas de théorie
+      compliquée&nbsp;: ce qui aide vraiment à s'y mettre, et à y rester.
+    </p>
+  </div>
+</section>
+
+<section class="py-16 px-4">
+  <div class="container mx-auto max-w-5xl">
+    <% if (featured_post = @posts.first) %>
+      <%= render partial: "posts/featured", locals: { post: featured_post } %>
+
+      <% more_posts = @posts.drop(1) %>
+      <% if more_posts.any? %>
+        <div class="mt-8 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <%= render partial: "posts/card", collection: more_posts, as: :post %>
+        </div>
+      <% end %>
+    <% else %>
+      <%= render "posts/empty" %>
+    <% end %>
+  </div>
+</section>
+
+<section class="py-16 px-4 bg-secondary/50">
+  <div class="container mx-auto max-w-3xl text-center">
+    <h2 class="text-2xl md:text-3xl font-bold tracking-tight mb-3">On en parle, on partage</h2>
+    <p class="text-muted-foreground mb-8 max-w-xl mx-auto leading-relaxed">
+      Un article vous a marqué&nbsp;? Répondez en dessous, ou passez sur le Discord
+      pour discuter avec d'autres qui pratiquent.
+    </p>
+    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+      <%= ui_action_to "Rejoindre le Discord", "https://discord.gg/8vCbhQUK7M", as: :link, variant: :primary, data: { turbo: false } %>
+      <%= ui_action_to "Créer mon compte", new_registration_path, as: :link, variant: :outline, data: { turbo: false } %>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,86 @@
+<% content_for :title, "Administration - Practice Room" %>
+
+<div class="space-y-8">
+  <header>
+    <h1 class="h1">Tableau de bord</h1>
+    <p class="mt-2 text-muted-foreground">Un coup d'œil sur la communauté et sur les articles du blog.</p>
+  </header>
+
+  <section class="space-y-4">
+    <h2 class="h3">La communauté</h2>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      <%= render Admin::StatCardComponent.new(
+        label: "Membres",
+        value: number_with_delimiter(@stats[:users]),
+        icon_name: "users",
+        hint: "+#{@stats[:new_users]} sur les 30 derniers jours"
+      ) %>
+
+      <%= render Admin::StatCardComponent.new(
+        label: "Pratiques",
+        value: number_with_delimiter(@stats[:practices]),
+        icon_name: "musical-note"
+      ) %>
+
+      <%= render Admin::StatCardComponent.new(
+        label: "Activités",
+        value: number_with_delimiter(@stats[:activities]),
+        icon_name: "bolt"
+      ) %>
+
+      <%= render Admin::StatCardComponent.new(
+        label: "Commentaires",
+        value: number_with_delimiter(@stats[:comments]),
+        icon_name: "chat-bubble-left-ellipsis"
+      ) %>
+    </div>
+  </section>
+
+  <section class="space-y-4">
+    <h2 class="h3">Le blog</h2>
+
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      <%= render Admin::StatCardComponent.new(
+        label: "Articles publiés",
+        value: number_with_delimiter(@stats[:published_posts]),
+        icon_name: "newspaper"
+      ) %>
+
+      <%= render Admin::StatCardComponent.new(
+        label: "Brouillons",
+        value: number_with_delimiter(@stats[:draft_posts]),
+        icon_name: "document-text"
+      ) %>
+    </div>
+
+    <div class="overflow-hidden rounded-xl border border-border bg-card shadow-sm">
+      <div class="border-b border-border px-5 py-4">
+        <h3 class="text-base font-semibold tracking-tight">Derniers articles</h3>
+      </div>
+
+      <% if @recent_posts.any? %>
+        <ul class="divide-y divide-border">
+          <% @recent_posts.each do |post| %>
+            <li class="flex items-center gap-4 px-5 py-4">
+              <div class="min-w-0 flex-1">
+                <p class="truncate font-medium text-foreground"><%= post.title %></p>
+                <p class="mt-0.5 text-xs text-muted-foreground">
+                  <%= post.user.username %>
+                  &middot;
+                  <%= l post.created_at.to_date, format: :long %>
+                </p>
+              </div>
+
+              <%= render partial: "admin/posts/status_badge", locals: { post: post } %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="px-5 py-8 text-center text-sm text-muted-foreground">
+          Aucun article pour l'instant.
+        </p>
+      <% end %>
+    </div>
+  </section>
+</div>

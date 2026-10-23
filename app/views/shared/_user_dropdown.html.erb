@@ -29,6 +29,11 @@
       <%= menu.with_item(href: Current.user) do %>
         Votre profil
       <% end %>
+      <% if Current.user&.admin? %>
+        <%= menu.with_item(href: admin_root_path) do %>
+          Administration
+        <% end %>
+      <% end %>
       <%= menu.with_item(href: session_path, method: :delete) do %>
         Se déconnecter
       <% end %>

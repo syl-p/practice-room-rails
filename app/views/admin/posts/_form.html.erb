@@ -1,0 +1,68 @@
+<%= form_with model: [:admin, post], builder: TailwindFormBuilder do |f| %>
+  <% if post.errors.any? %>
+    <div class="mb-6 rounded-lg border border-destructive/50 bg-destructive/5 p-4">
+      <p class="text-sm font-semibold text-destructive">
+        <%= t("admin.posts.errors_count", count: post.errors.count) %>
+      </p>
+
+      <ul class="mt-2 list-disc pl-5 text-sm text-destructive">
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
+    <div class="space-y-6 lg:col-span-2">
+      <section class="rounded-xl border border-border bg-card p-5 shadow-sm">
+        <h2 class="h4 mb-4">L'article</h2>
+
+        <%= f.text_field :title, label: "Titre" %>
+        <%= f.text_area :excerpt, label: "Extrait", rows: 3 %>
+        <%= f.rich_textarea :content, label: "Contenu", class: "trix-content" %>
+      </section>
+    </div>
+
+    <div class="space-y-6">
+      <section class="rounded-xl border border-border bg-card p-5 shadow-sm">
+        <h2 class="h4 mb-4">Publication</h2>
+
+        <%= f.select :status, [["Brouillon", "draft"], ["Publié", "published"]], { label: "Statut" } %>
+
+        <% if post.persisted? && post.published_at? %>
+          <p class="mb-3 text-xs text-muted-foreground">
+            Publié le <%= l post.published_at.to_date, format: :long %>.
+          </p>
+        <% end %>
+      </section>
+
+      <section class="rounded-xl border border-border bg-card p-5 shadow-sm">
+        <h2 class="h4 mb-4">Image de couverture</h2>
+
+        <% if post.cover_attached? %>
+          <figure class="mb-4 overflow-hidden rounded-lg border border-border">
+            <%= image_tag post.cover, alt: post.title, class: "aspect-[16/9] w-full object-cover" %>
+          </figure>
+        <% end %>
+
+        <%= f.file_field :cover, label: "Fichier" %>
+      </section>
+
+      <section class="rounded-xl border border-border bg-card p-5 shadow-sm">
+        <h2 class="h4 mb-4">Référencement</h2>
+
+        <%= f.text_field :meta_description, label: "Méta description (160 caractères max)" %>
+
+        <p class="text-xs text-muted-foreground">
+          Laisser vide pour reprendre l'extrait. C'est ce texte qui s'affiche dans les résultats de recherche.
+        </p>
+      </section>
+
+      <div class="flex flex-wrap items-center gap-3">
+        <%= f.submit "Enregistrer" %>
+        <%= ui_action_to "Annuler", admin_posts_path, as: :link, variant: :ghost %>
+      </div>
+    </div>
+  </div>
+<% end %>

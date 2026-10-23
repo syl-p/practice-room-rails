@@ -1,0 +1,22 @@
+<aside class="border-b border-border bg-secondary/40 lg:min-h-screen lg:border-b-0 lg:border-r">
+  <div class="flex h-14 items-center gap-2 px-4">
+    <%= link_to root_path, class: "flex items-center gap-2 font-bold tracking-tight", data: { turbo: false }, aria: { label: "Practice Room" } do %>
+      <%= render "shared/logo" %>
+      <span class="hidden lg:inline">Practice Room</span>
+    <% end %>
+
+    <span class="ml-auto rounded-full bg-primary/10 px-2 py-0.5 text-xs font-semibold text-primary">Admin</span>
+  </div>
+
+  <nav class="flex gap-1 overflow-x-auto px-2 pb-3 lg:flex-col lg:px-3 lg:pb-6">
+    <%= link_to admin_root_path, class: admin_nav_link_classes(admin_nav_active?("dashboard")) do %>
+      <%= icon "squares-2x2", class: "size-5 shrink-0" %>
+      <span class="whitespace-nowrap">Tableau de bord</span>
+    <% end %>
+
+    <%= link_to admin_posts_path, class: admin_nav_link_classes(admin_nav_active?("posts")) do %>
+      <%= icon "newspaper", class: "size-5 shrink-0" %>
+      <span class="whitespace-nowrap">Articles</span>
+    <% end %>
+  </nav>
+</aside>

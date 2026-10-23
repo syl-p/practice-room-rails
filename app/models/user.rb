@@ -1,10 +1,13 @@
 class User < ApplicationRecord
+  enum :role, { member: 0, admin: 1 }, default: :member
+
   has_secure_password
   has_many :sessions, dependent: :destroy
   has_many :activities, dependent: :destroy
   has_many :media
   has_many :practice_entries, dependent: :destroy
   has_many :practices, dependent: :destroy
+  has_many :posts, dependent: :destroy
   has_many :goals
   has_many :notifications, dependent: :destroy
   has_and_belongs_to_many :bookmarks, class_name: "Activity", join_table: "bookmarks"
