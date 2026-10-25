@@ -1,0 +1,16 @@
+<div class="rounded-xl border border-dashed border-border bg-secondary/40 px-6 py-16 text-center">
+  <div class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+    <%= icon "sparkles", class: "size-6 text-primary" %>
+  </div>
+
+  <h2 class="mt-4 text-xl font-bold tracking-tight">Le premier article arrive bientôt</h2>
+  <p class="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground">
+    On écrit. En attendant, la communauté continue de noter ses séances —
+    vous y serez bienvenu&nbsp;?
+  </p>
+
+  <div class="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
+    <%= ui_action_to "Créer mon compte", new_registration_path, as: :link, variant: :primary, data: { turbo: false } %>
+    <%= ui_action_to "Rejoindre le Discord", "https://discord.gg/8vCbhQUK7M", as: :link, variant: :outline, data: { turbo: false } %>
+  </div>
+</div>

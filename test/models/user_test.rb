@@ -43,4 +43,18 @@ class UserTest < ActiveSupport::TestCase
     assert_not user.valid?
     assert_includes user.errors[:email_address], "est déjà utilisé(e)"
   end
+
+  test "users are members by default" do
+    user = FactoryBot.create(:user)
+
+    assert_predicate user, :member?
+    assert_not_predicate user, :admin?
+  end
+
+  test "users can be promoted to admin" do
+    user = FactoryBot.create(:user, :admin)
+
+    assert_predicate user, :admin?
+    assert_equal "admin", user.role
+  end
 end

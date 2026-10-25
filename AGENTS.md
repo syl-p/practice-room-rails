@@ -52,11 +52,19 @@ Practice Room est une plateforme communautaire open source permettant de suivre 
 ### Vues
 
 - ERB uniquement (pas de HAML/Slim).
-- Layouts : `application` (connecté), `marketing` (public), `guest` (auth).
+- Layouts : `application` (connecté), `marketing` (public), `guest` (auth), `admin` (back-office).
 - Composants ViewComponent pour les éléments UI réutilisables.
 - Utiliser `ui_action_to` depuis `TailwindHelper` pour tous les boutons/CTA.
 - Turbo Frames et Turbo Streams pour les interactions dynamiques.
 - `<html lang="fr">` — le projet est en français par défaut.
+
+### Administration
+
+- Namespace `Admin::` : `app/controllers/admin/`, `app/views/admin/`, `app/helpers/admin/`, `app/components/admin/`.
+- `Admin::BaseController` vérifie le rôle via `before_action :require_admin` (`Current.user&.admin?`) et pose le layout `admin`.
+- Le rôle est un enum sur `User` : `enum :role, { member: 0, admin: 1 }, default: :member`.
+- Promouvoir un compte : `bin/rails admin:promote EMAIL=...` (ou `bin/rails admin:revoke EMAIL=...`).
+- Le blog public reste en lecture seule (`PostsController`) : toute l'écriture passe par `Admin::`.
 
 ### Tests
 
@@ -212,6 +220,9 @@ Les meta tags OG et canonical sont injectés automatiquement via `shared/_head.h
 | `app/views/shared/_marketing_nav.html.erb` | Nav des pages publiques |
 | `app/views/shared/_footer.html.erb` | Footer marketing |
 | `app/views/layouts/marketing.html.erb` | Layout pages publiques |
+| `app/views/layouts/admin.html.erb` | Layout back-office |
+| `app/controllers/admin/base_controller.rb` | Garde `require_admin` du namespace `Admin::` |
+| `app/controllers/admin/dashboard_controller.rb` | Stats du dashboard admin |
 | `app/assets/stylesheets/application.tailwind.css` | Thème couleurs + composants CSS |
 | `config/tailwind.config.js` | Config Tailwind |
 
@@ -226,4 +237,5 @@ bin/rails console               # Console Rails
 bin/dev                         # Serveur de dev ( Rails + Tailwind )
 bundle exec rubocop             # Linter le code Ruby
 bundle exec brakeman            # Audit de sécurité
+bin/rails admin:promote EMAIL=…  # Donner le rôle admin à un compte
 ```

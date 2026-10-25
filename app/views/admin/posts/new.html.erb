@@ -1,0 +1,13 @@
+<% content_for :title, "Nouvel article - Administration" %>
+
+<div class="mb-6">
+  <%= link_to admin_posts_path, class: "group inline-flex items-center gap-1.5 text-sm font-medium text-muted-foreground transition-colors hover:text-foreground" do %>
+    <%= icon "arrow-left", class: "size-4 shrink-0 transition-transform group-hover:-translate-x-0.5" %>
+    Retour aux articles
+  <% end %>
+
+  <h1 class="h1 mt-4">Nouvel article</h1>
+  <p class="mt-2 text-muted-foreground">Il part en brouillon. Vous pourrez le publier quand il est prêt.</p>
+</div>
+
+<%= render partial: "form", locals: { post: @post } %>

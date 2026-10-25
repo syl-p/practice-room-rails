@@ -1,0 +1,13 @@
+fr:
+  admin:
+    posts:
+      errors_count:
+        one: "%{count} erreur lors de l'enregistrement"
+        other: "%{count} erreurs lors de l'enregistrement"
+  posts:
+    comments_count:
+      one: "%{count} commentaire"
+      other: "%{count} commentaires"
+    reading_time:
+      one: "%{count} minute de lecture"
+      other: "%{count} minutes de lecture"

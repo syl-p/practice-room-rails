@@ -1,0 +1,21 @@
+<div class="mt-5 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs text-muted-foreground">
+  <%= link_to post.user, data: { turbo: false }, class: "flex items-center gap-2" do %>
+    <%= render AvatarComponent.new(user: post.user, size: :xs) %>
+    <span class="font-medium text-foreground"><%= post.user.username %></span>
+  <% end %>
+
+  <% if post.published_at? %>
+    <span aria-hidden="true">&middot;</span>
+
+    <time datetime="<%= post.published_at.iso8601 %>">
+      <%= l post.published_at.to_date, format: :long %>
+    </time>
+  <% end %>
+
+  <span aria-hidden="true">&middot;</span>
+
+  <span class="inline-flex items-center gap-1">
+    <%= icon "clock", class: "size-3.5" %>
+    <%= t("posts.reading_time", count: post.reading_time) %>
+  </span>
+</div>
