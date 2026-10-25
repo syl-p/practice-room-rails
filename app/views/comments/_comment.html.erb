@@ -26,7 +26,7 @@
         </header>
 
         <div class="mt-1.5 text-sm leading-relaxed text-foreground/90 [&_a]:font-medium [&_a]:text-primary [&_a:hover]:underline">
-          <%== comment.content %>
+          <%= render_comment_content(comment) %>
         </div>
 
         <% if authenticated? %>
