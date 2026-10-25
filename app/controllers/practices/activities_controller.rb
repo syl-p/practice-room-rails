@@ -7,6 +7,7 @@ class Practices::ActivitiesController < ApplicationController
   def show
     authorize!(@activity)
     @practice_activity = @practice.practice_activities.find_by(activity: @activity)
+    @goal = Current.user.goals.find_by(practice_activity: @practice_activity)
   end
 
   def index

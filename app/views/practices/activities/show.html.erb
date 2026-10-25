@@ -75,9 +75,9 @@
       </article>
       <aside class="hidden lg:block lg:col-span-2">
         <div class="rounded-xl border border-border bg-background p-5 shadow-sm lg:sticky lg:top-24">
-          <% if @practice_activity.goals.present? %>
+          <% if @goal.present? %>
             <!-- Mettre à jour les progrès -->
-            <%= turbo_frame_tag :goal_sidebar, src: goal_path(id: @practice_activity.goals.first.id), loading: :lazy do %>
+            <%= turbo_frame_tag :goal_sidebar, src: goal_path(id: @goal.id), loading: :lazy do %>
               ...
             <% end %>
           <% else %>

@@ -10,6 +10,7 @@ class PracticeActivities::GoalsController < ApplicationController
   end
 
   def create
+    authorize! @practice_activity.practice, :update?
     @goal = Goal.new(goal_params)
     @goal.user = Current.user
     @goal.practice_activity = @practice_activity

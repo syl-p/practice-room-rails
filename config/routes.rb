@@ -46,7 +46,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :goals, only: :show do
+  resources :goals, only: %i[show edit] do
     scope module: :goals do
       resources :goal_progresses, only: [ :index, :create ]
     end

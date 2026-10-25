@@ -12,6 +12,15 @@ class PracticeActivityTest < ActiveSupport::TestCase
     assert_raise(Exception) { practice.activities << activity }
   end
 
+  test "attached activity have not goal set by default" do
+    practice = FactoryBot.create(:practice)
+    activity = FactoryBot.create(:activity)
+    practice.activities << activity
+
+    practice_activity = practice.practice_activities.first
+    assert_empty practice_activity.goals
+  end
+
   test "when we delete a practice_activity, goal and goal_progress must be clear" do
     practice_activity = FactoryBot.create(:practice_activity)
 
